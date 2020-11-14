@@ -1,9 +1,11 @@
-#!/bin/env bash
-chmod 777 /sys/class/pwm/pwmchip0/export
-chmod 777 /sys/class/pwm/pwmchip0/pwm0/period
-chmod 777 /sys/class/pwm/pwmchip0/pwm0/enable
-chmod 777 /sys/class/pwm/pwmchip0/pwm0/duty_cycle
-echo 0 > /sys/class/pwm/pwmchip0/export
+#!/bin/bash
+if [ -f /sys/class/pwm/pwmchip0/export ]; then
+  echo 0 > /sys/class/pwm/pwmchip0/export
+fi
+sudo chmod 777 /sys/class/pwm/pwmchip0/export
+sudo chmod 777 /sys/class/pwm/pwmchip0/pwm0/period
+sudo chmod 777 /sys/class/pwm/pwmchip0/pwm0/enable
+sudo chmod 777 /sys/class/pwm/pwmchip0/pwm0/duty_cycle
 echo 1000000 > /sys/class/pwm/pwmchip0/pwm0/period
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 echo 1000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
