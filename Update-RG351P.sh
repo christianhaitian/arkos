@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="11142020"
+UPDATE_DATE="11152020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -40,7 +40,7 @@ if [ ! -f "/home/ark/.config/.update11132020" ]; then
 	touch "/home/ark/.config/.update11132020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11142020" ]; then
 	printf "\nFix the power led status...\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11142020/boot.ini -O /boot/boot.ini -a "$LOG_FILE"
 	
@@ -60,11 +60,42 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v ark:ark /home/ark/.config/retroarch32/cores/pcsx_rearmed_libretro.so | tee -a "$LOG_FILE"
 	sudo chown -v ark:ark /home/ark/.config/retroarch32/cores/pcsx_rearmed_libretro.so.lck | tee -a "$LOG_FILE"
 
+	touch "/home/ark/.config/.update11132020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+	printf "\nInstall lr-flycast_rumble core with rumble support...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11152020/flycast_rumble_libretro.so -O /home/ark/.config/retroarch/cores/flycast_rumble_libretro.so -a "$LOG_FILE"
+	sudo chmod -v 775 /home/ark/.config/retroarch/cores/flycast_rumble_libretro.so | tee -a "$LOG_FILE"
+	sudo chown -v ark:ark /home/ark/.config/retroarch/cores/flycast_rumble_libretro.so | tee -a "$LOG_FILE"
+	
+	printf "\nInstall Amstrad CPC and Game and Watch retroarch cores...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11152020/cap32_libretro.so -O /home/ark/.config/retroarch/cores/cap32_libretro.so -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11152020/gw_libretro.so -O /home/ark/.config/retroarch/cores/gw_libretro.so -a "$LOG_FILE"
+	sudo cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update11152020.bak | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11152020/es_systems.cfg -O /etc/emulationstation/es_systems.cfg -a "$LOG_FILE"
+	sudo chmod -v 775 /home/ark/.config/retroarch/cores/cap32_libretro.so | tee -a "$LOG_FILE"
+	sudo chmod -v 775 /home/ark/.config/retroarch/cores/gw_libretro.so | tee -a "$LOG_FILE"
+	sudo chmod -v 775 /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
+	sudo chown -v ark:ark /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
+	if [ ! -d "/roms/gameandwatch/" ]; then
+		sudo mkdir -v /roms/gameandwatch | tee -a "$LOG_FILE"
+	fi
+	if [ ! -d "/roms/amstradcpc/" ]; then
+		sudo mkdir -v /roms/amstradcpc | tee -a "$LOG_FILE"
+	fi	
+
+	printf "\nInstall updated themes from Tiduscrying(gbz35 and gz35 dark mod) and Jetup(nes-box)..." | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11152020/es-theme-nes-box.zip -O /home/ark/es-theme-nes-box.zip -a "$LOG_FILE"
+	sudo runuser -l ark -c 'unzip -o /home/ark/es-theme-nes-box.zip -d /etc/emulationstation/themes/es-theme-nes-box/' | tee -a "$LOG_FILE"
+	sudo rm -v /home/ark/es-theme-nes-box.zip | tee -a "$LOG_FILE"
+	sudo runuser -l ark -c 'git clone https://github.com/tiduscrying/es-theme-gbz35_mod /etc/emulationstation/themes/es-theme-gbz35-mod/' | tee -a "$LOG_FILE"
+	sudo runuser -l ark -c 'git clone https://github.com/tiduscrying/es-theme-gbz35-dark_mod /etc/emulationstation/themes/es-theme-gbz35-dark-mod/' | tee -a "$LOG_FILE"
+
 	touch "$UPDATE_DONE"
-	msgbox "Updates have been completed.  For instructions on how to enable rumble in the pcsx_rearmed emulator, check Frequent Asked Questions RG351P #12 in the ArkOS wiki.  You're system will now reboot so the updates can take effect after you hit the A button."
+	msgbox "Updates have been completed.  Please restart emulationstation or restart you system for the update to take effect.  Hit the A button to continue."
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-	sudo reboot
 	exit 187
 fi
