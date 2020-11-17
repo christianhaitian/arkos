@@ -123,9 +123,10 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v ark:ark /home/ark/.config/retroarch32/retroarch.cfg
 	
 	touch "$UPDATE_DONE"
-	msgbox "Updates have been completed.  Please restart emulationstation or restart you system for the update to take effect.  Hit the A button to continue."
+	msgbox "Updates have been completed.  System will now restart after after you hit the A button to continue."
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+	sudo reboot
 	exit 187
 fi	
