@@ -1,0 +1,13 @@
+- Corrected FAVORIS to FAVORITE at the bottom of the screen when inside a system menu
+- Added missing genesis folder to EASYROMS partition
+- Fixed input not being shown when inserting username/password in scraper menu in default nes-box theme... (thanks to Jetup)
+- Fixed the power led status (thanks to luali)
+- Added support for Rumble (thanks to luali)
+- Updated lr-pcsx_rearmed core with rumble support
+- Added lr-flycast_rumble core with rumble support
+- Added Amstrad CPC and Game and Watch retroarch cores and associated roms folders
+- Added updated themes from Tiduscrying(gbz35 and gz35 dark mod) and Jetup(nes-box)
+- Updated lr-mgba core with rumble support
+- Updated options scripts to remove unnecessary screen outputs during loading
+- Changed analog to digital setting for flycast to None
+- Set analog sensitivity to 1.5
