@@ -12,3 +12,4 @@ v1.1
 - Updated options scripts to remove unnecessary screen outputs during loading
 - Changed analog to digital setting for flycast to None
 - Set analog sensitivity to 1.5
+- Updated power led fix
