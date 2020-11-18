@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="11162020"
+UPDATE_DATE="11182020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -95,7 +95,7 @@ if [ ! -f "/home/ark/.config/.update11152020" ]; then
 	touch "/home/ark/.config/.update11152020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11162020" ]; then
 	printf "\nInstall updated lr-mgba core with rumble support...\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11162020/mgba_libretro.so -O /home/ark/.config/retroarch/cores/mgba_libretro.so -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11162020/mgba_libretro.so.lck -O /home/ark/.config/retroarch/cores/mgba_libretro.so.lck -a "$LOG_FILE"
@@ -122,7 +122,18 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v ark:ark /home/ark/.config/retroarch/retroarch.cfg
 	sudo chown -v ark:ark /home/ark/.config/retroarch32/retroarch.cfg
 	
-	touch "$UPDATE_DONE"
+	touch "/home/ark/.config/.update11162020"
+fi	
+
+if [ ! -f "$UPDATE_DONE" ]; then
+	printf "\nApply alternative power led fix to improve system booting stability...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11182020/boot.ini -O /boot/boot.ini -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11182020/addledfix-crontab -O /home/ark/addledfix-crontab -a "$LOG_FILE"	
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11182020/fix_power_led -O /usr/local/bin/fix_power_led -a "$LOG_FILE"	
+	sudo chmod -v 777 /usr/local/bin/fix_power_led | tee -a "$LOG_FILE"
+	sudo crontab /home/ark/addledfix-crontab
+	sudo rm -v /home/ark/addledfix-crontab | tee -a "$LOG_FILE"
+
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue."
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
