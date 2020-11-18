@@ -1,0 +1,1 @@
+@reboot /home/ark/.config/imageshift.sh && /usr/local/bin/enable_rumble && /usr/local/bin/fix_power_led

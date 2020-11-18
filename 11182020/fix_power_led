@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo chmod 777 /sys/class/gpio/export
+echo 77 > /sys/class/gpio/export
+sudo chmod 777 /sys/class/gpio/gpio77/direction
+sudo echo out > /sys/class/gpio/gpio77/direction
+sudo chmod 777 /sys/class/gpio/gpio77/value
