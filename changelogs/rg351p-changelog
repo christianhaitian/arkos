@@ -1,3 +1,4 @@
+v1.1
 - Corrected FAVORIS to FAVORITE at the bottom of the screen when inside a system menu
 - Added missing genesis folder to EASYROMS partition
 - Fixed input not being shown when inserting username/password in scraper menu in default nes-box theme... (thanks to Jetup)
