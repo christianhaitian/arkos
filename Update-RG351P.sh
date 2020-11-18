@@ -138,6 +138,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+	touch "$UPDATE_DONE"
 	sudo reboot
 	exit 187
 fi	
