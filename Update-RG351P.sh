@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="11202020"
+UPDATE_DATE="11212020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -137,7 +137,7 @@ if [ ! -f "/home/ark/.config/.update11182020-1" ]; then
 	touch "/home/ark/.config/.update11182020-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update1120020" ]; then
 
 	printf "\nUpdate mednafen_pce_fast libretro core to fix turbo button issue..." | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11202020/mednafen_pce_fast_libretro.so -O /home/ark/.config/retroarch/cores/mednafen_pce_fast_libretro.so -a "$LOG_FILE"
@@ -156,8 +156,21 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo sed -i '/brown\=/c\brown\=0xff0000' /usr/share/plymouth/themes/text.plymouth
 	sudo sed -i '/blue\=/c\blue\=0x0000ff' /usr/share/plymouth/themes/text.plymouth
 
+	touch "/home/ark/.config/.update1120020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nInstall updated kernel with realtek chipset wifi fixes...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11212020/BootFileUpdates.tar.gz -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/11212020/KernelUpdate.tar.gz -a "$LOG_FILE"
+	sudo tar --same-owner -zxvf BootFileUpdates.tar.gz -C / | tee -a "$LOG_FILE"
+	sudo tar --same-owner -zxvf KernelUpdate.tar.gz -C / | tee -a "$LOG_FILE"
+	sudo rm -v BootFileUpdates.tar.gz | tee -a "$LOG_FILE"
+	sudo rm -v KernelUpdate.tar.gz | tee -a "$LOG_FILE"
+
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
-	sudo sed -i "/title\=/c\title\=ArkOS 1.1 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	sudo sed -i "/title\=/c\title\=ArkOS 1.2 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue."
 	rm -v -- "$0" | tee -a "$LOG_FILE"
@@ -166,4 +179,5 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	touch "$UPDATE_DONE"
 	sudo reboot
 	exit 187
+
 fi
