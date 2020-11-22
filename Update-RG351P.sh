@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="11212020-1"
+UPDATE_DATE="11222020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -172,7 +172,7 @@ if [ ! -f "/home/ark/.config/.update11212020" ]; then
 	touch "/home/ark/.config/.update11212020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11212020-1" ]; then
 
 	printf "\nUpdate platform name for SMS to mastersystem in es_systems.cfg to fix scraping...\n" | tee -a "$LOG_FILE"
 	sudo sed -i '/platform>sms/c\\t\t<platform>mastersystem<\/platform>' /etc/emulationstation/es_systems.cfg
@@ -183,6 +183,18 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v ark:ark /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
 	sudo chmod -v 777 /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
 
+
+	touch "/home/ark/.config/.update11212020-1"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate permissions on cheats and assets folder for retroarch and retroarch32 to fix cheats update\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark/.config/retroarch/cheats/*
+	sudo chown -R ark:ark /home/ark/.config/retroarch32/cheats/*
+	sudo chown -R ark:ark /home/ark/.config/retroarch/assets/*
+	sudo chown -R ark:ark /home/ark/.config/retroarch32/assets/*
+	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.2 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
