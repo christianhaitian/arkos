@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="11212020"
+UPDATE_DATE="11212020-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -159,7 +159,7 @@ if [ ! -f "/home/ark/.config/.update1120020" ]; then
 	touch "/home/ark/.config/.update1120020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11212020" ]; then
 
 	printf "\nInstall updated kernel with realtek chipset wifi fixes...\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11212020/BootFileUpdates.tar.gz -a "$LOG_FILE"
@@ -168,6 +168,20 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo tar --same-owner -zxvf KernelUpdate.tar.gz -C / | tee -a "$LOG_FILE"
 	sudo rm -v BootFileUpdates.tar.gz | tee -a "$LOG_FILE"
 	sudo rm -v KernelUpdate.tar.gz | tee -a "$LOG_FILE"
+
+	touch "/home/ark/.config/.update11212020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate platform name for SMS to mastersystem in es_systems.cfg to fix scraping...\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/platform>sms/c\\t\t<platform>mastersystem<\/platform>' /etc/emulationstation/es_systems.cfg
+
+	printf "\nUpdate retroarch to fix loading remap issues...\n" | tee -a "$LOG_FILE"
+	mv -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
+	wget https://github.com/christianhaitian/arkos/raw/main/11212020-1/retroarch -O /opt/retroarch/bin/retroarch -a "$LOG_FILE"
+	sudo chown -v ark:ark /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
+	sudo chmod -v 777 /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.2 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
@@ -179,5 +193,4 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	touch "$UPDATE_DONE"
 	sudo reboot
 	exit 187
-
 fi
