@@ -16,3 +16,16 @@ v1.1
 
 v1.2
 - Updated kernel to apply some realtek wireless chipset fixes.
+
+v1.3
+- Updated kernel and modules adding support for additional rtl8812/rtl8821 based usb wifi dongles
+- Updated dtbs to default clock speed to 1.3Ghz (Normal Clock) for stability and better consistent performance
+- Added an Advanced option under the Options section
+- Added ability to switch to 1.5Ghz (High Clock) from the Options/Advanced section
+- Added ability to switch to 1.3Ghz (Normal Clock) from the Options/Advanced section
+- Added ability to check current max speed from the Options/Advanced section
+- Moved Fix ExFat Partition feature to Options/Advanced section
+- Added zh-cn as a language locale for Emulationstation
+- Updated Emulationstation to fix background music not returning after video screensaver stops
+- Redirected background music folder to /roms/bgmusic folder for easier management
+- Updated themes from Jetup (switch and epicnoir)
