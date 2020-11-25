@@ -1,6 +1,6 @@
 ---
 name: Bug or Feature request
-about: Encourage review of existing documentation before submitting a bug or feature
+about: Be sure to check the extensive documentation available in the wiki before submitting a bug or feature
   request
 title: ''
 labels: ''
