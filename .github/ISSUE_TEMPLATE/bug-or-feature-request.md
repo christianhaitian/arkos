@@ -26,7 +26,7 @@ A clear and concise description of what the bug is.
 
 
 
-### What version of ArkOS are you on
+### What version of ArkOS are you on?
 - You can find this during the initial boot process right before the Emulationstation loading screen
 
 
