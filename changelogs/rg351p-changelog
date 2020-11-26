@@ -45,9 +45,9 @@ v1.3 (11/23/2020)
 v1.3 (11/24/2020)
 - Updated Libretro Parallel_n64 core to support rumble.  See this FAQ entry on how to enable rumble: 
   (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-enable-rumblevibration-in-parallel_n64)
-- Added support for the left analog stick for pico-8
+- Added support for the left analog stick for pico-8 (Thanks to fewt for finding the fix)
 - Added the ability to enable and disable wifi in the Options/Advanced section.  
   This is for those who have internal wifi on their unit who wish to turn off wifi when not in use to help in saving power and heat generation.
 
 v1.3 (11/25/2020)
-- Updated lr-mgba, lr-flycast_rumble, lr-parallel_n64, and lr-pcsx_rearmed cores with more efficient rumble support
+- Updated lr-mgba, lr-flycast_rumble, lr-parallel_n64, and lr-pcsx_rearmed cores with more efficient rumble support (Thanks to fewt for the idea)
