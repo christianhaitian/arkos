@@ -1,4 +1,4 @@
-v1.1
+v1.1 (11/16/2020)
 - Corrected FAVORIS to FAVORITE at the bottom of the screen when inside a system menu
 - Added missing genesis folder to EASYROMS partition
 - Fixed input not being shown when inserting username/password in scraper menu in default nes-box theme... (thanks to Jetup)
@@ -14,10 +14,22 @@ v1.1
 - Set analog sensitivity to 1.5
 - Updated power led fix
 
-v1.2
+v1.1 (11/18/2020)
+- Updated the power led fix to address an occasional issue that it may cause the gamepad controls to not be detected in Emulationstation and requiring a forced shutdown.  
+
+v1.1 (11/20/2020
+- Updated mednafen_pce_fast libretro core to fix turbo button issue
+- Updated Emulationstation to fix shift key character for builtin keyboard
+- Updated boot text to reflect current version of ArkOS
+
+v1.2 (11/21/2020)
 - Updated kernel to apply some realtek wireless chipset fixes.
 
-v1.3
+v1.2 (11/22/2020)
+- Updated Retroarch to resolve an issue with loading remap files for fbneo core.
+- Fix mastersystem scraper issue by renaming platform sms to mastersystem in es_systems.cfg
+
+v1.3 (11/23/2020)
 - Updated kernel and modules adding support for additional rtl8812/rtl8821 based usb wifi dongles
 - Updated dtbs to default clock speed to 1.3Ghz (Normal Clock) for stability and better consistent performance
 - Added an Advanced option under the Options section
@@ -29,3 +41,10 @@ v1.3
 - Updated Emulationstation to fix background music not returning after video screensaver stops
 - Redirected background music folder to /roms/bgmusic folder for easier management
 - Updated themes from Jetup (switch and epicnoir)
+
+v1.3 (11/24/2020)
+- Updated Libretro Parallel_n64 core to support rumble.  See this FAQ entry on how to enable rumble: 
+  (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-enable-rumblevibration-in-parallel_n64)
+- Added support for the left analog stick for pico-8
+- Added the ability to enable and disable wifi in the Options/Advanced section.  
+  This is for those who have internal wifi on their unit who wish to turn off wifi when not in use to help in saving power and heat generation.
