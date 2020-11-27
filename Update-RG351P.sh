@@ -297,11 +297,11 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.3 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	touch "$UPDATE_DONE"
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue."
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-	touch "$UPDATE_DONE"
 	sudo reboot
 	exit 187
 fi
