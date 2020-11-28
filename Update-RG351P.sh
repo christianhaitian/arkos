@@ -303,7 +303,7 @@ fi
 if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate emulationstation adding timezone setting in start/advanced settings menu...\n" | tee -a "$LOG_FILE"
-	sudo cp -v /usr/bin/emulationstation/emulationstation /usr/bin/emulationstation/emulationstation.update11272020.bak | tee -a "$LOG_FILE"
+	sudo mv -v /usr/bin/emulationstation/emulationstation /usr/bin/emulationstation/emulationstation.update11272020.bak | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11272020/emulationstation -O /usr/bin/emulationstation/emulationstation -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/11272020/timezones -O /usr/local/bin/timezones -a "$LOG_FILE"
 	sudo chmod -v 777 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
