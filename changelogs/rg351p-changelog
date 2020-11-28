@@ -59,4 +59,5 @@ v1.3 (11/27/2020)
 - Added Atari ST (lr-hatari) emulator
 - Added Quake II (lr-vitaquake2) emulator for Quake II port
   - There's no support for music at this time until Libretro or the original developer of that emulator fixes this.
+- Added support for recognizing .7z and .zip as supported file types for ZX Spectrum emulator.
 - Updated the symlink for the Drastic emulator to the correct SDL2 library.
