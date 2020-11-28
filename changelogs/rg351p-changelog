@@ -51,3 +51,10 @@ v1.3 (11/24/2020)
 
 v1.3 (11/25/2020)
 - Updated lr-mgba, lr-flycast_rumble, lr-parallel_n64, and lr-pcsx_rearmed cores with more efficient rumble support (Thanks to fewt for the idea)
+
+v1.3 (11/27/2020)
+- Updated emulationstation adding a timezone setting in the start/advanced settings menu.
+- Updated retroarch32 to fix loading game, core, and content remap issues for some cores like lr-tyrquake
+- Added Atari ST (lr-hatari) emulator
+- Added Quake II (lr-vitaquake2) emulator for Quake II port
+- Updated the symlink for the Drastic emulator to the correct SDL2 library.
