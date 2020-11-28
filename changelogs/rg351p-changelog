@@ -54,9 +54,9 @@ v1.3 (11/25/2020)
 
 v1.3 (11/27/2020)
 - Updated emulationstation adding a timezone setting in the start/advanced settings menu.
- - Be aware that when you hit A on the timezone menu option, it takes about 10 seconds or so for it to load and display all available timezones.  Please be patient.
+ - **Be aware that when you hit A on the timezone menu option, it takes about 10 seconds or so for it to load and display all available timezones.  Please be patient.**
 - Updated retroarch32 to fix loading game, core, and content remap issues for some cores like lr-tyrquake
 - Added Atari ST (lr-hatari) emulator
 - Added Quake II (lr-vitaquake2) emulator for Quake II port
- - (There's no support for music at this time until Libretro or the original developer of that emulator fixes this.)
+ - **There's no support for music at this time until Libretro or the original developer of that emulator fixes this.**
 - Updated the symlink for the Drastic emulator to the correct SDL2 library.
