@@ -61,3 +61,10 @@ v1.3 (11/27/2020)
   - There's no support for music at this time until Libretro or the original developer of that emulator fixes this.
 - Added support for recognizing .7z and .zip as supported file types for ZX Spectrum emulator.
 - Updated the symlink for the Drastic emulator to the correct SDL2 library.
+
+v1.4 (11/29/2020)
+- Updated initial boot expansion script for stability (Downloadable Image Only)
+- Updated emulationstation fixing missing keyboard for creating custom game collections
+- Added Backup settings and Restore settings function to Options/Advance section.  See FAQ #18 for more information about this feature.
+- Added lr-puae as additional Amiga emulator
+- Added standalone scummvm emulator
