@@ -68,3 +68,9 @@ v1.4 (11/29/2020)
 - Added Backup settings and Restore settings function to Options/Advance section.  See FAQ #18 for more information about this feature.
 - Added lr-puae as additional Amiga emulator
 - Added standalone scummvm emulator
+
+v1.4 (12/01/2020)
+- Reverted Dreamcast(lr-flycast-rumble), N64(lr-parallel-n64), and PSX (lr-pcsx-rearmed) cores to previous versions to restore performance
+- Added support for Libretro Tic-80 emulator
+- Updated themes from Jetup(nes-box, switch, epicnoir)
+- Updated es_systems.cfg to address platform name for famicom to nes and sfc to snes to fix scraping and add tic-80 support
