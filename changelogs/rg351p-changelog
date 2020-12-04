@@ -77,3 +77,4 @@ v1.4 (12/01/2020)
 
 v1.4 (12/03/2020)
 - Reverted GBA (lr-mgba) core to previous versions to restore stability
+- Added Emulationstation menu translation for Portugal (Thanks to jonasbeavis)
