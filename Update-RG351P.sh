@@ -457,8 +457,8 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v ark:ark /home/ark/.config/retroarch/cores/mgba_libretro.so | tee -a "$LOG_FILE"
 
 	printf "\nAdd Emulationstation menu translation for Portugal...\n" | tee -a "$LOG_FILE"
-	sudo mkdir -v /usr/bin/emulationstation/locale/pt/ | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12032020/pt/emulationstation2.po -O /usr/bin/emulationstation/locale/pt/emulationstation2.po -a "$LOG_FILE"
+	sudo mkdir -v /usr/bin/emulationstation/resources/locale/pt/ | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12032020/pt/emulationstation2.po -O /usr/bin/emulationstation/resources/locale/pt/emulationstation2.po -a "$LOG_FILE"
 	
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
