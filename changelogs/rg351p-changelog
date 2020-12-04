@@ -74,3 +74,6 @@ v1.4 (12/01/2020)
 - Added support for Libretro Tic-80 emulator
 - Updated themes from Jetup(nes-box, switch, epicnoir)
 - Updated es_systems.cfg to address platform name for famicom to nes and sfc to snes to fix scraping and add tic-80 support
+
+v1.4 (12/03/2020)
+- Reverted GBA (lr-mgba) core to previous versions to restore stability
