@@ -512,6 +512,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.4 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	#The follow has been disabled due to reports of dns not resolving even though networkmanager should be able to resolve it.
 	#printf "\nDisable systemd-resolved...\n" | tee -a "$LOG_FILE"
 	#sudo systemctl disable systemd-resolved
 	#sudo systemctl stop systemd-resolved
