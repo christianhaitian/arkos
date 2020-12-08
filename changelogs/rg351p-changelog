@@ -78,3 +78,13 @@ v1.4 (12/01/2020)
 v1.4 (12/03/2020)
 - Reverted GBA (lr-mgba) core to previous version to restore stability
 - Added Emulationstation menu translation for Portugal (Thanks to jonasbeavis)
+
+v1.4 (12/03/2020)
+- Fixed some Emulationstation menu translations for Portuguese and Brazilian (Thanks to Leandro-Reis and jonasbeavis)
+- Set resolution for Quake2 to 480x272 to fix initial performance if need be (Thanks to Gordon1972 and Jetup for confirmation)
+- Added support for mapping the right analog stick in standalone ppsspp emulator
+- Fixed the permission error for standalone ppsspp emulator
+- Corrected supported extensions for MSX and MSX2 games
+- Added bluemsx emulator option to Emulationstaton and defaulted MSX and MSX2 emulator to bluemsx instead (Thanks to Gordon1972 for testing and confirmation)
+- Disabled systemd-resolved deamon to save on resources
+- Added ArkOS Browser (filebrowser) web file browser server.  Enabled with when remote services are enabled.  See FAQ #19 on how to use this for managing roms via a web browser.
