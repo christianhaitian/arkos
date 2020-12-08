@@ -512,11 +512,11 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.4 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
-	printf "\nDisable systemd-resolved...\n" | tee -a "$LOG_FILE"
-	sudo systemctl disable systemd-resolved
-	sudo systemctl stop systemd-resolved
-	sudo cp -v /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.update12072020.bak | tee -a "$LOG_FILE"
-	sudo sed -i "/plugins\=/c\plugins\=ifupdown\,keyfile\ndns\=default" /etc/NetworkManager/NetworkManager.conf
+	#printf "\nDisable systemd-resolved...\n" | tee -a "$LOG_FILE"
+	#sudo systemctl disable systemd-resolved
+	#sudo systemctl stop systemd-resolved
+	#sudo cp -v /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.update12072020.bak | tee -a "$LOG_FILE"
+	#sudo sed -i "/plugins\=/c\plugins\=ifupdown\,keyfile\ndns\=default" /etc/NetworkManager/NetworkManager.conf
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
