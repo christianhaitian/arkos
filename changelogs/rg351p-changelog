@@ -92,3 +92,8 @@ v1.4 (12/07/2020)
 v1.4 (12/09/2020)
 - Added non rumble enabled GBA cores (MGBA, VBA-M, VBA-NExt)
 - Ensure systemd-resolved has been reenabled
+
+v1.4 (12/12/2020)
+- Added support for devilutionX port
+- Updated platform names for Colecovision, Intellivision, and MSX2 to fix scraping
+- Updated Backup Settings option to not include cheats and overlays to speed up the backup process
