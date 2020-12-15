@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12122020"
+UPDATE_DATE="12152020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -512,7 +512,7 @@ if [ ! -f "/home/ark/.config/.update12072020" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.4 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
-	#The follow has been disabled due to reports of dns not resolving even though networkmanager should be able to resolve it.
+	#The following has been disabled due to reports of dns not resolving even though networkmanager should be able to resolve it.
 	#printf "\nDisable systemd-resolved...\n" | tee -a "$LOG_FILE"
 	#sudo systemctl disable systemd-resolved
 	#sudo systemctl stop systemd-resolved
@@ -556,7 +556,7 @@ if [ ! -f "/home/ark/.config/.update12092020" ]; then
 	touch "/home/ark/.config/.update12092020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12122020" ]; then
 
 	printf "\nAdd devolutionx(diablo) port support\n" | tee -a "$LOG_FILE"
 	sudo mkdir -v /home/ark/.config/devilution | tee -a "$LOG_FILE"
@@ -597,6 +597,117 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.4 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	
+	touch "/home/ark/.config/.update12122020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nInstall correct SDL2, Wayland, and graphics drivers to support more ports...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libmali-rk-bifrost-g31-rxp0-wayland-gbm_1.7-2+deb10_arm64.deb -O /home/ark/libmali-rk-bifrost-g31-rxp0-wayland-gbm_1.7-2+deb10_arm64.deb -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libsdl2-2.0-0_2.0.10+dfsg1-1ubuntu1_arm64.deb -O /home/ark/libsdl2-2.0-0_2.0.10+dfsg1-1ubuntu1_arm64.deb -a "$LOG_FILE"
+	sudo dpkg -i --force-all /home/ark/libmali-rk-bifrost-g31-rxp0-wayland-gbm_1.7-2+deb10_arm64.deb /home/ark/libsdl2-2.0-0_2.0.10+dfsg1-1ubuntu1_arm64.deb
+	sudo rm -v /home/ark/libmali-rk-bifrost-g31-rxp0-wayland-gbm_1.7-2+deb10_arm64.deb | tee -a "$LOG_FILE"
+	sudo rm -v /home/ark/libsdl2-2.0-0_2.0.10+dfsg1-1ubuntu1_arm64.deb | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libSDL2_image.a -O /usr/lib/aarch64-linux-gnu/libSDL2_image.a -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libSDL2_image-2.0.so.0.2.2 -O /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so.0.2.2 -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libjpeg.a -O /usr/lib/aarch64-linux-gnu/libjpeg.a -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libjpeg.so.62.2.0 -O /usr/lib/aarch64-linux-gnu/libjpeg.so.62.2.0 -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libjpegxr.so.1.1 -O /usr/lib/aarch64-linux-gnu/libjpegxr.so.1.1 -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libSDL2_ttf.a -O /usr/lib/aarch64-linux-gnu/libSDL2_ttf.a -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libSDL2_ttf-2.0.so.0.14.1 -O /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so.0.14.1 -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so.0.2.2 /usr/lib/aarch64-linux-gnu/libSDL2_image.so | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so.0.2.2 /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so.0 /usr/lib/aarch64-linux-gnu/libSDL2_image-2.0.so | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libjpeg.so.62.2.0 /usr/lib/aarch64-linux-gnu/libjpeg.so.62 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libjpeg.so.62.2.0 /usr/lib/aarch64-linux-gnu/libjpeg.so | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libjpegxr.so.1.1 /usr/lib/aarch64-linux-gnu/libjpegxr.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2_ttf-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2_ttf.so | tee -a "$LOG_FILE"
+	
+	printf "\nInstall image-viewer and default loading.jpg to support splash screens...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/image-viewer -O /usr/local/bin/image-viewer -a "$LOG_FILE"
+	sudo chmod -v 777 /usr/local/bin/image-viewer | tee -a "$LOG_FILE"
+	sudo mkdir -v /roms/launchimages | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/loading.jpg -O /roms/launchimages/loading.jpg -a "$LOG_FILE"
+	
+	printf "\nAdd Commander Genius port...\n" | tee -a "$LOG_FILE"
+	sudo mkdir -v /roms/ports/cgenius | tee -a "$LOG_FILE"
+	sudo mkdir -v /roms/ports/cgenius/games | tee -a "$LOG_FILE"
+	sudo mkdir -v /home/ark/.config/CGenius | tee -a "$LOG_FILE"
+	sudo mkdir -v /home/ark/.CommanderGenius | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/CGeniusExe -O /home/ark/.config/CGenius/CGeniusExe -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/cgenius.cfg -O /home/ark/.CommanderGenius/cgenius.cfg -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/keen-shr.zip -O /home/ark/keen-shr.zip -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/Commander%20Genius.sh -O /roms/ports/"Commander Genius".sh -a "$LOG_FILE"
+	sudo chmod 777 -v /home/ark/.config/CGenius/CGeniusExe | tee -a "$LOG_FILE"
+	sudo chown ark:ark -v /home/ark/.config/CGenius/CGeniusExe | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark -v /home/ark/.config/CGenius/ | tee -a "$LOG_FILE"
+	unzip -o -d /roms/ports/cgenius/games /home/ark/keen-shr.zip
+	sudo rm -v /home/ark/keen-shr.zip | tee -a "$LOG_FILE"
+
+	#Not ready for primtime yet due to issues with controls
+	#printf "\nAdd Openbor support...\n" | tee -a "$LOG_FILE"
+	#sudo mkdir -v /roms/ports/OpenBor/ | tee -a "$LOG_FILE"
+	#sudo mkdir -v /roms/ports/OpenBor/Paks | tee -a "$LOG_FILE"
+	#sudo mkdir -v /roms/ports/OpenBor/Saves | tee -a "$LOG_FILE"
+	#sudo mkdir -v /roms/ports/OpenBor/ScreenShots | tee -a "$LOG_FILE"
+	#sudo mkdir -v /home/ark/.config/OpenBor | tee -a "$LOG_FILE"
+	#sudo ln -sfv /roms/ports/OpenBor/Saves /home/ark/.config/OpenBor/Saves | tee -a "$LOG_FILE"
+	#sudo ln -sfv /roms/ports/OpenBor/ScreenShots /home/ark/.config/OpenBor/ScreenShots | tee -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/OpenBor -O /home/ark/.config/OpenBor/OpenBor -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/OpenBor.elf -O /home/ark/.config/OpenBor/OpenBor.elf -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/master.cfg -O /home/ark/.config/OpenBor/master.cfg -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libvpx.a -O /usr/lib/aarch64-linux-gnu/libvpx.a -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/libvpx.so.5.0.0 -O /usr/lib/aarch64-linux-gnu/libvpx.so.5.0.0 -a "$LOG_FILE"
+	#sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/OpenBor.sh -O /roms/ports/OpenBor.sh -a "$LOG_FILE"
+	#sudo ln -sfv /usr/lib/aarch64-linux-gnu/libvpx.so.5.0.0 /usr/lib/aarch64-linux-gnu/libvpx.so.5.0 | tee -a "$LOG_FILE"
+	#sudo ln -sfv /usr/lib/aarch64-linux-gnu/libvpx.so.5.0.0 /usr/lib/aarch64-linux-gnu/libvpx.so.5 | tee -a "$LOG_FILE"
+	#sudo ln -sfv /usr/lib/aarch64-linux-gnu/libvpx.so.5.0.0 /usr/lib/aarch64-linux-gnu/libvpx.so | tee -a "$LOG_FILE"
+	#sudo chown -R ark:ark -v /home/ark/.config/OpenBor/ | tee -a "$LOG_FILE"
+	#sudo chown 777 -v /home/ark/.config/OpenBor/OpenBor | tee -a "$LOG_FILE"
+	#sudo chown 777 -v /home/ark/.config/OpenBor/OpenBor.elf | tee -a "$LOG_FILE"
+
+	printf "\nAdd Opentyrian port...\n" | tee -a "$LOG_FILE"
+	sudo mkdir -v /roms/ports/opentyrian | tee -a "$LOG_FILE"
+	sudo mkdir -v /home/ark/.config/opentyrian | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/opentyrian-arkos.tar.gz -O /home/ark/opentyrian-arkos.tar.gz -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/otyriandata.zip -O /home/ark/otyriandata.zip -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/OpenTyrian.sh -O /roms/ports/OpenTyrian.sh -a "$LOG_FILE"
+	sudo tar --same-owner -zxhvf /home/ark/opentyrian-arkos.tar.gz -C / | tee -a "$LOG_FILE"
+	unzip -o -d /roms/ports/opentyrian/ /home/ark/otyriandata.zip | tee -a "$LOG_FILE"
+	sudo rm -v /home/ark/otyriandata.zip | tee -a "$LOG_FILE"
+	sudo rm -v /home/ark/opentyrian-arkos.tar.gz | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate scripts to show loading.jpg before game launch if available...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/perfmax -O /usr/local/bin/perfmax -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/perfnorm -O /usr/local/bin/perfnorm -a "$LOG_FILE"
+	sudo chmod -v 777 /usr/local/bin/perfmax | tee -a "$LOG_FILE"
+	sudo chmod -v 777 /usr/local/bin/perfnorm | tee -a "$LOG_FILE"
+
+	printf "\nUpdate sources.list to fix apt-get since EOAN is now End of Life for new updates...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/sources.list -O /etc/apt/sources.list -a "$LOG_FILE"
+
+	printf "\nFix L2 button for devilutionX...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/gamecontrollerdb.txt -O /roms/ports/devilution/gamecontrollerdb.txt -a "$LOG_FILE"
+
+	printf "\nReally Update Backup script this time to not include cheats and overlays to speed up process...\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/Backup%20Settings.sh -O /opt/system/Advanced/"Backup Settings".sh -a "$LOG_FILE"
+	sudo chmod -v 777 /opt/system/Advanced/"Backup Settings".sh | tee -a "$LOG_FILE"
+	sudo chown -v ark:ark /opt/system/Advanced/"Backup Settings".sh | tee -a "$LOG_FILE"
+
+	printf "\nAdd Emulationstation menu translation for German and corrections for es and corrections for Spanish and French...\n" | tee -a "$LOG_FILE"
+	sudo mkdir -v /usr/bin/emulationstation/resources/locale/de/ | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/pt/emulationstation2.po.de -O /usr/bin/emulationstation/resources/locale/de/emulationstation2.po -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/pt/emulationstation2.po.es -O /usr/bin/emulationstation/resources/locale/es/emulationstation2.po -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12152020/pt/emulationstation2.po.fr -O /usr/bin/emulationstation/resources/locale/pr/emulationstation2.po -a "$LOG_FILE"
+	
+	printf "\nLet's ensure that Drastic's performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 	
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
