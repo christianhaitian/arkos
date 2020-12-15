@@ -1,0 +1,10 @@
+#!/bin/bash
+clear > /dev/tty1
+if [ -f "/roms/launchimages/loading.jpg" ]; then
+  image-viewer /roms/launchimages/loading.jpg &
+  PROC=$!
+  (sleep 2s; kill $PROC) &
+fi
+echo performance > /sys/devices/platform/ff400000.gpu/devfreq/ff400000.gpu/governor
+echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+echo performance > /sys/devices/platform/dmc/devfreq/dmc/governor

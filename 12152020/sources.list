@@ -1,0 +1,5 @@
+deb http://old-releases.ubuntu.com/ubuntu eoan main universe
+deb http://old-releases.ubuntu.com/ubuntu eoan-updates main universe
+deb http://old-releases.ubuntu.com/ubuntu eoan-security main universe
+
+deb http://deb.odroid.in/go2 bionic main
