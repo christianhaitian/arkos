@@ -97,3 +97,13 @@ v1.4 (12/12/2020)
 - Added support for devilutionX port
 - Updated platform names for Colecovision, Intellivision, and MSX2 to fix scraping
 - Updated Backup Settings option to not include cheats and overlays to speed up the backup process
+
+v1.5 (12/15/2020)
+- Installed updated SDL2 and graphics drivers and added Wayland to support various ports
+- Installed image-viewer to support new splash screen
+- Added Command Genius Port
+- Added OpenTyrian Port
+- Updated launch scripts to show splash screen before game launch if available
+- Updated sources.list to fix apt-get since Ubuntu 19.10 EOAN is now End of Life
+- Fixed L2 button for devilutionX port
+- Really updated the Backup script this time to not include cheats and overlays to speed up backup and restore process.
