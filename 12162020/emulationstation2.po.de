@@ -1,0 +1,2254 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: recalbox-emulationstation\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Translated into German by OolDEMool - 13122020
+#: 
+msgid "DISPLAY SETTINGS"
+msgstr "ANZEIGE-EINSTELLUNGEN"
+
+#: 
+msgid "DISPLAY"
+msgstr "ANZEIGE"
+
+#: 
+msgid "BRIGHTNESS"
+msgstr "HELLIGKEIT"
+
+#: 
+msgid "CONFIGURATION"
+msgstr "KONFIGURATION"
+
+#: 
+msgid "TIMEZONE"
+msgstr "ZEITZONE"
+
+#: 
+msgid "ON"
+msgstr "AN"
+
+#: 
+msgid "OFF"
+msgstr "AUS"
+
+msgid "EMULATOR SETTINGS"
+msgstr "EMULATOR-EINSTELLUNGEN"
+
+#:
+msgid "LOG LEVEL"
+msgstr "LOG-PROTOKOLL"
+
+#: 
+msgid "Loading..."
+msgstr "Laden..."
+
+#:
+msgid "THEME INSTALLED SUCCESSFULLY"
+msgstr "DESIGN (THEME) ERFOLGREICH INSTALLIERT"
+
+#:
+msgid "Downloading"
+msgstr "Herunterladen"
+
+#:
+msgid "Extracting"
+msgstr "Entpacken"
+
+#:
+msgid "AUDIO CARD"
+msgstr "AUDIOKARTE"
+
+#:
+msgid "Only missing medias"
+msgstr "Nur fehlende Medien"
+
+#:
+msgid "always"
+msgstr "immer"
+
+#:
+msgid "start & end"
+msgstr "Start & Ende"
+
+#:
+msgid "never"
+msgstr "niemals"
+
+#:
+msgid "SCRAPE VIDEOS"
+msgstr "SCRAPE-VIDEOS"
+
+#:
+msgid "RESET GAMELIST CUSTOMISATIONS"
+msgstr "SPIELLISTE-ANPASSUNGEN ZURÜCKSETZEN"
+
+#:
+msgid "RESET"
+msgstr "ZURÜCKSETZEN"
+
+#:
+msgid "SHOW FOLDERS"
+msgstr "VERZEICHNISSE ANZEIGEN"
+
+#:
+msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgstr "BIST DU SICHER, DASS DU DEN EINGANG KONFIGURIEREN WILLST?"
+
+#:
+msgid "disabled"
+msgstr "deaktiviert"
+
+#:
+msgid "default"
+msgstr "Standard"
+
+#:
+msgid "warning"
+msgstr "Warnung"
+
+#:
+msgid "error"
+msgstr "Fehler"
+
+#: 
+msgid "Preloading UI"
+msgstr "Benutzeroberfläche wird vorgeladen..."
+
+#: 
+msgid "GRID SIZE"
+msgstr "RASTERERGRÖSSE"
+
+#: 
+msgid "DEFAULT GRID SIZE"
+msgstr "STANDARD-RASTERERGRÖSSE"
+
+#: 
+msgid "UI MODE"
+msgstr "BENUTZEROBERFLÄCHEN MODUS"
+
+#: 
+msgid "PRELOAD UI"
+msgstr "BENUTZEROBERFLÄCHE VORLADEN"
+
+#: 
+msgid "VSYNC"
+msgstr "VSYNC"
+
+#: 
+msgid "DISPLAY FAVORITES FIRST IN GAMELIST"
+msgstr "FAVORITEN ZUERST IN DER GAMELISTE ANZEIGEN"
+
+#: 
+msgid "OPTIMIZE IMAGES VRAM USE"
+msgstr "OPTIMIERE BILDER VRAM-NUTZUNG"
+
+#: 
+msgid "Full"
+msgstr "Vollständig"
+
+#: 
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#: 
+msgid "Kid"
+msgstr "Kind"
+
+#: 
+msgstr "GAME COLLECTION SETTINGS"
+msgstr "SPIELSAMMLUNGS-EINSTELLUNGEN"
+
+#:
+msgstr "CANCEL"
+msgstr "EINGESCHRÄNKT (Kids)"
+
+#:
+msgid "automatic"
+msgstr "automatisch"
+
+#: 
+msgid "basic"
+msgstr "Einfach"
+
+#: 
+msgid "BASIC"
+msgstr "EINFACH"
+
+#: 
+msgid "detailed"
+msgstr "ausführlich"
+
+#: 
+msgid "DETAILED"
+msgstr "AUSFÜHRLICH"
+
+#: 
+msgid "grid"
+msgstr "Raster"
+
+#: 
+msgid "fade"
+msgstr "ausblenden"
+
+#: 
+msgid "slide"
+msgstr "animiert"
+
+#: 
+msgid "gridex"
+msgstr "detailliertes Raster"
+
+#:
+msgid "SWAP VIDEO AFTER (SECS)"
+msgstr "VIDEO WECHSELN NACH (SEK.)"
+
+#:
+msgid "SWAP IMAGE AFTER (SECS)"
+msgstr "BILD WECHSELN NACH (SEK.)"
+
+#:
+msgid "STRETCH IMAGES"
+msgstr "BILDER STRECKEN"
+
+#:
+msgid "USE CUSTOM IMAGES"
+msgstr "EIGENE BILDER VERWENDEN"
+
+#:
+msgid "CUSTOM IMAGE DIR"
+msgstr "EIGENE BILDER ORDNER"
+
+#:
+msgid "CUSTOM IMAGE DIR RECURSIVE"
+msgstr "EIGENE BILDER ORDNER REKURSIV"
+
+#:
+msgid "CUSTOM IMAGE FILTER"
+msgstr "EIGENE BILDER FILTER"
+
+#:
+msgid "USE OMX PLAYER FOR SCREENSAVER"
+msgstr "OMX-PLAYER FÜR BILDSCHIRMSCHONER VERWENDEN"
+
+#:
+msgid "SHOW GAME INFO"
+msgstr "SPIELINFORMATIONEN ANZEIGEN"
+
+#:
+msgid "SHOW GAME INFO ON SCREENSAVER"
+msgstr "SPIELINFORMATIONEN IM BILDSCHIRMSCHONER ANZEIGEN"
+
+#:
+msgid "USE MARQUEE AS GAME INFO"
+msgstr "LAUFSCHRIFT ALS SPIELINFORMATIONEN VERWENDEN"
+
+#:
+msgid "STRETCH VIDEO ON SCREENSAVER"
+msgstr "VIDEO-STRECHTCHING IM BILDSCHIRMSCHONER"
+
+#:
+msgid "This collection is empty"
+msgstr "Diese Sammlung ist leer"
+
+#:
+msgid "None"
+msgstr "Keine"
+
+#:
+msgid "Various"
+msgstr "Sonstiges"
+
+#:
+msgid "among other titles."
+msgstr "neben anderen Titeln."
+
+#:
+msgid "This collection contains"
+msgstr "Diese Sammlung beinhaltet"
+
+
+#: 
+msgid "ENABLE NAVIGATION SOUNDS"
+msgstr "NAVIGATIONSTÖNE EINSCHALTEN"
+
+#: 
+msgid "ENABLE VIDEO AUDIO"
+msgstr "VIDEO-AUDIO EINSCHALTEN"
+
+#: 
+msgid "APPLY FILTER"
+msgstr "FILTER ANWENDEN"
+
+#: 
+msgid "AUTOMATIC GAME COLLECTIONS"
+msgstr "AUTOMATISCHE SPIELESAMMLUNGEN"
+
+#: 
+msgid "SELECT COLLECTIONS"
+msgstr "SPIELESAMMLUNGEN AUSWÄHLEN"
+
+#: 
+msgid "CUSTOM GAME COLLECTIONS"
+msgstr "EIGENE SPIELESAMMLUNGEN"
+
+#: 
+msgid "CREATE NEW CUSTOM COLLECTION FROM THEME"
+msgstr "EIGENE SPIELESAMMLUNGEN THEMATISCH ERSTELLEN"
+
+#: 
+msgid "GAME COLLECTION SETTINGS"
+msgstr "SPIELESAMMLUNG-EINSTELLUNGEN"
+
+#: 
+msgid "SELECT THEME FOLDER"
+msgstr "THEMENORDNER WÄHLEN"
+
+#: 
+msgid "CREATE NEW CUSTOM COLLECTION"
+msgstr "EIGENE SPIELSAMMLUNG ERSTELLEN"
+
+#: 
+msgid "New Collection Name"
+msgstr "Name der neuen Spielesammlung"
+
+#: 
+msgid "Loading..."
+msgstr "Laden..."
+
+#: 
+msgid "GROUP UNTHEMED CUSTOM COLLECTIONS"
+msgstr "EIGENE SPIELSAMMLUNGEN OHNE GRUPPE GRUPPIEREN"
+
+#: 
+msgid "SORT CUSTOM COLLECTIONS AND SYSTEMS"
+msgstr "SORTIEREN EIGENER SPIELESAMMLUNGEN & SYSTEME"
+
+#: 
+msgid "SHOW SYSTEM NAME IN COLLECTIONS"
+msgstr "SYSTEMNAME IN SPIELESAMMLUNGEN ANZEIGEN"
+
+#: 
+msgid "FINISH EDITING COLLECTION"
+msgstr "BEARBEITUNG DER SPIELESAMMLUNG ABSCHLIESSEN"
+
+#: 
+msgid "PARSE GAMESLISTS ONLY"
+msgstr "NUR SPIELELISTEN ANALYSIEREN"
+
+#: 
+msgid "POWER SAVER MODES"
+msgstr "ENERGIESPAROPTIONEN"
+
+#: 
+msgid "Enhanced"
+msgstr "ERWEITERT"
+
+#: 
+msgid "instant"
+msgstr "DIREKT"
+
+#: 
+msgid "SAVE METADATA ON EXIT"
+msgstr "METADATEN BEIM BEENDEN SPEICHERN"
+
+#: 
+msgid "SHOW HIDDEN FILES"
+msgstr "VERSTECKTE DATEIEN ANZEIGEN"
+
+#: 
+msgid "VRAM LIMIT"
+msgstr "VRAM LIMIT (SPEICHERBEGRENZUNG)"
+
+#: 
+msgid "RESET ALL FILTERS"
+msgstr "ALLE FILTER ZURÜCKSETZEN"
+
+#: 
+msgid "GAMELIST VIEW STYLE"
+msgstr "DARSTELLUNG DER SPIELESAMMLUNG"
+
+#: 
+msgid "GAME LAUNCH TRANSITION"
+msgstr "EFFEKT BEIM SPIELSTART"
+
+#: 
+msgid "Searching..."
+msgstr "Suchen..."
+
+#: 
+msgid "RANDOM"
+msgstr "ZUFÄLLIG"
+
+#: 
+msgid "Rating"
+msgstr "Bewertung"
+
+#: 
+msgid "Rating:"
+msgstr "Bewertung:"
+
+#: 
+msgid "Released"
+msgstr "Veröffentlicht"
+
+#: 
+msgid "Released:"
+msgstr "Veröffentlicht:"
+
+#: 
+msgid "Developer"
+msgstr "Entwickler"
+
+#: 
+msgid "Publisher"
+msgstr "Herausgeber"
+
+#: 
+msgid "Genre"
+msgstr "Genre"
+
+#: 
+msgid "Players"
+msgstr "Spieler"
+
+#: 
+msgid "Players:"
+msgstr "Spieler:"
+
+#: 
+msgid "NO GAMES FOUND - SKIP"
+msgstr "KEINE SPIELE GEFUNDEN - ÜBERSPRINGEN"
+
+#: 
+msgid "RETRY"
+msgstr "WIEDERHOLEN"
+
+#: 
+msgid "SKIP"
+msgstr "ÜBERSPRINGEN"
+
+#: 
+msgid "SEARCH FOR"
+msgstr "SUCHE NACH"
+
+#: 
+msgid "SEARCH FOR LOCAL ART"
+msgstr "SUCHE NACH LOKALEN MEDIEN"
+
+#: 
+msgid "THREADED LOADING"
+msgstr "MULTITASKING-LADEN"
+
+#:
+msgid "COMPLETE QUIT MENU"
+msgstr "ERWEITERTES BEENDEN-MENÜ ANZEIGEN"
+
+#: 
+msgid "SEARCH"
+msgstr "SUCHEN"
+
+#: 
+msgid "SCRAPING IN PROGRESS"
+msgstr "SCANNEN NACH SPIELEN LÄUFT"
+
+#: 
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#: 
+msgid "subtitle text"
+msgstr "Untertiteltext"
+
+#: 
+msgid "INPUT"
+msgstr "EINGABE"
+
+#: 
+msgid "search"
+msgstr "Suche"
+
+#: 
+msgid "STOP"
+msgstr "BEENDEN"
+
+#: 
+msgid "stop (progress saved)"
+msgstr "BEENDET (Fortschritt gespeichert)"
+
+#: 
+msgid "GAME %i OF %i"
+msgstr "SPIEL %i VON %i"
+
+#: 
+msgid "WE CAN'T FIND ANY SYSTEMS!\n"
+"CHECK THAT YOUR PATHS ARE CORRECT IN THE SYSTEMS CONFIGURATION FILE, AND YOUR GAME DIRECTORY HAS AT LEAST ONE GAME WITH THE CORRECT EXTENSION.\n"
+"\n"
+""
+msgstr "KEINE SYSTEME GEFUNDEN!\n"
+"Überprüfen bitte ob der Pfad in der Systemkonfigurationsdatei korrekt ist und ob mindestens ein Spiel mit der richtigen Erweiterung in Ihrem Spieleverzeichnis vorhanden ist.\n"
+"\n"
+""
+
+#: 
+msgid "%i GAME SUCCESSFULLY SCRAPED!"
+msgid_plural "%i GAMES SUCCESSFULLY SCRAPED!"
+msgstr[0] "%i SPIEL ERFOLGREICH GESCANNT (GESRAPPED)!"
+msgstr[1] "%i SPIELE ERFOLGREICH GESCANNT (GESRAPPED)!"
+
+#: 
+msgid "%i GAME SKIPPED."
+msgid_plural "%i GAMES SKIPPED."
+msgstr[0] "%i SPIEL ÜBERSPRUNGEN!"
+msgstr[1] "%i SPIELE ÜBERSPRUNGEN!"
+
+#: 
+msgid "OK"
+msgstr "OK"
+
+#: 
+msgid "EDIT METADATA"
+msgstr "METADATEN ÄNDERN"
+
+#: 
+msgid "SCRAPE"
+msgstr "SCANNEN"
+
+#: 
+msgid "SAVE"
+msgstr "SPEICHERN"
+
+#: 
+msgid "THIS WILL DELETE A FILE!\n"
+"ARE YOU SURE?"
+msgstr "DATEI WIRD GELÖSCHT!\n"
+" BIST DU SICHER?"
+
+#: 
+msgid "YES"
+msgstr "JA"
+
+#: 
+msgid "NO"
+msgstr "NEIN"
+
+#: 
+msgid "DELETE"
+msgstr "LÖSCHEN"
+
+#: 
+msgid "SAVE CHANGES?"
+msgstr "ÄNDERUNGEN SPEICHERN?"
+
+#: 
+msgid "BACK"
+msgstr "ZURÜCK"
+
+#: 
+msgid "CLOSE"
+msgstr "SCHLIESSEN"
+
+#: 
+msgid "MAIN MENU"
+msgstr "HAUPTMENÜ"
+
+#: 
+msgid "KODI MEDIA CENTER"
+msgstr "KODI MEDIA CENTER"
+
+#: 
+msgid "SYSTEM SETTINGS"
+msgstr "SYSTEMEINSTELLUNGEN"
+
+#: 
+msgid "VERSION"
+msgstr "VERSIÓN"
+
+#: 
+msgid "DISK USAGE"
+msgstr "SPEICHERBELEGUNG (SD Karte)"
+
+#: 
+msgid "STORAGE DEVICE"
+msgstr "SPEICHERGERÄT"
+
+#: 
+msgid "LANGUAGE"
+msgstr "SPRACHE"
+
+#: 
+msgid "OVERCLOCK"
+msgstr "ÜBERTAKTUNG"
+
+#: 
+msgid "EXTREM (1100Mhz)"
+msgstr "EXTREM (1100Mhz)"
+
+#: 
+msgid "TURBO (1000Mhz)"
+msgstr "TURBO (1000Mhz)"
+
+#: 
+msgid "HIGH (950Mhz)"
+msgstr "HOCH (950Mhz)"
+
+#: 
+msgid "NONE (700Mhz)"
+msgstr "KEINE (900Mhz)"
+
+#: 
+msgid "TURBO (1050Mhz)+"
+msgstr "TURBO (1050Mhz)+"
+
+#: 
+msgid "HIGH (1050Mhz)"
+msgstr "HOCJ (1050Mhz)"
+
+#: 
+msgid "NONE (900Mhz)"
+msgstr "NINGKEINEUNO (900Mhz)"
+
+#: 
+msgid "NONE (1200Mhz)"
+msgstr "KEINE (1200Mhz)"
+
+#: 
+msgid "NONE"
+msgstr "KEINE"
+
+#. NEW SETTINGS ORGANIZATION
+#: 
+msgid "UPDATES"
+msgstr "AKTUALISIERUNGEN"
+
+#: 
+msgid "AUTO UPDATES"
+msgstr "AUTO-AKTUALISIERUNGEN"
+
+#: 
+msgid "START UPDATE"
+msgstr "STARTE AKTUALISIERUNG"
+
+#: 
+msgid "APPLY UPDATE"
+msgstr "AKTUALISIERUNG ANWENDEN"
+
+#: 
+msgid "DOWNLOADS AND UPDATES"
+msgstr "HERUNTERLADEN UND AKTUALISIEREN"
+
+#: 
+msgid "THEME INSTALLER"
+msgstr "DESIGN-INSTALLATIONSPROGRAMM"
+
+#: 
+msgid "IMAGE SOURCE"
+msgstr "BILDQUELLE"
+
+#: 
+msgid "BOX SOURCE"
+msgstr "BOX-QUELLE"
+
+#: 
+msgid "LOGO SOURCE"
+msgstr "LOGO-QUELLE"
+
+#:
+msgid "SHOW FILENAMES IN LISTS"
+msgstr "DATEINAMEN IN LISTEN ANZEIGEN"
+
+#:
+msgid "LOWER MUSIC WHEN PLAYING VIDEO"
+msgstr "BEIM ABSPIELEN VON VIDEOS MUSIK LEISER STELLEN"
+
+#:
+msgid "PLAY THEME MUSICS"
+msgstr "HINTERGRUNDMUSIK ABSPIELEN"
+
+#:
+msgid "DISPLAY SONG TITLES"
+msgstr "SONGTITEL ANZEIGEN"
+
+#:
+msgid "SHOW FAVORITES ON TOP"
+msgstr "FAVORITEN OBEN ANZEIGEN"
+
+#:
+msgid "SHOW CLOCK"
+msgstr "UHR ANZEIGEN"
+
+#: 
+msgid "KODI SETTINGS"
+msgstr "KODI EINSTELLUNGEN"
+
+#: 
+msgid "ENABLE KODI"
+msgstr "KODI AKTIVIEREN"
+
+#: 
+msgid "KODI AT START"
+msgstr "KODI AUTOMATISCH STARTEN"
+
+#: 
+msgid "START KODI WITH X"
+msgstr "KODI MIT X STARTEN"
+
+#: 
+msgid "SECURITY"
+msgstr "SICHERHEIT"
+
+#: 
+msgid "ENFORCE SECURITY"
+msgstr "SICHERHEIT ERZWINGEN"
+
+#: 
+msgid "ROOT PASSWORD"
+msgstr "ROOT PASSWORT"
+
+#: 
+msgid "THE SYSTEM WILL NOW REBOOT"
+msgstr "DAS SYSTEM WIRD JETZT NEU GESTARTET"
+
+#: 
+msgid "GAMES SETTINGS"
+msgstr "SPIELEINSTELLUNGEN"
+
+#: 
+msgid "GAME RATIO"
+msgstr "SPIEL SEITENVERHÄLTNIS"
+
+#: 
+msgid "SMOOTH GAMES"
+msgstr "SPIELE OPTIMIEREN"
+
+#: 
+msgid "REWIND"
+msgstr "ZURÜCKSPULEN"
+
+#: 
+msgid "AUTO SAVE/LOAD"
+msgstr "AUTOMATISCH SPEICHERN/LADEN"
+
+#: 
+msgid "SHADERS SET"
+msgstr "SHADERS EINSTELLEN"
+
+#: 
+msgid "SCANLINES"
+msgstr "SCANLINES"
+
+#: 
+msgid "RETRO"
+msgstr "RETRO"
+
+#: 
+msgid "RETROACHIEVEMENTS SETTINGS"
+msgstr "EINSTELLUNGEN FÜR RETRO-ACHIEVEMENTS"
+
+#: 
+msgid "RETROACHIEVEMENTS"
+msgstr "RETRO-ACHIEVEMENTS"
+
+#: 
+msgid "HARDCORE MODE"
+msgstr "HARDCORE-MODUS"
+
+#: 
+msgid "USERNAME"
+msgstr "BENUTZERNAME"
+
+#: 
+msgid "PASSWORD"
+msgstr "PASSWORT"
+
+#: 
+msgid "ADVANCED"
+msgstr "ERWEITERT"
+
+#: 
+msgid "REALLY UPDATE GAMES LISTS ?"
+msgstr "SPIELELISTEN WIRKLICH AKTUALISIEREN?"
+
+#: 
+msgid "UPDATE GAMES LISTS"
+msgstr "SPIELELISTEN AKTUALISIEREN"
+
+#: 
+msgid "CONTROLLERS SETTINGS"
+msgstr "KONTROLLER-EINSTELLUNGEN"
+
+#: 
+msgid "UI SETTINGS"
+msgstr "BENUTZEROBERFLÄCHE-EINSTELLUNGEN"
+
+#: 
+msgid "OVERSCAN"
+msgstr "OVERSCAN"
+
+#:
+msgid "LAUNCH SCREENSAVER"
+msgstr "BILDSCHIRMSCHONER STARTEN"
+
+#: 
+msgid "SCREENSAVER SETTINGS"
+msgstr "BILDSCHIRMSCHONER-EINSTELLUNGEN"
+
+#: 
+msgid "SCREENSAVER AFTER"
+msgstr "BILDSCHIRMSCHONER NACH:"
+
+#: 
+msgid "TRANSITION STYLE"
+msgstr "ÜBERGANGSSTIL"
+
+#: 
+msgid "SCREENSAVER BEHAVIOR"
+msgstr "BILDSCHIRMSCHONER-VERHALTEN"
+
+#: 
+msgid "SHOW FRAMERATE"
+msgstr "FRAMERATE ANZEIGEN"
+
+#: 
+msgid "ON-SCREEN HELP"
+msgstr "ON-SCREEN HILFE"
+
+#: 
+msgid "HIDE WHEN RUNNING GAME"
+msgstr "AUSBLENDEN BEI LAUFENDEM SPIEL"
+
+#: 
+msgid "QUICK SYSTEM SELECT"
+msgstr "SCHNELLE SYSTEMAUSWAHL"
+
+#: 
+msgid "THEME"
+msgstr "Design-Einstellungen (THEME)"
+
+#: 
+msgid "SOUND SETTINGS"
+msgstr "AUDIO-EINSTELLUNGEN"
+
+#: 
+msgid "SYSTEM VOLUME"
+msgstr "SYSTEM LAUTSTÄRKE"
+
+#: 
+msgid "FRONTEND MUSIC"
+msgstr "FRONTEND-MUSIK"
+
+#: 
+msgid "ONLY PLAY SYSTEM-SPECIFIC MUSIC FOLDER"
+msgstr "NUR AUS SYSTEM MUSIKORDNER ABSPIELEN"
+
+#: 
+msgid "FILTER GAMES BY TEXT"
+msgstr "RSPIELE NACH TEXT FILTERN"
+
+#: 
+msgid "OUTPUT DEVICE"
+msgstr "AUSGABEGERÄT"
+
+#: 
+msgid "HDMI"
+msgstr "HDMI"
+
+#: 
+msgid "JACK"
+msgstr "Audioanschluss"
+
+#: 
+msgid "AUTO"
+msgstr "AUTO"
+
+#: 
+msgid "NETWORK SETTINGS"
+msgstr "NETZWERK-EINSTELLUNGEN"
+
+#: 
+msgid "CONNECTED"
+msgstr "VERBUNDEN"
+
+#: 
+msgid "NOT CONNECTED"
+msgstr "NICHT VERBUNDEN"
+
+#: 
+msgid "STATUS"
+msgstr "STATUS"
+
+#: 
+msgid "IP ADDRESS"
+msgstr "IP-ADRESSE"
+
+#: 
+msgid "HOSTNAME"
+msgstr "HOST-NAME"
+
+#: 
+msgid "ENABLE WIFI"
+msgstr "WLAN AKTIVIEREN"
+
+#: 
+msgid "WIFI SSID"
+msgstr "WLAN SSID"
+
+#: 
+msgid "WIFI KEY"
+msgstr "WLAN-SCHLÜSSEL"
+
+#: 
+msgid "WIFI ENABLED"
+msgstr "WLAN AKTIVIERT"
+
+#: 
+msgid "WIFI CONFIGURATION ERROR"
+msgstr "WLAN-KONFIGURATIONSFEHLER"
+
+#: 
+msgid "SCRAPER"
+msgstr "SCANNER-EINSTELLUNGEN (SCRAPER)"
+
+#: 
+msgid "SCRAPE FROM"
+msgstr "SCANNEN VON:"
+
+#: 
+msgid "SCRAPE RATINGS"
+msgstr "SCANNE BEWERTUNGEN"
+
+#: 
+msgid "SCRAPE NOW"
+msgstr "STARTE SCAN (SCRAPE)"
+
+#: 
+msgid "QUIT"
+msgstr "BEENDEN"
+
+#: 
+msgid "QUIT EMULATIONSTATION"
+msgstr "EMULATIONSSTATION BEENDEN"
+
+#: 
+msgid "RESTART EMULATIONSTATION"
+msgstr "EMULATIONSSTATION NEU STARTEN"
+
+#: 
+msgid "REALLY QUIT?"
+msgstr "WIRKLICH BEENDEN?"
+
+#: 
+msgid "REALLY RESTART?"
+msgstr "WIRKLICH NEU STARTEN?"
+
+#: 
+msgid "RESTART SYSTEM"
+msgstr "SYSTEM NEU STARTEN"
+
+#: 
+msgid "REALLY SHUTDOWN?"
+msgstr "WIRKLICH AUSSCHALTEN?"
+
+#: 
+msgid "SHUTDOWN SYSTEM"
+msgstr "SYSTEM AUSSCHALTEN"
+
+#: 
+msgid "Emulator"
+msgstr "Emulator"
+
+#: 
+msgid "Core"
+msgstr "Core"
+
+#: 
+msgid "YOU ARE GOING TO CONFIGURE A CONTROLLER. IF YOU HAVE ONLY ONE JOYSTICK, CONFIGURE THE DIRECTIONS KEYS AND SKIP JOYSTICK CONFIG BY HOLDING A BUTTON. IF YOU DO NOT HAVE A SPECIAL KEY FOR HOTKEY, CHOOSE THE SELECT BUTTON. SKIP ALL BUTTONS YOU DO NOT HAVE BY HOLDING A KEY. BUTTONS NAMES ARE BASED ON THE SNES CONTROLLER."
+msgstr "CONTROLLER KONFIGURIEREN! WENN SIE NUR EINEN ANALOGEN-JOYSTICK HABEN, KONFIGURIEREN SIE DIE RICHTUNGSTASTEN UND ÜBERSPRINGEN SIE DIE ANALOGE-JOYSTICK-KONFIGURATION DURCH HALTEN EINER TASTE. WENN SIE KEINE SPEZIELLE TASTE FÜR DEN HOTKEY HABEN, WÄHLEN SIE DIE SELECT-TASTE. ÜBERSPRINGEN SIE ALLE TASTEN, DIE SIE NICHT HABEN, INDEM SIE EINE TASTE GEDRÜCKT HALTEN. DIE NAMEN DER TASTEN BASIEREN AUF DENEN DES SNES-CONTROLLERS."
+
+#. GUIMENU
+#: 
+msgid "CONFIGURE A CONTROLLER"
+msgstr "EINEN CONTROLLER KONFIGURIEREN"
+
+#. Bluetooth
+#: 
+msgid "CONTROLLER PAIRED"
+msgstr "CONTROLLER GEPAART"
+
+#: 
+msgid "UNABLE TO PAIR CONTROLLER"
+msgstr "CONTROLLER KANN NICHT GEKOPPELN WERDEN"
+
+#: 
+msgid "AN ERROR OCCURED"
+msgstr "ES IST EIN FEHLER AUFGETRETEN"
+
+#: 
+msgid "NO CONTROLLERS FOUND"
+msgstr "KEINE CONTROLLER GEFUNDEN"
+
+#: 
+msgid "PAIR A BLUETOOTH CONTROLLER"
+msgstr "KOPPELN EINES BLUETOOTH-CONTROLLERS"
+
+#: 
+msgid "CONTROLLERS LINKS HAVE BEEN DELETED."
+msgstr "DIE VERKNÜPFUNGEN DER CONTROLLER WURDEN GELÖSCHT."
+
+#: 
+msgid "FORGET BLUETOOTH CONTROLLERS"
+msgstr "BLUETOOTH-CONTROLLER VERGESSEN"
+
+#: 
+msgid "INPUT P%i"
+msgstr "EINGABE %i"
+
+#: 
+msgid "CHOOSE"
+msgstr "WÄHLEN"
+
+#: 
+msgid "SELECT"
+msgstr "AUSWAHL"
+
+#: 
+msgid "OPTIONS"
+msgstr "OPTIONEN"
+
+#: 
+msgid "JUMP TO LETTER"
+msgstr "ZUM BUCHSTABEN SPRINGEN"
+
+#: 
+msgid "SORT GAMES BY"
+msgstr "SPIELE SORTIEREN NACH:"
+
+#. FAVORITES
+#: 
+msgid "FAVORITES ONLY"
+msgstr "NUR FAVORITEN"
+
+#: 
+msgid "EDIT THIS GAME'S METADATA"
+msgstr "SPIELMETADATEN BEARBEITEN"
+
+#: 
+msgid "SCRAPE THESE GAMES"
+msgstr "DIESE SPIELE SCANNEN (SCRAPPEN)"
+
+#: 
+msgid "All Games"
+msgstr "Alle Spiele"
+
+#. MISSING SCRAPPER TRANSLATIONS
+#: 
+msgid "Only missing image"
+msgstr "Nur fehlende Bilder"
+
+#: 
+msgid "FILTER"
+msgstr "FILTER"
+
+#: 
+msgid "SCRAPE THESE SYSTEMS"
+msgstr "DIESE SYSTEME SCANNEN (SCRAPPEN)"
+
+#: 
+msgid "SYSTEMS"
+msgstr "SYSTEME"
+
+#: 
+msgid "USER DECIDES ON CONFLICTS"
+msgstr "BENUTZER ENTSCHEIDET BEI KONFLIKTEN"
+
+#: 
+msgid "START"
+msgstr "START"
+
+#: 
+msgid "WARNING: SOME OF YOUR SELECTED SYSTEMS DO NOT HAVE A PLATFORM SET. RESULTS MAY BE EVEN MORE INACCURATE THAN USUAL!\n"
+"CONTINUE ANYWAY?"
+msgstr "WARNUNG: EINIGE DER VON IHNEN AUSGEWÄHLTEN SYSTEME HABEN KEINE PLATTFORM EINGESTELLT. DIE ERGEBNISSE KÖNNEN DAHER UNGENAUER SEIN ALS ÜBLICH!\n"
+"TROTZDEM FORTFAHREN?"
+
+#: 
+msgid "NO GAMES FIT THAT CRITERIA."
+msgstr "KEINE SPIELE ERFÜLLEN DIESE KRITERIEN."
+
+#: 
+msgid "REALLY UPDATE?"
+msgstr "WIRKLICH AKTUALISIEREN?"
+
+#: 
+msgid "NETWORK CONNECTION NEEDED"
+msgstr "NETZWERKVERBINDUNG ERFORDERLICH"
+
+#: 
+msgid "UPDATE DOWNLOADED, THE SYSTEM WILL NOW REBOOT"
+msgstr "AKTUALISIERUNG HERUNTERGELADEN, DAS SYSTEM WIRD JETZT NEU GESTARTET"
+
+#: 
+msgid "UPDATE FAILED, THE SYSTEM WILL NOW REBOOT"
+msgstr "AKTUALISIERUNG FEHLGESCHLAGEN, DAS SYSTEM WIRD NUN NEU GESTARTET"
+
+#: 
+msgid "NO UPDATE AVAILABLE"
+msgstr "KEINE AKTUALISIERUNG VERFÜGBAR"
+
+#: 
+msgid "enter emulator"
+msgstr "Emulator-Auswahl"
+
+#: 
+msgid "enter core"
+msgstr "Core-Auswahl"
+
+#: 
+msgid "Ratio"
+msgstr "Seitenverhältnis (Aspect Ratio) "
+
+#: 
+msgid "enter ratio"
+msgstr "Seitenverhältnis-Auswahl"
+
+#: 
+msgid "Name"
+msgstr "Name"
+
+#: 
+msgid "enter game name"
+msgstr "Namen des Spiels eingeben"
+
+#: 
+msgid "Description"
+msgstr "Spielbeschreibung"
+
+#: 
+msgid "enter description"
+msgstr "Spielbeschreibung eingeben"
+
+#: 
+msgid "Image"
+msgstr "Bild"
+
+#: 
+msgid "enter path to image"
+msgstr "Pfad zum Bild eingeben"
+
+#: 
+msgid "Thumbnail"
+msgstr "Vorschaubild"
+
+#: 
+msgid "enter path to thumbnail"
+msgstr "Pfad zum Vorschaubild eingeben"
+
+#: 
+msgid "enter rating"
+msgstr "Bewertung eingeben"
+
+#: 
+msgid "Release date"
+msgstr "Erscheinungsdatum"
+
+#: 
+msgid "enter release date"
+msgstr "Erscheinungsdatum eingeben"
+
+#: 
+msgid "enter game developer"
+msgstr "Spieleentwickler eingeben"
+
+#: 
+msgid "enter game publisher"
+msgstr "Spiele-Publisher eingeben"
+
+#: 
+msgid "enter game genre"
+msgstr "Spiel-Genre eingeben"
+
+#: 
+msgid "enter number of players"
+msgstr "Anzahl der Spieler eingeben"
+
+#: 
+msgid "Favorite"
+msgstr "Favorit"
+
+#: 
+msgid "enter favorite"
+msgstr "Favoriten eingeben"
+
+#: 
+msgid "Region"
+msgstr "Region"
+
+#: 
+msgid "enter region"
+msgstr "Region eingeben"
+
+#: 
+msgid "Romtype"
+msgstr "Rom-Typ"
+
+#: 
+msgid "enter romtype"
+msgstr "Rom-Typ eingeben"
+
+#: 
+msgid "Hidden"
+msgstr "Ausgeblendet"
+
+#: 
+msgid "HIDDEN"
+msgstr "AUSGEBLENDET"
+
+#: 
+msgid "NAME"
+msgstr "NAME"
+
+#: 
+msgid "EMULATOR"
+msgstr "EMULATOR"
+
+#: 
+msgid "FAVORITE"
+msgstr "FAVORITE"
+
+#: 
+msgid "set hidden"
+msgstr "Ausblenden"
+
+#: 
+msgid "Play count"
+msgstr "Spielanzahl"
+
+#: 
+msgid "enter number of times played"
+msgstr "Eingabe der Zahl wie oft gespielt"
+
+#: 
+msgid "Last played"
+msgstr "Zuletzt gespielt"
+
+#: 
+msgid "enter last played date"
+msgstr "Letztes Spieldatum eingeben"
+
+#: 
+msgid "GAMES AVAILABLE"
+msgstr "VERFÜGBARE SPIELE"
+
+#:
+msgid "%i GAME AVAILABLE"
+msgid_plural "%i GAMES AVAILABLE"
+msgstr[0] "%i VERFÜGBARES SPIEL"
+msgstr[1] "%i VERFÜGBARE SPIELE"
+
+#: 
+msgid "%i FAVORITE"
+msgid_plural "%i FAVORITES"
+msgstr[0] "%i FAVORITE"
+msgstr[1] "%i FAVORITEN"
+
+#: 
+msgid "SCROLL"
+msgstr "SCROLLEN"
+
+#: 
+msgid "LAUNCH"
+msgstr "GESPIELT"
+
+#: 
+msgid "Times played"
+msgstr "Wie oft gespielt"
+
+#: 
+msgid "MENU"
+msgstr "MENÜ"
+
+#: 
+msgid "FILENAME, ASCENDING"
+msgstr "DATEINAME, AUFSTEIGEND"
+
+#: 
+msgid "FILENAME, DESCENDING"
+msgstr "DATEINAME, ABSTEIGEND"
+
+#: 
+msgid "RATING, ASCENDING"
+msgstr "BEWERTUNG, AUFSTEIGEND"
+
+#: 
+msgid "RATING, DESCENDING"
+msgstr "BEWERTUNG,  ABSTEIGEND"
+
+#: 
+msgid "TIMES PLAYED, ASCENDING"
+msgstr "SPIELANZAHL, AUFSTEIGEND"
+
+#: 
+msgid "TIMES PLAYED, DESCENDING"
+msgstr "SPIELANZAHL, ABSTEIGEND"
+
+#: 
+msgid "LAST PLAYED, ASCENDING"
+msgstr "ZULETZT GESPIELT, AUFSTEIGEND"
+
+#: 
+msgid "LAST PLAYED, DESCENDING"
+msgstr "ZULETZT GESPIELT, ABSTEIGEND"
+
+#: 
+msgid "WORKING..."
+msgstr "BEARBEITE..."
+
+#: 
+msgid "CHANGE"
+msgstr "ÄNDERUNG"
+
+#: 
+msgid "never"
+msgstr "nie"
+
+#: 
+msgid "just now"
+msgstr "gerade jetzt"
+
+#: 
+msgid "%i sec ago"
+msgid_plural "%i secs ago"
+msgstr[0] "vor %i Sekunde"
+msgstr[1] "vor %i Sekunden"
+
+#: 
+msgid "%i min ago"
+msgid_plural "%i mins ago"
+msgstr[0] "vor %i Minute"
+msgstr[1] "vor %i Minuten"
+
+#: 
+msgid "%i hour ago"
+msgid_plural "%i hours ago"
+msgstr[0] "vor %i Stunde"
+msgstr[1] "vor %i Stunden"
+
+#: 
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "vor %i Tag"
+msgstr[1] "vor %i Tagen"
+
+#: 
+msgid "unknown"
+msgstr "unbekannt"
+
+#: 
+msgid "SELECT ALL"
+msgstr "ALLES MARKIEREN"
+
+#: 
+msgid "SELECT NONE"
+msgstr "NICHTS MARKIEREN"
+
+#: 
+msgid "%i SELECTED"
+msgid_plural "%i SELECTED"
+msgstr[0] "%i MARKIERT"
+msgstr[1] "%i MARKIERT"
+
+#:
+msgid "VIDEO SCREENSAVER SETTINGS"
+msgstr "VIDEO-BILDSCHIRMSCHONER-EINSTELLUNGEN"
+
+#:
+msgid "SLIDESHOW SCREENSAVER SETTINGS"
+msgstr "DIASHOW-BILDSCHIRMSCHONER-EINSTELLUNGEN"
+
+#:
+msgid "SLIDESHOW SCREENSAVER"
+msgstr "DIASHOW-BILDSCHIRMSCHONER"
+
+#:
+msgid "SCREENSAVER CONTROLS"
+msgstr "BILDSCHIRMSCHONER-STEUERUNG"
+
+#:
+msgid "GROUPED SYSTEMS"
+msgstr "GRUPPIERTE SYSTEME"
+
+#: 
+msgid "UP"
+msgstr "HOCH"
+
+#: 
+msgid "DOWN"
+msgstr "RUNTER"
+
+#: 
+msgid "LEFT"
+msgstr "LINKS"
+
+#: 
+msgid "RIGHT"
+msgstr "RECHTS"
+
+#: 
+msgid "JOYSTICK 1 UP"
+msgstr "JOYSTICK 1 HOCH"
+
+#: 
+msgid "JOYSTICK 1 LEFT"
+msgstr "JOYSTICK 1 LINKS"
+
+#: 
+msgid "JOYSTICK 2 UP"
+msgstr "JOYSTICK 2 RUNTER"
+
+#: 
+msgid "JOYSTICK 2 LEFT"
+msgstr "JOYSTICK 2 LINKS"
+
+#: 
+msgid "PAGE UP"
+msgstr "L1 (NÄCHSTE SEITE)"
+
+#: 
+msgid "PAGE DOWN"
+msgstr "R1 (VORHERIGE SEITE)"
+
+#: 
+msgid "HOTKEY"
+msgstr "HOTKEY"
+
+#: 
+msgid "CONFIGURING"
+msgstr "KONFIGURATION"
+
+#: 
+msgid "KEYBOARD"
+msgstr "TASTATUR"
+
+#: 
+msgid "GAMEPAD %i"
+msgstr "GAMEPAD %i"
+
+#. Config controllers missing translation
+#: 
+msgid "PRESS ANYTHING"
+msgstr "BELIEBIGE TASTE DRÜCKEN"
+
+#: 
+msgid "ALREADY TAKEN"
+msgstr "BEREITS BELEGT"
+
+#: 
+msgid "DISCARD CHANGES"
+msgstr "ÄNDERUNGEN VERWERFEN"
+
+#: 
+msgid "WELCOME"
+msgstr "WILLKOMMEN"
+
+#: 
+msgid "CONFIGURE INPUT"
+msgstr "EINGABE KONFIGURIEREN"
+
+#: 
+msgid "%i GAMEPAD DETECTED"
+msgid_plural "%i GAMEPADS DETECTED"
+msgstr[0] "%i GAMEPAD ERKANNT"
+msgstr[1] "%i GAMEPADS ERKANNT"
+
+#: 
+msgid "NO GAMEPADS DETECTED"
+msgstr "KEINE GAMEPADS ERKANNT"
+
+#: 
+msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
+msgstr "HALTEN SIE EINE TASTE AN IHREM GERÄT GEDRÜCKT, UM ES ZU KONFIGURIEREN."
+
+#: 
+msgid "PRESS F4 TO QUIT AT ANY TIME."
+msgstr "DRÜCKEN SIE F4, UM DEN VORGANG JEDERZEIT ZU BEENDEN."
+
+#: 
+msgid "PRESS ESC OR THE HOTKEY TO CANCEL."
+msgstr "DRÜCKEN SIE ESC ODER DEN HOTKEY, UM ABZUBRECHEN."
+
+#: 
+msgid "DO YOU WANT TO START KODI MEDIA CENTER ?"
+msgstr "MÖCHTEN SIE KODI MEDIA CENTER STARTEN?"
+
+#: 
+msgid "LOADING..."
+msgstr "LADEN..."
+
+#: 
+msgid "PLEASE WAIT..."
+msgstr "BITTE WARTEN..."
+
+#: 
+msgid "REALLY SHUTDOWN WITHOUT SAVING METADATAS?"
+msgstr "WIRKLICH HERUNTERFAHREN, OHNE METADATEN ZU SPEICHERN?"
+
+#: 
+msgid "FAST SHUTDOWN SYSTEM"
+msgstr "SYSTEM SCHNELL HERUNTERFAREN"
+
+#: 
+msgid "WE CAN'T FIND ANY SYSTEMS!\n"
+"CHECK THAT YOUR PATHS ARE CORRECT IN THE SYSTEMS CONFIGURATION FILE, AND YOUR GAME DIRECTORY HAS AT LEAST ONE GAME WITH THE CORRECT EXTENSION.\n"
+"\n"
+"VISIT EMULATIONSTATION.ORG FOR MORE INFORMATION."
+msgstr "ES KONNTE KEIN SYSTEM GEFUNDEN WERDEN!\n"
+"Überprüfen Sie, ob Ihre PFADE in der SYSTEMKONFIGURATIONSDATEI korrekt sind und ob Ihr SPIELVERZEICHNIS mindestens ein SPIEL mit der richtigen DATEIENDUNG enthält.\n"
+"BESUCHEN SIE EMULATIONSSTATION.ORG FÜR WEITERE INFORMATIONEN."
+
+#: 
+msgid "ON SCREEN KEYBOARD"
+msgstr "BILDSCHIRMTASTATUR"
+
+#: 
+msgid "SHIFTS FOR UPPER,LOWER, AND SPECIAL"
+msgstr "UMSCHALT-TASTE FÜR GROß, KLEIN UND SONDERZEICHEN"
+
+#: 
+msgid "SPACE"
+msgstr "LEERTASTE"
+
+#: 
+msgid "DELETE A CHAR"
+msgstr "LÖSCHEN EINES ZEICHENS"
+
+#: 
+msgid "SHIFT"
+msgstr "UMSCHALT-TASTE"
+
+#: 
+msgid "STOP EDITING"
+msgstr "BEARBEITUNG BEENDEN"
+
+#: 
+msgid "MOVE CURSOR"
+msgstr "KURSOR BEWEGEN"
+
+#: 
+msgid "EDIT"
+msgstr "BEARBEITEN"
+
+#: 
+msgid "ACCEPT RESULT"
+msgstr "ERGEBNIS ÜBERNEHMEN"
+
+#: 
+msgid "FILENAME"
+msgstr "DATEINAME"
+
+#: 
+msgid "RATING"
+msgstr "BEWERTUNG"
+
+#: 
+msgid "PARTIES JOUÉES"
+msgstr "Wie oft gespielt"
+
+#: 
+msgid "LAST PLAYED"
+msgstr "ZULETZT GESPIELT"
+
+#: 
+msgid "NUMBER OF PLAYERS"
+msgstr "ANZAHL DER SPIELER"
+
+#: 
+msgid "DEVELOPER"
+msgstr "ENTWICKLER"
+
+#: 
+msgid "GENRE"
+msgstr "GENRE"
+
+#: 
+msgid "SHOW HIDDEN"
+msgstr "AUSGEBENDETE ANZEIGEN"
+
+#: 
+msgid "EXTREM (1400Mhz)"
+msgstr "EXTREM (1400MHz)"
+
+#: 
+msgid "TURBO (1350Mhz)"
+msgstr "TURBO (1350MHz)"
+
+#: 
+msgid "HIGH (1300Mhz)"
+msgstr "HOCH (1300MHz)"
+
+#: 
+msgid "TURBO AND EXTREM OVERCLOCK PRESETS MAY CAUSE SYSTEM UNSTABILITIES, SO USE THEM AT YOUR OWN RISK.\n"
+"IF YOU CONTINUE, THE SYSTEM WILL REBOOT NOW."
+msgstr "TURBO- UND EXTREM-ÜBERTAKTUNGSVOREINSTELLUNGEN KÖNNEN SYSTEMINSTABILITÄTEN VERURSACHEN, DAHER ERFOLGT DEREN VERWENDUNG AUF EIGENE GEFAHR.\n"
+"WENN SIE FORTFAHREN, WIRD DAS SYSTEM JETZT NEU GESTARTET."
+
+#: 
+msgid "%i GAME HIDDEN"
+msgid_plural "%i GAMES HIDDEN"
+msgstr[0] "%i SPIEL AUSGEBLENDET"
+msgstr[1] "%i SPIELE AUSGEBLENDET"
+
+#: 
+msgid "Start kodi media player."
+msgstr "Starten des Kodi Media Player."
+
+#: 
+msgid "Select the language for your recalbox, select an external drive to store your games and configurations, check your current version and the free space on your drive"
+msgstr "Wählen Sie die Sprache für die Emulationstation, wählen Sie ein externes Laufwerk zum Speichern Ihrer Spiele und Konfigurationen, prüfen Sie Ihre aktuelle Version und den freien Speicherplatz auf Ihrem Laufwerk"
+
+#:
+msgid "Configure games display, ratio, filters (shaders), auto save and load and retroachievement account."
+msgstr "Konfigurieren Sie die Spiele Anzeige, das Anzeigeverhältnis, die Filter (Shader), das automatische Speichern und Laden und das Retroachievement-Konto."
+
+#: 
+msgid "The game ratio is the ratio between image width and image height. Use AUTO to let the emulator choose the original game ratio, that will give you the best retrogaming experience."
+msgstr "Das Spiel Seitenverhältnis ist das Verhältnis zwischen Bildbreite und Bildhöhe. Verwenden Sie AUTO, damit der Emulator das Original-Spiel Seitenverhältnis wählt, das Ihnen das beste Retrogaming-Erlebnis bietet."
+
+#: 
+msgid "Smooth the game image. This option makes the image smoother, using bilinear filtering."
+msgstr "Das Spielbild optimieren. Mit dieser Option wird das Bild mithilfe der bilinearen Filterung geglättet."
+
+#: 
+msgid "This option allows you to rewind the game if you get killed by a monster, or if you make any other mistake. Use the HOTKEY + LEFT command within the game to rewind."
+msgstr "Mit dieser Option können Sie das Spiel zurückspulen, wenn Sie von einem Monster getötet werden oder wenn Sie einen anderen Fehler machen. Verwenden Sie den Befehl HOTKEY + LINKS innerhalb des Spiels, um zurückzuspulen."
+
+#: 
+msgid "Auto save the state when you quit a game, and auto load last saved state when you start a game."
+msgstr "Automatisches Speichern des Status, wenn Sie ein Spiel beenden, und das automatische Laden des zuletzt gespeicherten Status, wenn Sie ein Spiel starten."
+
+#: 
+msgid "Integer scaling is scaling by a factor of a whole number, such as 2x, 3x, 4x, etc. This option scales the image up to the greatest integer scale below the set resolution. So for instance, if you set your fullscreen resolution to 1920x1080 and enable integer scaling, it will only scale a 320x240 image up to 1280x960, and leave black borders all around. This is to maintain a 1:1 pixel ratio with the original source image, so that pixels are not unevenly duplicated."
+msgstr "Ganzzahlige Skalierung ist die Skalierung um einen Faktor einer ganzen Zahl, z.B. 2x, 3x, 4x usw. Diese Option skaliert das Bild bis zur größten ganzzahligen Skala unterhalb der eingestellten Auflösung. Wenn Sie z. B. die Vollbildauflösung auf 1920x1080 einstellen und die ganzzahlige Skalierung aktivieren, wird ein Bild mit 320x240 nur auf 1280x960 skaliert, wobei rundherum schwarze Ränder bleiben. Dies dient dazu, ein 1:1-Pixelverhältnis mit dem ursprünglichen Quellbild beizubehalten, damit die Pixel nicht ungleichmäßig dupliziert werden."
+
+#: 
+msgid "Shaders are like filters for the game rendering. You can select a shader set here, which is a collection of shaders selected for each system. You can also change the shader within the game with HOTKEY + L2 or HOTKEY + R2."
+msgstr "Shader sind wie Filter für das Rendering des Spiels. Sie können hier ein Shader-Set auswählen, das eine Sammlung von Shadern ist, die für jedes System ausgewählt wurden. Sie können den Shader auch innerhalb des Spiels mit HOTKEY + L2 oder HOTKEY + R2 ändern."
+
+#: 
+msgid "Enable or disable RetroAchievements in games."
+msgstr "Aktivieren oder deaktivieren Sie RetroAchievements in Spielen."
+
+#: 
+msgid "Hardcore mode disables *all* savestate and rewind functions within the emulator: you will not be able to save and reload at any time. You will have to complete the game and get the achievements first time, just like on the original console. In reward for this, you will earn both the standard and the hardcore achievement, in effect earning double points! A regular game worth 400 points, is now worth 800 if you complete it on hardcore! For example: if you complete the game for 400 points, you then have the opportunity to earn another 400 on hardcore."
+msgstr "Der Hardcore-Modus deaktiviert *alle* Speicherstand- und Rückspulfunktionen innerhalb des Emulators: Sie können zu keiner Zeit speichern und neu laden. Sie müssen das Spiel beenden und die Errungenschaften beim ersten Mal erhalten, genau wie auf der Originalkonsole. Als Belohnung dafür erhalten Sie sowohl die Standard- als auch die Hardcore-Achievements, also doppelte Punkte! Ein normales Spiel, das 400 Punkte wert ist, ist jetzt 800 Punkte wert, wenn Sie es auf Hardcore abschließen! Ein Beispiel: Wenn Sie das Spiel für 400 Punkte abschließen, haben Sie die Möglichkeit, weitere 400 Punkte auf Hardcore zu verdienen."
+
+#: 
+msgid "The website retroachievements.org proposes challenges/achievements/trophies on platforms like NES, SNES, GB, GBC, GBA, Genesis/Megadrive, TurboGrafx16/PCEngine and more! Create your account on retroachievements.org and start your quest for achievements!"
+msgstr "Die Webseite retroachievements.org bietet Herausforderungen/Achievements/Trophäen auf Plattformen wie NES, SNES, GB, GBC, GBA, Genesis/Megadrive, TurboGrafx16/PCEngine und mehr! Erstellen Sie Ihr Konto auf retroachievements.org und beginnen Sie Ihre Jagd nach Achievements!"
+
+#: 
+msgid "Add and configure up to 5 controllers."
+msgstr "Hinzufügen und Konfigurieren von bis zu 5 Controllern."
+
+#: 
+msgid "Start the screensaver after N minutes."
+msgstr "Starten den Bildschirmschoner nach N Minuten."
+
+#: 
+msgid "Set the screensaver behavior. DIM will reduce the screen light, and BLACK will turn the screen black."
+msgstr "Stellen Sie das Verhalten des Bildschirmschoners ein. DIM reduziert die Bildschirmhelligkeit, und BLACK macht den Bildschirm schwarz."
+
+#: 
+msgid "Shows a help at the bottom of the screen which displays commands you can use."
+msgstr "Zeigt eine Hilfe am unteren Rand des Bildschirms an, die Ihnen mögliche Bedienfunktionen anzeigt."
+
+#: 
+msgid "When enabled, you can switch between systems while browsing a gamelist by pressing LEFT or RIGHT."
+msgstr "Wenn diese Funktion aktiviert ist, können Sie beim Durchsuchen einer Spieleliste durch Drücken von LINKS oder RECHTS zwischen den Systemen wechseln."
+
+#: 
+msgid "Updates the gamelists, if you added games since the last boot."
+msgstr "Aktualisiert die Gamelisten, falls seit dem letzten Systemstart Spiele hinzugefügt wurden."
+
+#: 
+msgid "Set the volume of the sound output for the frontend and the games."
+msgstr "Stellen Sie die Lautstärke der Soundausgabe für das Front-End und die Spiele ein."
+
+#: 
+msgid "Get informations and visual for your games. The scraper downloads metadata and visuals for your games from different servers and enhances the user experience in EmulationStation completely."
+msgstr "Scanne nach Informationen und Bildmaterial für Ihre Spiele. Der Scraper lädt Metadaten und Visualisierungen für Ihre Spiele von verschiedenen Servern herunter und verbessert das Benutzererlebnis der EmulationStation erheblich."
+
+#: 
+msgid "Select a server to scrape from. The SCREENSCRAPER server is recommended and is based on www.screenscraper.fr and scrapes game data in your language, if available."
+msgstr "Wählen Sie einen Server zum Scannen (Scrapen) aus. Es wird der SCREENSCRAPER-Server empfohlen, der auf www.screenscraper.fr basiert und Spieldaten in Ihrer Sprache abruft, sofern verfügbar."
+
+#: 
+msgid "Begin the scrape process with the configuration shown below."
+msgstr "Starte den Scanner (Scraper) Vorgang mit der unten gezeigten Konfiguration."
+
+#: 
+msgid "Scrape and display game ratings."
+msgstr "Scannen (Scrapen) und Anzeigen von Spielbewertungen."
+
+#: 
+msgid "Advanced settings. Please make sure you really know what you're doing, before changing any values in this menu."
+msgstr "Erweiterte Einstellungen. Stellen bitte sicher, dass du wirklich weißt, was du tust, bevor du irgendwelche Werte in diesem Menü änderst."
+
+#: 
+msgid "Overclock your board to increase the performance.\n"
+"Overclock settings are tested and validated by the community. Keep in mind that overclocking your board can void your warranty."
+msgstr "Übertakten des Prozessors, um die Leistung zu erhöhen.\n"
+"Übertaktungseinstellungen werden von der Community getestet und validiert. Bitte beachte, dass das übertakten deines Prozessors zum Erlöschen deiner Garantie führen kann."
+
+#: 
+msgid "Only show games contained in the gamelist.xml file (located in your roms directories).\n"
+"This option highly speeds up boot time, but new games will not be detected."
+msgstr "Zeigt nur Spiele an, die in der Datei gamelist.xml enthalten sind (die sich in den Verzeichnissen Ihrer Roms befindet).\n"
+"Mit dieser Option wird die Bootzeit stark beschleunigt, aber neue Spiele werden nicht erkannt."
+
+#: 
+msgid "This option allows you to set the selected system to fixed mode. With this option activated, the user cannot access other systems."
+msgstr "Mit dieser Option kann das ausgewählte System in den fixen Modus versetzt werden. Wenn diese Option aktiviert ist, kann man nicht mehr auf andere Systeme zugreifen."
+
+#: 
+msgid "Always display the basic gamelist view, even if you have scraped your games."
+msgstr "Zeigen nur die Basisansicht der Gamelist an, auch wenn die Spieleinfos mit dem Scanner (Scraper) erweitert wurden.."
+
+#: 
+msgid "Enable or disable Kodi, customize the Kodi startup, enable the X button to start Kodi"
+msgstr "Habilitar o deshabilitar Kodi, personalizar el inicio de Kodi, habilitar el botón X para iniciar Kodi."
+
+#: 
+msgid "Enable or disable Kodi. If kodi is disabled, you won't be able to start it with the X button, or start it automatically at boot. The menu entry will be removed as well."
+msgstr "Aktiviere oder deaktiviere Kodi, passen den Kodi-Start an, aktivieren die X-Taste zum Starten von Kodi"
+
+#: 
+msgid "Use the X button to start Kodi."
+msgstr "Verwenden die X-Taste, um Kodi zu starten."
+
+#: 
+msgid "Automatically start into Kodi on boot."
+msgstr "Beim Hochfahren automatisch mit Kodi starten."
+
+#: 
+msgid "Show the framerate in EmulationStation and in game."
+msgstr "Anzeige der Framerate in EmulationStation und im Spiel."
+
+#: 
+msgid "Select which emulator to use when you start a game for this system."
+msgstr "Auswahl des Emulators, der verwendet werden soll, wenn man ein Spiel für dieses System startet."
+
+#: 
+msgid "Select which core to use for the selected emulator. For example, the LIBRETRO emulator has many cores to run Super Nintendo games. The default core you choose here can also be overridden in game specific settings."
+msgstr "Wählen aus, welcher CORE für den ausgewählten Emulator verwendet werden soll. Der LIBRETRO-Emulator hat z. B. viele Cores, um Super Nintendo-Spiele auszuführen. Der hier gewählte Standard-Core kann auch in den spielspezifischen Einstellungen eines Spiles überschrieben werden."
+
+#: 
+msgid "USE COMPOSED VISUALS"
+msgstr "NUTZE VISUELLE KOMPOSTIONEN"
+
+#: 
+msgid "CHECK UPDATES"
+msgstr "NACH AKTUALISIERUNGEN SUCHEN"
+
+#: 
+msgid "UPDATE TYPE"
+msgstr "AKTUALISIERUNGSART"
+
+#: 
+msgid "INTEGER SCALE (PIXEL PERFECT)"
+msgstr "GANZZAHLIGE SKALIERUNG (PIXELGENAU)"
+
+#: 
+msgid "ADVANCED SETTINGS"
+msgstr "ERWEITERTE-EINSTELLUNGEN"
+
+#: 
+msgid "BOOT SETTINGS"
+msgstr "START-EINSTELLUNGEN"
+
+#: 
+msgid "GAMELIST ONLY"
+msgstr "NUR SPIELLISTE"
+
+#: 
+msgid "START ON SYSTEM"
+msgstr "FOLGENDES SYSTEM NACH START ANZEIGEN"
+
+#: 
+msgid "BOOT ON GAMELIST"
+msgstr "SYSTEM DETAILLIERT ANZEIGEN"
+
+#: 
+msgid "HIDE SYSTEM VIEW"
+msgstr "SYSTEMANSICHT VERBERGEN"
+
+#: 
+msgid "EMULATOR ADVANCED CONFIGURATION"
+msgstr "ERWEITERTE KONFIGURATION DES EMULATORS"
+
+#: 
+msgid "ADVANCED EMULATOR CONFIGURATION"
+msgstr "ERWEITERTE EMULATOR-KONFIGURATION"
+
+#: 
+msgid "HELP"
+msgstr "HILFE"
+
+#: 
+msgid "THE SYSTEM IS UP TO DATE"
+msgstr "DAS SYSTEM IST AUF DEM NEUESTEN STAND"
+
+#: 
+msgid "FORCE BASIC GAMELIST VIEW"
+msgstr "ERZWINGE ANSICHT DER BASISSPIELLISTE"
+
+#: 
+msgid "DOWNLOADED"
+msgstr "HERUNTERGELADEN"
+
+#: 
+msgid "UPDATE VERSION:"
+msgstr "VERSION AKTUALISIEREN:"
+
+#: 
+msgid "UPDATE CHANGELOG:"
+msgstr "AKTUALISIERE ÄNDERUNGSPROTOKOLL:"
+
+#: 
+msgid "MORE DETAILS"
+msgstr "WEITERE DETAILS"
+
+#: 
+msgid "CAROUSEL TRANSITIONS"
+msgstr "KARUSSELL-ÜBERGÄNGE"
+
+#: 
+msgid "ENABLE FILTERS"
+msgstr "FILTER AKTIVIEREN"
+
+#: 
+msgid "THEME CONFIGURATION"
+msgstr "DESIGN-KONFIGURATION"
+
+#: 
+msgid "THEME COLORSET"
+msgstr "FARBENSET DES DESIGNS"
+
+#: 
+msgid "THEME ICONSET"
+msgstr "DESIGN SYMBOLSET"
+
+#: 
+msgid "THEME MENU"
+msgstr "DESIGN-MENÜ"
+
+#: 
+msgid "THEME SYSTEMVIEW"
+msgstr "DESIGN SYSTEMANSICHT"
+
+#: 
+msgid "THEME GAMELISTVIEW"
+msgstr "DESIGN SPIELÜBERSICHT"
+
+#: 
+msgid "THEME REGION"
+msgstr "DESIGN REGION"
+
+#: 
+msgid "THIS THEME HAS NO OPTION"
+msgstr "DIESES DESIGN HAT KEINE OPTIONEN"
+
+#: 
+msgid "MANUAL INPUT"
+msgstr "MANUELLE EINGABE"
+
+#: 
+msgid "AN ERROR OCCURED - DOWNLOADED"
+msgstr "EIN FEHLER IST AUFGETRETEN - HERUNTERGELADEN"
+
+#: 
+msgid "START KODI"
+msgstr "STARTE KODI"
+
+#: 
+msgid "Shows the current available update version."
+msgstr "Anzeige der aktuell verfügbaren Aktualisierungsversion."
+
+#: 
+msgid "Shows the current available update changelog."
+msgstr "Zeigt das aktuell verfügbare Änderungsprotokoll der Aktualisierung an."
+
+#: 
+msgid "Configure an associated controller. Your controller has to be associated / plugged before."
+msgstr "Konfigurieren eines zugeordneten Kontrollers. Ihr Kontroller muss vorher zugeordnet / angeschlossen worden sein."
+
+#: 
+msgid "Choose if carousel will be animated or not during transitions"
+msgstr "Einstellen, ob das Karussell bei Übergängen animiert werden soll oder nicht."
+
+#: 
+msgid "Select the type of transition that occurs when you start a game. INSTANT will do nothing, FADE will fade to dark, and SLIDE will zoom on the game cover (or name if there is no scrape information)"
+msgstr "Wählen Sie die Art des Übergangs, der beim Starten eines Spiels ausgeführt wird. INSTANT bewirkt nichts, FADE lässt das Spiel dunkel werden und SLIDE vergrößert das Spielcover (oder den Namen, wenn es keine Scrape-Informationen gibt)"
+
+#: 
+msgid "Select exisiting colorset options for this theme."
+msgstr "Wählen Sie die vorhandenen Farboptionen für dieses Design aus."
+
+#: 
+msgid "Select exisiting iconset options for this theme."
+msgstr "Wählen Sie die vorhandenen Symbolset-Optionen für dieses Design aus."
+
+#: 
+msgid "Select exisiting menu style options for this theme."
+msgstr "Wählen Sie die vorhandenen Menüstiloptionen für dieses Design aus."
+
+#: 
+msgid "Select exisiting system view options for this theme."
+msgstr "Wählen Sie vorhandene Systemansichtsoptionen für dieses Design aus."
+
+#: 
+msgid "Select exisiting gamelist view options for this theme."
+msgstr "Wählen Sie die vorhandenen Spiellisten-Ansichtsoptionen für dieses Design aus."
+
+#: 
+msgid "Configure theme options if available."
+msgstr "Konfigurieren Sie die Designoptionen, falls vorhanden."
+
+#: 
+msgid "Select Region of logos, pictures for system that are different for some countries. E.g. Megadrive in EU / Genesis in US"
+msgstr "Auswahl der Region von Logos, Bildern für Systeme, die für einige Länder unterschiedlich sind. z.B. Megadrive EU / Genesis US"
+
+#: 
+msgid "Type the name of your SSID if it is hidden or not listed"
+msgstr "Geben Sie den Namen Ihrer SSID ein, falls sie versteckt oder nicht aufgelistet ist"
+
+#: 
+msgid "Select a letter and the listing will go directly on the first game starting with this letter."
+msgstr "Durch Auswahl eines Buchstabens geht die Auflistung direkt auf das erste Spiel, das mit diesem Buchstaben beginnt."
+
+#: 
+msgid "Select the way the game list is sortered (alphabetically, by notation...)."
+msgstr "Auswahl der Art und Weise, wie die Spieleliste sortiert wird (alphabetisch, nach Notation...)."
+
+#: 
+msgid "Switch between seing or not only the favorites games. To add a game in the favorite list, select the game and toggle its state using 'Y'."
+msgstr "Umschalten, ob nur die Favoritenspiele angezeigt werden sollen oder nicht. Um ein Spiel in die Favoritenliste aufzunehmen, wählen Sie das Spiel aus und wechseln den Status mit 'Y'."
+
+#: 
+msgid "Switch between seing or not the hidden games. To hide a game, edit its data and select 'Hide'."
+msgstr "Umschalten, ob die ausgeblendeten Spiele angezeigt werden oder nicht. Um ein Spiel auszublenden, bearbeiten Sie seine Daten und wählen Sie 'Ausblenden'."
+
+#: 
+msgid "This option display a menu which allows to change game data and many others options."
+msgstr "Mit dieser Option wird ein Menü angezeigt, mit dem die Spieldaten und viele andere Optionen geändert werden können."
+
+#: 
+msgid "AVAILABLE UPDATE"
+msgstr "VERFÜGBARE AKTUALISIERUNG"
+
+#: 
+msgid "UPDATE CHANGELOG"
+msgstr "ÄNDERUNGSPROTOKOLL"
+
+#: 
+msgid "CLOCK IN MENU"
+msgstr "MENÜ UHR EINSCHALTEN"
+
+#: 
+msgid "Now playing"
+msgstr "Wird jetzt abgespielt"
+
+#: 
+msgid "DEFAULT (%1%)"
+msgstr "STANDARD (%1%)"
+
+#: 
+msgid "INPUT REQUIRED"
+msgstr "EINGABE ERFORDERLICH"
+
+#: 
+msgid "(skipped)"
+msgstr "(überspringen)"
+
+#: 
+msgid "UP/DOWN TO SKIP"
+msgstr "HOCH/RUNTER ZUM ÜBERSPRINGEN"
+
+#: 
+msgid "A TO UNSET"
+msgstr "(A) zum nicht belegen"
+
+#: 
+msgid "DOWN TO SKIP AND KEEP [%1%]"
+msgstr "RUNTER ZUM ÜBERSPRINGEN UND BEHALTEN VON [%1%]"
+
+#: 
+msgid "UP/DOWN TO SKIP AND KEEP [%1%]"
+msgstr "HOCH/RUNTER ZUM ÜBERSPRINGEN UND BEHALTEN VON [%1%]"
+
+#: 
+msgid "Set duration of help popups, 0 means no popup."
+msgstr "Dauer der Hilfe-Popups einstellen, 0 = kein Popup."
+
+#: 
+msgid "HELP POPUP DURATION"
+msgstr "ANZEIGEDAUER DES HILFE-POPUPS"
+
+#: 
+msgid "Set duration of music popups, 0 means no popup."
+msgstr "Dauer der Musik-Popups einstellen, 0 = kein Popup."
+
+#: 
+msgid "MUSIC POPUP DURATION"
+msgstr "ANZEIGEDAUER DES MUSIK-POPUPS"
+
+#: 
+msgid "POPUP SETTINGS"
+msgstr "POPUP EINSTELLUNGEN"
+
+#: 
+msgid "POPUP POSITION"
+msgstr "POPUP POSITION"
+
+#: 
+msgid "Select the position of popups on screen."
+msgstr "Position der Popups auf dem Bildschirm festlegen."
+
+#: 
+msgid "Set position and duration of popups."
+msgstr "Position und Dauer von Popups einstellen."
+
+#: 
+msgid "TOP/RIGHT"
+msgstr "OBEN/RECHTS"
+
+#: 
+msgid "BOTTOM/RIGHT"
+msgstr "UNTEN/RECHTS"
+
+#: 
+msgid "BOTTOM/LEFT"
+msgstr "UNTEN/LINKS"
+
+#: 
+msgid "TOP/LEFT"
+msgstr "OBEN/LINKS"
+
+#: 
+msgid "SHOW FOLDERS CONTENT"
+msgstr "ORDNERINHALT ANZEIGEN"
+
+#: 
+msgid "Switch between seeing the folders structure and seeing all games in a flatten top level."
+msgstr "Umschalten zwischen der Anzeige der kompletten Ordner-Struktur und der Anzeige aller Spiele in einer einfachen Ansicht (Top-Level)."
+
+#: 
+msgid "NETPLAY"
+msgstr "NETPLAY"
+
+#: 
+msgid "NETPLAY SETTINGS"
+msgstr "NETPLAY-EINSTELLUNGEN"
+
+#: 
+msgid "NETPLAY LOBBY"
+msgstr "NETPLAY-LOBBY"
+
+#: 
+msgid "Enable or disable Netplay in games."
+msgstr "Netplay in Spielen aktivieren oder deaktivieren."
+
+#: 
+msgid "PORT"
+msgstr "PORT"
+
+#: 
+msgid "NICKNAME"
+msgstr "NICKNAME"
+
+#: 
+msgid "RELAY SERVER"
+msgstr "RELAY SERVER"
+
+#: 
+msgid "Enable or disable connections throught relay servers."
+msgstr "Verbindungen über Relay-Server aktivieren oder deaktivieren."
+
+#: 
+msgid "KODI/NETPLAY"
+msgstr "KODI/NETPLAY"
+
+#: 
+msgid "NO GAMES OR NO CONNECTION"
+msgstr "KEINE SPIELE ODER KEINE VERBINDUNG"
+
+#: 
+msgid "HASH NOW"
+msgstr "HASH ERMITTELN"
+
+#: 
+msgid "HASH THESE SYSTEMS"
+msgstr "HASH DIESE SYSTEME"
+
+#: 
+msgid "Add hash of roms in your gamelists to have more accurate results in Netplay."
+msgstr "Fügen Sie den HASH von Roms in Ihre Spiellisten ein, um genauere Ergebnisse in Netplay zu erhalten."
+
+#: 
+msgid "HASH ROMS"
+msgstr "HASH ROMS"
+
+#: 
+msgid "Only missing hashs"
+msgstr "Nur fehlende Hashes"
+
+#: 
+msgid "Username"
+msgstr "Benutzername"
+
+#: 
+msgid "Country"
+msgstr "Land"
+
+#: 
+msgid "Latency"
+msgstr "Latenzzeit"
+
+#: 
+msgid "Host arch."
+msgstr "Host-Arch."
+
+#: 
+msgid "Core ver."
+msgstr "Core-Ver."
+
+#: 
+msgid "RA ver."
+msgstr "RA-Ver."
+
+#: 
+msgid "Can join"
+msgstr "Spielbar"
+
+#: 
+msgid "Rom and core match"
+msgstr "Rom und Core passen"
+
+#: 
+msgid "Rom found"
+msgstr "Rom gefunden"
+
+#: 
+msgid "No rom match"
+msgstr "Keine Rom-Übereinstimmung"
+
+#: 
+msgid "Match"
+msgstr "Übereinstimmung"
+
+#: 
+msgid "No Match"
+msgstr "Keine Übereinstimmung."
+
+#: 
+msgid "Rom file"
+msgstr "Rom Datei"
+
+#: 
+msgid "Rom hash"
+msgstr "Rom HASH"
+
+#: 
+msgid "THIS COULD TAKE A WHILE, CONFIRM?"
+msgstr "DAS KANN EINE ZEIT DAUERN, BITTE BESTÄTIGEN?"
+
+#: 
+msgid "good"
+msgstr "gut"
+
+#: 
+msgid "bad"
+msgstr "schlecht"
+
+#: 
+msgid "medium"
+msgstr "mittel"
+
+#: 
+msgid "NETPLAY POPUP DURATION"
+msgstr "NETPLAY POPUP-DAUER"
+
+#: 
+msgid "Set duration of netplay popups, 0 means no popup."
+msgstr "Dauer der Netplay-Popups einstellen, 0 = kein Popup."
+
+#: 
+msgid "Player"
+msgstr "Spieler"
+
+#: 
+msgid "Game"
+msgstr "Spiel"
+
+#: 
+msgid "Play online on games running through Retroarch like NES, SNES, FBA, Genesis/Megadrive and more!"
+msgstr "Mit Retroarch online Spiele spielen, zum Beispiel von NES, SNES, FBA, Genesis/Megadrive und mehr!"
+
+#: 
+msgid "Rom, hash and core match"
+msgstr "Rom, Hash und Core passen zusammen"
+
+#: 
+msgid "No core match"
+msgstr "Keine Core-Übereinstimmung"
+
+#: 
+msgid "Add a clock in the main menu."
+msgstr "Eine Uhr im Hauptmenü hinzufügen."
+
+#:
+msgid "UPGRADING"
+msgstr "UPGRADEN"
+
+#:
+msgid "PREPARING"
+msgstr "VORBEREITUNG"
+
+#:
+msgid "Starting UI"
+msgstr "Start der Benutzeroberfläche"
+
+#:
+msgid "VERIFYING"
+msgstr "ÜBERPRÜFUNG"
+
+#:
+msgid "EMPTY LIST"
+msgstr "LEERE LISTE"
+
+#:
+msgid "VISIBLE SYSTEMS"
+msgstr "SICHTBARE SYSTEME"
+
+#: Retroarch ratio
+msgid "Auto"
+msgstr "Automatisch"
+
+msgid "Square pixel"
+msgstr "Quadratische Pixel"
+
+msgid "Retroarch Config"
+msgstr "Retroarch-Konfiguration"
+
+msgid "Retroarch Custom"
+msgstr "Retroarch Benutzerdefiniert"
+
+msgid "Core provided"
+msgstr "Core Vorgaben"
+
+msgid "Do not set"
+msgstr "Nicht setzen"
