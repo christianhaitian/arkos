@@ -107,3 +107,10 @@ v1.5 (12/15/2020)
 - Updated sources.list to fix apt-get since Ubuntu 19.10 EOAN is now End of Life
 - Fixed L2 button for devilutionX port
 - Really updated the Backup script this time to not include cheats and overlays to speed up backup and restore process.
+
+v1.5 (12/16/2020)
+- Fixed bad update for German, Spanish and French ES Menu entries (Thanks to OolDEMool and olab75)
+- Added update for a few themes to support Solarus and lzdoom system entries (Thanks to Jetup)
+- Added support for Solarus
+- Added lzdoom as default emulator for Doom wads as a new main system (former ports location will be deprecated in a future update)
+(Thanks to That One Seong for the lzdoom port and tiduscrying for the lzdoom configuration)
