@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12162020"
+UPDATE_DATE="12172020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -712,8 +712,8 @@ if [ ! -f "/home/ark/.config/.update12152020" ]; then
 	touch "/home/ark/.config/.update12152020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
-
+if [ ! -f "/home/ark/.config/.update12162020" ]; then
+	
 	printf "\nFix bad update for German, Spanish and French ES Menu entries...\n" | tee -a "$LOG_FILE"
 	sudo mkdir -v /usr/bin/emulationstation/resources/locale/de/ | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/12162020/emulationstation2.po.de -O /usr/bin/emulationstation/resources/locale/de/emulationstation2.po -a "$LOG_FILE"
@@ -754,9 +754,17 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo tar --same-owner -zxvf /home/ark/solarus.tar.gz -C / | tee -a "$LOG_FILE"
 	sudo rm -v /home/ark/solarus.tar.gz | tee -a "$LOG_FILE"
 	
+	touch "/home/ark/.config/.update12162020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+	
+	printf "\nAdd support for RetroArch text-to-speech accessibility feature...\n" | tee -a "$LOG_FILE"
+	sudo apt -y install espeak espeak-data | tee -a "$LOG_FILE"
+	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
-
+	
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
