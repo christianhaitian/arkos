@@ -114,3 +114,8 @@ v1.5 (12/16/2020)
 - Added support for Solarus
 - Added lzdoom as default emulator for Doom wads as a new main system (former ports location will be deprecated in a future update)
 (Thanks to That One Seong for the lzdoom port and tiduscrying for the lzdoom configuration)
+
+v1.5 (12/18/2020)
+- Added support for RetroArch text-to-speech accessibility feature (Thanks to ridgekuhn for the suggeestion and pull request)
+- Added Tic-80 back to the ES Systems Menu 
+- Added VVVVVV port
