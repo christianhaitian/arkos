@@ -119,3 +119,8 @@ v1.5 (12/18/2020)
 - Added support for RetroArch text-to-speech accessibility feature (Thanks to ridgekuhn for the suggestion and pull request)
 - Added Tic-80 back to the ES Systems Menu 
 - Added VVVVVV port
+
+v1.5 (12/19/2020)
+- Updated PPSSPP emulator to 1.10.3 with batocera speedup.  (Thanks to fewt and batocera for patches)
+- Updated lzdoom to swap OK and Cancel buttons.  (Thanks to That One Seong for the code changes and guidance)
+- Updated Solarus to center image on screen.
