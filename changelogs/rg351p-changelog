@@ -124,3 +124,6 @@ v1.5 (12/19/2020)
 - Updated PPSSPP emulator to 1.10.3 with batocera speedup.  (Thanks to fewt and batocera for patches)
 - Updated lzdoom to swap OK and Cancel buttons.  (Thanks to That One Seong for the code changes and guidance)
 - Updated Solarus to center image on screen.
+
+v1.5 (12/19/2020-1)
+- Reverted PPSSPP emulator to previos PPSSPP-GO version.
