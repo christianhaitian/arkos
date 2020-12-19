@@ -835,7 +835,7 @@ fi
 if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nRevert PPSSPP back to previous version...\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12192020/arkosupdate12192020-1.zip -O /home/ark/arkosupdate12192020-1.zip -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12192020-1/arkosupdate12192020-1.zip -O /home/ark/arkosupdate12192020-1.zip -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate12192020-1.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate12192020-1.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate12192020-1.zip | tee -a "$LOG_FILE"
