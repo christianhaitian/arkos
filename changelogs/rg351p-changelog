@@ -127,3 +127,8 @@ v1.5 (12/19/2020)
 
 v1.5 (12/19/2020-1)
 - Reverted PPSSPP emulator to previos PPSSPP-GO version.
+
+v1.5 (12/21/2020)
+- Readded PPSSPPSDL 1.10.3 with fixed ppsspp.ini and keep original PPSSPPGO as additional emulator in Emulationstation
+- Added glide64mk2 plugin for mupen64plus.  Selectable emulator named standalone-glide64mk2 in Emulationstation
+- Updated lzdoom.ini to support Heretic, Hexen, Strife, and Chex Quest
