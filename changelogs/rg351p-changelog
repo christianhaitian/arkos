@@ -87,7 +87,9 @@ v1.4 (12/07/2020)
 - Corrected supported extensions for MSX and MSX2 games
 - Added bluemsx emulator option to Emulationstaton and defaulted MSX and MSX2 emulator to bluemsx instead (Thanks to Gordon1972 for testing and confirmation)
 - Disabled systemd-resolved deamon to save on resources -- Reverted due to some losing internet after this update.
-- Added ArkOS Browser (filebrowser) web file browser server.  Enabled when remote services are enabled.  See FAQ #19 (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-use-arkos-browser-for-managing-my-roms-via-a-web-browser) on how to use this for managing roms via a web browser.
+- Added ArkOS Browser (filebrowser) web file browser server.  Enabled when remote services are enabled.  
+See FAQ #19 (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-use-arkos-browser-for-managing-my-roms-via-a-web-browser) 
+on how to use this for managing roms via a web browser.
 
 v1.4 (12/09/2020)
 - Added non rumble enabled GBA cores (MGBA, VBA-M, VBA-NExt)
@@ -135,3 +137,7 @@ v1.5 (12/21/2020)
 
 v1.5 (12/21/2020-1)
 - Fixed Emulationstation menu for last update to recognize changes
+Note: If you have specifically set up "standalone" for any of your N64 roms by editing the meta data, 
+you'll need to update those rom settings to use either "standalone-Rice" or "standalone-Glide64mk2". 
+For PSP, make sure you don't have a button assigned to speed toggle, atl speed 1 or alt speed 2. 
+It's been reported that this causes major slowdowns with the new ppsspp emulator.
