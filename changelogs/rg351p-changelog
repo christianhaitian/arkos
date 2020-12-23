@@ -141,3 +141,13 @@ Note: If you have specifically set up "standalone" for any of your N64 roms by e
 you'll need to update those rom settings to use either "standalone-Rice" or "standalone-Glide64mk2". 
 For PSP, make sure you don't have a button assigned to speed toggle, atl speed 1 or alt speed 2. 
 It's been reported that this causes major slowdowns with the new ppsspp emulator.
+
+v1.5 (12/22/2020)
+- Added support for Half-Life 1 port (Thanks to kreal for the conversion) 
+(see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#half-life-1 for proper instructions.)
+- Added Prince of Persia port (Thanks to jetup)
+- Added dosbox_pure libretro emulator as default dosbox core
+- Power Led will turn red when battery life remaining is equal to or less than 30 percent
+- Added exit key daemon for pico-8 (Select + Start will exit this game engine)
+- Added exit key daemon for ppsspp-go (Select + Start will exit the emulator)
+- Fixed solarus exit key daemon so that it will recover when exiting sleep mode during play
