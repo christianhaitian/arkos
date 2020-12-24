@@ -910,36 +910,36 @@ if [ ! -f "/home/ark/.config/.update12212020-1" ]; then
 	touch "/home/ark/.config/.update12212020-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+#if [ ! -f "$UPDATE_DONE" ]; then
+#
+#	printf "\nAdd support for half-life\nAdd battery life indicator\nAdd PoP port\nAdd dosbox-pure\nFix solarus exit daemon\n" | tee -a "$LOG_FILE"
+#	sudo wget https://github.com/christianhaitian/arkos/raw/main/12222020/arkosupdate12222020.zip -O /home/ark/arkosupdate12222020.zip -a "$LOG_FILE"
+#	if [ -f "/home/ark/arkosupdate12222020.zip" ]; then
+#		sudo unzip -X -o /home/ark/arkosupdate12222020.zip -d / | tee -a "$LOG_FILE"
+#		sudo systemctl daemon-reload
+#		sudo systemctl enable batt_led.service
+#		sudo systemctl start batt_led.service
+#		sudo rm -v /home/ark/arkosupdate12222020.zip | tee -a "$LOG_FILE"
+#	else 
+#		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+#		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+#		exit 1
+#	fi
 
-	printf "\nAdd support for half-life\nAdd battery life indicator\nAdd PoP port\nAdd dosbox-pure\nFix solarus exit daemon\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12222020/arkosupdate12222020.zip -O /home/ark/arkosupdate12222020.zip -a "$LOG_FILE"
-	if [ -f "/home/ark/arkosupdate12222020.zip" ]; then
-		sudo unzip -X -o /home/ark/arkosupdate12222020.zip -d / | tee -a "$LOG_FILE"
-		sudo systemctl daemon-reload
-		sudo systemctl enable batt_led.service
-		sudo systemctl start batt_led.service
-		sudo rm -v /home/ark/arkosupdate12222020.zip | tee -a "$LOG_FILE"
-	else 
-		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-		exit 1
-	fi
-
-	if [ -f "/home/ark/.config/.update12222020" ]; then
-	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
-		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
-	else
-		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-		exit 1
-	fi
+#	if [ -f "/home/ark/.config/.update12222020" ]; then
+#	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+#		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+#	else
+#		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+#		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+#		exit 1
+#	fi
 	
-	touch "$UPDATE_DONE"
-	rm -v -- "$0" | tee -a "$LOG_FILE"
-	printf "\033c" >> /dev/tty1
-	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
-	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-	sudo reboot
-	exit 187
-fi
+#	touch "$UPDATE_DONE"
+#	rm -v -- "$0" | tee -a "$LOG_FILE"
+#	printf "\033c" >> /dev/tty1
+#	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
+#	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+#	sudo reboot
+#	exit 187
+#fi
