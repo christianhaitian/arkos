@@ -142,7 +142,7 @@ you'll need to update those rom settings to use either "standalone-Rice" or "sta
 For PSP, make sure you don't have a button assigned to speed toggle, atl speed 1 or alt speed 2. 
 It's been reported that this causes major slowdowns with the new ppsspp emulator.
 
-v1.5 (12/22/2020)
+v1.5 (12/22/2020) (Disabled until further notice due to licensing issue for half-life)
 - Added support for Half-Life 1 port (Thanks to kreal for the conversion) 
 (see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#half-life-1 for proper instructions.)
 - Added Prince of Persia port (Thanks to jetup)
