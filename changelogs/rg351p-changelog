@@ -157,3 +157,6 @@ v1.5 (12/26/2020)
 - Updated dtb to address possible occassional freezes during gameplay
 - Added updated blacklist.conf file to stabilize rtl8xxx wifi chipsets
 - Relocated Emulationstation themes to /roms/themes folder (if at least 1GB of space is available in EASYROMS partition)
+
+v1.5 (12/26/2020-1)
+- Fix DinguxCommander File Manager control for rg351p
