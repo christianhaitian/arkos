@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12262020-1"
+UPDATE_DATE="12272020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -981,7 +981,7 @@ if [ ! -f "/home/ark/.config/.update12262020" ]; then
 	touch "/home/ark/.config/.update12262020"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12262020-1" ]; then
 
 	printf "\nFix File Manager from last update\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/12262020-1/DinguxCommander -O /opt/dingux/DinguxCommander -a "$LOG_FILE"
@@ -999,6 +999,31 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 	
+	touch "/home/ark/.config/.update12262020-1"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\n"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate12272020.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate12272020.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate12272020.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if [ -f "/home/ark/.config/.update12272020" ]; then
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1

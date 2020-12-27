@@ -2,3 +2,10 @@ v1.5 (12/26/2020)
 - Added DinguxCommander File Manager
 - Added updated blacklist.conf file to stabilize rtl8xxx wifi chipsets
 - Relocated Emulationstation themes to /roms/themes folder(if at least 1GB of space is available in EASYROMS partition)
+
+v1.5 (12/27/2020)
+- Updated emulationstation config file to add .m3u support for most CD based systems (AmigaCD, PC-Engine/TG16-CD, Sega CD, Dreamcast, DOS, etc.)
+- Updated emulationstation config file to add support for .sh files for Doom system to support .pk3 mods.  
+  Stay tuned to retrogamecorps for guides on this soon.
+- Added updated blacklist to further mitigate performance issues for rtl8xxx chipsets (such as rtl8188CU and rtl8192cu) and resolve sleep issue.
+- Updated sleep script to address wakeup freeze due to internal wifi for OGA 1.1
