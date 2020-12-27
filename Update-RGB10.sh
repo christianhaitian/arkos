@@ -45,6 +45,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else 
 		sudo mkdir -v /roms/themes | tee -a "$LOG_FILE"
 		sudo mv -v /etc/emulationstation/themes/* /roms/themes | tee -a "$LOG_FILE"
+		sudo rm -rf -v /etc/emulationstation/themes/ | tee -a "$LOG_FILE"
 		sudo ln -sfv /roms/themes/ /etc/emulationstation/themes | tee -a "$LOG_FILE"
 	fi
 	
