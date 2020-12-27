@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12222020"
+UPDATE_DATE="12262020"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -910,7 +910,7 @@ if [ ! -f "/home/ark/.config/.update12212020-1" ]; then
 	touch "/home/ark/.config/.update12212020-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12222020" ]; then
 
 	printf "\nAdd support for half-life\nAdd battery life indicator\nAdd PoP port\nAdd dosbox-pure\nFix solarus exit daemon\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/12222020/arkosupdate12222020.zip -O /home/ark/arkosupdate12222020.zip -a "$LOG_FILE"
@@ -928,6 +928,47 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	if [ -f "/home/ark/.config/.update12222020" ]; then
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+	
+	touch "/home/ark/.config/.update12222020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd File Manger to Options section\nAdd updated dtb to address possible occassional freezes for RG351P\nAdd updated blacklist to stabilize rtl8xxx wifi chipsets\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12262020/arkosupdate12262020.zip -O /home/ark/arkosupdate12262020.zip -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate12262020.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate12262020.zip -d / | tee -a "$LOG_FILE"
+		sudo dpkg -i libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb
+		sudo rm -v /home/ark/arkosupdate12262020.zip | tee -a "$LOG_FILE"
+		sudo rm -v /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nMove themes folder to roms folder for easy management\n" | tee -a "$LOG_FILE"
+	reqSpace=1000000
+	availSpace=$(df "/roms" | awk 'NR==2 { print $4 }')
+	if (( availSpace < reqSpace )); then
+		echo "not enough Space" >&2
+	else 
+		sudo mkdir -v /roms/themes | tee -a "$LOG_FILE"
+		sudo mv -v /etc/emulationstation/themes/* /roms/themes | tee -a "$LOG_FILE"
+		sudo ln -sfv /roms/themes/ /etc/emulationstation/themes | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nLet's ensure that Drastic's performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
+	if [ -f "/home/ark/.config/.update12262020" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 	else
