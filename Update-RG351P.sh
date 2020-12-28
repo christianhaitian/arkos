@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12272020"
+UPDATE_DATE="12272020-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1002,7 +1002,7 @@ if [ ! -f "/home/ark/.config/.update12262020-1" ]; then
 	touch "/home/ark/.config/.update12262020-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12272020" ]; then
 
 	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\n"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
@@ -1016,6 +1016,31 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	if [ -f "/home/ark/.config/.update12272020" ]; then
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	touch "/home/ark/.config/.update12272020"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate doom execution script to support running mod files using .sh extension\n"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020-1/arkosupdate12272020-1.zip -O /home/ark/arkosupdate12272020-1.zip -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate12272020-1.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate12272020-1.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate12272020-1.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if [ -f "/home/ark/.config/.update12272020-1" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 	else

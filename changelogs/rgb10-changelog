@@ -9,3 +9,6 @@ v1.5 (12/27/2020)
   Stay tuned to retrogamecorps for guides on this soon.
 - Added updated blacklist to further mitigate performance issues for rtl8xxx chipsets (such as rtl8188CU and rtl8192cu) and resolve sleep issue.
 - Updated sleep script to address wakeup freeze due to internal wifi for OGA 1.1
+
+v1.5 (12/27/2020-1)
+- Updated doom execution script to support running mod files using .sh extension

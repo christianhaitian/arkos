@@ -166,3 +166,6 @@ v1.5 (12/27/2020)
 - Updated emulationstation config file to add support for .sh files for Doom system to support .pk3 mods.  
   Stay tuned to retrogamecorps for guides on this soon.
 - Added updated blacklist to further mitigate performance issues for rtl8xxx chipsets (such as rtl8188CU and rtl8192cu) and resolve sleep issue.
+
+v1.5 (12/27/2020-1)
+- Updated doom execution script to support running mod files using .sh extension
