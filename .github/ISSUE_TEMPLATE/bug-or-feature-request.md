@@ -16,6 +16,8 @@ assignees: ''
 
 3. If your issue is related to being able to run certain emulators or ports, have you reviewed the Emulators and Ports section available at https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information for needed bios files and supported rom extensions?
 
+4. Have you reviewed the ***known issues*** section available at https://github.com/christianhaitian/arkos/wiki/Known-issues ?
+
 ### Describe the Issue (If applicable)
 A clear and concise description of what the bug is.
 
