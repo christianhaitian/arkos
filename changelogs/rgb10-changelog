@@ -12,3 +12,11 @@ v1.5 (12/27/2020)
 
 v1.5 (12/27/2020-1)
 - Updated doom execution script to support running mod files using .sh extension
+
+v1.5 (01/02/2021)
+- Updated emulationstation to fix display brightness decrement issue (Thanks to stino for assistance on this)
+- Updated spanish translation for emulationstation (Thanks to Cisko for submission)
+- Added Pokemon Mini system menu
+- Added Atari Jaguar system menu - Performance is slow
+- Added 3DO system menu - Performance is slow
+- Fixed Atari 800, 5200 and XEGS rom loading issue due to options settings
