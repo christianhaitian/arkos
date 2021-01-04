@@ -177,3 +177,8 @@ v1.5 (01/02/2021)
 - Added Atari Jaguar system menu - Performance is slow
 - Added 3DO system menu - Performance is slow
 - Fixed Atari 800, 5200 and XEGS rom loading issue due to options settings
+
+v1.5 (01/03/2021)
+- Fixed Emulationstation platform and theme for Atari Jaguar
+- Added support for .lha for Amiga CD32
+- Added support for .zip for Pokemon Mini
