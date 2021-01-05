@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01032021"
+UPDATE_DATE="01042021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1078,7 +1078,7 @@ if [ ! -f "/home/ark/.config/.update01022021" ]; then
 	touch "/home/ark/.config/.update01022021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01032021" ]; then
 
 	printf "\nFix platform and theme for Atari Jaguar\n" | tee -a "$LOG_FILE"
 	cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak
@@ -1093,6 +1093,34 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update01032021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd support for .zip for AmstradCPC\n" | tee -a "$LOG_FILE"
+	sed -i '/<extension>.cpc .CPC .dsk .DSK/s//<extension>.cpc .CPC .dsk .DSK .zip .ZIP/' /etc/emulationstation/es_systems.cfg
+
+	printf "\nUpdate low battery warning python script to flash on 19 percent or lower\n"
+		sudo wget https://github.com/christianhaitian/arkos/raw/main/01042021/arkosupdate01042021.zip -O /home/ark/arkosupdate01042021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01042021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate01042021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate01042021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate01042021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if [ -f "/home/ark/.config/.update01042021" ]; then
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
