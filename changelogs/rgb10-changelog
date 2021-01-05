@@ -25,3 +25,6 @@ v1.5 (01/03/2021)
 - Fixed Emulationstation platform and theme for Atari Jaguar
 - Added support for .lha for Amiga CD32
 - Added support for .zip for Pokemon Mini
+
+v1.5 (01/04/2021)
+- Added support for .zip for Amstrad CPC

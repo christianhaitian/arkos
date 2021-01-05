@@ -182,3 +182,7 @@ v1.5 (01/03/2021)
 - Fixed Emulationstation platform and theme for Atari Jaguar
 - Added support for .lha for Amiga CD32
 - Added support for .zip for Pokemon Mini
+
+v1.5 (01/04/2021)
+- Updated battery led script to blink red every 1 second when battery life is at 19% or lower.
+- Added support for .zip for Amstrad CPC
