@@ -186,3 +186,8 @@ v1.5 (01/03/2021)
 v1.5 (01/04/2021)
 - Updated battery led script to blink red every 1 second when battery life is at 19% or lower.
 - Added support for .zip for Amstrad CPC
+
+v1.5 (01/05/2021)
+- Updated battery led script to fix excessive cpu usage
+- Updated Retroarch and Retroarch32 with netplay fix
+- Increase audio period and buffer sizes temporarily when running Drastic to improve performance

@@ -28,3 +28,7 @@ v1.5 (01/03/2021)
 
 v1.5 (01/04/2021)
 - Added support for .zip for Amstrad CPC
+
+v1.5 (01/05/2021)
+- Updated Retroarch and Retroarch32 with netplay fix
+- Increase audio period and buffer sizes temporarily when running Drastic to improve performance
