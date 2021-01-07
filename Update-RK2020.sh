@@ -80,50 +80,9 @@ if [ ! -f "/home/ark/.config/.update12262020-1" ]; then
 	touch "/home/ark/.config/.update12262020-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
-
-	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\n"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020/rgb10-rk2020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
-	if [ -f "/home/ark/arkosupdate12272020.zip" ]; then
-		sudo unzip -X -o /home/ark/arkosupdate12272020.zip -d / | tee -a "$LOG_FILE"
-		sudo rm -v /home/ark/arkosupdate12272020.zip | tee -a "$LOG_FILE"
-	else 
-		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-		exit 1
-	fi
-
-	if [ -f "/home/ark/.config/.update12272020" ]; then
-	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
-		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
-	else
-		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
-		exit 1
-	fi
-
-	touch "/home/ark/.config/.update12262020"
-fi
-
-if [ ! -f "/home/ark/.config/.update12262020-1" ]; then
-
-	printf "\nFix File Manager from last update\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12262020-1/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -O /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -a "$LOG_FILE"
-	sudo dpkg -i /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb
-	sudo rm -v /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb | tee -a "$LOG_FILE"
-
-	printf "\nLet's ensure that Drastic's performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
-	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-
-	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
-		sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
-	
-	touch "/home/ark/.config/.update12262020-1"
-fi
-
 if [ ! -f "/home/ark/.config/.update12272020" ]; then
 
-	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\nFix sleep for OGA 1.1 due to internal wifi\n"
+	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\n"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020/rgb10-rk2020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate12272020.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate12272020.zip -d / | tee -a "$LOG_FILE"
