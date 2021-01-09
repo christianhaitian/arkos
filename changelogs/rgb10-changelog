@@ -32,3 +32,8 @@ v1.5 (01/04/2021)
 v1.5 (01/05/2021)
 - Updated Retroarch and Retroarch32 with netplay fix
 - Increase audio period and buffer sizes temporarily when running Drastic to improve performance
+
+v1.5 (01/09/2021)
+- Fixed scraping for Neo-Geo CD
+- Added support for .dim for x68000
+- Added vmu to roms folder and background image to nes-box theme for vmu
