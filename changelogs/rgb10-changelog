@@ -37,3 +37,6 @@ v1.5 (01/09/2021)
 - Fixed scraping for Neo-Geo CD
 - Added support for .dim for x68000
 - Added vmu to roms folder and background image to nes-box theme for vmu
+
+v1.5 (01/09/2021-1)
+- Fixed scraping for Pokemon Mini

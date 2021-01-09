@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01092021"
+UPDATE_DATE="01092021-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1154,7 +1154,7 @@ if [ ! -f "/home/ark/.config/.update01052021" ]; then
 	touch "/home/ark/.config/.update01052021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01092021" ]; then
 
 	printf "\nFix scraping for NeoGeo CD\n" | tee -a "$LOG_FILE"
 	sudo sed -i '0,/<platform>console/!{0,/platform>console/s//platform>neogeocd/}' /etc/emulationstation/es_systems.cfg
@@ -1181,6 +1181,14 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update01092021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix scraping for Pokemon Mini\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/platform>pokemonmini/c\\t\t<platform>pokemini<\/platform>' /etc/emulationstation/es_systems.cfg
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
