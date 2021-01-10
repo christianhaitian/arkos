@@ -39,3 +39,9 @@ v1.5 (01/09/2021)
 
 v1.5 (01/09/2021-1)
 - Fixed scraping for Pokemon Mini
+
+v1.5 (01/10/2021)
+- Added Daphne (Hypseus) emulator
+  * for key assignments, see Daphne section within the rg351p global hotkey section of faq 
+    (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RK2020#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS)
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#daphne)
