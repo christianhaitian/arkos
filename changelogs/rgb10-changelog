@@ -46,3 +46,8 @@ v1.5 (01/10/2021)
   * for key assignments, see Daphne section within the rg351p global hotkey section of faq 
     (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RGB10#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS)
   * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#daphne)
+
+v1.5 (01/11/2021)
+- Changed opentyrian port to 32 bit to improve performance
+- Added workaround for retroarch crashes when taking screenshots
+- Added fix for shaders not autoloading when saved
