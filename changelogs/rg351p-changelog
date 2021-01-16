@@ -211,3 +211,8 @@ v1.5 (01/11/2021)
 - Added workaround for retroarch crashes when taking screenshots
 - Added fix for shaders not autoloading when saved
 - Added vibration support for Pokemon Mini emulator
+
+v1.5 (01/15/2021)
+- Updated MGBA_Rumble core
+- Updated Flycast_Rumble core (Previous savestates may not load with his updated rumble core)
+- Updated PCSX_Rearmed_Rumble core and added as a separate core for psx

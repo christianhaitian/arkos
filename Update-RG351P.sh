@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01112021"
+UPDATE_DATE="01152021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1220,7 +1220,7 @@ if [ ! -f "/home/ark/.config/.update01102021" ]; then
 	touch "/home/ark/.config/.update01102021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01112021" ]; then
 
 	printf "\nAdd vibration support for Pokemon mini emulator (RG351P Only!)\nAdd 32bit opentyrian port to address performance\n" | tee -a "$LOG_FILE"
 	sudo chown -R -v ark:ark /home/ark/.config/opentyrian/ | tee -a "$LOG_FILE"
@@ -1249,11 +1249,31 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	touch "/home/ark/.config/.update01112021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate vibration enabled cores (flycast, mgba, and pcsx_rearmed)\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/01152021/arkosupdate01152021.zip -O /home/ark/arkosupdate01152021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01152021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate01152021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate01152021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate01152021.zip | tee -a "$LOG_FILE"
+		sudo sed -i -e '/<core>pcsx_rearmed<\/core>/{r /home/ark/add_pcsxrearmedrumble.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/.config/retroarch32/cores/pcsx_rearmed_libretro.so.lck | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_pcsxrearmedrumble.txt | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
 	sudo reboot
-	exit 187
+	exit 187	
 fi
