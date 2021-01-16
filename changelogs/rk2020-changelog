@@ -50,3 +50,7 @@ v1.5 (01/11/2021)
 - Changed opentyrian port to 32 bit to improve performance
 - Added workaround for retroarch crashes when taking screenshots
 - Added fix for shaders not autoloading when saved
+
+v1.5 (01/16/2021)
+- Added Uzebox (lr-uzem) emulator - Performance is slow
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#uzebox)

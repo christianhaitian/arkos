@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01152021"
+UPDATE_DATE="01162021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1252,7 +1252,7 @@ if [ ! -f "/home/ark/.config/.update01112021" ]; then
 	touch "/home/ark/.config/.update01112021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01152021" ]; then
 
 	printf "\nUpdate vibration enabled cores (flycast, mgba, and pcsx_rearmed)\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/01152021/arkosupdate01152021.zip -O /home/ark/arkosupdate01152021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01152021.zip | tee -a "$LOG_FILE"
@@ -1268,6 +1268,31 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
 		exit 1
 	fi
+
+	touch "/home/ark/.config/.update01152021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd lr-Uzebox emulator\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/01162021/arkosupdate01162021.zip -O /home/ark/arkosupdate01162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01162021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate01162021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate01162021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate01162021.zip | tee -a "$LOG_FILE"
+		sudo sed -i -e '/<name>retropie<\/name>/{r /home/ark/add_uzebox.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/add_uzebox.txt | tee -a "$LOG_FILE"
+		if [ ! -d "/roms/uzebox/" ]; then
+			sudo mkdir -v /roms/uzebox | tee -a "$LOG_FILE"
+		fi
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
