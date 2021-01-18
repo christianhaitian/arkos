@@ -221,3 +221,8 @@ v1.5 (01/16/2021)
 - Added Uzebox (lr-uzem) emulator - Performance is slow
   * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#uzebox)
 - Properly update ArkOS version boot text screen
+
+v1.5 (01/17/2021)
+- Updated 64 bit libSDL2 2.10 to libSDL2 2.0.14.1 to fix some tearing (Thanks to Johnny on Flame for suggestion and kreal for compilation)
+- Increase audio period and buffer sizes temporarily when running N64 (may improve performance in some games)
+- Increase audio period and buffer sizes temporarily when running PSP (may improve performance in some games)
