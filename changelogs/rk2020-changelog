@@ -62,3 +62,8 @@ v1.5 (01/17/2021)
 
 v1.5 (01/18/2021)
 - Fixed retroarch N64 no sound issue from last update
+
+v1.5 (01/21/2021)
+- Adjusted sound configuration in ArkOS so future updates should not impact emulators and ports needing direct access to set sound
+- Added fixed controls for the standalone Amiga emulator (Amiberry)
+- Added correct kyra.dat file to Standalone ScummVM
