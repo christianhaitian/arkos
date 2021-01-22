@@ -233,3 +233,7 @@ v1.5 (01/18/2021)
 v1.5 (01/21/2021)
 - Adjusted sound configuration in ArkOS so future updates should not impact emulators and ports needing direct access to set sound
 - Added correct kyra.dat file to Standalone ScummVM
+
+v1.5 (01/21/2021-1)
+- Fixed deadzone for lzdoom
+- Fixed deadzone for Half-Life

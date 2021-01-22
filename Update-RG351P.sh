@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01212021"
+UPDATE_DATE="01212021-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1342,7 +1342,7 @@ if [ ! -f "/home/ark/.config/.update01182021" ]; then
 	touch "/home/ark/.config/.update01182021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01212021" ]; then
 
 	printf "\nAdjust sound settings in ArkOS so future updates should not impact emulators and ports needing direct access to set sound\nUpdate kyra.dat for standalone scummvm\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/01212021/arkosupdate01212021.zip -O /home/ark/arkosupdate01212021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01212021.zip | tee -a "$LOG_FILE"
@@ -1359,6 +1359,23 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	touch "/home/ark/.config/.update01212021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix deadzone for lzdoom\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/Axis1deadzone=0.100001/c\Axis1deadzone=0.100001\nAxis2deadzone=0.100001\nAxis3deadzone=0.100001' /home/ark/.config/lzdoom/lzdoom.ini
+
+	printf "\nFix deadzone for Half-Life\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/joy_forward_deadzone "0"/c\joy_forward_deadzone "10000"' /roms/ports/Half-Life/valve/config.cfg
+	sudo sed -i '/joy_pitch_deadzone "0"/c\joy_pitch_deadzone "10000"' /roms/ports/Half-Life/valve/config.cfg
+	sudo sed -i '/joy_side_deadzone "0"/c\joy_side_deadzone "10000"' /roms/ports/Half-Life/valve/config.cfg
+	sudo sed -i '/joy_yaw_deadzone "0"/c\joy_yaw_deadzone "10000"' /roms/ports/Half-Life/valve/config.cfg
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
@@ -1366,4 +1383,4 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
 	sudo reboot
 	exit 187	
-fi
+fi	
