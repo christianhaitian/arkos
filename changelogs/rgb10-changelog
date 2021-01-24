@@ -70,3 +70,10 @@ v1.5 (01/21/2021)
 
 v1.5 (01/21/2021-1)
 - Fixed deadzone for lzdoom
+
+v1.5 (01/24/2021)
+- Updated Emulationstation to fix scraping for daphne, neogeo cd, and xegs
+- Fixed sound for ppsspp-go emulator
+- Added sraping support for tic-80 and sharp x1
+- Added official support for Sega Saturn (Performance is slow)
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sega-saturn)
