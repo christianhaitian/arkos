@@ -4,4 +4,4 @@ From a SSH terminal in ArkOS, do the following:
 
 1. wget https://github.com/christianhaitian/arkos/raw/main/KernelandHeader/ArkosKernandHead.tar.gz
 2. tar -zxvf ArkosKernandHead.tar.gz
-3. ./install_headers.sh
+3. sudo ./install_headers.sh
