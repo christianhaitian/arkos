@@ -6,4 +6,4 @@ From a SSH terminal in ArkOS, do the following:
 2. tar -zxvf ArkosKernandHead.tar.gz
 3. ./install_headers.sh
 
-Note: Ignore permission error about permission issues for /boot.  That normal as permissions can't be set on fat partitions.
+Note: Ignore the permission error about permission issues for /boot.  That is normal as permissions can't be set on fat partitions.
