@@ -245,3 +245,19 @@ v1.5 (01/24/2021)
 - Added official support for Sega Saturn (Performance is slow)
   * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sega-saturn)
 - Updated battery led script to turn power led red when below 20% and blink red every 1 second when battery life is below 10%
+
+v1.5 (01/28/2021)
+- Updated Drastic to newer 64 bit build (Thanks to slaminger for working with drastic team on getting the fix)
+- Updated dosbox_pure core to version 0.10
+- Added Crocods (Amstrad CPC) emulator and made it the default emulator for Amstrad CPC (Thanks to JCORR76 for suggeston and testing)
+- Added gpsp as a selectable gba core in Emulationstation
+- Added 2048 port to ports section
+- Added OpenBOR port as system (Thanks to luali for rg351p gamepad workaround)
+  * for pak loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#openbor)
+  * To exit the emulator, hit the Start button then select exit in the menu for most paks or hit Select+Start
+- Added scan script for scummvm games (Thanks to kreal for initial script)
+- Set standalone scummvm as default scummvm emulator
+- Disabled DSP for Flycast emulator to improve performance for Dreamcast games (Thanks to Bignella for suggestion)
+- Added support for Commodore 16
+- Added support for Commodore 128
+- Updated nes-box theme (Thanks to Jetup)
