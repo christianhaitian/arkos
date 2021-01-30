@@ -261,3 +261,10 @@ v1.5 (01/28/2021)
 - Added support for Commodore 16
 - Added support for Commodore 128
 - Updated nes-box theme (Thanks to Jetup)
+
+v1.5 (01/29/2021)
+- Added platform name for scummvm
+- Fixed scummvm scan games script to allow for spaces in directory name (Thanks to kreal for fix)
+- Added workaround for OpenBor sleep issue
+- Fixed loading of scummvm games in retroarch (Thanks to southoz for suggested fix)
+- Recompiled dosbox_pure 0.10 core to improve performance (Thanks to Stino for updated Makefile)
