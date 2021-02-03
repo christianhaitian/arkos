@@ -99,3 +99,13 @@ v1.5 (01/29/2021)
 - Fixed scummvm scan games script to allow for spaces in directory name (Thanks to kreal for fix)
 - Fixed loading of scummvm games in retroarch (Thanks to southoz for suggested fix)
 - Recompiled dosbox_pure 0.10 core to improve performance (Thanks to Stino for updated Makefile)
+
+v1.5 (02/03/2021)
+- Added TI-99 emulator
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#ti-99)
+  * for key configuration, see the global events TI99 Standalone emulator section in the FAQ (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RGB10#q-what-are-the-global-event-keys-and-emulator-event-keys-in-arkos)
+  * To exit the emulator, hit Minus+Start
+- Added retroarch core options reset to default script in Options/Advanced section
+- Updated Emulationstation to support ti99 scraping
+- Updated TI99 system and background images for nes-box theme (Thanks to Jetup)
+- Added support for .hdf extension for Amiga
