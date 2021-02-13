@@ -122,3 +122,6 @@ v1.5 (02/13/2021)
 v1.5 (02/13/2021-1)
 - Added ability to mount and unmount a USB drive from the options menu
   * See FAQ #20 for information on how to use this (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RK2020#q-how-do-i-mount-a-usb-drive-for-copying-and-moving-files).
+  
+v1.5 (02/13/2021-2)
+- Fixed global hotkeys not working after 02132021 update
