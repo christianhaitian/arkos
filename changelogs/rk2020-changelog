@@ -109,3 +109,12 @@ v1.5 (02/03/2021)
 - Updated Emulationstation to support ti99 scraping
 - Updated TI99 system and background images for nes-box theme (Thanks to Jetup)
 - Added support for .hdf extension for Amiga
+
+v1.5 (02/13/2021)
+- Added Flycast32_Rumble core as a selectable core for Atomiswave, Dreamcast and Naomi emulation (Thanks to slaminger for the advice on the core)
+- Recompiled scummvm standalone to allow the use of virtual keyboards
+- Fixed ability to load .adf for Amiberry (Amiga)
+- Updated 32bit and 64bit libgo2 libraries
+- Reduced cpu usage of global events hotkey daemon
+- Added tools folder into roms partition (Thanks to TadMSTR for suggestion)
+  *Allows the ability to add your own tools/scripts. AnberThemes(https://github.com/TadMSTR/AnberThemes) being one such tool.
