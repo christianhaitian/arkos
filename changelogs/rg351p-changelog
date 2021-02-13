@@ -287,3 +287,7 @@ v1.5 (02/13/2021)
 - Reduced cpu usage of global events hotkey daemon
 - Added tools folder into roms partition (Thanks to TadMSTR for suggestion)
   *Allows the ability to add your own tools/scripts. AnberThemes(https://github.com/TadMSTR/AnberThemes) being one such tool.
+
+v1.5 (02/13/2021-1)
+- Added ability to mount and unmount a USB drive from the options menu
+  * See FAQ #23 for information on how to use this (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-mount-a-usb-drive-for-copying-and-moving-files).
