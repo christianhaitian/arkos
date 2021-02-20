@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="02192021"
+UPDATE_DATE="02202021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1571,7 +1571,7 @@ if [ ! -f "/home/ark/.config/.update02132021-1" ]; then
 	touch "/home/ark/.config/.update02132021-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update02192021" ]; then
 
 	printf "\nAdd ZX81 lr emulator\nClean up USB mount script\nAdd pico-8 as system\nUpdate NES box theme to include pico-8\nUpdate Emulationstation to support scraping pico-8\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/02192021/arkosupdate02192021.zip -O /home/ark/arkosupdate02192021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02192021.zip | tee -a "$LOG_FILE"
@@ -1601,6 +1601,30 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	
+	touch "/home/ark/.config/.update02192021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAllow splore and different aspect ratios for Pico-8\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/02202021/arkosupdate02202021.zip -O /home/ark/arkosupdate02202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate02202021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate02202021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
+		sudo cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update02202021.bak | tee -a "$LOG_FILE"
+		sudo sed -i '/<extension>.png .PNG .p8 .P8<\/extension>/{n;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<extension>.png .PNG .p8 .P8<\/extension>/{r /home/ark/fix_pico8.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/fix_pico8.txt | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 	

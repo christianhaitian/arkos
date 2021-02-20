@@ -134,3 +134,7 @@ v1.5 (02/19/2021)
   * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#pico-8)
 - Updated Emulationstation-fcamod to add scraping for Pico-8 via screenscraper.fr. (Thanks to choo t and kreal for most of the heavy lifting on this.)
 - Updated NES box theme to include pico-8 (Thanks to Jetup13)
+
+v1.5 (02/20/2021)
+- Added support for splore and different aspect ratios for Pico-8 (Thanks to onionsaregross and choo t for suggestions)
+  * See updated rom loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#pico-8)
