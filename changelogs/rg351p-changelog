@@ -291,3 +291,12 @@ v1.5 (02/13/2021)
 v1.5 (02/13/2021-1)
 - Added ability to mount and unmount a USB drive from the options menu
   * See FAQ #23 for information on how to use this (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351P#q-how-do-i-mount-a-usb-drive-for-copying-and-moving-files).
+
+v1.5 (02/19/2021)
+- Added support for ZX81 emulation (EightyOne libretro core) (Thanks to slaminger for rom testing help)
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#zx81)
+- Cleaned up and corrected USB mount script (Thanks to kreal for cleaned up script and Bignella for note on script text mistake)
+- Added Pico-8 as a System (roms/pico8).  
+  * for rom loading, see emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#pico-8)
+- Updated Emulationstation-fcamod to add scraping for Pico-8 via screenscraper.fr. (Thanks to choo t and kreal for most of the heavy lifting on this.)
+- Updated NES box theme to include pico-8 (Thanks to Jetup13)
