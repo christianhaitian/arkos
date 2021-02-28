@@ -312,7 +312,7 @@ v1.5 (02/27/2021)
 - Added Retrorun and Retrorun32 emulators for Atomiswave, Dreamcast, Naomi and Saturn (Thanks to luali for the rg351 workaround)
 - Added LowRes NX system emulator
 - Added Genesis Plus GX Wide 32bit core
-- Updated NESBOX theme to add support for fullscreen toggle
+- Updated NESBOX theme to add support for fullscreen toggle and LowRes NX(Thanks to Jetup)
 - Updated Dosbox-pure to version 0.11
 - Fixed scraping for Super Gameboy
 - Added support for .dosz files for DOS games
