@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="02202021"
+UPDATE_DATE="02272021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1607,7 +1607,7 @@ if [ ! -f "/home/ark/.config/.update02192021" ]; then
 	touch "/home/ark/.config/.update02192021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update02202021" ]; then
 
 	printf "\nAllow splore and different aspect ratios for Pico-8\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/02202021/arkosupdate02202021.zip -O /home/ark/arkosupdate02202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
@@ -1627,6 +1627,57 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	
+	touch "/home/ark/.config/.update02202021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Retrorun for Dreamcast, Atomiswave, Naomi, and Saturn\nAdd LowRes NX emulator\nAdd Genesis Plus GX Wide core\nUpdate NESBOX theme\nAdd support for Fullscreen emulationstation\nUpdate Dosbox-pure to 0.11\nAdd .dosz extension for dos games\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/02272021/arkosupdate02272021.zip -O /home/ark/arkosupdate02272021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate02272021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate02272021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
+		sudo cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update02272021.bak | tee -a "$LOG_FILE"
+		sudo sed -i '/<name>Sega Atomiswave<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>Sega Atomiswave<\/name>/{r /home/ark/new_atomiswave.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i '/<name>Sega Naomi<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>Sega Naomi<\/name>/{r /home/ark/new_naomi.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i '/<name>dreamcast<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>dreamcast<\/name>/{r /home/ark/new_dreamcast.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i '/<name>Sega Saturn<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>Sega Saturn<\/name>/{r /home/ark/new_saturn.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<theme>pico-8<\/theme>/{r /home/ark/add_lowresnx.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i '/<name>genesis<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>genesis<\/name>/{r /home/ark/new_genesis.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i '/<name>megadrive<\/name>/{n;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;N;d}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<name>megadrive<\/name>/{r /home/ark/new_megadrive.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sed -i '/<extension>.exe .EXE .com .COM .bat .BAT .conf .CONF .cue .CUE .iso .ISO .zip .ZIP .m3u .M3U/s//<extension>.exe .EXE .com .COM .bat .BAT .conf .CONF .cue .CUE .iso .ISO .zip .ZIP .m3u .M3U .dosz .DOSZ/' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/new_atomiswave.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/new_naomi.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/new_dreamcast.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/new_saturn.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_lowresnx.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/new_genesis.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/new_megadrive.txt | tee -a "$LOG_FILE"
+		if [ ! -d "/roms/lowresnx/" ]; then
+			sudo mkdir -v /roms/lowresnx | tee -a "$LOG_FILE"
+		fi
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.5 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	printf "\nFix ES scraping for Super Gameboy\n" | tee -a "$LOG_FILE"	
+	sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"

@@ -138,3 +138,15 @@ v1.5 (02/19/2021)
 v1.5 (02/20/2021)
 - Added support for splore and different aspect ratios for Pico-8 (Thanks to onionsaregross and choo t for suggestions)
   * See updated rom loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#pico-8)
+
+v1.5 (02/27/2021)
+- Added support for Emulationstation Fullscreen
+  * Can be switched to from the Options/Advanced section. (ES FullScreen)
+  * Can be switched back to the original from the Options/Advanced section. (ES Header)
+- Added Retrorun and Retrorun32 emulators for Atomiswave, Dreamcast, Naomi and Saturn
+- Added LowRes NX system emulator
+- Added Genesis Plus GX Wide 32bit core
+- Updated NESBOX theme to add support for fullscreen toggle
+- Updated Dosbox-pure to version 0.11
+- Fixed scraping for Super Gameboy
+- Added support for .dosz files for DOS games
