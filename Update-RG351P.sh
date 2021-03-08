@@ -1684,18 +1684,18 @@ fi
 
 if [ ! -f "$UPDATE_DONE" ]; then
 
-	sudo msgbox "This update includes a new kernel, video drivers, and has significant changes that may leave your ArkOS distribution in an inoperable state if not successfully completed.  It is HIGHLY RECOMMENDED YOU HAVE A BACK UP OF YOUR SD CARD BERORE PROCEEDING! You've been warned!  Type OK in the next screen to proceed."
-	var=`osk "Again, enter OK here to proceed." | tail -n 1`
+	#msgbox "This update includes a new kernel, video drivers, and has significant changes that may leave your ArkOS distribution in an inoperable state if not successfully completed.  It is HIGHLY RECOMMENDED YOU HAVE A BACK UP OF YOUR SD CARD BERORE PROCEEDING! You've been warned!  Type OK in the next screen to proceed."
+	#var=`osk "Again, enter OK here to proceed." | tail -n 1`
 
-	echo "$var" | tee -a "$LOG_FILE"
+	#echo "$var" | tee -a "$LOG_FILE"
 
-	if [[ $var = OK ]] || [[ $var = ok ]] ; then
-		printf "Proceeding with updates." | tee -a "$LOG_FILE"
-	else
-		sudo msgbox "You didn't type OK.  This update will not proceed and no changes have been made from this process."
-		printf "You didn't type OK.  This update will not proceed and no changes have been made from this process." | tee -a "$LOG_FILE"
-		exit 1
-	fi
+	#if [[ $var = OK ]] || [[ $var = ok ]] ; then
+		#printf "Proceeding with updates." | tee -a "$LOG_FILE"
+	#else
+		#sudo msgbox "You didn't type OK.  This update will not proceed and no changes have been made from this process."
+		#printf "You didn't type OK.  This update will not proceed and no changes have been made from this process." | tee -a "$LOG_FILE"
+		#exit 1
+	#fi
 
 	printf "\nUpdate retroarch and retroarch32 core_updater_buildbot_cores_url\nUpdate retroarch and retroarch32 to support OGS resolution\nAdd easyrpg as ES system with scraping support\nAdd option for ascii art loading screen\nUpdate nes-box theme for easyrpg\nRevert lr-mgba to older faster core\n" | tee -a "$LOG_FILE"
 	sudo wget http://gitcdn.xyz/repo/christianhaitian/arkos/main/03082021/arkosupdate03082021.zip -O /home/ark/arkosupdate03082021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
