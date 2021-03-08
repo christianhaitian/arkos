@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="02272021"
+UPDATE_DATE="03082021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1631,7 +1631,7 @@ if [ ! -f "/home/ark/.config/.update02202021" ]; then
 	touch "/home/ark/.config/.update02202021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update02272021" ]; then
 
 	printf "\nAdd Retrorun for Dreamcast, Atomiswave, Naomi, and Saturn\nAdd LowRes NX emulator\nAdd Genesis Plus GX Wide core\nUpdate NESBOX theme\nAdd support for Fullscreen emulationstation\nUpdate Dosbox-pure to 0.11\nAdd .dosz extension for dos games\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/arkos/raw/main/02272021/arkosupdate02272021.zip -O /home/ark/arkosupdate02272021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
@@ -1679,7 +1679,91 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nFix ES scraping for Super Gameboy\n" | tee -a "$LOG_FILE"	
 	sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	
+	touch "/home/ark/.config/.update02272021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	sudo msgbox "This update includes a new kernel, video drivers, and has significant changes that may leave your ArkOS distribution in an inoperable state if not successfully completed.  It is HIGHLY RECOMMENDED YOU HAVE A BACK UP OF YOUR SD CARD BERORE PROCEEDING! You've been warned!  Type OK in the next screen to proceed."
+	var=`osk "Again, enter OK here to proceed." | tail -n 1`
+
+	echo "$var" | tee -a "$LOG_FILE"
+
+	if [[ $var = OK ]] || [[ $var = ok ]] ; then
+		printf "Proceeding with updates." | tee -a "$LOG_FILE"
+	else
+		sudo msgbox "You didn't type OK.  This update will not proceed and no changes have been made from this process."
+		printf "You didn't type OK.  This update will not proceed and no changes have been made from this process." | tee -a "$LOG_FILE"
+		exit 1
+	fi
+
+	printf "\nUpdate retroarch and retroarch32 core_updater_buildbot_cores_url\nUpdate retroarch and retroarch32 to support OGS resolution\nAdd easyrpg as ES system with scraping support\nAdd option for ascii art loading screen\nUpdate nes-box theme for easyrpg\nRevert lr-mgba to older faster core\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/03082021/arkosupdate03082021.zip -O /home/ark/arkosupdate03082021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate03082021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate03082021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
+		sudo cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update02272021.bak | tee -a "$LOG_FILE"
+		sudo sed -i -e '/<theme>doom<\/theme>/{r /home/ark/add_easyrpg.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/add_easyrpg.txt | tee -a "$LOG_FILE"
+		sed -i '/core_updater_buildbot_cores_url/c\core_updater_buildbot_cores_url \= "https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/aarch64/"' /home/ark/.config/retroarch/retroarch.cfg
+		sed -i '/core_updater_buildbot_cores_url/c\core_updater_buildbot_cores_url \= "https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/arm7hf/"' /home/ark/.config/retroarch32/retroarch.cfg
+		sed -i '/core_updater_buildbot_cores_url/c\core_updater_buildbot_cores_url \= "https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/aarch64/"' /home/ark/.config/retroarch/config/Atari800/retroarch_5200.cfg
+		sed -i '/core_updater_buildbot_cores_url/c\core_updater_buildbot_cores_url \= "https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/aarch64/"' /home/ark/.config/retroarch/config/Atari800/retroarch_A800.cfg
+		sed -i '/core_updater_buildbot_cores_url/c\core_updater_buildbot_cores_url \= "https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/aarch64/"' /home/ark/.config/retroarch/config/Atari800/retroarch_XEGS.cfg
+		if [ ! -d "/roms/easyrpg/" ]; then
+			sudo mkdir -v /roms/easyrpg | tee -a "$LOG_FILE"
+			touch /roms/easyrpg/menu.ldb
+		fi
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix retroarch folder ownership\n" | tee -a "$LOG_FILE"
+	sudo chown -v -R ark:ark ~/.config/retroarch | tee -a "$LOG_FILE"
+
+	printf "\nFix samba name and path for ark folder\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/\[odroid\]/c\\[ark\]" /etc/samba/smb.conf
+	sudo sed -i "/comment \= ODROID/c\   comment \= ark" /etc/samba/smb.conf
+	sudo sed -i "/path \= \/home\/odroid/c\   path \= \/home\/ark" /etc/samba/smb.conf
+
+	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	printf "\nCopy correct updated ES for easyrpg scraping fix\n" | tee -a "$LOG_FILE"	
+	test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	if [[ "$test" == "3150376" ]]; then
+		sudo cp -v /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	else
+		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	fi
+	
 	touch "$UPDATE_DONE"
+fi
+
+if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
+
+	printf "\nInstall updated kernel, dtb, and modules\n"
+	sudo wget https://github.com/christianhaitian/arkos/raw/main/03082021/newkernelnmodndtb02032021.zip -O /home/ark/newkernelnmodndtb02032021.zip -a "$LOG_FILE" || rm -f /home/ark/newkernelnmodndtb02032021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/newkernelnmodndtb02032021.zip" ]; then
+		sudo unzip -X -o /home/ark/newkernelnmodndtb02032021.zip -d / | tee -a "$LOG_FILE"
+		sudo depmod 4.4.189
+		sudo rm -v /home/ark/newkernelnmodndtb02032021.zip | tee -a "$LOG_FILE"
+		sudo cp -v /boot/rk3326-rg351p-linux.dtb /boot/rk3326-rg351p-linux.dtb.13 | tee -a "$LOG_FILE"
+		sudo rm -rfv /lib/modules/4.4.189-139502-g380eeff98d35/ | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update of your kernel couldn't complete because the kernel package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	touch "/home/ark/.config/.kernelupdate02032021"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."

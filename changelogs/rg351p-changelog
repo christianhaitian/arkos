@@ -316,3 +316,19 @@ v1.5 (02/27/2021)
 - Updated Dosbox-pure to version 0.11
 - Fixed scraping for Super Gameboy
 - Added support for .dosz files for DOS games
+
+v1.6 (03/08/2021)
+- Updated the kernel and libmali for opengl fixes
+- Added easyrpg as ES system
+- Updated Emulationstation to support scraping easyrpg
+- Fixed retroarch folder ownership
+- Fixed samba name and path for the /home/ark folder
+- Updated retroarch and retroarch32 core_updater location to new central repository (https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/aarch64/ and https://raw.githubusercontent.com/christianhaitian/retroarch-cores/master/arm7hf/)
+- Updated retroarch and retroarch32 executables to support a more universal screen size for future device support
+- Revert lr-MGBA and lr-MGBA_Rumble to 0.8.3 417eb53e commit for best performance (Thanks to Artemis-Ophiel for reporting and testing)
+  * Cores have been locked so they can not be accidentally updated through retroarch core updater.  Can be updated by unlocking them in retroarch then doing an update.
+- Updated NES-Box theme to support easyrpg
+- Added support for ascii art again under Options/Advanced 
+  * Included a default loading.ascii file in launchimages roms folder
+  * Simply go to Options/Advanced and select Switch launchimage to ascii
+  * To switch back to jpg images, simply go to Options/Advanced and select Switch launchimage to jpg
