@@ -331,4 +331,4 @@ v1.6 (03/08/2021)
 - Added support for ascii art again under Options/Advanced 
   * Included a default loading.ascii file in launchimages roms folder
   * Simply go to Options/Advanced and select Switch launchimage to ascii
-  * To switch back to jpg images, simply go to Options/Advanced and select Switch launchimage to jpg
+  * To switch back to jpg images, simply go to Options and select Switch launchimage to jpg
