@@ -24,7 +24,7 @@ tail -f $LOG_FILE >> /dev/tty1 &
 if [ ! -f "/home/ark/.config/.update12262020" ]; then
 
 	printf "\nAdd File Manger to Options section\nAdd updated dtb to address possible occassional freezes for RG351P\nAdd updated blacklist to stabilize rtl8xxx wifi chipsets" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12262020/arkosupdate12262020.zip -O /home/ark/arkosupdate12262020.zip -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/12262020/arkosupdate12262020.zip -O /home/ark/arkosupdate12262020.zip -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate12262020.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate12262020.zip -d / | tee -a "$LOG_FILE"
 		sudo dpkg -i libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb
@@ -67,7 +67,7 @@ fi
 if [ ! -f "/home/ark/.config/.update12262020-1" ]; then
 
 	printf "\nFix File Manager from last update\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12262020-1/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -O /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/12262020-1/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -O /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb -a "$LOG_FILE"
 	sudo dpkg -i /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb
 	sudo rm -v /opt/dingux/libsdl2-gfx-1.0-0_1.0.4+dfsg-3_armhf.deb | tee -a "$LOG_FILE"
 
@@ -83,7 +83,7 @@ fi
 if [ ! -f "/home/ark/.config/.update12272020" ]; then
 
 	printf "\nUpdated es_systems.cfg to support .m3u for cd systems and .sh for doom mods\nAdd updated blacklist for realtek chipset fixes.\nFix sleep for OGA 1.1 due to internal wifi\n"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020/rgb10-rk2020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/12272020/rgb10-rk2020/arkosupdate12272020.zip -O /home/ark/arkosupdate12272020.zip -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate12272020.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate12272020.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate12272020.zip | tee -a "$LOG_FILE"
@@ -108,7 +108,7 @@ fi
 if [ ! -f "/home/ark/.config/.update12272020-1" ]; then
 
 	printf "\nUpdate doom execution script to support running mod files using .sh extension\n"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/12272020-1/arkosupdate12272020-1.zip -O /home/ark/arkosupdate12272020-1.zip -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/12272020-1/arkosupdate12272020-1.zip -O /home/ark/arkosupdate12272020-1.zip -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate12272020-1.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate12272020-1.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate12272020-1.zip | tee -a "$LOG_FILE"
@@ -133,7 +133,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01022021" ]; then
 
 	printf "\nUpdate spanish translation for emulationstation\nUpdate emulationstation\nAdd support for Pokemon Mini\nAdd support for Atari Jaguar\nAdd support for 3DO\nFix Atari 800, 5200 and XEGS rom loading\n"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01022021/rgb10/arkosupdate01022021.zip -O /home/ark/arkosupdate01022021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01022021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01022021/rgb10/arkosupdate01022021.zip -O /home/ark/arkosupdate01022021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01022021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01022021.zip" ]; then
 		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak
 		sudo unzip -X -o /home/ark/arkosupdate01022021.zip -d / | tee -a "$LOG_FILE"
@@ -189,7 +189,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01052021" ]; then
 
 	printf "\nIncrease audio period and buffer sizes in .asoundrc\nAdded updated retroarch with netplay fix\n"
-		sudo wget https://github.com/christianhaitian/arkos/raw/main/01052021/rgb10rk2020/arkosupdate01052021.zip -O /home/ark/arkosupdate01052021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01052021.zip | tee -a "$LOG_FILE"
+		sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01052021/rgb10rk2020/arkosupdate01052021.zip -O /home/ark/arkosupdate01052021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01052021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01052021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01052021.zip -d / | tee -a "$LOG_FILE"
 		cp -v /home/ark/.asoundrc /home/ark/.asoundrcbak | tee -a "$LOG_FILE"
@@ -224,7 +224,7 @@ if [ ! -f "/home/ark/.config/.update01092021" ]; then
 	sudo sed -i '/<extension>.zip .ZIP .2hd .2HD .d88 .D88 .88d .88D .hdm .HDM .hdf .HDF .xdf .XDF .dup .DUP .cmd .CMD .m3u .M3U .img .IMG/s//<extension>.dim .DIM .zip .ZIP .2hd .2HD .d88 .D88 .88d .88D .hdm .HDM .hdf .HDF .xdf .XDF .dup .DUP .cmd .CMD .m3u .M3U .img .IMG/' /etc/emulationstation/es_systems.cfg
 
 	printf "\nAdd roms folder and background image to nes-box theme for vmu\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01092021/arkosupdate01092021.zip -O /home/ark/arkosupdate01092021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01092021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01092021/arkosupdate01092021.zip -O /home/ark/arkosupdate01092021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01092021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01092021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01092021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01092021.zip | tee -a "$LOG_FILE"
@@ -257,7 +257,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01102021" ]; then
 
 	printf "\nAdd Daphne(Hypseus) standalone emulator\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01102021/rgb10/arkosupdate01102021.zip -O /home/ark/arkosupdate01102021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01102021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01102021/rgb10/arkosupdate01102021.zip -O /home/ark/arkosupdate01102021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01102021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01102021.zip" ]; then
 		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 		sudo unzip -X -o /home/ark/arkosupdate01102021.zip -d / | tee -a "$LOG_FILE"
@@ -285,7 +285,7 @@ if [ ! -f "/home/ark/.config/.update01112021" ]; then
 
 	printf "\nAdd 32bit opentyrian port to address performance\n" | tee -a "$LOG_FILE"
 	sudo chown -R -v ark:ark /home/ark/.config/opentyrian/ | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01112021/rgb10rk2020/arkosupdate01112021.zip -O /home/ark/arkosupdate01112021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01112021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01112021/rgb10rk2020/arkosupdate01112021.zip -O /home/ark/arkosupdate01112021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01112021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01112021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01112021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01112021.zip | tee -a "$LOG_FILE"
@@ -316,7 +316,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01162021" ]; then
 
 	printf "\nAdd lr-Uzebox emulator\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01162021/arkosupdate01162021.zip -O /home/ark/arkosupdate01162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01162021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01162021/arkosupdate01162021.zip -O /home/ark/arkosupdate01162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01162021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01162021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01162021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01162021.zip | tee -a "$LOG_FILE"
@@ -341,7 +341,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01172021" ]; then
 
 	printf "\nUpdate 64 bit libSDL2 to updated 64bit libSDL2 2.0.14.1 compiled by kreal\nImprove audio for N64\nImprove audio for PSP\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01172021/arkosupdate01172021.zip -O /home/ark/arkosupdate01172021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01172021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01172021/arkosupdate01172021.zip -O /home/ark/arkosupdate01172021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01172021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01172021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01172021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01172021.zip | tee -a "$LOG_FILE"
@@ -366,7 +366,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01182021" ]; then
 
 	printf "\nFix retroarch N64 no sound issue from last update\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01182021/arkosupdate01182021.zip -O /home/ark/arkosupdate01182021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01182021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01182021/arkosupdate01182021.zip -O /home/ark/arkosupdate01182021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01182021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01182021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01182021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01182021.zip | tee -a "$LOG_FILE"
@@ -386,7 +386,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01212021" ]; then
 
 	printf "\nAdjust sound settings in ArkOS so future updates should not impact emulators and ports needing direct access to set sound\nUpdate kyra.dat for standalone scummvm\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01212021/arkosupdate01212021.zip -O /home/ark/arkosupdate01212021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01212021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01212021/arkosupdate01212021.zip -O /home/ark/arkosupdate01212021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01212021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01212021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01212021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01212021.zip | tee -a "$LOG_FILE"
@@ -417,7 +417,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01242021" ]; then
 
 	printf "\nUpdated ES to fix scraping for daphne, neogeo cd, and xegs\nAdd tic-80 and sharp x1 scraping\nFix audio for ppsspp-standalone\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01242021/arkosupdate01242021.zip -O /home/ark/arkosupdate01242021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01242021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01242021/arkosupdate01242021.zip -O /home/ark/arkosupdate01242021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01242021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01242021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01242021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01242021.zip | tee -a "$LOG_FILE"
@@ -445,7 +445,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01282021" ]; then
 
 	printf "\nAdd Crocods (Amstrad CPC) emulator and make it the default emulator for this system\nUpdate Drastic to newer 64 bit build\nAdd gpsp as a selectable gba core\nAdd 2048 retroarch port\nAdd scan script for scummvm\nUpdate dosbox_pure core to version 0.10\nAdd Openbor system\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01282021/rgb10/arkosupdate01282021.zip -O /home/ark/arkosupdate01282021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01282021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01282021/rgb10/arkosupdate01282021.zip -O /home/ark/arkosupdate01282021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01282021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01282021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01282021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01282021.zip | tee -a "$LOG_FILE"
@@ -492,7 +492,7 @@ fi
 if [ ! -f "/home/ark/.config/.update01292021" ]; then
 
 	printf "\nAdd platform name for scummvm\nFix scummvm scan games script to allow for spaces in directory name\nFix loading of scummvm games in retroarch\nUpdate dosbox_pure 0.10 for performance\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/01292021/rgb10rk2020/arkosupdate01292021.zip -O /home/ark/arkosupdate01292021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01292021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/01292021/rgb10rk2020/arkosupdate01292021.zip -O /home/ark/arkosupdate01292021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate01292021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate01292021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate01292021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate01292021.zip | tee -a "$LOG_FILE"
@@ -519,7 +519,7 @@ fi
 if [ ! -f "/home/ark/.config/.update02032021" ]; then
 
 	printf "\nAdd TI99 emulator\nAdd retroarch core options reset to default\nUpdate ES to support ti99 scraping\nAdd ti99 image to nes-box theme\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02032021/rgb10/arkosupdate02032021.zip -O /home/ark/arkosupdate02032021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02032021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02032021/rgb10/arkosupdate02032021.zip -O /home/ark/arkosupdate02032021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02032021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate02032021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate02032021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate02032021.zip | tee -a "$LOG_FILE"
@@ -549,7 +549,7 @@ fi
 if [ ! -f "/home/ark/.config/.update02132021" ]; then
 
 	printf "\nAdd flycast32 rumble enabled core as selectable core\nRecompiled scummvm standalone to allow the use of virtual keyboards\nFix ability to load .adf for Amiberry (Amiga)\nUpdate 32bit and 64bit libgo2 libraries\nAdd tools folder into roms partition\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02132021/arkosupdate02132021.zip -O /home/ark/arkosupdate02132021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02132021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02132021/arkosupdate02132021.zip -O /home/ark/arkosupdate02132021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02132021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate02132021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate02132021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate02132021.zip | tee -a "$LOG_FILE"
@@ -586,8 +586,8 @@ fi
 if [ ! -f "/home/ark/.config/.update02132021-1" ]; then
 
 	printf "\nAdd USB drive mount and unmount to options menu\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02132021-1/USB%20Drive%20Mount.sh -O "/opt/system/USB Drive Mount.sh" -a "$LOG_FILE" || rm -f "/opt/system/USB Drive Mount.sh" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02132021-1/USB%20Drive%20Unmount.sh -O "/opt/system/USB Drive Unmount.sh" -a "$LOG_FILE" || rm -f "/opt/system/USB Drive Unmount.sh" | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02132021-1/USB%20Drive%20Mount.sh -O "/opt/system/USB Drive Mount.sh" -a "$LOG_FILE" || rm -f "/opt/system/USB Drive Mount.sh" | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02132021-1/USB%20Drive%20Unmount.sh -O "/opt/system/USB Drive Unmount.sh" -a "$LOG_FILE" || rm -f "/opt/system/USB Drive Unmount.sh" | tee -a "$LOG_FILE"
 	if [ -f "/opt/system/USB Drive Mount.sh" ] && [ -f "/opt/system/USB Drive Unmount.sh" ]; then
 		sudo chmod 777 "/opt/system/USB Drive Mount.sh" | tee -a "$LOG_FILE"
 		sudo chmod 777 "/opt/system/USB Drive Unmount.sh" | tee -a "$LOG_FILE"
@@ -620,7 +620,7 @@ fi
 if [ ! -f "/home/ark/.config/.update02192021" ]; then
 
 	printf "\nAdd ZX81 lr emulator\nClean up USB mount script\nAdd pico-8 as system\nUpdate NES box theme to include pico-8\nUpdate Emulationstation to support scraping pico-8\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02192021/arkosupdate02192021.zip -O /home/ark/arkosupdate02192021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02192021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02192021/arkosupdate02192021.zip -O /home/ark/arkosupdate02192021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02192021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate02192021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate02192021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate02192021.zip | tee -a "$LOG_FILE"
@@ -656,7 +656,7 @@ fi
 if [ ! -f "/home/ark/.config/.update02202021" ]; then
 
 	printf "\nAllow splore and different aspect ratios for Pico-8\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02202021/arkosupdate02202021.zip -O /home/ark/arkosupdate02202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02202021/arkosupdate02202021.zip -O /home/ark/arkosupdate02202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate02202021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate02202021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate02202021.zip | tee -a "$LOG_FILE"
@@ -680,7 +680,7 @@ fi
 if [ ! -f "/home/ark/.config/.update02272021" ]; then
 
 	printf "\nAdd Retrorun for Dreamcast, Atomiswave, Naomi, and Saturn\nAdd LowRes NX emulator\nAdd Genesis Plus GX Wide core\nUpdate NESBOX theme\nAdd support for Fullscreen emulationstation\nUpdate Dosbox-pure to 0.11\nAdd .dosz extension for dos games\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/02272021/rgb10/arkosupdate02272021.zip -O /home/ark/arkosupdate02272021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/02272021/rgb10/arkosupdate02272021.zip -O /home/ark/arkosupdate02272021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate02272021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate02272021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate02272021.zip | tee -a "$LOG_FILE"
