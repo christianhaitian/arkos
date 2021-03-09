@@ -744,7 +744,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	#fi
 
 	printf "\nUpdate retroarch and retroarch32 core_updater_buildbot_cores_url\nUpdate retroarch and retroarch32 to support OGS resolution\nAdd easyrpg as ES system with scraping support\nAdd option for ascii art loading screen\nUpdate nes-box theme for easyrpg\nFix dpad for ti99\nRevert lr-mgba to older faster core\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/03082021/rk2020/arkosupdate03082021.zip -O /home/ark/arkosupdate03082021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/03082021/rk2020/arkosupdate03082021.zip -O /home/ark/arkosupdate03082021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate03082021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate03082021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate03082021.zip | tee -a "$LOG_FILE"
@@ -797,7 +797,7 @@ fi
 if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
 
 	printf "\nInstall updated kernel, dtb, and modules\n"
-	sudo wget https://github.com/christianhaitian/arkos/raw/main/03082021/rgb10/newkernelnmodndtb02032021-rgb10.zip -O /home/ark/newkernelnmodndtb02032021-rgb10.zip -a "$LOG_FILE" || rm -f /home/ark/newkernelnmodndtb02032021-rgb10.zip | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/repo/christianhaitian/arkos/main/03082021/rgb10/newkernelnmodndtb02032021-rgb10.zip -O /home/ark/newkernelnmodndtb02032021-rgb10.zip -a "$LOG_FILE" || rm -f /home/ark/newkernelnmodndtb02032021-rgb10.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/newkernelnmodndtb02032021-rgb10.zip" ]; then
 		sudo unzip -X -o /home/ark/newkernelnmodndtb02032021-rgb10.zip -d / | tee -a "$LOG_FILE"
 		sudo depmod 4.4.189
