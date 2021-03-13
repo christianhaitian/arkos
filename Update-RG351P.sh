@@ -5,7 +5,7 @@ UPDATE_DATE="03082021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
-if [ -f "$UPDATE_DONE" ] || [ -f "/home/ark/.config/.kernelupdate02032021" ]; then
+if [ -f "$UPDATE_DONE" ] && [ -f "/home/ark/.config/.kernelupdate02032021" ]; then
 	msgbox "No more updates available.  Check back later."
 	rm -- "$0"
 	exit 187
