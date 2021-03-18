@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="03082021"
+UPDATE_DATE="03182021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -728,7 +728,7 @@ if [ ! -f "/home/ark/.config/.update02272021" ]; then
 	touch "/home/ark/.config/.update02272021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update03082021" ]; then
 
 	#msgbox "This update includes a new kernel, video drivers, and has significant changes that may leave your ArkOS distribution in an inoperable state if not successfully completed.  It is HIGHLY RECOMMENDED YOU HAVE A BACK UP OF YOUR SD CARD BERORE PROCEEDING! You've been warned!  Type OK in the next screen to proceed."
 	#var=`osk "Again, enter OK here to proceed." | tail -n 1`
@@ -791,7 +791,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	fi
 	
-	touch "$UPDATE_DONE"
+	touch "/home/ark/.config/.update03082021"
 fi
 
 if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
@@ -845,6 +845,33 @@ if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
 	fi
 
 	touch "/home/ark/.config/.kernelupdate02032021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate oga_events service to use ogage instead\nUpdate retrorun and retrorun32\nUpdate saturn.sh to fix retrorun triggers\nUpdate rtl8812au wifi adapter\n" | tee -a "$LOG_FILE"
+	sudo wget http://gitcdn.link/cdn/christianhaitian/arkos/main/03182021/rk2020/arkosupdate03182021.zip -O /home/ark/arkosupdate03182021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate03182021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate03182021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate03182021.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate03182021.zip | tee -a "$LOG_FILE"
+		sudo apt update -y && sudo apt -y install brightnessctl uboot bootini
+		sudo sed -i '/ExecStart/c\ExecStart\=\/usr\/local\/bin\/ogage' /etc/systemd/system/oga_events.service
+		sudo systemctl daemon-reload
+		sudo depmod 4.4.189
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."

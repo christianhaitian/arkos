@@ -332,3 +332,11 @@ v1.6 (03/08/2021)
   * Included a default loading.ascii file in launchimages roms folder
   * Simply go to Options/Advanced and select Switch launchimage to ascii
   * To switch back to jpg images, simply go to Options and select Switch launchimage to jpg
+
+v1.6 (03/18/2021)
+- Readd support for Tp-Link T2U Nano wifi adapter
+- Add sleep 1 to Change Password, Check Current Max Speed, Network Info, Update, and Wifi scripts to decrease occurrence of no control on launch.
+- Updated retrorun and retrorun32 with better performance for Sega Dreamcast and slightly better performance for Sega Saturn. (Thanks to valadaa48 for guidance. Thanks to Firebird_WS6, Bignella, and thegreatcrippler for testing and feedback.)
+  * For Sega Dreamcast, Retrorun32 and flycast32_rumble core seems to have the overall best performance.
+  * For Sega Saturn, Retrorun32 and Yabasanshiro core has the best performance.  Not great but performance has improved.
+- Updated global hotkeys system event to use ogage for much less system resource usage.  (Thanks to Valadaa48 for the source and guidance on this.)
