@@ -176,3 +176,8 @@ v1.6 (03/18/2021)
   * For Sega Saturn, Retrorun32 and Yabasanshiro core has the best performance.  Not great but performance has improved.
 - Updated global hotkeys system event to use ogage for much less system resource usage.  (Thanks to Valadaa48 for the source and guidance on this.)
 - Update uboot and bootini to latest version
+
+v1.6 (03/18/2021-1)
+- Added low battery indication
+  * Screen brightness will lower then raise to previous set brightness every 30 seconds when battery life is less than 30 percent
+  * Screen brightness will lower then raise to previous set brightness every 5 seconds when battery life is less than 19 percent

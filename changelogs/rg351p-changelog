@@ -340,3 +340,9 @@ v1.6 (03/18/2021)
   * For Sega Dreamcast, Retrorun32 and flycast32_rumble core seems to have the overall best performance.
   * For Sega Saturn, Retrorun32 and Yabasanshiro core has the best performance.  Not great but performance has improved.
 - Updated global hotkeys system event to use ogage for much less system resource usage.  (Thanks to Valadaa48 for the source and guidance on this.)
+
+v1.6 (03/18/2021-1)
+- Fixed retrorun and retrorun32 coin and button mapping issues for Atomiswave and Naomi
+  * L3+A = Pause emulation
+  * L3+B = Fast Forward emulation
+  * Select + Start = Stop and exit emulation
