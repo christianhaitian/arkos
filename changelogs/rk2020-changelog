@@ -181,3 +181,9 @@ v1.6 (03/18/2021-1)
 - Added low battery indication
   * Screen brightness will lower then raise to previous set brightness every 30 seconds when battery life is less than 30 percent
   * Screen brightness will lower then raise to previous set brightness every 5 seconds when battery life is less than 19 percent
+
+v1.6 (03/20/2021)
+- Fixed retrorun and retrorun32 coin and button mapping issues for Atomiswave and Naomi
+  * L2+A = Pause emulation
+  * L2+B = Fast Forward emulation
+  * Select + Start = Stop and exit emulation
