@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="03202021"
+UPDATE_DATE="04032021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -907,6 +907,40 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	if [ -f "/home/ark/arkosupdate03202021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate03202021.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate03202021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update03182021-1"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix battery indicator service\nUpdate to Retroarch 1.9.1\nUpdated ogage\nUpdate perfmax script for better battery life\nReplace glupen64 with mupen64plus core\nIncrease emulation process priority\nUpdate Hypseus to 1.3.0\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04032021/rk2020/arkosupdate04032021.zip -O /home/ark/arkosupdate04032021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04032021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate04032021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate04032021.zip -d / | tee -a "$LOG_FILE"
+		sudo systemctl daemon-reload
+		sudo systemctl restart batt_led.service
+		sed -i '/<core>glupen64/s//<core>mupen64plus/' /etc/emulationstation/es_systems.cfg
+		sed -i '/perfmax/s//perfmax %EMULATOR% %CORE%/' /etc/emulationstation/es_systems.cfg
+		sed -i '/%CORE%;/s//%CORE%; nice -n -19/' /etc/emulationstation/es_systems.cfg
+		sed -i '/\/usr\/local\/bin\/retroarch -L \/home\/ark\/.config\/retroarch\/cores\/hatari_libretro.so/s//nice -n -19 \/usr\/local\/bin\/retroarch -L \/home\/ark\/.config\/retroarch\/cores\/hatari_libretro.so/' /etc/emulationstation/es_systems.cfg
+		sed -i '/nice -n -19 sudo systemctl start/s//sudo systemctl start/' /etc/emulationstation/es_systems.cfg
+		sed -i '/\/usr\/local\/bin\/pico8.sh/s//nice -n -19 \/usr\/local\/bin\/pico8.sh/' /etc/emulationstation/es_systems.cfg
+		sudo chmod -v +s /usr/bin/nice | tee -a "$LOG_FILE"
+		sudo rm -v /opt/system/Switch\ Launchimage\ to\ jpg.sh | tee -a "$LOG_FILE"
+		sudo cp -n -v /usr/local/bin/Switch\ Launchimage\ to\ ascii.sh /opt/system/. | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate04032021.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3

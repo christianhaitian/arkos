@@ -181,3 +181,13 @@ v1.6 (03/18/2021-1)
 - Added low battery indication
   * Screen brightness will lower then raise to previous set brightness every 30 seconds when battery life is less than 30 percent
   * Screen brightness will lower then raise to previous set brightness every 5 seconds when battery life is less than 19 percent
+
+v1.6 (04/03/2021)
+- Updated kernel and dtb to add better battery monitoring
+- Replaced retroarch 64 bit glupen64 core with Mupen64plus 64 bit core (Thanks to Arzeon for recommendation on this)
+- Updated perfmax script to only force max speed for emulators that need it such as PSP, N64, and Dreamcast
+- Updated ogage service to account for perfmax script change
+- Updated retroarches to 1.9.1 (See https://www.libretro.com/index.php/retroarch-1-9-1-released/ for what's new and related changelog)
+- Updated hypseus (Daphne Emulator) to version 1.3.0
+- Fixed battery indicator service that was added on 03/18/2021-1
+- Added nice -19 for emulation priority
