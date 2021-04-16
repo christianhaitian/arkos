@@ -191,3 +191,11 @@ v1.6 (04/03/2021)
 - Updated hypseus (Daphne Emulator) to version 1.3.0
 - Fixed battery indicator service that was added on 03/18/2021-1
 - Added nice -19 for emulation priority
+
+v1.6 (04/16/2021)
+- Updated ScummVM with AGS support
+- Added ability to disable battery warning to Options/Advanced section
+- Updated Enable Remote Services script to show assigned IP and 5s pause
+- Updated perfmax and perfnorm for image blinking fix
+- Updated emulationstaton fullscreen and header to not use Batocera's scraping ID
+- Updated video shader delay settings

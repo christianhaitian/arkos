@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="04032021"
+UPDATE_DATE="04162021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -940,6 +940,51 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update04032021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Enable Remote Services script to show assigned IP and 5s pause\nUpdate perfmax and perfnorm for image blinking fix\nUpdate emulationstaton fullscreen and header to not use Batocera's scraping ID\nUpdate ScummVM with AGS support\nUpdate video shader delay settings\nAdd ability to disable battery warning\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04162021/rgb10rk2020/arkosupdate04162021.zip -O /home/ark/arkosupdate04162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04162021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate04162021.zip" ]; then
+		if [ $(wc -c < /usr/bin/emulationstation/emulationstation) -ne $(wc -c < /usr/bin/emulationstation/emulationstation.fullscreen) ]; then
+		  header=1
+		else
+		  header=0
+		fi
+		sudo unzip -X -o /home/ark/arkosupdate04162021.zip -d / | tee -a "$LOG_FILE"
+		cp -f -v /usr/local/bin/"disable low battery warning.sh" /opt/system/Advanced/.
+		if [ $header -eq 1 ]; then
+		  sudo cp /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation
+		else
+		  sudo cp /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation
+		fi
+		if [ -f "/opt/system/Switch Launchimage to ascii.sh" ]; then
+		  sudo cp -f -v /usr/local/bin/perfmax.pic /usr/local/bin/perfmax | tee -a "$LOG_FILE"
+		  sudo cp -f -v /usr/local/bin/perfnorm.pic /usr/local/bin/perfnorm | tee -a "$LOG_FILE"
+		else
+		  sudo cp -f -v /usr/local/bin/perfmax.asc /usr/local/bin/perfmax | tee -a "$LOG_FILE"
+		  sudo cp -f -v /usr/local/bin/perfnorm.asc /usr/local/bin/perfnorm | tee -a "$LOG_FILE"
+		fi
+		sudo rm -v /home/ark/arkosupdate04162021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix retroarch shaders not autoloading when saved as override\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/video_shader_delay \= \"3\"/s//video_shader_delay \= \"0\"/' /home/ark/.config/retroarch/retroarch.cfg
+	sudo sed -i '/video_shader_delay \= \"3\"/s//video_shader_delay \= \"0\"/' /home/ark/.config/retroarch32/retroarch.cfg	
+
+	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
