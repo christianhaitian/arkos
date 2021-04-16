@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="04152021"
+UPDATE_DATE="04162021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -67,7 +67,7 @@ if [ ! -f "/home/ark/.config/.update04132021" ]; then
 	touch "/home/ark/.config/.update04132021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04152021" ]; then
 
 	printf "\nUpdate scummvm to fix AGS not loading\nUpdate perfmax and perfnorm scripts to fix screen flashing issue on loading and returning from games.\nUpdate Emulationstation to not use Batocera's scraping ID\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04152021/rg351v/arkosupdate04152021.zip -O /home/ark/arkosupdate04152021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04152021.zip | tee -a "$LOG_FILE"
@@ -83,6 +83,29 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS OaD (Test Release 1.3)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update04152021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate to add support for launching retrorun Dreamcast in 640 mode by holding A\nFix no controls for retrorun saturn\nUpdated libgo2.so libs\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04162021/rg351v/arkosupdate04162021.zip -O /home/ark/arkosupdate04162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04162021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate04162021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate04162021.zip -d / | tee -a "$LOG_FILE"
+        if [ ! -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+           sudo sed -i '/roms2\//s//roms\//g' /usr/local/bin/dreamcast.sh
+		fi
+		sudo rm -v /home/ark/arkosupdate04162021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS OaD (Test Release 1.4)" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
