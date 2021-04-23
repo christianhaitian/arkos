@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="04162021"
+UPDATE_DATE="04222021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -957,7 +957,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	touch "/home/ark/.config/.update04032021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04162021" ]; then
 
 	printf "\nUpdate Enable Remote Services script to show assigned IP and 5s pause\nUpdate perfmax and perfnorm for image blinking fix\nUpdate emulationstaton fullscreen and header to not use Batocera's scraping ID\nUpdate ScummVM with AGS support\nUpdate video shader delay settings\nAdd ability to disable battery warning\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04162021/rgb10rk2020/arkosupdate04162021.zip -O /home/ark/arkosupdate04162021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04162021.zip | tee -a "$LOG_FILE"
@@ -995,6 +995,59 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nEnsure 64bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update04162021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Video Player\nAdd ability to restore default retroarch.cfg\nAdd UAE4arm_libretro.so for retroarch32\nAdd potatore core for Watara\nAdd section for MD MSU\nUpdate Emulationstation to support Waratar Supervision scraping\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/04222021/rk2020/arkosupdate04222021.zip -O /home/ark/arkosupdate04222021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04222021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate04222021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate04222021.zip -d / | tee -a "$LOG_FILE"
+		sudo apt update -y && sudo apt -y install ffmpeg | tee -a "$LOG_FILE"
+		if [ ! -d "/roms/videos/" ]; then
+			sudo mkdir -v /roms/videos | tee -a "$LOG_FILE"
+		fi
+		if [ ! -d "/roms/supervision/" ]; then
+			sudo mkdir -v /roms/supervision | tee -a "$LOG_FILE"
+		fi
+		if [ ! -d "/roms/msumd/" ]; then
+			sudo mkdir -v /roms/msumd | tee -a "$LOG_FILE"
+		fi
+		sudo cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update04222021.bak | tee -a "$LOG_FILE"
+		sudo sed -i -e '/<theme>uzebox<\/theme>/{r /home/ark/add_videos.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<theme>uzebox<\/theme>/{r /home/ark/add_supervision.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<theme>megadrive<\/theme>/{r /home/ark/add_msumd.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '/<core>puae<\/core>/{r /home/ark/add_uae4arm.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo sed -i -e '\/puae_libretro.so/{r /home/ark/add_uae4armcd.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/add_uae4arm.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_uae4armcd.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_msumd.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_supervision.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_videos.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate04222021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nCopy correct updated ES for supervision scraping fix\n" | tee -a "$LOG_FILE"	
+	test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	if [[ "$test" == "3835024" ]]; then
+		sudo cp -v /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	else
+		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	fi
+	
+	printf "\nEnsure 64bit and 32bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
