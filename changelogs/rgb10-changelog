@@ -204,7 +204,7 @@ v1.6 (04/22/2021)
 - Added video player
  - See FAQ in wiki for more information and how to use it. (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RGB10#q-how-does-the-movievideo-player-work)
 - Added ability to restore retroarch and retroarch32 to default configurations.
-- Added UAE4arm_libretro.so for retroarch32 for Amiga and Amiga32
+- Added UAE4arm_libretro.so for retroarch32 for Amiga and Amiga32 (Thanks to slaminger for the core build)
 - Added potator core for Watara Supervision
 - Added section for MD+ MSU (genesis_plus_gx)
 - Added ability to restore default retroarch.cfg for both retroarch and retroarch32 from the Options/Advanced menu
