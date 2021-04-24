@@ -1,0 +1,56 @@
+v1.1 (04/11/2021)
+- Changed kernel and dtb to fix emulator performance
+- Updated ogage to include volume control
+- Updated dreamcast.sh atomiswave.sh naomi.sh openborkeydemon.py ppssppkeydemon.py solarushotkeydemon.py pico8keydemon.py ti99keydemon.py perfmax
+- Updated "Switch to SD2 for Roms.sh" and "Switch to main SD for Roms.sh"
+- Updated crontab to remove rg351p_gpio.sh
+
+v1.2 (04/13/2021)
+- Updated wifi.sh network info.sh change password.sh to fix no controls
+- Fixed potential Daphne, TI99, and SCUMMVM not launching issue
+- Fixed reversed PPSSPP menu controls
+
+v1.3 (04/15/2021)
+- Updated scummvm to fix AGS not loading
+- Updated perfmax and perfnorm scripts to fix screen flashing issue on loading and returning from games
+- Updated Emulationstation to not use Batocera's scraping ID (Thanks to f.caruso for the coding adapter from batocera-emulationstation)
+
+v1.4 (04/16/2021)
+- Updated to add support for launching retrorun Dreamcast in 640 mode by holding A
+- Fixed controls for retrorun saturn
+- Updated libgo2.so libs
+- Updated Enable Remote Services script to show assigned IP and pause for 5 seconds
+
+v1.5 (04/17/2021)
+- Fixed an issue with being able to consistently launch dreamcast in 640x480
+
+v1.5.1 (04/17/2021)
+- Updated to add brightness control using F+Vol Up+Dn buttons for better gradual control
+
+v1.6 (04/18/2021)
+-Finally fixed issue with enabling 640x480 with retrorun32 for dreamcast. 
+  (Just hold A while launching a game to enable 640x480.  You should see "640x480 enabled" on the screen while launching.
+-Added video player.
+  See the ArkOS wiki here (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351V#q-how-does-the-movievideo-player-work) for controls and other info.
+
+v1.7 (04/22/2021)
+- Added UAE4arm_libretro.so for retroarch32 for Amiga and Amiga32 (Thanks to Slaminger for the core build)
+- Added potator core for Watara Supervision
+- Added section for MD-MSU  using the genesis_plus_gx retroarch core
+- Updated /usr/bin/emulationstation.sh and switch to sd2 and switch to main scripts to be more stable.
+- Fixed Daphne not loading from SD2
+- Updated emulationstation to support scraping for Watara Supervision
+
+v1.8 (04/23/2021)
+- Added ppsspp-stock emulator as default (Hopefully helps with performance)
+   * Savestates are not interchangeable with the regular ppsspp in ArkOS OaD
+- Added ability to restore retroarch and retroarch32 default settings from Options/Advanced menu
+
+v1.8.1 (04/24/2021)
+- Forgot to include a check of whether someone is using a second sd card or not and adjust es_systems.cfg accordingly
+  * If you're using a 2nd sd card, you didn't have an issue from the last update.  If using just the main sd card, your systems went missing in ES.  This update fixes that.
+
+v1.8.2 (04/24/2021)
+- Added ability to toggle wifi on and off using F+L3 buttons
+  * When Wifi is turned on, led will blink red once
+  * When Wifi is turned off, led will blink red twice
