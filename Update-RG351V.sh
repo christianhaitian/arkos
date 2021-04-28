@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="04242021-1"
+UPDATE_DATE="04282021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -263,7 +263,7 @@ if [ ! -f "/home/ark/.config/.update04242021" ]; then
 	touch "/home/ark/.config/.update04242021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04242021-1" ]; then
 
 	printf "\nAdd ability to toggle wifi via F+L3\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04242021-1/rg351v/arkosupdate04242021-1.zip -O /home/ark/arkosupdate04242021-1.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04242021-1.zip | tee -a "$LOG_FILE"
@@ -279,6 +279,36 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS OaD (Test Release 1.8.2)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update04242021-1"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nImprove stability of global hotkeys\nAdd Fix Global Hotkeys script to /opt/Advanced menu\nRemove some unneeded 32bit sdl2 libraries that cause linker issues\nUpdate retrorun and retrorun32 to hopefully minimize a potential memory leak issue\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04282021/rg351v/arkosupdate04282021.zip -O /home/ark/arkosupdate04282021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04282021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate04282021.zip" ]; then
+		sudo systemctl disable oga_events
+		sudo unzip -X -o /home/ark/arkosupdate04282021.zip -d / | tee -a "$LOG_FILE"
+		sudo systemctl daemon-reload
+		sudo systemctl restart oga_events
+		sudo systemctl enable oga_events
+		sudo rm /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.12.0
+		sudo rm /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.14.1
+		sudo rm -v /home/ark/arkosupdate04282021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nMake sure the proper SDLs are still linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.10.0 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS V (Test Release 1.9)" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"

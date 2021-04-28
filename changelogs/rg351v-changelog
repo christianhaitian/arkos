@@ -54,3 +54,10 @@ v1.8.2 (04/24/2021)
 - Added ability to toggle wifi on and off using F+L3 buttons
   * When Wifi is turned on, led will blink red once
   * When Wifi is turned off, led will blink red twice
+
+v1.9 (04/28/2021)
+- Improved stability of global hotkeys
+- Added Fix Global Hotkeys script to /opt/Advanced menu
+- Removed some unneeded 32bit sdl2 libraries that cause linker issues
+- Updated retrorun and retrorun32 to hopefully minimize a potential memory leak issue
+- Removed OaD from version information (See https://github.com/christianhaitian/arkos/wiki/Announcement#4282021 for more info)
