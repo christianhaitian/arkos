@@ -61,3 +61,8 @@ v1.9 (04/28/2021)
 - Removed some unneeded 32bit sdl2 libraries that cause linker issues
 - Updated retrorun and retrorun32 to hopefully minimize a potential memory leak issue
 - Removed OaD from version information (See https://github.com/christianhaitian/arkos/wiki/Announcement#4282021 for more info)
+
+v1.9.1 (04/30/2021)
+- Added Change LED color script to Options menu
+- Updated global hotkey app to use absolute path for brightness control
+- Fixed SD scripts to be able change filebrowser primary roms folder to point to right roms folder depending on primary roms SD
