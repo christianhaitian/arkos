@@ -214,3 +214,13 @@ v1.6 (04/22/2021)
 - Added section for MD+ MSU (genesis_plus_gx)
 - Added ability to restore default retroarch.cfg for both retroarch and retroarch32 from the Options/Advanced menu
 - Updated emulationstation to support scraping for Watara Supervision
+
+v1.6 (05/01/2021)
+-Added support for Sonic 1, 2, and CD ports
+  * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sonic-1-rg351pm-and-rg351v-only--coming-soon-to-the-rgb10-rk2020-and-oga-1011)
+-Renamed Run Command to Retroarch in Emulationstation
+-Renamed System to Options in Emulationstation
+-Disabled low battery warning by default (Causes more support questions when enabled by default)
+-Set Screenshot directory to _screenshot in roms folder for retroarch and retroarch32
+-Added 3 second sleep to oga_events service to better stabilize global brightness hotkeys
+-Renamed some Advanced options to better fit the screen

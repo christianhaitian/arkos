@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="04222021"
+UPDATE_DATE="05012021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -909,7 +909,7 @@ if [ ! -f "/home/ark/.config/.update03182021-1" ]; then
 	touch "/home/ark/.config/.update03182021-1"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04032021" ]; then
 
 	printf "\nFix battery indicator service\nUpdated kernel and dtbs with more accurate battery reading\nUpdate to Retroarch 1.9.1\nUpdated ogage\nUpdate perfmax script for better battery life\nReplace glupen64 with mupen64plus core\nIncrease emulation process priority\nUpdate Hypseus to 1.3.0\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/04032021/rgb10/arkosupdate04032021.zip -O /home/ark/arkosupdate04032021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04032021.zip | tee -a "$LOG_FILE"
@@ -991,7 +991,7 @@ if [ ! -f "/home/ark/.config/.update04162021" ]; then
 	touch "/home/ark/.config/.update04162021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04222021" ]; then
 
 	printf "\nAdd Video Player\nAdd ability to restore default retroarch.cfg\nAdd UAE4arm_libretro.so for retroarch32\nAdd potatore core for Watara\nAdd section for MD MSU\nUpdate Emulationstation to support Waratar Supervision scraping\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/04222021/rgb10/arkosupdate04222021.zip -O /home/ark/arkosupdate04222021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04222021.zip | tee -a "$LOG_FILE"
@@ -1033,6 +1033,64 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else
 		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	fi
+	
+	printf "\nEnsure 64bit and 32bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update04222021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Support for Sonic 1, 2, and 3 Ports\n" | tee -a "$LOG_FILE"
+	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05012021/rgb10/arkosupdate05012021.zip -O /home/ark/arkosupdate05012021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05012021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate05012021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate05012021.zip -d / | tee -a "$LOG_FILE"
+		sudo sed -i '/ScreenWidth\=320/s//ScreenWidth\=360/' /roms/ports/sonic1/settings.ini
+		sudo sed -i '/ScreenWidth\=320/s//ScreenWidth\=360/' /roms/ports/sonic2/settings.ini
+		sudo sed -i '/ScreenWidth\=320/s//ScreenWidth\=360/' /roms/ports/soniccd/settings.ini
+		sudo systemctl daemon-reload
+		sudo rm -v /home/ark/arkosupdate05012021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nRename Run Command to Retroarch\nRename System to Options\n" | tee -a "$LOG_FILE"
+	sed -i '/<fullname>Run command/s//<fullname>Retroarch/' /etc/emulationstation/es_systems.cfg
+	sed -i '/<fullname>System/s//<fullname>Options/' /etc/emulationstation/es_systems.cfg
+	sed -i '/<name>retropie/s//<name>Options/' /etc/emulationstation/es_systems.cfg
+
+	printf "\nRename some Advanced options to better fit the screen\n" | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/disable\ low\ battery\ warning.sh /opt/system/Advanced/Disable\ Low\ Battery\ Warning.sh | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Backup\ Settings.sh /opt/system/Advanced/Backup\ ArkOS\ Settings.sh | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Restore\ Settings.sh /opt/system/Advanced/Restore\ ArkOS\ Settings.sh | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Restore\ Default\ Retroarch\ Settings.sh /opt/system/Advanced/"Reset Retroarch Settings.sh" | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Restore\ Default\ Retroarch32\ Settings.sh /opt/system/Advanced/"Reset Retroarch32 Settings.sh" | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Restore\ Default\ Retroarch\ Core\ Settings.sh /opt/system/Advanced/"Reset Retroarch Core Settings.sh" | tee -a "$LOG_FILE"
+	sudo mv -f -v /opt/system/Advanced/Restore\ Default\ Retroarch32\ Core\ Settings.sh /opt/system/Advanced/"Reset Retroarch32 Core Settings.sh" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /opt/system/Advanced/
+
+	printf "\nDisable low battery warning by default\n" | tee -a "$LOG_FILE"
+	sudo systemctl disable batt_led
+	sudo systemctl stop batt_led
+	sudo cp -f -v /usr/local/bin/enable\ low\ battery\ warning.sh /opt/system/Advanced/.
+	sudo rm -f -v /opt/system/Advanced/disable\ low\ battery\ warning.sh
+
+	printf "\nSet Screenshot directory to _screenshot in roms folder for retroarch and retroarch32\n" | tee -a "$LOG_FILE"
+	if [ ! -d "/roms/_screenshots/" ]; then
+		sudo mkdir -v /roms/_screenshots | tee -a "$LOG_FILE"
+	fi
+	sed -i '/screenshot_directory \= \"default\"/s//screenshot_directory \= \"\/roms\/_screenshots\"/' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/screenshot_directory \= \"default\"/s//screenshot_directory \= \"\/roms\/_screenshots\"/' /home/ark/.config/retroarch32/retroarch.cfg
+	sudo chown ark:ark /home/ark/.config/retroarch/retroarch.cfg
+	sudo chown ark:ark /home/ark/.config/retroarch32/retroarch.cfg
 	
 	printf "\nEnsure 64bit and 32bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
