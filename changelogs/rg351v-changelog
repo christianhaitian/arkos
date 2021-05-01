@@ -66,3 +66,8 @@ v1.9.1 (04/30/2021)
 - Added Change LED color script to Options menu
 - Updated global hotkey app to use absolute path for brightness control
 - Fixed SD scripts to be able change filebrowser primary roms folder to point to right roms folder depending on primary roms SD
+
+v2.0 (05/01/2021)
+- Added support for the Sonic 1, 2, and CD Ports.
+  * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sonic-1-rg351pm-and-rg351v-only--coming-soon-to-the-rgb10-rk2020-and-oga-1011)
+- Add 3 second sleep to oga_events service to finally stabilize global brightness hotkeys
