@@ -372,3 +372,8 @@ v1.6 (04/22/2021)
 - Added section for MD+ MSU (genesis_plus_gx)
 - Added ability to restore default retroarch.cfg for both retroarch and retroarch32 from the Options/Advanced menu
 - Updated emulationstation to support scraping for Watara Supervision
+
+vFinal (05/01/2021)
+- Added support for the Sonic 1, 2, and CD Ports.
+  * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sonic-1-rg351pm-and-rg351v-only--coming-soon-to-the-rgb10-rk2020-and-oga-1011)
+  
