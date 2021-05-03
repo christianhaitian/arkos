@@ -74,3 +74,12 @@ v2.0 (05/01/2021)
 
 v2.1 (05/01/2021)
 - Fixed ports failing to load from SD2
+
+v2.2 (05/02/2021)
+- Added SuperTux
+- Added Mr. Boom
+- Added Dinothawr
+- Added Super Mario War
+- Added CDogs
+- Fixed background music to load from SD2 in ES when using SD2
+- Fixed roms2 not showing in Samba when using SD2
