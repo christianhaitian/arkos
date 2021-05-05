@@ -86,6 +86,7 @@ v2.2 (05/03/2021)
 
 v2.3 (05/04/2021)
 - Fixed Atari800, 5200, and XE loading
+   * Be aware when starting Atari XE games, the screen's width is weird at first.  Press Select+Start and it fixes the screen's width.  Might be a bug in the core or retroarch for the Atari XE emulation.
 - Added support for EXT4 format for SD2
 - Increased default audio gain for retroarch and retroarch32
 - Fixed default configs for Doom
