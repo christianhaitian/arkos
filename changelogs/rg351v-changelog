@@ -75,7 +75,7 @@ v2.0 (05/01/2021)
 v2.1 (05/01/2021)
 - Fixed ports failing to load from SD2
 
-v2.2 (05/02/2021)
+v2.2 (05/03/2021)
 - Added SuperTux
 - Added Mr. Boom
 - Added Dinothawr
@@ -83,3 +83,9 @@ v2.2 (05/02/2021)
 - Added CDogs
 - Fixed background music to load from SD2 in ES when using SD2
 - Fixed roms2 not showing in Samba when using SD2
+
+v2.3 (05/04/2021)
+- Fixed Atari800, 5200, and XE loading
+- Added support for EXT4 format for SD2
+- Increased default audio gain for retroarch and retroarch32
+- Fixed default configs for Doom
