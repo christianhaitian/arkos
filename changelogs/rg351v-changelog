@@ -90,3 +90,7 @@ v2.3 (05/04/2021)
 - Added support for EXT4 format for SD2
 - Increased default audio gain for retroarch and retroarch32
 - Fixed default configs for Doom
+
+v2.4 (05/05/2021)
+- Updated Retroarch and Retroarch32 to 1.9.2
+- Updated Dingux Commander for better screen visibility
