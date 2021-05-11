@@ -102,6 +102,6 @@ v2.5 (05/10/2021)
    * Thanks to pitiSeb for box86 (https://github.com/ptitSeb/box86)
    * Thanks to JohnnyonFlame for gl4es and the the necessary packaging to allow this game to run on ArkOS. (https://github.com/JohnnyonFlame/gl4es/tree/sk_hacks)
 - Updated wifi disable and enable to completely disable the chipset and enable chipset
-- Updated emulationstation for wifi toggle Off state text (Restore from this link
+- Updated emulationstation for wifi toggle Off state text
 - Updated Switch to SD2 to fix missing text if it can't swap to SD2 and add EXT4 to missing supported SD card type.
 - Disabled the ability for cores to be able to change video modes in retroarch and retroarch32
