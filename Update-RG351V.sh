@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05052021"
+UPDATE_DATE="05102021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -520,6 +520,8 @@ if [ ! -f "/home/ark/.config/.update05042021" ]; then
 		fi
 		sed -i '/audio_volume \= \"-4.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch32/retroarch.cfg
 		sed -i '/audio_volume \= \"0.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch/retroarch.cfg
+		sed -i '/audio_volume \= \"-4.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+		sed -i '/audio_volume \= \"0.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch/retroarch.cfg.bak
 		sudo rm -v /home/ark/arkosupdate05042021.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
@@ -538,7 +540,7 @@ if [ ! -f "/home/ark/.config/.update05042021" ]; then
 	touch "/home/ark/.config/.update05042021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05052021" ]; then
 
 	printf "\nUpdate Retroarch to version 1.9.2\nUpdate Dingux Commander for better screen visibility\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/05052021/rg351v/arkosupdate05052021.zip -O /home/ark/arkosupdate05052021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05052021.zip | tee -a "$LOG_FILE"
@@ -560,6 +562,48 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS V (Test Release 2.4)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05052021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Hydra Castle Labyrinth port\nAdd support for Shovel Knight Treasure Trove\nUpdate wifi disable and enable to completely disable the chipset and enable chipset\nUpdate emulationstation for wifi toggle Off state text\nUpdated Switch to SD2 to fix missing text if it can't swap to SD2 and add EXT4 to missing supported SD card type\nDisable the ability for cores to be able to change video modes in retroarches\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/05102021/rg351v/arkosupdate05102021.zip -O /home/ark/arkosupdate05102021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05102021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate05102021.zip" ]; then
+		sudo nmcli r wifi on
+		sudo unzip -X -o /home/ark/arkosupdate05102021.zip -d / | tee -a "$LOG_FILE"
+	    if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		  sudo cp -f -v /roms/ports/"Hydra Castle Labyrinth.sh" /roms2/ports/"Hydra Castle Labyrinth.sh" | tee -a "$LOG_FILE"
+		  sudo cp -f -v /roms/ports/"Shovel Knight.sh" /roms2/ports/"Shovel Knight.sh" | tee -a "$LOG_FILE"
+		  sudo sed -i '/roms\//s//roms2\//g' /roms2/ports/"Shovel Knight.sh"
+		  filesystem=`lsblk -no FSTYPE /dev/mmcblk1p1`
+		  if [ "$filesystem" = "ext4" ]; then
+		    sudo chown -R ark:ark /roms2/
+		  fi
+		else
+		  sudo cp -f -v "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
+		fi
+		sudo rm -v /home/ark/arkosupdate05102021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nDisable the ability for cores to be able to change video modes in retroarch and retroarch32\n" | tee -a "$LOG_FILE"
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+
+	printf "\nMake sure the proper SDLs are still linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.10.0 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS V (Test Release 2.5)" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
