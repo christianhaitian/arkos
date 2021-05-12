@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05012021"
+UPDATE_DATE="05112021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1044,7 +1044,7 @@ if [ ! -f "/home/ark/.config/.update04222021" ]; then
 	touch "/home/ark/.config/.update04222021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05012021" ]; then
 
 	printf "\nAdd Support for Sonic 1, 2, and 3 Ports\n" | tee -a "$LOG_FILE"
 	sudo wget --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05012021/rgb10/arkosupdate05012021.zip -O /home/ark/arkosupdate05012021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05012021.zip | tee -a "$LOG_FILE"
@@ -1098,6 +1098,69 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.6 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05012021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\033c" > /dev/tty1
+	printf "\nPreparing to enter The Matrix" > /dev/tty1
+	sleep 1.5 && printf "."  > /dev/tty1 && sleep 1.5 && printf "." > /dev/tty1 && sleep 1.5 && printf ".\n" > /dev/tty1
+	printf "\033[32m" > /dev/tty1
+	
+	printf "\nUpdate Retroarch and Retroarch32 to 1.9.2\nAdd SuperTux\nAdd Mr. Boom\nAdd Dinothawr\nAdd Super Mario War\nAdd CDogs\nFix exit hotkey for Sonic CD\nAdd Hydra Castle Labyrinth\nAdd support for Shovel Knight Treasure Trove\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05112021/rgb10/arkosupdate05112021.zip -O /home/ark/arkosupdate05112021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05112021.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05112021/rgb10/arkosupdate05112021.z01 -O /home/ark/arkosupdate05112021.z01 -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05112021.z01 | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05112021/rgb10/arkosupdate05112021.z02 -O /home/ark/arkosupdate05112021.z02 -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05112021.z02 | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05112021/rgb10/arkosupdate05112021.z03 -O /home/ark/arkosupdate05112021.z03 -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05112021.z03 | tee -a "$LOG_FILE"
+	if  [ -f "/home/ark/arkosupdate05112021.zip" ] && [ -f "/home/ark/arkosupdate05112021.z01" ] && [ -f "/home/ark/arkosupdate05112021.z02" ] && [ -f "/home/ark/arkosupdate05112021.z03" ]; then
+		cp -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.191.bak | tee -a "$LOG_FILE"
+		cp -v /opt/retroarch/bin/retroarch32 /opt/retroarch/bin/retroarch32.191.bak | tee -a "$LOG_FILE"
+		cd /home/ark/
+		sudo apt update -y && sudo apt install -y zip | tee -a "$LOG_FILE"
+		sudo zip -F arkosupdate05112021.zip --out arkosupdate.zip | tee -a "$LOG_FILE"
+		sudo rm -fv arkosupdate05112021.z* | tee -a "$LOG_FILE"
+		sudo unzip -X -o /home/ark/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+	
+	printf "Due to the size of this update, synchronizing the data on disk with memory to be sure the update is done right." | tee -a "$LOG_FILE"
+	sync
+
+	printf "\nIncrease default audio gain for retroarch and retroarch32\n" | tee -a "$LOG_FILE"
+	sed -i '/audio_volume \= \"-4.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch32/retroarch.cfg
+	sed -i '/audio_volume \= \"0.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/audio_volume \= \"-4.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+	sed -i '/audio_volume \= \"0.500000\"/c\audio_volume \= \"6.0\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+
+	printf "\nUpdate screenshot default directory for backup retroarch configs\n" | tee -a "$LOG_FILE"
+	sed -i '/screenshot_directory \= \"default\"/s//screenshot_directory \= \"\/roms\/_screenshots\"/' /home/ark/.config/retroarch/retroarch.cfg.bak
+	sed -i '/screenshot_directory \= \"default\"/s//screenshot_directory \= \"\/roms\/_screenshots\"/' /home/ark/.config/retroarch32/retroarch.cfg.bak
+
+	printf "\nFix exit hotkey for Sonic CD\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/Joypad.f1/s//Joypad.f2/' /usr/local/bin/soniccdkeydemon.py
+
+	printf "\nDisable the ability for cores to be able to change video modes in retroarch and retroarch32\n" | tee -a "$LOG_FILE"
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/driver_switch_enable \= \"true\"/c\driver_switch_enable \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+	
+	printf "\nEnsure 64bit and 32bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.7 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	printf "\nThe Matrix now has you" > /dev/tty1
+	sleep 1.5 && printf "." > /dev/tty1 && sleep 1.5 && printf "." > /dev/tty1 && sleep 1.5 && printf ".\n" > /dev/tty1
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
