@@ -1,39 +1,39 @@
-v1.1 (04/11/2021)
+TRv1.1 (04/11/2021)
 - Changed kernel and dtb to fix emulator performance
 - Updated ogage to include volume control
 - Updated dreamcast.sh atomiswave.sh naomi.sh openborkeydemon.py ppssppkeydemon.py solarushotkeydemon.py pico8keydemon.py ti99keydemon.py perfmax
 - Updated "Switch to SD2 for Roms.sh" and "Switch to main SD for Roms.sh"
 - Updated crontab to remove rg351p_gpio.sh
 
-v1.2 (04/13/2021)
+TRv1.2 (04/13/2021)
 - Updated wifi.sh network info.sh change password.sh to fix no controls
 - Fixed potential Daphne, TI99, and SCUMMVM not launching issue
 - Fixed reversed PPSSPP menu controls
 
-v1.3 (04/15/2021)
+TRv1.3 (04/15/2021)
 - Updated scummvm to fix AGS not loading
 - Updated perfmax and perfnorm scripts to fix screen flashing issue on loading and returning from games
 - Updated Emulationstation to not use Batocera's scraping ID (Thanks to f.caruso for the coding adapter from batocera-emulationstation)
 
-v1.4 (04/16/2021)
+TRv1.4 (04/16/2021)
 - Updated to add support for launching retrorun Dreamcast in 640 mode by holding A
 - Fixed controls for retrorun saturn
 - Updated libgo2.so libs
 - Updated Enable Remote Services script to show assigned IP and pause for 5 seconds
 
-v1.5 (04/17/2021)
+TRv1.5 (04/17/2021)
 - Fixed an issue with being able to consistently launch dreamcast in 640x480
 
-v1.5.1 (04/17/2021)
+TRv1.5.1 (04/17/2021)
 - Updated to add brightness control using F+Vol Up+Dn buttons for better gradual control
 
-v1.6 (04/18/2021)
+TRv1.6 (04/18/2021)
 -Finally fixed issue with enabling 640x480 with retrorun32 for dreamcast. 
   (Just hold A while launching a game to enable 640x480.  You should see "640x480 enabled" on the screen while launching.
 -Added video player.
   See the ArkOS wiki here (https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351V#q-how-does-the-movievideo-player-work) for controls and other info.
 
-v1.7 (04/22/2021)
+TRv1.7 (04/22/2021)
 - Added UAE4arm_libretro.so for retroarch32 for Amiga and Amiga32 (Thanks to Slaminger for the core build)
 - Added potator core for Watara Supervision
 - Added section for MD-MSU  using the genesis_plus_gx retroarch core
@@ -41,41 +41,41 @@ v1.7 (04/22/2021)
 - Fixed Daphne not loading from SD2
 - Updated emulationstation to support scraping for Watara Supervision
 
-v1.8 (04/23/2021)
+TRv1.8 (04/23/2021)
 - Added ppsspp-stock emulator as default (Hopefully helps with performance)
    * Savestates are not interchangeable with the regular ppsspp in ArkOS OaD
 - Added ability to restore retroarch and retroarch32 default settings from Options/Advanced menu
 
-v1.8.1 (04/24/2021)
+TRv1.8.1 (04/24/2021)
 - Forgot to include a check of whether someone is using a second sd card or not and adjust es_systems.cfg accordingly
   * If you're using a 2nd sd card, you didn't have an issue from the last update.  If using just the main sd card, your systems went missing in ES.  This update fixes that.
 
-v1.8.2 (04/24/2021)
+TRv1.8.2 (04/24/2021)
 - Added ability to toggle wifi on and off using F+L3 buttons
   * When Wifi is turned on, led will blink red once
   * When Wifi is turned off, led will blink red twice
 
-v1.9 (04/28/2021)
+TRv1.9 (04/28/2021)
 - Improved stability of global hotkeys
 - Added Fix Global Hotkeys script to /opt/Advanced menu
 - Removed some unneeded 32bit sdl2 libraries that cause linker issues
 - Updated retrorun and retrorun32 to hopefully minimize a potential memory leak issue
 - Removed OaD from version information (See https://github.com/christianhaitian/arkos/wiki/Announcement#4282021 for more info)
 
-v1.9.1 (04/30/2021)
+TRv1.9.1 (04/30/2021)
 - Added Change LED color script to Options menu
 - Updated global hotkey app to use absolute path for brightness control
 - Fixed SD scripts to be able change filebrowser primary roms folder to point to right roms folder depending on primary roms SD
 
-v2.0 (05/01/2021)
+TRv2.0 (05/01/2021)
 - Added support for the Sonic 1, 2, and CD Ports.
   * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sonic-1-rg351pm-and-rg351v-only--coming-soon-to-the-rgb10-rk2020-and-oga-1011)
 - Add 3 second sleep to oga_events service to finally stabilize global brightness hotkeys
 
-v2.1 (05/01/2021)
+TRv2.1 (05/01/2021)
 - Fixed ports failing to load from SD2
 
-v2.2 (05/03/2021)
+TRv2.2 (05/03/2021)
 - Added SuperTux
 - Added Mr. Boom
 - Added Dinothawr
@@ -84,18 +84,18 @@ v2.2 (05/03/2021)
 - Fixed background music to load from SD2 in ES when using SD2
 - Fixed roms2 not showing in Samba when using SD2
 
-v2.3 (05/04/2021)
+TRv2.3 (05/04/2021)
 - Fixed Atari800, 5200, and XE loading
    * Be aware when starting Atari XE games, the screen's width is weird at first.  Press Select+Start and it fixes the screen's width.  Might be a bug in the core or retroarch for the Atari XE emulation.
 - Added support for EXT4 format for SD2
 - Increased default audio gain for retroarch and retroarch32
 - Fixed default configs for Doom
 
-v2.4 (05/05/2021)
+TRv2.4 (05/05/2021)
 - Updated Retroarch and Retroarch32 to 1.9.2
 - Updated Dingux Commander for better screen visibility
 
-v2.5 (05/10/2021)
+TRv2.5 (05/10/2021)
 - Added Hydra Castle Labyrinth
 - Added support for Shovel Knight - Treasure Trove
    * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#shovel-knight---treasure-trove-rg351v-only---coming-soon-to-the-oga-rgb10-and-rk2020)
@@ -105,3 +105,11 @@ v2.5 (05/10/2021)
 - Updated emulationstation for wifi toggle Off state text
 - Updated Switch to SD2 to fix missing text if it can't swap to SD2 and add EXT4 to missing supported SD card type.
 - Disabled the ability for cores to be able to change video modes in retroarch and retroarch32
+
+v1.7 (05/15/2021) - Initial Stable Release
+- New stable image added and linked in the wiki main page
+- New boot logo for the stable image(Thanks to choo t)
+- Made gui menus (such as start menu) full screen
+- Fixed some games not being able to launch after Arkos Please wait jpeg image is displayed
+- Added TheGamesDB back as an option for scraping Emulationstation menu
+- Fixed NES box help menu for full screen gui
