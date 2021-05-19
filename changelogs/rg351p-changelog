@@ -369,7 +369,7 @@ v1.6 (04/22/2021)
 - Added ability to restore retroarch and retroarch32 to default configurations.
 - Added UAE4arm_libretro.so for retroarch32 for Amiga and Amiga32 (Thanks to slaminger for the core build)
 - Added potator core for Watara Supervision
-- Added section for MD+ MSU (genesis_plus_gx)
+- Added section for MD MSU (genesis_plus_gx)
 - Added ability to restore default retroarch.cfg for both retroarch and retroarch32 from the Options/Advanced menu
 - Updated emulationstation to support scraping for Watara Supervision
 
@@ -377,6 +377,6 @@ vFinal (05/01/2021)
 - Added support for the Sonic 1, 2, and CD Ports.
   * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#sonic-1-rg351pm-and-rg351v-only--coming-soon-to-the-rgb10-rk2020-and-oga-1011)
 
-vFinal (0501/2021)
+vFinal (05/01/2021)
 - Fixed Sonic CD exit hotkey daemon
 - Resized screens for Sonic 1, 2, and CD to be full screen (Thanks to sonhoon for suggestion)
