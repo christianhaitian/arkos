@@ -239,3 +239,13 @@ v1.7 (05/11/2021)
 - Updated Retroarch and Retroarch32 to 1.9.2
 - Increased default audio gain for retroarch and retroarch32
 - Disabled the ability for cores to be able to change video modes in retroarch and retroarch32
+
+v1.7 (05/19/2021)
+- Added Maldita Castilla port
+- Added Spelunky port
+- Added support for Undertale
+   * See updated ports loading info in emulators and ports section (https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#undertale-rk2020-rgb10-and-ogas-only--rg351v-use-anberports-by-krishenriksenkreal)
+- Added AM2R port
+- Added ability to generate m3u files for PS1 in Options section
+- Added ability to show only m3u files for PS1 in Options section
+- Blank screen when entering sleep and restore to previous brightness on wake (Simulate device going to sleep quicker)
