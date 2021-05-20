@@ -113,3 +113,9 @@ v1.7 (05/15/2021) - Initial Stable Release
 - Fixed some games not being able to launch after Arkos Please wait jpeg image is displayed
 - Added TheGamesDB back as an option for scraping Emulationstation menu
 - Fixed NES box help menu for full screen gui
+
+v1.7 (05/15/2021)
+- Added ability to generate and delete m3u files for PS1 (Thanks to vaiodotas for suggestion and testing)
+- Added ability to show only m3u files for PS1 (Thanks to vaiodotas for suggestion and testing)
+- Fixed ES wake from sleep to screensaver issue (Thanks to choo t)
+- Blank screen when entering sleep and restore to previous brightness on wake (Simulate device going to sleep quicker)
