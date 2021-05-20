@@ -249,3 +249,6 @@ v1.7 (05/19/2021)
 - Added ability to generate m3u files for PS1 in Options section
 - Added ability to show only m3u files for PS1 in Options section
 - Blank screen when entering sleep and restore to previous brightness on wake (Simulate device going to sleep quicker)
+
+v1.7 (05/19/2021-1)
+- Fixed AM2R
