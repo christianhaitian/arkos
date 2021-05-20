@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05??2021"
+UPDATE_DATE="05202021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -638,9 +638,9 @@ fi
 if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nAdd ability to generate and delete m3u files for PS1\nAdd ability to show only m3u files for PS1\nFix ES wake from sleep to screensaver issue\nBlank screen when entering sleep and restore to previous brightness on wake\n" | tee -a "$LOG_FILE"
-	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/05??2021/rg351v/arkosupdate05??2021.zip -O /home/ark/arkosupdate05??2021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05??2021.zip | tee -a "$LOG_FILE"
-	if [ -f "/home/ark/arkosupdate05??2021.zip" ]; then
-		sudo unzip -X -o /home/ark/arkosupdate05??2021.zip -d / | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/05202021/rg351v/arkosupdate05202021.zip -O /home/ark/arkosupdate05202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05202021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate05202021.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate05202021.zip -d / | tee -a "$LOG_FILE"
 	    if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
 		  sudo sed -i '/roms\//s//roms2\//g' /opt/system/PS1\ -\ Generate\ m3u\ files.sh
 		  sudo sed -i '/roms\//s//roms2\//g' /opt/system/PS1\ -\ Delete\ m3u\ files.sh
@@ -650,7 +650,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		  sudo sed -i '/roms2\//s//roms\//g' /opt/system/PS1\ -\ Delete\ m3u\ files.sh
 		  sudo cp -f -v "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
 		fi
-		sudo rm -v /home/ark/arkosupdate05??2021.zip | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate05202021.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3
