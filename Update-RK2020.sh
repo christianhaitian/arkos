@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05192021"
+UPDATE_DATE="05192021-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1173,7 +1173,7 @@ if [ ! -f "/home/ark/.config/.update05112021" ]; then
 	touch "/home/ark/.config/.update05112021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05192021" ]; then
 
 	printf "\033c" > /dev/tty1
 	printf "\nPreparing to enter The Matrix" > /dev/tty1
@@ -1210,6 +1210,26 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\n\n\n\n\n\nThe Matrix now has you\n\n\n\n\n\n" > /dev/tty1
 	sleep 1.5 && printf "." > /dev/tty1 && sleep 1.5 && printf "." > /dev/tty1 && sleep 1.5 && printf ".\n" > /dev/tty1
+
+	touch "/home/ark/.config/.update05192021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix AM2R\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05192021/rk2020/arkosupdate05192021-1.zip -O /home/ark/arkosupdate05192021-1.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05192021-1.zip | tee -a "$LOG_FILE"
+	if  [ -f "/home/ark/arkosupdate05192021-1.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate05192021-1.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate05192021-1.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.7 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
