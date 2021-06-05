@@ -122,6 +122,9 @@ v1.7 (05/20/2021)
 
 v1.7 (06/04/2021)
 - Added clear last collection script to options/Advanced
+- Updated Switch to SD2 for Roms script to account for sdcards mounted on on mmcblk1
+- Added ability to switch to 640x480 for Atomiswave and Naomi
+  (Just hold A while launching a game to enable 640x480.  You should see "640x480 enabled" on the screen while launching.
 - Fixed scraping for Commodore 16
 - Fixed scraping for Commodore 128
 - Fixed .bs snes hacks not loading from Emulationstation
