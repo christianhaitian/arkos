@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05202021"
+UPDATE_DATE="06042021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -635,7 +635,7 @@ if [ ! -f "/home/ark/.config/.update05152021" ]; then
 	touch "/home/ark/.config/.update05152021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05202021" ]; then
 
 	printf "\nAdd ability to generate and delete m3u files for PS1\nAdd ability to show only m3u files for PS1\nFix ES wake from sleep to screensaver issue\nBlank screen when entering sleep and restore to previous brightness on wake\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/05202021/rg351v/arkosupdate05202021.zip -O /home/ark/arkosupdate05202021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05202021.zip | tee -a "$LOG_FILE"
@@ -657,6 +657,71 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
 		exit 1
 	fi
+
+	printf "\nMake sure the proper SDLs are still linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.10.0 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.7 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05202021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Clear last played collection script\nUpdate Switch to SD2 to account for mmcblk1\nAdd ability for 640x480 for Atomiswave and Naomi\nFix Scraping for c16 and c128\nFix .bs snes hacks not loading\nUpdate Retroarches to 1.9.4\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/06042021/rg351v/arkosupdate06042021.zip -O /home/ark/arkosupdate06042021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06042021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06042021.zip" ]; then
+		cp -f -v /opt/mupen64plus/libmupen64plus.so.2.0.0 /opt/mupen64plus/libmupen64plus.so.2.0.0.bak | tee -a "$LOG_FILE"
+		cp -f -v /opt/mupen64plus/mupen64plus-audio-sdl.so /opt/mupen64plus/mupen64plus-audio-sdl.so.bak | tee -a "$LOG_FILE"
+		cp -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.192.bak | tee -a "$LOG_FILE"
+		cp -v /opt/retroarch/bin/retroarch32 /opt/retroarch/bin/retroarch32.192.bak | tee -a "$LOG_FILE"
+		sudo unzip -X -o /home/ark/arkosupdate06042021.zip -d / | tee -a "$LOG_FILE"
+		cp -f -v /opt/mupen64plus/libmupen64plus.so.2.0.0.bak /opt/mupen64plus/libmupen64plus.so.2.0.0 | tee -a "$LOG_FILE"
+		cp -f -v /opt/mupen64plus/mupen64plus-audio-sdl.so.bak /opt/mupen64plus/mupen64plus-audio-sdl.so | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update06042021.bak | tee -a "$LOG_FILE"
+		sed -i -e '/<command>sudo perfmax \%EMULATOR\% \%CORE\%\; nice \-n \-19 \/usr\/local\/bin\/retroarch \-L \/home\/ark\/.config\/retroarch\/cores\/snes9x2010_libretro.so \%ROM\%\; sudo perfnorm<\/command>/{r /home/ark/fix_sneshacks.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sed -i '/Nintendo - Super Famicom 2010/s//Nintendo - Super NES Hacks/' /etc/emulationstation/es_systems.cfg
+	    if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		  sudo cp -f -v "/usr/local/bin/Switch to main SD for Roms.sh" "/opt/system/Advanced/Switch to main SD for Roms.sh" | tee -a "$LOG_FILE"
+		else
+		  sudo cp -f -v "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
+		fi
+		sudo rm -f -v /home/ark/fix_sneshacks.txt | tee -a "$LOG_FILE"
+		sudo rm -f -v /home/ark/arkosupdate06042021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix Rick Dangerous for Retroarch 1.9.4 update\n" | tee -a "$LOG_FILE"
+    if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+	  cd /roms2/ports/xrick
+	  unzip -X -o data.zip
+	  rm -f -v data.zip
+	  sed -i '/xrick\/data.zip/s//xrick\//' /roms2/ports/"Rick Dangerous.sh"
+	fi
+	cd /roms/ports/xrick
+	unzip -X -o data.zip
+	rm -f -v data.zip
+	sed -i '/xrick\/data.zip/s//xrick\//' /roms/ports/"Rick Dangerous.sh"
+	cd ~
+
+	printf "\nChange wifi driver in retroarch to nmcli\n" | tee -a "$LOG_FILE"
+	sed -i '/wifi_driver \= \"null\"/c\wifi_driver \= \"nmcli\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/wifi_driver \= \"null\"/c\wifi_driver \= \"nmcli\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+
+	printf "\nMake mounting of usb drives read/write not read only\n" | tee -a "$LOG_FILE"
+	sed -i '/uid\=1000/s//uid\=1002/g' /opt/system/USB\ Drive\ Mount.sh
+
+	printf "\nDisable RGA Scaling if it's on\n" | tee -a "$LOG_FILE"
+	sed -i '/video_ctx_scaling \= \"true\"/c\video_ctx_scaling \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/video_ctx_scaling \= \"true\"/c\video_ctx_scaling \= \"false\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+	sed -i '/video_ctx_scaling \= \"true\"/c\video_ctx_scaling \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg
+	sed -i '/video_ctx_scaling \= \"true\"/c\video_ctx_scaling \= \"false\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
 
 	printf "\nMake sure the proper SDLs are still linked\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.10.0 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"

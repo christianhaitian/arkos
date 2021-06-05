@@ -245,3 +245,15 @@ v1.7 (05/19/2021)
 - Added ability to generate m3u files for PS1 in Options section
 - Added ability to show only m3u files for PS1 in Options section
 - Blank screen when entering sleep and restore to previous brightness on wake (Simulate device going to sleep quicker)
+
+v1.7 (06/04/2021)
+- Added clear last collection script to options/Advanced
+- Fixed scraping for Commodore 16
+- Fixed scraping for Commodore 128
+- Fixed scraping for Supervision
+- Fixed .bs snes hacks not loading from Emulationstation
+- Updated EasyRPG to 0.6.2
+- Updated Retroarch and Retroarch32 to 1.9.4
+- Added ability to configure wifi from Retroarch (settings>Wi-Fi)
+- Make mounting of usb drives read/write not read only
+- Fixed Rick Dangerous for Retroarch 1.9.4 update (Thanks to southoz for the fix)

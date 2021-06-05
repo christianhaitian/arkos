@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="05192021-1"
+UPDATE_DATE="06042021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -785,7 +785,7 @@ if [ ! -f "/home/ark/.config/.update03082021" ]; then
 
 	printf "\nCopy correct updated ES for easyrpg scraping fix\n" | tee -a "$LOG_FILE"	
 	test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
-	if [[ "$test" == "3150376" ]]; then
+	if [[ $test == "3150376" ]]; then
 		sudo cp -v /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	else
 		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
@@ -1039,7 +1039,7 @@ if [ ! -f "/home/ark/.config/.update04222021" ]; then
 
 	printf "\nCopy correct updated ES for supervision scraping fix\n" | tee -a "$LOG_FILE"	
 	test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
-	if [[ "$test" == "3835024" ]]; then
+	if [[ $test == "3835024" ]]; then
 		sudo cp -v /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	else
 		sudo cp -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
@@ -1214,7 +1214,7 @@ if [ ! -f "/home/ark/.config/.update05192021" ]; then
 	touch "/home/ark/.config/.update05192021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05192021-1" ]; then
 
 	printf "\nFix AM2R\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/master/05192021/rk2020/arkosupdate05192021-1.zip -O /home/ark/arkosupdate05192021-1.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate05192021-1.zip | tee -a "$LOG_FILE"
@@ -1230,6 +1230,62 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 1.7 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05192021-1"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Clear last played collection script\nFix Scraping for c16 and c128\nFix .bs snes hacks not loading\nUpdate Retroarches to 1.9.4\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate http://gitcdn.link/cdn/christianhaitian/arkos/main/06042021/rgb10rk2020/arkosupdate06042021.zip -O /home/ark/arkosupdate06042021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06042021.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06042021.zip" ]; then
+		cp -v /opt/mupen64plus/libmupen64plus.so.2.0.0 /opt/mupen64plus/libmupen64plus.so.2.0.0.bak | tee -a "$LOG_FILE"
+		cp -v /opt/mupen64plus/mupen64plus-audio-sdl.so /opt/mupen64plus/mupen64plus-audio-sdl.so.bak | tee -a "$LOG_FILE"
+		cp -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.192.bak | tee -a "$LOG_FILE"
+		cp -v /opt/retroarch/bin/retroarch32 /opt/retroarch/bin/retroarch32.192.bak | tee -a "$LOG_FILE"
+		sudo unzip -X -o /home/ark/arkosupdate06042021.zip -d / | tee -a "$LOG_FILE"
+		cp -f -v /opt/mupen64plus/libmupen64plus.so.2.0.0.bak /opt/mupen64plus/libmupen64plus.so.2.0.0 | tee -a "$LOG_FILE"
+		cp -f -v /opt/mupen64plus/mupen64plus-audio-sdl.so.bak /opt/mupen64plus/mupen64plus-audio-sdl.so | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update06042021.bak | tee -a "$LOG_FILE"
+		sed -i -e '/<command>sudo perfmax \%EMULATOR\% \%CORE\%\; nice \-n \-19 \/usr\/local\/bin\/retroarch \-L \/home\/ark\/.config\/retroarch\/cores\/snes9x2010_libretro.so \%ROM\%\; sudo perfnorm<\/command>/{r /home/ark/fix_sneshacks.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		sed -i '/Nintendo - Super Famicom 2010/s//Nintendo - Super NES Hacks/' /etc/emulationstation/es_systems.cfg
+		sudo rm -f -v /home/ark/fix_sneshacks.txt | tee -a "$LOG_FILE"
+		sudo rm -f -v /home/ark/arkosupdate06042021.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix Rick Dangerous for Retroarch 1.9.4 update\n" | tee -a "$LOG_FILE"
+	cd /roms/ports/xrick
+	unzip -X -o data.zip
+	rm -f -v data.zip
+	sed -i '/xrick\/data.zip/s//xrick\//' /roms/ports/"Rick Dangerous.sh"
+	cd ~
+
+	printf "\nChange wifi driver in retroarch to nmcli\n" | tee -a "$LOG_FILE"
+	sed -i '/wifi_driver \= \"null\"/c\wifi_driver \= \"nmcli\"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/wifi_driver \= \"null\"/c\wifi_driver \= \"nmcli\"' /home/ark/.config/retroarch/retroarch.cfg.bak
+
+	printf "\nMake mounting of usb drives read/write not read only\n" | tee -a "$LOG_FILE"
+	sed -i '/uid\=1000/s//uid\=1002/g' /opt/system/USB\ Drive\ Mount.sh
+
+	printf "\nEnsure 64bit and 32bit sdl2 is still properly linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.14.1 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 1.7 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	printf "\nCopy correct updated ES for supervision scraping fix\n" | tee -a "$LOG_FILE"	
+	test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	if [[ $test == "3224160" ]]; then
+		sudo cp -f -v /usr/bin/emulationstation/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	else
+		sudo cp -f -v /usr/bin/emulationstation/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	fi
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
