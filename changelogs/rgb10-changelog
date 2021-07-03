@@ -257,3 +257,11 @@ v1.7 (06/04/2021)
 - Added ability to configure wifi from Retroarch (settings>Wi-Fi)
 - Make mounting of usb drives read/write not read only
 - Fixed Rick Dangerous for Retroarch 1.9.4 update (Thanks to southoz for the fix)
+
+v1.7 (07/02/2021)
+- Updated Retroarch and Retroarch32 to 1.9.6
+- Fixed c16, c128, and supervision scraping for ES Fullscreen
+- Added support for scraping of American Laser Games
+- Added support for American Laser Games
+- Added supafaust snes core
+- Changed update confirmation to only require confirmation when there's an actual update to complete
