@@ -1,2 +1,4 @@
 Test Release 1 (07/16/2021)
 - To connect to your wifi, do so through retroarch>settings>wifi and NOT through the options/Wifi option.  The options/Wifi option currently crashes.
+- Hotkey information: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---CHI#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS
+- One HotKey option missing from the list is the wifi toggle.  That is Home+Select.  One blink of the blue led means wifi is on.  Two blinks for the blue led means wifi is off.
