@@ -265,3 +265,13 @@ v1.7 (07/02/2021)
 - Added support for American Laser Games
 - Added supafaust snes core
 - Changed update confirmation to only require confirmation when there's an actual update to complete
+
+v1.7 (07/28/2021)
+- Fixed OpenBOR not copying master.cfg correctly which caused launching of games to potentially have incorrect screen size
+- Fixed ti99 launching
+- Updated EasyRPG menu to support scanning and loading games from ES menu (Thanks to Jetup)
+- Added 351Files file manager (Thanks to TDG)
+- Added retroarch32 info file for flycast32_rumble
+- Added plaidman's doom loader configuration (see https://github.com/plaidman/rgb10max/wiki/doom-loader for more info)
+- Stopped symlinks from changing for aarch64 and arm32 
+- Changed mednafen_vb options cpu emulation to fast

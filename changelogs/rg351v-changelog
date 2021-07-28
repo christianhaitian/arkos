@@ -142,3 +142,19 @@ v1.7 (07/02/2021)
 - Added supafaust snes core
 - Updated Switch to SD2 for Roms.sh and Switch to main SD for Roms.sh scripts
 - Changed update confirmation to only require confirmation when there's an actual update to complete
+
+v1.7 (07/28/2021)
+- Updated "Switch to SD2 for Roms.sh" to fix American Laser Games scanning and launching
+- Updated "Switch to SD2 for Roms.sh" to account for 351Files and Doom loader when using SD2
+- Disabled Performance mode changes using hotkeys
+- Fixed Retroarch restore settings feature in options section
+- Fixed OpenBOR not copying master.cfg correctly which caused launching of games to potentially have incorrect screen size
+- Updated EasyRPG menu to support scanning and loading games from ES menu (Thanks to Jetup)
+- Stopped symlinks from changing for aarch64 and arm32 
+- Changed mednafen_vb options cpu emulation to fast
+- Added plaidman's doom loader configuration (see https://github.com/plaidman/rgb10max/wiki/doom-loader for more info)
+- Added 351Files file manager (Thanks to TDG)
+- Added retroarch info file for mgba_rumble
+- Added retroarch info file for flycast_rumble
+- Added retroarch info file for flycast32_rumble
+- Added retroarch info file for pcsx_rearmed_rumble
