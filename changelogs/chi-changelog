@@ -18,7 +18,7 @@ Test Release 1.2 (07/31/2021)
 - Updated controls for lzdoom
 - Updated EasyRPG menu to support scanning and loading games from ES menu (Thanks to Jetup)
 - Stop symlinks from changing for aarch64 and arm32
-- Fixed reversed analog issues for Hypseus(Daphne) and Hypseus-singe(American Lazer Games)
+- Fixed reversed analog issues for Hypseus(Daphne) and Hypseus-singe(American Laser Games)
 - Fixed Timezone issues for Asia/Hong_Kong and others in Emulationstation
 - Fixed resolution for SuperTux
 - Fixed amiberry controls
