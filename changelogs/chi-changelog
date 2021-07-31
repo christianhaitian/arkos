@@ -12,7 +12,7 @@ Test Release 1.1.1 (07/16/2021)
 - Fixed wifi toggle hotkey for real this time
 
 Test Release 1.2 (07/31/2021)
-- Added ecwolf standalone port (https://bitbucket.org/ecwolf/ecwolf)
+- Added ecwolf standalone port (https://bitbucket.org/ecwolf/ecwolf)https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#wolfenstein
 - Added Wolfenstein system to Emulationstation (Thanks to Jetup for the graphics)
 - Added plaidman's doom loader configuration (see https://github.com/plaidman/rgb10max/wiki/doom-loader for more info)
 - Updated controls for lzdoom
