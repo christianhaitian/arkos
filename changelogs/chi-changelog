@@ -22,3 +22,16 @@ Test Release 1.2 (07/31/2021)
 - Fixed Timezone issues for Asia/Hong_Kong and others in Emulationstation
 - Fixed resolution for SuperTux
 - Fixed amiberry controls
+
+Test Release 1.3 (08/27/2021)
+- Updated Retroarch and Rertroarch32 to 1.9.8
+- Fixed options wifi menu
+- Fixed the rare occassion that sound volume does not restore previous saved state so it can self recover after a reboot
+- Fixed scraping for Wolfenstein system in Emulationstation
+- Added PortMaster to Options/Tool section (See https://github.com/christianhaitian/arkos/wiki/PortMaster for more info)
+- Added support for online updating from China
+- Added genesis_plus_gx_wide 64bit as a selectable core for Sega Genesis and Sega Megadrive systems. (https://www.libretro.com/index.php/genesis-plus-gx-wide-now-available-for-libretroretroarch/)
+   * It's also been added for Sega Master System and Sega CD as there's been reports that it works for some games on these systems as well.
+- Install fonts-noto-cjk to fix Retroarch Korean language and possibly other languages
+- Install dialog for wifi menu option
+- Remove old cache and backup folder files from /var to recover space for future update needs

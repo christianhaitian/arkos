@@ -158,3 +158,18 @@ v1.7 (07/28/2021)
 - Added retroarch info file for flycast_rumble
 - Added retroarch info file for flycast32_rumble
 - Added retroarch info file for pcsx_rearmed_rumble
+
+v1.7 (08/27/2021)
+- Updated Retroarch and Rertroarch32 to 1.9.8
+- Fixed Timezone issues for Asia/Hong_Kong and others in Emulationstation
+- Fixed the rare occassion that sound volume does not restore previous saved state so it can self recover after a reboot
+- Added fix for black lines LCD issue (Thanks to 송재환 for info on fix from british-choi)
+- Added ecwolf standalone
+- Added PortMaster to Options/Tool section (See https://github.com/christianhaitian/arkos/wiki/PortMaster for more info)
+- Added Wolfenstein system to Emulationstation
+- Added support for online updating from China
+- Added genesis_plus_gx_wide 64bit as a selectable core for Sega Genesis and Sega Megadrive systems. (https://www.libretro.com/index.php/genesis-plus-gx-wide-now-available-for-libretroretroarch/)
+   * It's also been added for Sega Master System and Sega CD as there's been reports that it works for some games on these systems as well.
+- Updated "Switch to SD2 for Roms.sh" and "Switch to main SD for Roms.sh" to account for ecwolf if using SD2
+- Install fonts-noto-cjk to fix Retroarch Korean language and possibly other languages
+- Remove old cache and backup folder files from /var to recover space for future update needs
