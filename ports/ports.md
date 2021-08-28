@@ -1,3 +1,5 @@
+Title="AM2R ." Desc="Another Metroid 2 Remake.  An action-adventure game developed by Argentinian programmer Milton Guasti (also known as DoctorM64).  It is an unofficial remake of the 1991 Game Boy game Metroid II: Return of Samus in the style of Metroid: Zero Mission (2004)." porter="krishenriksen (kreal)" locat="AM2R.zip"
+
 Title="Blues_Brothers ." Desc="A rewrite of the Blues Brothers game engine developed by Titus Interactive.  Includes the demo files.  You can add your own full game Amiga or Dos files to the ports/bluesbrothers/gamedata folder." porter="Jetup13" locat="Blues%20Brothers.zip"
 
 Title="Cave_Story_(Evo) ." Desc="Cave Story using the Nxengine-evo engine from https://github.com/nxengine/nxengine-evo" porter="Christian_Haitian" locat="Cave%20Story-evo.zip"
@@ -15,3 +17,7 @@ Title="RAWGL ." Desc="A re-implementation of the engine used in the game Another
 Title="Rocks_N_Diamonds ." Desc="A Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels." porter="Christian_Haitian" locat="rocksndiamonds.zip"
 
 Title="SorR ." Desc="Streets of Rage Remake.  Just add your own sorr.dat file, mod folder, and palettes folder into the ports/sorr folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="SorR.zip"
+
+Title="Spelunky ." Desc="Spelunky Classic HD.  A modified version of Derek Yu's game Spelunky Classic. Based on the source code published in Humble Weekly Bundle: Play and Create with GameMaker (not original 1.1 release)." porter="Christian_Haitian" locat="Spelunky.zip"
+
+Title="SuperTux ." Desc="SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros. games for the various Nintendo platforms.  !!!Warning!!! This is a 169MB download and will take a while to download and install.  It will also be downloaded from a server in China due to Github file size restrictions." porter="Christian_Haitian" locat="SuperTux.zip"
