@@ -173,3 +173,8 @@ v1.7 (08/27/2021)
 - Updated "Switch to SD2 for Roms.sh" and "Switch to main SD for Roms.sh" to account for ecwolf if using SD2
 - Install fonts-noto-cjk to fix Retroarch Korean language and possibly other languages
 - Remove old cache and backup folder files from /var to recover space for future update needs
+
+v1.7 (08/29/2021)
+- Updated Retroarch and Retroarch32 to latest commit to fix overlay input when analog to digital mapping is enabled
+- Updated PPSSPP to 1.11.3
+- Updated PortMaster to version 1.52

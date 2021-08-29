@@ -295,3 +295,8 @@ v1.7 (08/27/2021)
 - Install fonts-noto-cjk to fix Retroarch Korean language and possibly other languages
 - Remove old cache and backup folder files from /var to recover space for future update needs
 - Disabled Performance mode changes using hotkeys (Not needed since this is automatically set for systems that need it.)
+
+v1.7 (08/29/2021)
+- Updated Retroarch and Retroarch32 to latest commit to fix overlay input when analog to digital mapping is enabled
+- Updated PPSSPP to 1.11.3
+- Updated PortMaster to version 1.52
