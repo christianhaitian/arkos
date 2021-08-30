@@ -14,6 +14,8 @@ Title="Moonlight ." Desc="A free, open-source NVIDIA Gamestream Client.  See  fo
 
 Title="OpenJazz ." Desc="A free, open-source version of the classic Jazz Jackrabbit games by Alister Thomson.  Includes the Jazz Jackrabiit shareware files.  You can add your own full game Dos files to the ports/openjazz/gamedata folder." porter="Jetup13" locat="OpenJazz.zip"
 
+Title="OpenTyrian ." Desc="OpenTyrian is an open-source port of the DOS game Tyrian.  OpenTyrian 2.1 files are already included as they were made freeware sometime ago." porter="Christian_Haitian" locat="OpenTyrian.zip"
+
 Title="Prehistorik_2 ." Desc="A caveman-era platform game using the Blues Brothers game engine developed by Titus Interactive.  Includes the demo files.  You can add your own full game Dos files to the ports/prehistorik2/gamedata folder." porter="Jetup13" locat="Prehistorik%202.zip"
 
 Title="RAWGL ." Desc="A re-implementation of the engine used in the game Another World aka Out of this World in the US.  Includes the Out of this World demo files.  You can add your own full game files to the ports/rawgl/gamedata/ folder.  See https://github.com/cyxx/rawgl#supported-versions for more supported files info." porter="Jetup13" locat="RAWGL.zip"
