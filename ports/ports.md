@@ -4,7 +4,7 @@ Title="Blues_Brothers ." Desc="A rewrite of the Blues Brothers game engine devel
 
 Title="Cave_Story_(Evo) ." Desc="Cave Story using the Nxengine-evo engine from https://github.com/nxengine/nxengine-evo" porter="Christian_Haitian" locat="Cave%20Story-evo.zip"
 
-Title="Commander_Genius ." Desc="Commander Genius is an open-source clone of Commander Keen (1-6, Dreams) which allows you to play these episodes and some of the mods made for them.  Developed by Gerstrong" porter="Christian_Haitian" locat="Commander%20Genius.zip"
+Title="Commander_Genius ." Desc="Commander Genius is an open-source clone of Commander Keen (1-6, Dreams) which allows you to play these episodes and some of the mods made for them.  Developed by Gerstrong.  Includes the shareware version of Commander Keen 1.  You can add load your own keen folders into the ports/cgenius/games folder" porter="Christian_Haitian" locat="Commander%20Genius.zip"
 
 Title="DevilutionX ." Desc="DevilutionX is a source port of Diablo from https://github.com/diasurgical/devilutionX.  Includes the Diablo shareware version.  You can add your own full version DIABDAT.MPQ file to the ports/devilution folder.  To run the Diablo: Hellfire expansion you will need to also copy hellfire.mpq, hfmonk.mpq, hfmusic.mpq, hfvoice.mpq" porter="Christian_Haitian" locat="Devilutionx.zip"
 
