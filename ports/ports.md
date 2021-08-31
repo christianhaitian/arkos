@@ -24,6 +24,8 @@ Title="RAWGL ." Desc="A re-implementation of the engine used in the game Another
 
 Title="Rocks_N_Diamonds ." Desc="A Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels." porter="Christian_Haitian" locat="rocksndiamonds.zip"
 
+Title="Sonic_1 ." Desc="Sonic the Hedgehog 1 decompilation by Rubberduckycooly.  Just add your own android Data.rsdk file to the ports/sonic1 folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="Sonic%201.zip"
+
 Title="SorR ." Desc="Streets of Rage Remake.  Just add your own sorr.dat file, mod folder, and palettes folder into the ports/sorr folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="SorR.zip"
 
 Title="Spelunky ." Desc="Spelunky Classic HD.  A modified version of Derek Yu's game Spelunky Classic. Based on the source code published in Humble Weekly Bundle: Play and Create with GameMaker (not original 1.1 release)." porter="Christian_Haitian" locat="Spelunky.zip"
