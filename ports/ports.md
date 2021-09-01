@@ -28,6 +28,8 @@ Title="Sonic_1 ." Desc="Sonic the Hedgehog 1 decompilation by Rubberduckycooly. 
 
 Title="Sonic_2 ." Desc="Sonic the Hedgehog 2 decompilation by Rubberduckycooly.  Just add your own android Data.rsdk file to the ports/sonic2 folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="Sonic%202.zip"
 
+Title="Sonic_CD ." Desc="Sonic the Hedgehog CD decompilation by Rubberduckycooly.  Just add your own android Data.rsdk file to the ports/soniccd folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="Sonic%20CD.zip"
+
 Title="SorR ." Desc="Streets of Rage Remake.  Just add your own sorr.dat file, mod folder, and palettes folder into the ports/sorr folder.  See the wiki for more info on this" porter="Christian_Haitian" locat="SorR.zip"
 
 Title="Spelunky ." Desc="Spelunky Classic HD.  A modified version of Derek Yu's game Spelunky Classic. Based on the source code published in Humble Weekly Bundle: Play and Create with GameMaker (not original 1.1 release)." porter="Christian_Haitian" locat="Spelunky.zip"
