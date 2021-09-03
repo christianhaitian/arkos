@@ -1,4 +1,4 @@
-Title="AM2R ." Desc="Another Metroid 2 Remake.  An action-adventure game developed by Argentinian programmer Milton Guasti (also known as DoctorM64).  It is an unofficial remake of the 1991 Game Boy game Metroid II: Return of Samus in the style of Metroid: Zero Mission (2004)." porter="krishenriksen (kreal)" locat="AM2R.zip"
+Title="AM2R ." Desc="Another Metroid 2 Remake.  An action-adventure game developed by Argentinian programmer Milton Guasti (also known as DoctorM64).  You'll need to provide your own am2r android apk into the ports/am2r/gamedata folder.  Make sure it is named am2r.apk.  The name is case sensitive." porter="Johnny on Flame" locat="AM2R.zip"
 
 Title="Blues_Brothers ." Desc="A rewrite of the Blues Brothers game engine developed by Titus Interactive.  Includes the demo files.  You can add your own full game Amiga or Dos files to the ports/bluesbrothers/gamedata folder." porter="Jetup13" locat="Blues%20Brothers.zip"
 
