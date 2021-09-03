@@ -10,7 +10,7 @@ Title="DevilutionX ." Desc="DevilutionX is a source port of Diablo from https://
 
 Title="Hydra_Castle_Labyrinth ." Desc="Hydra Castle Labyrinth is a platform game with some old school action. It's also reminiscent of games of the 16 bit era." porter="Christian_Haitian" locat="Hydra%20Castle%20Labyrinth.zip"
 
-Title="Heart_of_Darkness ." Desc="Heart of Darkness using the hode reimplementation of the engine developed by Amazing Studio" porter="Jetup13" locat="Heart%20of%20Darkness.zip"
+Title="Heart_of_Darkness ." Desc="Heart of Darkness using the hode reimplementation of the engine developed by Amazing Studio.  Just add your own Heart of Darkness game files to the ports/hode/gamedata folder." porter="Jetup13" locat="Heart%20of%20Darkness.zip"
 
 Title="Maldita_Castilla ." Desc="An arcade action video game developed by Locomalito and released in December 2012.  The gameplay is inspired by the games Shinobi and Ghost and Goblins." porter="krishenriksen (kreal)" locat="Maldita%20Castilla.zip"
 
