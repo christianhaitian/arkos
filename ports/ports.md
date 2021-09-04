@@ -40,6 +40,8 @@ Title="SorR ." Desc="Streets of Rage Remake.  Just add your own sorr.dat file, m
 
 Title="Spelunky ." Desc="Spelunky Classic HD.  A modified version of Derek Yu's game Spelunky Classic. Based on the source code published in Humble Weekly Bundle: Play and Create with GameMaker (not original 1.1 release)." porter="Christian_Haitian" locat="Spelunky.zip"
 
+Title="Super_Mario_War ." Desc="is a fan-made multiplayer Super Mario Bros. style deathmatch game in which players try to beat one another in a variety of gameplay modes.  Great fun even in single player mode." porter="Christian_Haitian" locat="Super%20Mario%20War.zip"
+
 Title="SuperTux ." Desc="SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros. games for the various Nintendo platforms.  !!!Warning!!! This is a 169MB download and will take a while to download and install.  It will also be downloaded from a server in China due to Github file size restrictions." porter="Christian_Haitian" locat="SuperTux.zip"
 
 Title="Undertale ." Desc="Undertale loader.  You must have a copy of Undertale Linux version assets copied to the ports/undertale/assets folder.  For more info on the setup needs, see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information" porter="krishenriksen (kreal)" locat="Undertale.zip"
