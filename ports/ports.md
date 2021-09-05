@@ -10,6 +10,8 @@ Title="DevilutionX ." Desc="DevilutionX is a source port of Diablo from https://
 
 Title="Duke_Nukem_3D ." Desc="Duke Nukem 3D using the rednukem build open source port by Alexey Khokholov.  You'll need to add your own full version duke3d.grp and duke.rts Duke Nukem 3D Atomic files to the ports/rednukem/gamedata folder." porter="Romadu" locat="Duke%20Nukem%203D.zip"
 
+Title="Freedom_Planet ." Desc="A combat-based platform adventure.  You must have a copy of Freedom Planet for Linux copied to the ports/freedomplanet/gamedata folder." porter="Johnny on Flame" locat="Freedom%20Planet.zip"
+
 Title="Heart_of_Darkness ." Desc="Heart of Darkness using the hode reimplementation of the engine developed by Amazing Studio.  Just add your own Heart of Darkness game files to the ports/hode/gamedata folder." porter="Jetup13" locat="Heart%20of%20Darkness.zip"
 
 Title="Hydra_Castle_Labyrinth ." Desc="Hydra Castle Labyrinth is a platform game with some old school action. It's also reminiscent of games of the 16 bit era." porter="Christian_Haitian" locat="Hydra%20Castle%20Labyrinth.zip"
