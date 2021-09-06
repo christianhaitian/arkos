@@ -30,6 +30,8 @@ Title="Quake_1 ." Desc="Quake 1 is one of the first fully 3D First-person shoote
 
 Title="RAWGL ." Desc="A re-implementation of the engine used in the game Another World aka Out of this World in the US.  Includes the Out of this World demo files.  You can add your own full game files to the ports/rawgl/gamedata/ folder.  See https://github.com/cyxx/rawgl#supported-versions for more supported files info." porter="Jetup13" locat="RAWGL.zip"
 
+Title="Rick_Dangerous ." Desc="An open source implementation of the legendary game "Rick Dangerous" using the xrick libretro retroarch core.  All necessary files are already included." porter="Christian_Haitian" locat="Rick%20Dangerous.zip"
+
 Title="Rocks_N_Diamonds ." Desc="A Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels." porter="Christian_Haitian" locat="rocksndiamonds.zip"
 
 Title="Shovel_Knight_Treasure_Trove ." Desc="Shovel Knight Treasure Trove loader.  You must have a copy of Shovel Knight Treasure Trove for Linux copied to the ports/shovelknight/gamedata folder.  For more info on the setup needs, see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information" porter="Johnny on Flame" locat="Shovel%20Knight.zip"
