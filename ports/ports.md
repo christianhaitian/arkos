@@ -26,6 +26,8 @@ Title="OpenTyrian ." Desc="OpenTyrian is an open-source port of the DOS game Tyr
 
 Title="Prehistorik_2 ." Desc="A caveman-era platform game using the Blues Brothers game engine developed by Titus Interactive.  Includes the demo files.  You can add your own full game Dos files to the ports/prehistorik2/gamedata folder." porter="Jetup13" locat="Prehistorik%202.zip"
 
+Title="Quake_1 ." Desc="Quake 1 is one of the first fully 3D First-person shooter games released by id software.  Includes shareware pak file.  You can add your own full game pak files to the ports/quake/quakepaks folder." porter="Christian_Haitian" locat="Quake.zip"
+
 Title="RAWGL ." Desc="A re-implementation of the engine used in the game Another World aka Out of this World in the US.  Includes the Out of this World demo files.  You can add your own full game files to the ports/rawgl/gamedata/ folder.  See https://github.com/cyxx/rawgl#supported-versions for more supported files info." porter="Jetup13" locat="RAWGL.zip"
 
 Title="Rocks_N_Diamonds ." Desc="A Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels." porter="Christian_Haitian" locat="rocksndiamonds.zip"
