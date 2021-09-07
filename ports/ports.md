@@ -2,6 +2,8 @@ Title="AM2R ." Desc="Another Metroid 2 Remake.  An action-adventure game develop
 
 Title="Blues_Brothers ." Desc="A rewrite of the Blues Brothers game engine developed by Titus Interactive.  Includes the demo files.  You can add your own full game Amiga or Dos files to the ports/bluesbrothers/gamedata folder." porter="Jetup13" locat="Blues%20Brothers.zip"
 
+Title="Cave_Story ." Desc="Cave Story using the Libretro Retroarch Nxengine core." porter="Christian_Haitian" locat="Cave%20Story.zip"
+
 Title="Cave_Story_(Evo) ." Desc="Cave Story using the Nxengine-evo engine from https://github.com/nxengine/nxengine-evo" porter="Christian_Haitian" locat="Cave%20Story-evo.zip"
 
 Title="Commander_Genius ." Desc="Commander Genius is an open-source clone of Commander Keen (1-6, Dreams) which allows you to play these episodes and some of the mods made for them.  Developed by Gerstrong.  Includes the shareware version of Commander Keen 1.  You can add load your own keen folders into the ports/cgenius/games folder" porter="Christian_Haitian" locat="Commander%20Genius.zip"
