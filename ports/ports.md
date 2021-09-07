@@ -22,6 +22,8 @@ Title="Maldita_Castilla ." Desc="An arcade action video game developed by Locoma
 
 Title="Moonlight ." Desc="A free, open-source NVIDIA Gamestream Client.  For more info on the setup needs at https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#moonlight-nvidia-gamestreaming-app-available-through-portmaster." porter="Christian_Haitian" locat="Moonlight.zip"
 
+Title="Mr_Boom ." Desc="A Bomberman clone." porter="Christian_Haitian" locat="Mr.%20Boom.zip"
+
 Title="NAM ." Desc="NAM using the rednukem build open source port by Alexey Khokholov.  You'll need to add your own full version NAM.GRP and NAM.RTS and .CON files and optionally CD audio tracks as OGG file in the format trackXX.ogg (where XX is the track number) to the ports/rednukem-NAM/gamedata folder." porter="romadu" locat="NAM.zip"
 
 Title="OpenJazz ." Desc="A free, open-source version of the classic Jazz Jackrabbit games by Alister Thomson.  Includes the Jazz Jackrabiit shareware files.  You can add your own full game Dos files to the ports/openjazz/gamedata folder." porter="Jetup13" locat="OpenJazz.zip"
