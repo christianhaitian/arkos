@@ -58,10 +58,12 @@ Title="SorR ." Desc="Streets of Rage Remake.  Just add your own sorr.dat file, m
 
 Title="Spelunky ." Desc="Spelunky Classic HD.  A modified version of Derek Yu's game Spelunky Classic. Based on the source code published in Humble Weekly Bundle: Play and Create with GameMaker (not original 1.1 release)." porter="Christian_Haitian" locat="Spelunky.zip"
 
-Title="Super_Mario_War ." Desc="is a fan-made multiplayer Super Mario Bros. style deathmatch game in which players try to beat one another in a variety of gameplay modes.  Great fun even in single player mode." porter="Christian_Haitian" locat="Super%20Mario%20War.zip"
+Title="Super_Mario_War ." Desc="Super Mario War is a fan-made multiplayer Super Mario Bros. style deathmatch game in which players try to beat one another in a variety of gameplay modes.  Great fun even in single player mode." porter="Christian_Haitian" locat="Super%20Mario%20War.zip"
 
 Title="SuperTux ." Desc="SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros. games for the various Nintendo platforms.  !!!Warning!!! This is a 169MB download and will take a while to download and install.  It will also be downloaded from a server in China due to Github file size restrictions." porter="Christian_Haitian" locat="SuperTux.zip"
 
 Title="Undertale ." Desc="Undertale loader.  You must have a copy of Undertale Linux version assets copied to the ports/undertale/assets folder.  For more info on the setup needs, see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information" porter="krishenriksen (kreal)" locat="Undertale.zip"
+
+Title="VVVVVV ." Desc="VVVVVV is a 2010 puzzle-platform game created by Terry Cavanagh.  The free Make and Play Edition data.zip file is already included.  You can also add your own purchased copy of the data.zip from your VVVVVV into the ports/VVVVVV folder if you prefer that version instead." porter="Christian_Haitian" locat="VVVVVV.zip"
 
 Title="World_War_II_GI ." Desc="World War 2 GI using the rednukem build open source port by Alexey Khokholov.  You'll need to add your own full version WW2GI.GRP and WW2DI.RTS and .CON files and optionally CD audio tracks as OGG file in the format trackXX.ogg (where XX is the track number) to the ports/rednukem-WWII/gamedata folder." porter="romadu" locat="World%20War%20II%20GI.zip"
