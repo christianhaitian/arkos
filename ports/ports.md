@@ -68,6 +68,8 @@ Title="Super_Mario_War ." Desc="Super Mario War is a fan-made multiplayer Super 
 
 Title="SuperTux ." Desc="SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros. games for the various Nintendo platforms.  !!!Warning!!! This is a 169MB download and will take a while to download and install.  It will also be downloaded from a server in China due to Github file size restrictions." porter="Christian_Haitian" locat="SuperTux.zip"
 
+Title="Tomb_Raider_1 ." Desc="An open source port of Tomb Raider 1 using OpenLara engine by xProger.  Just add your steam or gog Tomb Raider 1 files to the ports/tombraider1 folder." porter="Jetup13" locat="Tomb%20Raider%201.zip"
+
 Title="Undertale ." Desc="Undertale loader.  You must have a copy of Undertale Linux version assets copied to the ports/undertale/assets folder.  For more info on the setup needs, see https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information" porter="krishenriksen (kreal)" locat="Undertale.zip"
 
 Title="VVVVVV ." Desc="VVVVVV is a 2010 puzzle-platform game created by Terry Cavanagh.  The free Make and Play Edition data.zip file is already included.  You can also add your own purchased copy of the data.zip from your VVVVVV into the ports/VVVVVV folder if you prefer that version instead." porter="Christian_Haitian" locat="VVVVVV.zip"
