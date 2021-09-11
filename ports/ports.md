@@ -1,1 +1,1 @@
-Title="The_PortMaster_repo_has_ been_relocated__Please update ." Desc="Update your version of PortMaster so you can connect to the new location.  Exit now, and restart PortMaster and update!" porter="Christian_Haitian" locat="nope.zip"
+Title="The_PortMaster_repo_has_been_relocated ." Desc="Update your version of PortMaster so you can connect to the new location.  Exit now, and restart PortMaster and update!" porter="Christian_Haitian"
