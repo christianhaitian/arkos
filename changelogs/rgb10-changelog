@@ -294,3 +294,18 @@ v1.7 (08/29/2021)
 - Updated Retroarch and Retroarch32 to latest commit to fix overlay input when analog to digital mapping is enabled
 - Updated PPSSPP to 1.11.3
 - Updated PortMaster to version 1.52
+
+v2.0 (09/21/2021)
+- Added quicknes as a supported core for NES and Famicom Disk System
+- Added gpsp 32bit as an optional core for GBA (Supports dynarec for improved performance on some edge case games such as FFVI)
+  * Thanks to therealteamplayer for suggesting this core
+- Added Astrocade emulator
+  * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#astrocade for loading info
+- Added Channel F emulator
+  * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#fairchild-channel-f  for loading info
+- Updated NesBox Theme
+- Added BaRT (Boot and Recovery Tool) (See https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RGB10#q-what-is-bart-and-how-do-i-access-it for more info.)
+- Added ability to boot to retroarch64 directly using BaRT tool
+- Added video filters for retroarch and retroarch32
+- Added scraping support for Astrocade for Emulationstation
+- Added ability to switch A/B button in Emulationstation from the Start>Advanced Settings section
