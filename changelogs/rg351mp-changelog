@@ -13,3 +13,4 @@ Test Release 1.1 (09/30/2021)
 - Added the ability to switch between the Tony screen timings and the original screen timings.
   - Fixes possible screen jitter or shake issues.
 - Fixed brightness reading
+- Fixed Update onscreen keyboard

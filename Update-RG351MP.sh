@@ -41,7 +41,7 @@ tail -f $LOG_FILE >> /dev/tty1 &
 
 if [ ! -f "$UPDATE_DONE" ]; then
 
-	printf "\nAdd ability to switch between Tony screen timings and original screen timings\nFixed Brightness reading\n" | tee -a "$LOG_FILE"
+	printf "\nAdd ability to switch between Tony screen timings and original screen timings\nFixed Brightness reading\nFix update osk\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/09302021/arkosupdate09302021.zip -O /home/ark/arkosupdate09302021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate09302021.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate09302021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate09302021.zip -d / | tee -a "$LOG_FILE"
