@@ -8,3 +8,8 @@ Test Release 1 (09/30/2021)
 - To make use of your second sd card for your games, go to options/Advancec/Switch to SD2 for ROMS.  For more information, see: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---rg351mp#q-how-do-i-make-use-of-the-second-sd-slot-for-roms-and-games
 - There's no boot logo currently due to the unavailability of an updated uboot source code.  Hopefully this will be resolved in the near future.
 - Hotkey information: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG351MP#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS
+
+Test Release 1.1 (09/30/2021)
+- Added the ability to switch between the Tony screen timings and the original screen timings.
+  - Fixes possible screen jitter or shake issues.
+- Fixed brightness reading
