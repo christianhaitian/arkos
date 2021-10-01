@@ -14,3 +14,8 @@ Test Release 1.1 (09/30/2021)
   - Fixes possible screen jitter or shake issues.
 - Fixed brightness reading
 - Fixed Update onscreen keyboard
+
+Test Release 1.2 (10/01/2021)
+- Updated mgba_rumble core, pcsx-rearmed, and parallel-n64 cores.
+- Remove retroarch core locks for future updating needs.
+- Fixed savestate loading and saving for standalone mupen64plus
