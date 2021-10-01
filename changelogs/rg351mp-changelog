@@ -19,3 +19,6 @@ Test Release 1.2 (10/01/2021)
 - Updated mgba_rumble core, pcsx-rearmed, and parallel-n64 cores.
 - Remove retroarch core locks for future updating needs.
 - Fixed savestate loading and saving for standalone mupen64plus
+
+Test Release 1.3 (10/01/2021)
+- Fixed backspace, enter and reset keys for the on screen keyboard in Emulationstation
