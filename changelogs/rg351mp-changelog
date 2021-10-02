@@ -22,3 +22,8 @@ Test Release 1.2 (10/01/2021)
 
 Test Release 1.3 (10/01/2021)
 - Fixed backspace, enter and reset keys for the on screen keyboard in Emulationstation (Thanks to Baco)
+
+Test Release 1.4 (10/02/2021)
+- Updated u-boot for boot logo support (Thanks to TonyJih)
+- Updated boot.ini
+- Updated kernel to use the rk817 power management controller for reading battery life
