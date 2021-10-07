@@ -28,7 +28,7 @@ Test Release 1.4 (10/02/2021)
 - Updated boot.ini
 - Updated kernel to use the rk817 power management controller for reading battery life
 
-Test Release 1.4 (10/07/2021)
+Test Release 1.5 (10/07/2021)
 - Updated retroarch and retroarch32 to 1.9.10
 - Added Satellaview (Thanks to Jetup)
 - Updated u-boot to remove rumble on boot (Thanks to TonyJih)
