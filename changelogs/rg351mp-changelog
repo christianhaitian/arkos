@@ -27,3 +27,9 @@ Test Release 1.4 (10/02/2021)
 - Updated u-boot for boot logo support (Thanks to TonyJih)
 - Updated boot.ini
 - Updated kernel to use the rk817 power management controller for reading battery life
+
+Test Release 1.4 (10/07/2021)
+- Updated retroarch and retroarch32 to 1.9.10
+- Added Satellaview (Thanks to Jetup)
+- Updated u-boot to remove rumble on boot (Thanks to TonyJih)
+- Swap rk3326-rg351mp-linux.dtb.orig and rk3326-rg351mp-linux.dtb.tony dtbs
