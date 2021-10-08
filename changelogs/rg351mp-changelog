@@ -33,3 +33,6 @@ Test Release 1.5 (10/07/2021)
 - Added Satellaview (Thanks to Jetup)
 - Updated u-boot to remove rumble on boot (Thanks to TonyJih)
 - Swap rk3326-rg351mp-linux.dtb.orig and rk3326-rg351mp-linux.dtb.tony dtbs
+
+Test Release 1.6 (10/08/2021)
+- Fixed no controls for Atomiswave and Naomi using retrorun and retrorun32
