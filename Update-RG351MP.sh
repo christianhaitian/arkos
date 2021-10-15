@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="10102021"
+UPDATE_DATE="10142021"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -217,7 +217,7 @@ if [ ! -f "/home/ark/.config/.update10082021" ]; then
 	touch "/home/ark/.config/.update10082021"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update10102021" ]; then
 
 	printf "\nUpdate to Tony's latest screen timings\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/10102021/arkosupdate10102021.zip -O /home/ark/arkosupdate10102021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate10102021.zip | tee -a "$LOG_FILE"
@@ -240,6 +240,33 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 Test Release 1.7" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update10102021"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nRevert battery reading to voltage base instead of pmic based\nUpdated scummvm to version 2.5\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/10142021/arkosupdate10142021.zip -O /home/ark/arkosupdate10142021.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate10142021.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/10142021/arkosupdate10142021.z01 -O /home/ark/arkosupdate10142021.z01 -a "$LOG_FILE" || rm -f /home/ark/arkosupdate10142021.z01 | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate10142021.zip" ] && [ -f "/home/ark/arkosupdate10142021.z01" ]; then
+		zip -FF /home/ark/arkosupdate10142021.zip --out /home/ark/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/arkosupdate10142021.z* | tee -a "$LOG_FILE"
+		sudo unzip -X -o /home/ark/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/arkosupdate.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nMake sure the proper SDLs are still linked\n" | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.10.0 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 Test Release 1.8" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
