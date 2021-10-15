@@ -40,6 +40,6 @@ Test Release 1.6 (10/08/2021)
 Test Release 1.7 (10/10/2021)
 - Updated to Tony's latest screen timings (Thanks to TonyJih)
 
-Test Release 1.8 (10/15/2021)
+Test Release 1.8 (10/14/2021)
 - Reverted battery reading to be voltage based instead of pmic based
 - Updated scummvm to 2.5
