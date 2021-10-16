@@ -55,3 +55,17 @@ v2.0 (09/21/2021)
 - Added video filters for retroarch and retroarch32
 - Added scraping support for Astrocade for Emulationstation
 - Added ability to switch A/B button in Emulationstation from the Start>Advanced Settings section
+
+v2.0 (10/16/2021)
+- Updated Retroarch and Retroarch32 to 1.9.11
+- Updated scummvm to version 2.6
+- Updated Emulationstation with additional features
+  - Quick Search
+  - Better looking keyboard
+  - Improved loading speed when using game collections
+  - Add Russian translation (Thanks to SlowPixel)
+  - Update Spanish translation (Thank to Baco)
+- Updated controls for Solarus
+- Updated OpenBor script to point to opt directory and not home directory
+- Added Satellaview (Thanks to Jetup)
+  * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#satellaview for loading info
