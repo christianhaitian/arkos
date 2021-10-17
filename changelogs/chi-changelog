@@ -69,3 +69,6 @@ v2.0 (10/16/2021)
 - Updated OpenBor script to point to opt directory and not home directory
 - Added Satellaview (Thanks to Jetup)
   * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#satellaview for loading info
+  
+v2.0 (10/16/2021-1)
+- Fixed mislabled Arcade theme in es_systems.cfg from the last udpate

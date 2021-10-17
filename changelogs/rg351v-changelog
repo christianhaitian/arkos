@@ -208,3 +208,6 @@ v2.0 (10/16/2021)
 - Added Satellaview (Thanks to Jetup)
   * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#satellaview for loading info
 - Added support for switching between Tony screen timings and original screen timings
+
+v2.0 (10/16/2021-1)
+- Fixed mislabled Arcade theme in es_systems.cfg from the last udpate
