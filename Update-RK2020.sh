@@ -1537,6 +1537,7 @@ if [ ! -f "/home/ark/.config/.update10162021" ]; then
 		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update10162021.bak | tee -a "$LOG_FILE"
 		inputtest=$(cat /etc/emulationstation/es_input.cfg | grep "rev 1.1")
 		if [ -z "$inputtest" ]; then
+		  echo "doing nothing here"
 		  #sed -i "/<\/inputConfig>/c\ \t\t<input name=\"system_hk\" type=\"button\" id=\"15\" value=\"1\" />\n        <\/inputConfig>" /etc/emulationstation/es_input.cfg
 		else
 		  sed -i "/<\/inputConfig>/c\ \t\t<input name=\"system_hk\" type=\"button\" id=\"16\" value=\"1\" />\n        <\/inputConfig>" /etc/emulationstation/es_input.cfg
