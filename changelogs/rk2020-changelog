@@ -332,3 +332,6 @@ v2.0 (10/16/2021)
   
 v2.0 (10/16/2021-1)
 - Fixed mislabled Arcade theme in es_systems.cfg from the last udpate
+
+v2.0 (10/17/2021)
+- Updated Retroarch and Retroarch32 to 1.9.11 with fixes for Ozone menu driver missing assets issue

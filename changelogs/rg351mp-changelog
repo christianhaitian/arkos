@@ -44,5 +44,8 @@ Test Release 1.8 (10/14/2021)
 - Reverted battery reading to be voltage based instead of pmic based
 - Updated scummvm to 2.5
 
-Test Release 1.8 (10/14/2021)
+Test Release 1.9 (10/16/2021)
 - Updated Retroarch and Retroarch32 to 1.9.11
+
+Test Release 1.9.1 (10/17/2021)
+- Updated Retroarch and Retroarch32 to 1.9.11 with fixes for Ozone menu driver missing assets issue
