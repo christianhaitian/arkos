@@ -72,7 +72,7 @@ sudo bash -c 'cat <<EOF >"/opt/system/Cloud Settings.sh"
 # by ridgek
 # Released under GNU GPLv3 license, see LICENSE.md.
 
-/opt/arklone/dialogs/scripts/input-listener.sh "/opt/arklone/dialogs/settings.sh"
+/opt/arklone/src/dialogs/scripts/input-listener.sh "/opt/arklone/src/dialogs/settings.sh"
 EOF'
 
 sudo chown ark:ark "/opt/system/Cloud Settings.sh"
