@@ -214,3 +214,23 @@ v2.0 (10/16/2021-1)
 
 v2.0 (10/17/2021)
 - Updated Retroarch and Retroarch32 to 1.9.11 with fixes for Ozone menu driver missing assets issue
+
+v2.0 (11/05/2021)
+- Updated Retroarch and Retroarch32 to 1.9.12
+- Added MegaDuck (Thanks to slaminger)
+  * See https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information#mega-duck for loading info
+- Updated standalone PPSSPP to 1.12.3
+- Updated liblcf in preparation for future EasyRPG update to 0.7.0
+- Fixed screenscraper mixv2 scraping and possibly other image scraping (Thanks to Tartopoireaux)
+- Updated Emulationstation to add scraping support for MegaDuck (platform 90)
+- Updated Emulationstation to not include Options and Retroarch in auto collections (eg. Last Played)
+- Fixed space key for on-screen keyboard for non English languages for Emulationstation
+- Updated nes-box theme for Megaduck (Thanks to Jetup)
+- Added .7z and .7Z support for AMSTRAD,ATARI 2600, ATARI 5200,ATARI 800,ATARI LYNX,PC ENGINE/TURBOGRAFX 16,NES,VIRTUALBOY,NEOGEO POCKET/COLOR,COLECOVISION,VECTREX,MSX/MSX2 and SUPERVISION (Thanks to Cisko)
+- Added .zip .ZIP support for Amiga (Thanks to Cisko)
+- Added .vsf .VSF support for Commodore 64 (Thanks to Cisko)
+- Added ability to hide .zip for DOS games  (Thanks to Cisko)
+- Added ability to recreate sdl_controllers.txt for pico-8
+- Removed core locks that prevent updates through retroarch
+- Removed old cache and backup folder files from /var to recover space for future update needs
+- Updated update script to be universal and have fallback capablility for OTAs
