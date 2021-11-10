@@ -234,3 +234,8 @@ v2.0 (11/05/2021)
 - Removed core locks that prevent updates through retroarch
 - Removed old cache and backup folder files from /var to recover space for future update needs
 - Updated update script to be universal and have fallback capablility for OTAs
+
+v2.0 (11/09/2021)
+- Updated Retroarch and Retroarch32 to 1.9.13 (commit 619398b)
+- Updated PPSSPP to newer commit of 1.12.13 to address some graphical glitching issues (commit df9be77)
+- Updated Emulationstation to add brightness control from the start menu
