@@ -8,7 +8,7 @@ assignees: ''
 
 ---
 
-### Before submitting your issue or feature request.  DO NOT REQUEST PORTS THROUGH THIS PROCESS.  I will no longer be focusing on adding additional ports at this time.  You may try to post your request [here](https://github.com/krishenriksen/AnberPorts) for an alternative unofficial solution.  Do understand support for those ports will not be available on this github.
+### Before submitting your issue or feature request.  DO NOT REQUEST ASSISTANTS FOR PRELOADED IMAGES.  I do not support or condone the use of preloaded ArkOS images.  Preloaded meaning images that come with copyrighted roms preincluded.  Look for support from the creator or supplier of those preloaded images, not from here!  If a ticket is submitted for assistance for such images or if there's an indiciation that a preloaded image is what the support request is for, the issue ticket will be closed with no further response.
 
 1. ***This is not Anbernic Stock Emuelec or 351Elec.***  ArkOS is a different distribution from those systems and will have differing features.  The only somewhat similarity is that they both use EmulationStation as a frontend.  Even with that, the versions of EmulationStation that's used in between ArkOS and Anbernic Emuelec/351Elec is different with different capabilities.  If there are features you prefer with Anbernic Emuelec/351Elec, just use those distributions instead.  The choice is yours.
 
