@@ -39,6 +39,7 @@ jobs:
       - uses: robinraju/release-downloader@v1.2
         with:
           repository: "${{env.ARKOS_FILE_REPOSITORY}}"
+          tag: "*"
           fileName: "*"
 
       - name: rsync files
