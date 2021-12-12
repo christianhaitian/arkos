@@ -11,8 +11,6 @@ concurrency:
 jobs:
   build:
     env:
-      LARGE_FILE_REPOSITORY: "christianhaitian/ArkOS-OTA"
-      LARGE_FILE_TAG: "large-files"
       RSYNC_HOST: 139.196.213.206
       
       #RSYNC_PATH *must* end in a / or it will not work
@@ -38,10 +36,6 @@ jobs:
           fi
       - uses: actions/checkout@v2
       - uses: robinraju/release-downloader@v1.2
-        with:
-          repository: "${{env.LARGE_FILE_REPOSITORY}}"
-          tag: "${{env.LARGE_FILE_TAG}}"
-          fileName: "*"
 
       - name: rsync files
         run: |
