@@ -37,8 +37,9 @@ jobs:
           fi
       - uses: actions/checkout@v2
       - uses: robinraju/release-downloader@v1.2
-          repository:"${{env.ARKOS_FILE_REPOSITORY}}"
-          fileName:"*"
+        with:
+          repository: "${{env.ARKOS_FILE_REPOSITORY}}"
+          fileName: "*"
 
       - name: rsync files
         run: |
