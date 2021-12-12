@@ -1,0 +1,57 @@
+name: sync-to-china
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency: 
+  group: sync # only 1 sync at a time
+
+jobs:
+  build:
+    env:
+      LARGE_FILE_REPOSITORY: "christianhaitian/ArkOS-OTA"
+      LARGE_FILE_TAG: "large-files"
+      RSYNC_HOST: 139.196.213.206
+      
+      #RSYNC_PATH *must* end in a / or it will not work
+      RSYNC_PATH: /home/kreal/public/arkos/
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: hmarr/debug-action@v2
+        name: "debug: ${{github.event_name}}"
+      - name: Valid proper secrets set
+        run: |
+          valid=true
+          if [[ -z "${{ secrets.RSYNC_USER }}" ]]; then
+            echo "Please specify a secret: RSYNC_USER for sync to run"
+            valid=false
+          fi
+          if [[ -z "${{ secrets.RSYNC_PASSWORD }}" ]]; then
+            echo "Please specify a secret: RSYNC_PASSWORD for sync to run"
+            valid=false
+          fi
+          if [[ "$valid" != "true" ]]; then
+            exit 1
+          fi
+      - uses: actions/checkout@v2
+      - uses: robinraju/release-downloader@v1.2
+        with:
+          repository: "${{env.LARGE_FILE_REPOSITORY}}"
+          tag: "${{env.LARGE_FILE_TAG}}"
+          fileName: "*"
+
+      - name: rsync files
+        run: |
+          rsync_user="${{ secrets.RSYNC_USER }}"
+          rsync_password='${{ secrets.RSYNC_PASSWORD }}'
+          rsync_path="${{ env.RSYNC_PATH }}"
+          rsync_host="${{ env.RSYNC_HOST }}"
+
+          sshpass -p "$rsync_password" \
+            rsync -avz --progress --no-times --no-perms --no-group --no-owner --partial --fuzzy \
+              --exclude ".*" \
+              -e "ssh -oStrictHostKeyChecking=no" \
+              ./ $rsync_user@$rsync_host:$rsync_path
