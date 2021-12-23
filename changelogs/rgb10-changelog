@@ -372,3 +372,7 @@ v2.0 (12/22/2021)
 - Added Mame (current) as a selectable core for Arcade (Thanks to jlopezvl for testing)
 - Added fceumm as a selectable core for Famicom
 - Added support for mods for ecwolf (Thanks to Ashjf for testing)
+
+v2.0 (12/23/2021)
+- Fixed scraping for Emulationstation
+- Added .nib and .tap as supported extensions for Commodore64 (Thanks to Smello for testing and confirming)
