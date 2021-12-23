@@ -239,3 +239,20 @@ v2.0 (11/09/2021)
 - Updated Retroarch and Retroarch32 to 1.9.13 (commit 619398b)
 - Updated PPSSPP to newer commit of 1.12.13 to address some graphical glitching issues (commit df9be77)
 - Updated Emulationstation to add brightness control from the start menu
+
+v2.0 (12/22/2021)
+- Updated Retroarch and Retroarch32 to 1.9.14 (Commit b9041995f0)
+- Updated ScummVM to 2.6 (Commit 76213af)
+- Added OpenMSX as optional emulator for MSX1 and MSX2 (https://github.com/openMSX/openMSX)
+- Replaced Solarus 1.7.0 with 1.6.5 for better controls
+- Fixed atomiswave, dreamcast, naomi and saturn failing to boot with retrorun and retrorun32 when just using 1 sd card
+- Updated SDL2 to 2.0.16 for 64bit and 32bit userspace (Thanks to JohnnyonFlame)
+- Forced the use of older SDL2 2.0.10 for hypseus due to audio sync issue
+- Updated emulationstation to fix some translation issues
+- Updated Scan_for_new_games for EasyRPG
+- Added prg support for Commodore 64
+- Added zip support for EasyRPG
+- Added sgd support for Genesis/Megadrive
+- Added Mame (current) as a selectable core for Arcade (Thanks to jlopezvl for testing)
+- Added fceumm as a selectable core for Famicom
+- Added support for mods for ecwolf (Thanks to Ashjf for testing)
