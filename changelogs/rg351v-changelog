@@ -278,3 +278,16 @@ v2.0 (01/21/2022)
 - Updated Hypseus Singe to version 2.8.0
 - Converted Daphne emulator from Hypseus to Hypseus Singe
 - Fixed options menu name in Emulationstation's es_systems.cfg
+
+v2.0 (02/24/2022)
+- Fixed Retrorun and Retrorun32 for Sega Saturn
+- Fixed pico-8 splore for pixel-perfect
+- Fixed quitter putting out random characters and not consistently working for pico-8 and yabasanshiro standalone
+- Removed gitcdn.link as a dynamic CDN provider for future updates
+- Added pcsx_rearmed_peops as a selectable core for psx (Thanks to Ikaruga92/CometHunter92)
+- Added gzdoom (Thanks to dhwz/351Elec for fixes)
+- Updated ArkOS Browser by filebrowser to version 2.21.1
+- Updated OpenMSX standalone emulator
+- Update yabasanshiro standalone to remove about menu
+- Replace exfat-fuse with exfat-linux (Thanks to Baco for the suggestion)
+- Added tool to remove ._ files created by Mac OS in Options menu (Thanks to 351elec for the script)
