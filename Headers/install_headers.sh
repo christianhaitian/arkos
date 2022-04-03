@@ -55,5 +55,5 @@ if [ $? != 0 ]; then
   exit
 fi
 cd ~
-rm -f *linux-headers-4.4.189_4.4.189-2_arm64.deb*
+rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
 echo "All done!"
