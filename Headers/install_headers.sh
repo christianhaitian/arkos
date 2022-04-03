@@ -8,8 +8,16 @@ if [ ! -f "linux-headers-4.4.189_4.4.189-2_arm64.deb" ]; then
 fi
 
 sudo dpkg -i linux-headers-4.4.189_4.4.189-2_arm64.deb
+
+# Fix vermagic description so it properly matches
+sudo sed -i "/#define UTS_RELEASE/c\#define UTS_RELEASE \"4.4.189\"" /usr/src/linux-headers-4.4.189/include/generated/utsrelease.h
+
+# Install some typically important and handy build tools
 sudo apt update -y && sudo apt-get --reinstall install -y build-essential bc bison flex libssl-dev python linux-libc-dev libc6-dev
 cd /usr/src/linux-headers-4.4.189/
+
+# This fix dkms Exec format errors
 wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/headers-debian-byteshift.patch -O - | sudo patch -p1
+
 sudo make scripts
 cd ~
