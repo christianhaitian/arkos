@@ -3,7 +3,7 @@ If you wish to build packages that require header files, please follow the instr
 From a SSH terminal in ArkOS, do the following:
 
 ```
-wget https://github.com/christianhaitian/arkos/raw/main/KernelandHeader/install_headers.sh
+wget https://github.com/christianhaitian/arkos/raw/main/Headers/install_headers.sh
 chmod 777 install_headers.sh
 ./install_headers.sh
 ```
