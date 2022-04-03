@@ -3,19 +3,21 @@
 cd ~
 
 if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-rg351p-linux.dtb" ]; then
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/rg351-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f rg351-linux-headers-4.4.189_4.4.189-2_arm64.deb
+  unit="rg351"
 elif [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/chi-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f chi-linux-headers-4.4.189_4.4.189-2_arm64.deb
+  unit="chi"
 else
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/goa-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f goa-linux-headers-4.4.189_4.4.189-2_arm64.deb
+  unit="goa"
 fi
 
-if [ ! -f *"linux-headers-4.4.189_4.4.189-2_arm64.deb"* ]; then
-	printf "\nThe linux header deb did not download correctly or is missing. Either rerun this script or manually download it from the git and place it in this current folder then run this script again.\n"
+wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
+
+if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ]; then
+	printf "\nThe ${unit} linux header deb did not download correctly or is missing. Either rerun this script or manually download it from the git and place it in this current folder then run this script again.\n"
 	exit
 fi
 
-sudo dpkg -i *linux-headers-4.4.189_4.4.189-2_arm64.deb*
+sudo dpkg -i ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
 
 # Apply some patches to fix some possible compile issues with gcc 9
 cd /usr/src/linux-headers-4.4.189/include/linux/
