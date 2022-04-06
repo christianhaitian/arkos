@@ -820,6 +820,7 @@ if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
 	if [ -f "/home/ark/newkernelnmodndtb02032021-rgb10.zip" ]; then
 		sudo unzip -X -o /home/ark/newkernelnmodndtb02032021-rgb10.zip -d / | tee -a "$LOG_FILE"
 		sudo depmod 4.4.189
+		sudo depmod -a
 		sudo rm -v /home/ark/newkernelnmodndtb02032021-rgb10.zip | tee -a "$LOG_FILE"
 		sudo rm -rfv /lib/modules/4.4.189-139502-g380eeff98d35/ | tee -a "$LOG_FILE"
 		sed -i '/<inputConfig type="joystick" deviceName="odroidgo2_joypad"/c\\t<inputConfig type="joystick" deviceName="GO-Advance Gamepad" deviceGUID="190000004b4800000010000000010000">' /etc/emulationstation/es_input.cfg
@@ -877,6 +878,7 @@ if [ ! -f "/home/ark/.config/.update03182021" ]; then
 		sudo sed -i '/ExecStart/c\ExecStart\=\/usr\/local\/bin\/ogage' /etc/systemd/system/oga_events.service
 		sudo systemctl daemon-reload
 		sudo depmod 4.4.189
+		sudo depmod -a
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3
@@ -2128,6 +2130,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else
 	  sudo install -m644 -b -D -v /home/ark/exfat.ko.oga /lib/modules/4.4.189/kernel/fs/exfat/exfat.ko | tee -a "$LOG_FILE"
 	fi
+	sudo depmod 4.4.189
 	sudo depmod -a
 	sudo modprobe -v exfat | tee -a "$LOG_FILE"
 	sudo rm -v /home/ark/exfat.ko* | tee -a "$LOG_FILE"
