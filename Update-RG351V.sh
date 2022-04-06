@@ -47,6 +47,7 @@ if [ ! -f "/home/ark/.config/.update04112021" ]; then
 	if [ -f "/home/ark/arkosupdate04112021.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate04112021.zip -d / | tee -a "$LOG_FILE"
 		sudo depmod 4.4.189
+		sudo depmod -a
 		sudo rm -v /home/ark/arkosupdate04112021.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"

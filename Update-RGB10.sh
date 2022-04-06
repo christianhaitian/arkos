@@ -819,6 +819,7 @@ if [ ! -f "/home/ark/.config/.kernelupdate02032021" ]; then
 	if [ -f "/home/ark/newkernelnmodndtb02032021-rgb10.zip" ]; then
 		sudo unzip -X -o /home/ark/newkernelnmodndtb02032021-rgb10.zip -d / | tee -a "$LOG_FILE"
 		sudo depmod 4.4.189
+		sudo depmod -a
 		sudo rm -v /home/ark/newkernelnmodndtb02032021-rgb10.zip | tee -a "$LOG_FILE"
 		sudo rm -rfv /lib/modules/4.4.189-139502-g380eeff98d35/ | tee -a "$LOG_FILE"
 		sed -i '/<inputConfig type="joystick" deviceName="odroidgo2_joypad"/c\\t<inputConfig type="joystick" deviceName="GO-Advance Gamepad  (rev 1.1)" deviceGUID="190000004b4800000010000001010000">' /etc/emulationstation/es_input.cfg
@@ -886,6 +887,7 @@ if [ ! -f "/home/ark/.config/.update03182021" ]; then
 		sudo sed -i '/ExecStart/c\ExecStart\=\/usr\/local\/bin\/ogage' /etc/systemd/system/oga_events.service
 		sudo systemctl daemon-reload
 		sudo depmod 4.4.189
+		sudo depmod -a
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3
@@ -947,6 +949,7 @@ if [ ! -f "/home/ark/.config/.update04032021" ]; then
 		sudo cp -n -v /usr/local/bin/Switch\ Launchimage\ to\ ascii.sh /opt/system/. | tee -a "$LOG_FILE"
 		sudo unzip -X -o /home/ark/rgb10kernelndtb.zip -d / | tee -a "$LOG_FILE"
 		sudo depmod 4.4.189
+		sudo depmod -a
 		sudo rm -v /home/ark/rgb10kernelndtb.zip | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate04032021.zip | tee -a "$LOG_FILE"
 	else 
