@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Let's check and make sure this is not run with sudo or as root
+isitroot=$(id -u)
+if [ "$isitroot" == "0" ]; then
+  printf "\nDon't run me with sudo or as root!"
+  printf "  Run me with ./install_headers.sh\n\n"
+  exit
+fi
+
 cd ~
 
 # Let's download the right header files depending on the supported unit
