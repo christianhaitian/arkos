@@ -2118,7 +2118,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	printf "\nReplace exfat-fuse with exfat-linux\n" | tee -a "$LOG_FILE"
-	sudo umount /opt/Tools
+	sudo umount /opt/system/Tools
 	sudo umount /roms
 	sudo apt remove -y exfat-fuse | tee -a "$LOG_FILE"
 	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
