@@ -2118,6 +2118,8 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	printf "\nReplace exfat-fuse with exfat-linux\n" | tee -a "$LOG_FILE"
+	sudo umount /opt/Tools
+	sudo umount /roms
 	sudo apt remove -y exfat-fuse | tee -a "$LOG_FILE"
 	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
 	  sudo install -m644 -b -D -v /home/ark/exfat.ko.351 /lib/modules/4.4.189/kernel/fs/exfat/exfat.ko | tee -a "$LOG_FILE"
@@ -2129,6 +2131,9 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo depmod -a
 	sudo modprobe -v exfat | tee -a "$LOG_FILE"
 	sudo rm -v /home/ark/exfat.ko* | tee -a "$LOG_FILE"
+	sudo mount -o defaults,auto,umask=000,noatime -t exfat /dev/mmcblk0p3 /roms
+	sudo chown root:root /etc/fstab
+	sudo chmod 644 /etc/fstab
 	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
 	  sudo sed -i 's/utf8\=1/iocharset\=utf8/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
 	  sudo sed -i 's/utf8\=1/iocharset\=utf8/' /etc/fstab
