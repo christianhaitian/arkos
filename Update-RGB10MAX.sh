@@ -42,7 +42,7 @@ tail -f $LOG_FILE >> /dev/tty1 &
 
 if [ ! -f "$UPDATE_DONE" ]; then
 
-	printf "\nAdd Dreamcast widescreen mode for retrorun and retrorun32\nFix gzdoom crashing\nAdd pcsx_rearmed_peops as a selectable core for psx\nFix China repo setting for future ArkOS updates\nRemove China repo settings for retroarch core updates\nFix osk screen size\n" | tee -a "$LOG_FILE"
+	printf "\nAdd Dreamcast widescreen mode for retrorun and retrorun32\nFix gzdoom crashing\nFix China repo setting for future ArkOS updates\nRemove China repo settings for retroarch core updates\nFix osk screen size\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/04122022/arkosupdate04122022.zip -O /home/ark/arkosupdate04122022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate04122022.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate04122022.zip" ]; then
 		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update04122022.bak | tee -a "$LOG_FILE"
