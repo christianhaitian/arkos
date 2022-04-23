@@ -407,3 +407,24 @@ v2.0 (02/24/2022)
 - Update yabasanshiro standalone to remove about menu
 - Replace exfat-fuse with exfat-linux (Thanks to Baco for the suggestion)
 - Added tool to remove ._ files created by Mac OS in Options menu (Thanks to 351elec for the script)
+
+v2.0 (04/23/2022)
+- Updated Retroarch and Retroarch32 to 1.10.3 (Commit da5d135)
+- Updated SDL to 2.0.18.2 (also known as SDL 2.0.20)
+- Updated GZDoom
+- Updated PPSSPPSDL
+- Updated File Manager for improved visuals (Thanks to EmuELEC)
+- Updated Hypseus-Singe to 2.8.2a
+- Updated Amiberry to 5.1
+- Added Mednafen emulator for Lynx, Game Gear, Master System, Mega Drive, Genesis, NES, SNES, GB, GBC, 
+  GBA, Virtual Boy, NGP, NGPC, PCE, WonderSwan, and WonderSwan Color
+  * See https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RGB10#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS for hotkey info
+- Added A5200 retroarch libretro core as default core for Atari 5200
+- Added gameplay recording capability for Lynx, Game Gear, Master System, Mega Drive, Genesis, NES,
+  SNES, GB, GBC, GBA, Virtual Boy, NGP, NGPC, PCE, WonderSwan, and WonderSwan Color using Mednafen
+- Added support for .mov extension to video player
+- Added Libretro Arduboy emulator (Arduous)
+- Updated Nes-Box theme for Arduboy (Thanks to Jetup)
+- Updated Yabasanshrio standalone build to latest commit
+- Fixed Yabasanshiro standalone menu size (Thanks to 351elec for the patch)
+- Added hidden Enable Developer Mode to options/Advanced menu 
