@@ -156,7 +156,7 @@ v2.0 (02/24/2022)
 
 v2.0 (04/23/2022)
 - Updated Retroarch and Retroarch32 to 1.10.3 (Commit da5d135)
-- Updated SDL to 2.0.18.2 (also known as SDL 2.0.20)
+- Updated SDL to 2.0.18.2 (also known as SDL 2.0.20) (Thanks to Johnny on Flame and shantiilbert for the patches)
 - Updated GZDoom
 - Updated PPSSPPSDL
 - Updated File Manager for improved visuals (Thanks to EmuELEC)
