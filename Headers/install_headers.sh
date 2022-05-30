@@ -94,11 +94,11 @@ fi
 sudo umount /opt/system/Tools
 sudo umount /roms
 
-dev="/dev/mmcblk0"
-ext="/dev/mmcblk0p2"
+dev="/dev/mmcblk1"
+ext="/dev/mmcblk1p4"
 
 # Let's delete the existing exfat partition if it exists
-if test ! -z "$(sudo fdisk -l | grep mmcblk0p3 | tr -d '\0')"
+if test ! -z "$(sudo fdisk -l | grep mmcblk1p5 | tr -d '\0')"
 then
   printf "d\n3\nw\nq\n" | sudo fdisk $dev
 fi
@@ -116,7 +116,7 @@ sudo growpart -v $dev 2
 sudo resize2fs $ext
 
 # We'll update /etc/fstab to not try to mount a exfat partition on the main system sd card
-sudo sed -i "/\/dev\/mmcblk0p3/d" /etc/fstab
+sudo sed -i "/\/dev\/mmcblk1p5/d" /etc/fstab
 
 # Let's recreate the default roms directory structure
 mkdir /roms
