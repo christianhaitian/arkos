@@ -145,7 +145,7 @@ else
 -O ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb || rm -f ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb
 fi
 
-if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] || [ ! -f "${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb" ]; then
+if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] && [ ! -f "${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb" ]; then
 	msgbox "The ${unit} linux header deb file did not download correctly or is missing. \
 	Either rerun this script or manually download it from the git and place \
 	it in this current folder then run this script again."
