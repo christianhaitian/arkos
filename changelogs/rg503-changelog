@@ -1,0 +1,20 @@
+Test Release 1 (05/30/2022)
+- Only authentic Sandisk and Samsung cards are supported and recommended.
+  - In my initial testing poor or unknown quality sd cards somestimes fail to reboot.  TO MINIMIZE ON POTENTIAL FRUSTRATION, ONLY USE AN AUTHENTIC SAMSUNG OR SANDISK SD CARD
+- Follow the instructions from the wiki to properly loading this image: https://github.com/christianhaitian/arkos/wiki#instructions-for-loading
+- Initial boot and preparation can take about 5 minutes to complete due to the themes being copied.  Be patient!
+- Be sure during initial boot, Only have the OS SD card in slot 1 (TF1/INT.) during the initial boot!.  Do not put an SD card in slot 2 (TF2/Ext.) during the initial boot!  Failure to follow this may result in strange behavior during the intial boot preparation process.
+- Once the initial boot has completed and you're at the Emulationstation menu, you can insert your second sd card into slot 2 (TF2/Ext.).
+- To make use of your second sd card for your games, go to options/Advancec/Switch to SD2 for ROMS.  For more information, see: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---rg503#q-how-do-i-make-use-of-the-second-sd-slot-for-roms-and-games
+- Philips CDI and Panasonic 3DO gaming systems work decently on this chipset.
+- Kodi is available from Options/Tools menu
+- HDMI out is functional
+- Connectivity with external controllers via usb has not been extensively tested.
+
+Known Issues/Limitations
+- Vibration (Rumble) is not working yet at this time.
+- Bluetooth support is not yet functional.
+- System boot logo can not be changed at this time.
+- Some plugins may cause Kodi to crash.
+- Portmaster ports have not been thoroughly tested for compatibility yet either.
+- Hotkey information: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG503#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS
