@@ -18,3 +18,12 @@ Known Issues/Limitations
 - Some plugins may cause Kodi to crash.
 - Portmaster ports have not been thoroughly tested for compatibility yet either.
 - Hotkey information: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RG503#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS
+
+Test Release 2 (06/01/2022)
+- Fixed Neo Geo Pocket and Neo Geo Pocket Color not loading from Emulationstation
+- Fixed .ecwolf files not recognized for Wolfenstein
+- Fixed exfat permission issue
+- Fixed Bluetooth systemd not being able to load
+- Added Bluetooth configuration Tool to the Options menu (Only supports controllers for now)
+- Added Bluetooth off/on trigger to F button at the bottom of the unit
+- Added Bluetooth off/on identification to Emulationstation start menu
