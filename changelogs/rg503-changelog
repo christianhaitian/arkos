@@ -27,3 +27,11 @@ Test Release 2 (06/01/2022)
 - Added Bluetooth configuration Tool to the Options menu (Only supports controllers for now)
 - Added Bluetooth off/on trigger to F button at the bottom of the unit
 - Added Bluetooth off/on identification to Emulationstation start menu
+
+Test Release 3 (06/03/2022)
+- Fixed user decides on conflict scraping crash in Emulationstation
+- Updated Emulationstation gui menus (ex. start menu) to be full screen via hdmi
+- Removed standalone-stock option for psp
+- Updated enable_rumble script
+- Added widescreen support to standalone-glide64mk2 in emulationstation cores settings
+- Added rumble support for mgba,parallel-n64(32bit),pcsx_rearmed, and pokemini libretro cores
