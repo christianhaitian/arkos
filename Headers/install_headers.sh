@@ -20,6 +20,19 @@ if [[ -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick"
   fi
 fi
 
+# Let's download the right header files depending on the supported unit
+# Minor differences between the same kernel files between units
+# will cause modules to not install. ¯\_(ツ)_/¯
+if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-rg351p-linux.dtb" ]; then
+  unit="rg351"
+elif [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+  unit="chi"
+elif [ -f "/boot/rk3566.dtb" ]; then
+  unit="rg503"
+else
+  unit="goa"
+fi
+
 # Let's check and make sure this is not run with sudo or as root
 isitroot=$(id -u)
 if [ "$isitroot" == "0" ]; then
@@ -94,13 +107,25 @@ fi
 sudo umount /opt/system/Tools
 sudo umount /roms
 
-dev="/dev/mmcblk1"
-ext="/dev/mmcblk1p4"
-
+if [ "$unit" != "rg503" ]; then
+  dev="/dev/mmcblk0"
+  ext="/dev/mmcblk0p2"
+else
+  dev="/dev/mmcblk1"
+  ext="/dev/mmcblk1p4"
+fi
 # Let's delete the existing exfat partition if it exists
-if test ! -z "$(sudo fdisk -l | grep mmcblk1p5 | tr -d '\0')"
-then
-  printf "d\n3\nw\nq\n" | sudo fdisk $dev
+
+if [ "$unit" != "rg503" ]; then
+  if test ! -z "$(sudo fdisk -l | grep mmcblk0p3 | tr -d '\0')"
+  then
+    printf "d\n3\nw\nq\n" | sudo fdisk $dev
+  fi
+else
+  if test ! -z "$(sudo fdisk -l | grep mmcblk1p5 | tr -d '\0')"
+  then
+    printf "d\n5\nw\nq\n" | sudo fdisk $dev
+  fi
 fi
 if [ "$?" -ne "0" ]; then
   msgbox "Uh oh, something went wrong with trying to delete the exfat partition."
@@ -112,30 +137,24 @@ if [ "$?" -ne "0" ]; then
 fi
 
 # We'll resize the ext partition to take up the rest of the available space
-sudo growpart -v $dev 2
+if [ "$unit" != "rg503" ]; then
+  sudo growpart -v $dev 2
+else
+  sudo growpart -v $dev 4
+fi
 sudo resize2fs $ext
 
 # We'll update /etc/fstab to not try to mount a exfat partition on the main system sd card
-sudo sed -i "/\/dev\/mmcblk1p5/d" /etc/fstab
-
+if [ "$unit" != "rg503" ]; then
+  sudo sed -i "/\/dev\/mmcblk0p3/d" /etc/fstab
+else
+  sudo sed -i "/\/dev\/mmcblk1p5/d" /etc/fstab  
+fi
 # Let's recreate the default roms directory structure
 mkdir /roms
 sudo chown -Rv ark:ark /roms
 tar -xvf defaultromsfolderstructure.tar -C /
 rm -fv defaultromsfolderstructure.tar
-
-# Let's download the right header files depending on the supported unit
-# Minor differences between the same kernel files between units
-# will cause modules to not install. ¯\_(ツ)_/¯
-if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-rg351p-linux.dtb" ]; then
-  unit="rg351"
-elif [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-  unit="chi"
-elif [ -f "/boot/rk3566.dtb" ]; then
-  unit="rg503"
-else
-  unit="goa"
-fi
 
 if [ "$unit" != "rg503" ]; then
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb \
@@ -183,23 +202,28 @@ else
   cd /usr/src/linux-headers-4.19.172/include/linux/
 fi
 
-wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/module.patch -O - | sudo patch
-if [ $? != 0 ]; then
-  msgbox "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+if [ "$unit" != "rg503" ]; then
+  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/module.patch -O - | sudo patch
+  if [ $? != 0 ]; then
+    msgbox "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
+    if [ ! -z $(pidof rg351p-js2xbox) ]; then
+      sudo kill -9 $(pidof rg351p-js2xbox)
+      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+    fi
+    exit
   fi
-  exit
 fi
-wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/compiler.patch -O - | sudo patch
-if [ $? != 0 ]; then
-  msgbox "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+
+if [ "$unit" != "rg503" ]; then
+  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/compiler.patch -O - | sudo patch
+  if [ $? != 0 ]; then
+    msgbox "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
+    if [ ! -z $(pidof rg351p-js2xbox) ]; then
+      sudo kill -9 $(pidof rg351p-js2xbox)
+      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+    fi
+    exit
   fi
-  exit
 fi
 
 if [ "$unit" != "rg503" ]; then
