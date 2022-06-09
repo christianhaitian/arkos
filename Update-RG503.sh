@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06082022"
+UPDATE_DATE="06092022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -108,7 +108,7 @@ if [ ! -f "/home/ark/.config/.update06032022" ]; then
 	touch "/home/ark/.config/.update06032022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06082022" ]; then
 
 	printf "\nPython fixes\nFix volume control for Kodi\nAdd Select and Start to kill Kodi\nAdd retroarch-tate for Arcade\nAdd mame2003_plus to Arcade in ES\nRebuild retroarch and retroarch32 1.10.3\nMove Kodi to ES start menu\nUpdate Backup Settings.sh\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06082022/arkosupdate06082022.zip -O /home/ark/arkosupdate06082022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06082022.zip | tee -a "$LOG_FILE"
@@ -159,6 +159,36 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/arm7hf\/"' /home/ark/.config/retroarch32/retroarch.cfg.bak
 	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/aarch64\/"' /home/ark/.config/retroarch/retroarch.cfg
 	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/aarch64\/"' /home/ark/.config/retroarch/retroarch.cfg.bak
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06082022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nCorrect tigerlcd theme name in ES\nUpdated ThemeMaster\nUpdated nes-box theme to include cdi and tigerlcd\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06092022/arkosupdate06092022.zip -O /home/ark/arkosupdate06092022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06092022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06092022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate06092022.zip -d / | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update06092022.bak | tee -a "$LOG_FILE"
+		sed -i 's/<theme>tiger<\/theme>/<theme>tigerlcd<\/theme>/' /etc/emulationstation/es_systems.cfg
+		sudo tar -v --delete -f /roms.tar "roms/tools/ThemeMaster/"
+		sudo tar -v --delete -f /roms.tar "roms/tools/ThemeMaster.sh"
+		sudo tar -v --append -f /roms.tar "/roms/tools/ThemeMaster/"
+		sudo tar -v --append -f /roms.tar "/roms/tools/ThemeMaster.sh"
+		if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		  cp -R -f -v /roms/tools/ThemeMaster/ /roms2/tools/ | tee -a "$LOG_FILE"
+		  cp -f -v /roms/tools/ThemeMaster.sh /roms2/tools/  | tee -a "$LOG_FILE"
+		fi
+		sudo rm -v /home/ark/arkosupdate06092022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
