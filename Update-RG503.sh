@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06032022"
+UPDATE_DATE="06082022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -79,7 +79,7 @@ if [ ! -f "/home/ark/.config/.update06012022" ]; then
 	touch "/home/ark/.config/.update06012022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06032022" ]; then
 
 	printf "\nFix ES user decides on conflicts crash\nUpdate Emulationstation gui menus to be full screen via hdmi\nUpdate enable_rumble script\nAdd Rumble for gba,psx,pokemini and parallel-n64\nRemove ppsspp-stock\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06032022/arkosupdate06032022.zip -O /home/ark/arkosupdate06032022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06032022.zip | tee -a "$LOG_FILE"
@@ -101,6 +101,64 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	then
 	  sed -i '/<emulator name="standalone-Glide64mk2">/c\              <emulator name="standalone-Glide64mk2">\n\t\t \t<cores>\n\t\t \t  <core>Default_Aspect<\/core>\n\t\t \t  <core>Widescreen_Aspect<\/core>\n\t\t \t<\/cores>' /etc/emulationstation/es_systems.cfg
 	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06032022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nPython fixes\nFix volume control for Kodi\nAdd Select and Start to kill Kodi\nAdd retroarch-tate for Arcade\nAdd mame2003_plus to Arcade in ES\nRebuild retroarch and retroarch32 1.10.3\nMove Kodi to ES start menu\nUpdate Backup Settings.sh\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06082022/arkosupdate06082022.zip -O /home/ark/arkosupdate06082022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06082022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06082022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate06082022.zip -d / | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update06082022.bak | tee -a "$LOG_FILE"
+		if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'name="retroarch-tate"' | tr -d '\0')"
+		then
+		  sed -i '/<core>fbalpha2018<\/core>/c\\t\t \t  <core>fbalpha2018<\/core>\n\t\t \t<\/cores>\n\t\t      <\/emulator>\n\t\t      <emulator name\=\"retroarch-tate\">\n\t\t \t<cores>\n\t\t \t  <core>fbneo<\/core>\n\t\t \t  <core>mame2003_plus<\/core>' /etc/emulationstation/es_systems.cfg
+		  sed -i '/<core>fbalpha2012<\/core>/c\\t\t\t  <core>fbalpha2012<\/core>\n\t\t\t  <core>mame2003_plus<\/core>' /etc/emulationstation/es_systems.cfg
+		fi
+		sed -i '/mame2003-plus_skip_disclaimer \=/c\mame2003-plus_skip_disclaimer \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/mame2003-plus_skip_disclaimer \=/c\mame2003-plus_skip_disclaimer \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/mame2003-plus_skip_warnings \=/c\mame2003-plus_skip_warnings \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/mame2003-plus_skip_warnings \=/c\mame2003-plus_skip_warnings \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_anisotropic_filtering \=/c\reicast_anisotropic_filtering \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/reicast_anisotropic_filtering \=/c\reicast_anisotropic_filtering \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_anisotropic_filtering \=/c\reicast_anisotropic_filtering \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg
+		sed -i '/reicast_anisotropic_filtering \=/c\reicast_anisotropic_filtering \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg.bak
+		sed -i '/reicast_enable_dsp \=/c\reicast_enable_dsp \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/reicast_enable_dsp \=/c\reicast_enable_dsp \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_enable_dsp \=/c\reicast_enable_dsp \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg
+		sed -i '/reicast_enable_dsp \=/c\reicast_enable_dsp \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg.bak
+		sed -i '/reicast_enable_rtt \=/c\reicast_enable_rtt \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/reicast_enable_rtt \=/c\reicast_enable_rtt \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_enable_rtt \=/c\reicast_enable_rtt \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg
+		sed -i '/reicast_enable_rtt \=/c\reicast_enable_rtt \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg.bak
+		sed -i '/reicast_frame_skipping \=/c\reicast_frame_skipping \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/reicast_frame_skipping \=/c\reicast_frame_skipping \= "disabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_frame_skipping \=/c\reicast_frame_skipping \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg
+		sed -i '/reicast_frame_skipping \=/c\reicast_frame_skipping \= "disabled"' /home/ark/.config/retroarch32/retroarch-core-options.cfg.bak
+		sed -i '/reicast_internal_resolution \=/c\reicast_internal_resolution \= "640x480"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+		sed -i '/reicast_internal_resolution \=/c\reicast_internal_resolution \= "640x480"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+		sed -i '/reicast_internal_resolution \=/c\reicast_internal_resolution \= "640x480"' /home/ark/.config/retroarch32/retroarch-core-options.cfg
+		sed -i '/reicast_internal_resolution \=/c\reicast_internal_resolution \= "640x480"' /home/ark/.config/retroarch32/retroarch-core-options.cfg.bak
+		sudo rm -v /roms2/tools/Kodi.sh /roms/tools/Kodi.sh | tee -a "$LOG_FILE"
+		sudo tar -v --delete -f /roms.tar "roms/tools/Kodi.sh" | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate06082022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate retroarch and retroarch32 core repo locations for rg503\n" | tee -a "$LOG_FILE"
+	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/arm7hf\/"' /home/ark/.config/retroarch32/retroarch.cfg
+	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/arm7hf\/"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/aarch64\/"' /home/ark/.config/retroarch/retroarch.cfg
+	sed -i '/core_updater_buildbot_cores_url \=/c\core_updater_buildbot_cores_url \= "https:\/\/raw.githubusercontent.com\/christianhaitian\/retroarch-cores\/rg503/aarch64\/"' /home/ark/.config/retroarch/retroarch.cfg.bak
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth

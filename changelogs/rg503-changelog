@@ -35,3 +35,16 @@ Test Release 3 (06/03/2022)
 - Updated enable_rumble script
 - Added widescreen support to standalone-glide64mk2 in emulationstation cores settings
 - Added rumble support for mgba,parallel-n64(32bit),pcsx_rearmed, and pokemini libretro cores
+
+Test Release 4 (06/08/2022)
+- Added retroarch-tate configuration for Arcade, CPS1, CPS2 and CPS3
+  - Just set the emulator to retroarch-tate and select either fbneo or mame2003 for your core
+- Added mame2003_plus as selectable core for Arcade, CPS1, CPS2 and CPS3
+- More Python 2.7 fixes for Kodi (More addons should be supported without crashing)
+- Fixed volume control for Kodi
+- Added Select+Start kill process for Kodi
+- Added a dedicated retroarch core repo for the rg503
+- Tuned retroarch and retroarch32 1.10.3 to a55 processor
+- Tuned flycast cores to a55 processor
+- Moved Kodi to Emulationstation start menu from Options/Tools menu
+- Updated Backup Settings.sh to include Kodi Addons and settings
