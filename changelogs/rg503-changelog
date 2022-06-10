@@ -53,3 +53,9 @@ Test Release 5 (06/09/2022)
 - Corrected tigerlcd theme name in emulationstation
 - Updated ThemeMaster (Thanks to JohnIrvine)
 - Updated nes-box theme to include cdi and tigerlcd (Thanks to Jetup)
+
+Test Release 6 (06/10/2022)
+- Fixed virtual boy retroarch not loading from ES (Thanks to EmperorOfTigers for reporting the issue)
+- Changed the default for NDS dual screen to a horizontal layout (Thanks to slaminger for the suggestion)
+- Updated Emulationstation to add support for displaying an icon for Display Settings for certain themes like ArkOS Carbon (Thanks to wakeboxer for reporting the issue)
+- Updated ArkOS Carbon theme to include an icon for Display Settings in the start menu

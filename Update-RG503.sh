@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06092022"
+UPDATE_DATE="06102022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -166,7 +166,7 @@ if [ ! -f "/home/ark/.config/.update06082022" ]; then
 	touch "/home/ark/.config/.update06082022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06092022" ]; then
 
 	printf "\nCorrect tigerlcd theme name in ES\nUpdated ThemeMaster\nUpdated nes-box theme to include cdi and tigerlcd\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06092022/arkosupdate06092022.zip -O /home/ark/arkosupdate06092022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06092022.zip | tee -a "$LOG_FILE"
@@ -183,6 +183,35 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		  cp -f -v /roms/tools/ThemeMaster.sh /roms2/tools/  | tee -a "$LOG_FILE"
 		fi
 		sudo rm -v /home/ark/arkosupdate06092022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06092022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix virtual boy retroarch not loading from ES\nChanged default for NDS dual screen to horizontal\nUpdate ES for display settings icon\nUpdated ArkOS Carbon theme display settings icon\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06102022/arkosupdate06102022.zip -O /home/ark/arkosupdate06102022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06102022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06102022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate06102022.zip -d / | tee -a "$LOG_FILE"
+		if test ! -z "$(grep "mednafen_vb_libretro.so" /etc/emulationstation/es_systems.cfg | tr -d '\0')"
+		then
+			cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update06102022.bak | tee -a "$LOG_FILE"
+			sed -i 's/<core>mednafen_vb_libretro.so<\/core>/<core>mednafen_vb<\/core>/' /etc/emulationstation/es_systems.cfg
+		fi
+		if test ! -z "$(grep "screen_orientation = 2" /opt/drastic/config/drastic.cfg | tr -d '\0')"
+		then
+			sed -i 's/screen_orientation \= 2/screen_orientation \= 1/' /opt/drastic/config/drastic.cfg
+		fi
+		sudo rm -v /home/ark/arkosupdate06102022.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3
