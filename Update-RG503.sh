@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06172022"
+UPDATE_DATE="06182022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -225,7 +225,7 @@ if [ ! -f "/home/ark/.config/.update06102022" ]; then
 	touch "/home/ark/.config/.update06102022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06172022" ]; then
 
 	printf "\nUpdate bluetooth script\nFix wifi script activate existing connection error\nFix Solarus\nAdd controller_setup.sh script\nAdd stanadalone-stock\nFix SGB in ES\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06172022/arkosupdate06172022.zip -O /home/ark/arkosupdate06172022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06172022.zip | tee -a "$LOG_FILE"
@@ -243,6 +243,26 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		#fi
 		sudo apt -y update && sudo apt -y install inotify-tools | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate06172022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06172022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix mupen64plus standalone glide64mk2 default aspect ratio\nAdd Italian language for ES\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06182022/arkosupdate06182022.zip -O /home/ark/arkosupdate06182022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06182022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06182022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate06182022.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate06182022.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3

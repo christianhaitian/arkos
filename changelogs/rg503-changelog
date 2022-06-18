@@ -71,3 +71,7 @@ Test Release 7 (06/17/2022)
 - Added missing info files for mupen64plus, fbalpha_2016, fbalpha_2018, and reicast libretro cores.
 - Added workaround to address in game save issues for PSP libretro.  
   * May require attempting to save in game twice for saves to succeed.
+
+Test Release 8 (06/18/2022)
+- Updated N64 launch script to fix mupen64plus standalone glide64mk2 default aspect ratio
+- Added Italian language support for Emulationstation. (Thanks to Batocera)
