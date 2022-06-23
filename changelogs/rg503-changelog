@@ -75,3 +75,11 @@ Test Release 7 (06/17/2022)
 Test Release 8 (06/18/2022)
 - Updated N64 launch script to fix mupen64plus standalone glide64mk2 default aspect ratio
 - Added Italian language support for Emulationstation. (Thanks to Batocera)
+
+Test Release 9 (06/23/2022)
+- Updated volume control to be more granular (Thanks to animeware for the suggestion)
+- Updated Kodi launch script to add please wait view and set cpu governor to interactive
+- Adjusted pollinterval for timesync
+- Fixed retroarch32 execution script when run with external controller connected (Thanks to EmperorOfTigers for the report)
+- Updated gamecontrollerdb.txt for ppsspp, scummvm, and OpenMSX
+- Updated controller_setup script to override existing retroarch external controller configuration to follow emulatiosntation's configuration (Thanks to EmperorOfTigers for report and testing)

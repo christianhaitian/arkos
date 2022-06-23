@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06182022"
+UPDATE_DATE="06232022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -256,13 +256,38 @@ if [ ! -f "/home/ark/.config/.update06172022" ]; then
 	touch "/home/ark/.config/.update06172022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06182022" ]; then
 
 	printf "\nFix mupen64plus standalone glide64mk2 default aspect ratio\nAdd Italian language for ES\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06182022/arkosupdate06182022.zip -O /home/ark/arkosupdate06182022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06182022.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate06182022.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate06182022.zip -d / | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate06182022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06182022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate volume control\nUpdate Kodi launch script\nDisable systemd-timesyncd\nFixed retroarch32 script for ext controllers\nUpdate gamecontrollerdb files\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06232022/arkosupdate06232022.zip -O /home/ark/arkosupdate06232022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06232022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06232022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate06232022.zip -d / | tee -a "$LOG_FILE"
+		if test -z "$(grep "PollIntervalMinSec=60" /etc/systemd/timesyncd.conf | tr -d '\0')"
+		then
+		  sudo sed -i '$aPollIntervalMinSec=60' /etc/systemd/timesyncd.conf
+		  sudo sed -i '$aPollIntervalMaxSec=3600' /etc/systemd/timesyncd.conf
+		fi
+		sudo rm -v /home/ark/arkosupdate06232022.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3
