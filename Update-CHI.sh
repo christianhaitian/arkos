@@ -1082,6 +1082,10 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		sed -i '/mame2003-plus_skip_warnings \=/c\mame2003-plus_skip_warnings \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg
 		sed -i '/mame2003-plus_skip_warnings \=/c\mame2003-plus_skip_warnings \= "enabled"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
 		sed -i '/<extension>.wolf .WOLF/s//<extension>.wolf .WOLF .ecwolf .ECWOLF/' /etc/emulationstation/es_systems.cfg
+		sed -i '/input_player1_left_axis \= \"+3\"/c\input_player1_left_axis \= \"+2\"' /home/ark/.config/retroarch/retroarch.cfg.vert
+		sed -i '/input_player1_right_axis \= \"-3\"/c\input_player1_right_axis \= \"-2\"' /home/ark/.config/retroarch/retroarch.cfg.vert
+		sed -i '/input_player1_up_axis \= \"-2\"/c\input_player1_up_axis \= \"-3\"' /home/ark/.config/retroarch/retroarch.cfg.vert
+		sed -i '/input_player1_down_axis \= \"+2\"/c\input_player1_down_axis \= \"+3\"' /home/ark/.config/retroarch/retroarch.cfg.vert
 		sudo sed -i 's/exfat defaults,auto,umask=000,noatime 0 0/exfat defaults,auto,umask=000,uid=1002,gid=1002,noatime 0 0/' /etc/fstab
 		sudo sed -i 's/exfat umask=0000,iocharset=utf8,noatime 0 0/exfat umask=0000,iocharset=utf8,uid=1002,gid=1002,noatime 0 0/' /etc/fstab
 		sudo sed -i 's/umask=0000,iocharset=utf8,noatime 0 0/umask=0000,iocharset=utf8,uid=1002,gid=1002,noatime 0 0/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
