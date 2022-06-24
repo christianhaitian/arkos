@@ -428,3 +428,12 @@ v2.0 (04/23/2022)
 - Updated Yabasanshrio standalone build to latest commit
 - Fixed Yabasanshiro standalone menu size (Thanks to 351elec for the patch)
 - Added hidden Enable Developer Mode to options/Advanced menu 
+
+v2.0 (06/24/2022)
+- Updated yabasanshiro standalone emulator to 1.9.0
+- Added mame2003_plus as selectable core for Arcade, CPS1, CPS2 and CPS3
+- Added Italian language support for Emulationstation (Thanks to Batocera)
+- Adjusted poll interval for timesync (Thanks to sydarn2 for testing)
+- Fixed .ecwolf files not recognized for Wolfenstein
+- Fixed exfat permission issue
+- Fixed solarus launch script to properly link back to the solarus roms folder
