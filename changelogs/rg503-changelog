@@ -84,5 +84,8 @@ Test Release 9 (06/23/2022)
 - Updated gamecontrollerdb.txt for ppsspp, scummvm, and OpenMSX
 - Updated controller_setup script to override existing retroarch external controller configuration to follow emulatiosntation's configuration (Thanks to EmperorOfTigers for report and testing)
 
-v2.0 Stable Release (06/24/2022)
+v2.0 First Stable Release (06/24/2022)
 - Updated yabasanshiro standalone emulator to 1.9.0
+
+v2.0 (06/26/2022)
+- Updated Kodi from 18.8 Leia 32bit to 19.4 Matrix 64bit

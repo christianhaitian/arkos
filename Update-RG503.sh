@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06242022"
+UPDATE_DATE="06262022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -301,7 +301,7 @@ if [ ! -f "/home/ark/.config/.update06232022" ]; then
 	touch "/home/ark/.config/.update06232022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06242022" ]; then
 
 	printf "\nUpdate yabasanshiro standalone to 1.9.0\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06242022/arkosupdate06242022.zip -O /home/ark/arkosupdate06242022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06242022.zip | tee -a "$LOG_FILE"
@@ -328,6 +328,30 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else
 	  cp -fv /opt/yabasanshiro/yabasanshiro.640 /opt/yabasanshiro/yabasanshiro | tee -a "$LOG_FILE"
 	  rm -fv /opt/yabasanshiro/yabasanshiro.* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06242022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Kodi to Kodi19 64bit\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06262022/arkosupdate06262022.zip -O /home/ark/arkosupdate06262022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06262022.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06262022/arkosupdate06262022.z01 -O /home/ark/arkosupdate06262022.z01 -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06262022.z01 | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate06262022.zip" ] && [ -f "/home/ark/arkosupdate06262022.z01" ]; then
+		sudo rm -rfv /opt/kodi | tee -a "$LOG_FILE"
+		zip -FF /home/ark/arkosupdate06262022.zip --out /home/ark/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/arkosupdate06262022.z* | tee -a "$LOG_FILE"
+		sudo unzip -X -o /home/ark/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/arkosupdate.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
