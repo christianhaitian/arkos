@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="06242022"
+UPDATE_DATE="07012022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1809,7 +1809,7 @@ if [ ! -f "/home/ark/.config/.update04232022" ]; then
 	touch "/home/ark/.config/.update04232022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06242022" ]; then
 
 	printf "\nUpdated yabasanshiro standalone\nAdjusted poll interval for timesync\nFix .ecwolf files not recognized for Wolfenstein\nFix exfat permission issue\nFix solarus launch script to properly link back to the solarus roms folder\nAdd Italian language support for Emulationstation\nAdd mame2003_plus to arcade, cps1, cps2, and cps3\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06242022/arkosupdate06242022.zip -O /home/ark/arkosupdate06242022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate06242022.zip | tee -a "$LOG_FILE"
@@ -1852,6 +1852,26 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else
 	  cp -fv /opt/yabasanshiro/yabasanshiro.640 /opt/yabasanshiro/yabasanshiro | tee -a "$LOG_FILE"
 	  rm -fv /opt/yabasanshiro/yabasanshiro.* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06242022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdated scummvm.sh script for scan of new games\nAdd missing shaders folder for some scummvm games\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/07012022/arkosupdate07012022.zip -O /home/ark/arkosupdate07012022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate07012022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate07012022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate07012022.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate07012022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
+		exit 1
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"

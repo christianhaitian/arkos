@@ -89,3 +89,8 @@ v2.0 First Stable Release (06/24/2022)
 
 v2.0 (06/26/2022)
 - Updated Kodi from 18.8 Leia 32bit to 19.4 Matrix 64bit
+
+v2.0 (07/01/2022)
+- Updated Emulationstation to fix background music setting not being respected when exiting Kodi (Thanks to SG, Kang for reporting the issue)
+- Updated scummvm.sh script to fix scan for new games script (Thanks to wakeboxer for reporting the issue)
+- Added missing shaders folder needed for some scummvm games such as The Longest Journey (Thanks to sammy2142 for reporting the issue)
