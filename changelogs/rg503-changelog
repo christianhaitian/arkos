@@ -94,3 +94,7 @@ v2.0 (07/01/2022)
 - Updated Emulationstation to fix background music setting not being respected when exiting Kodi (Thanks to SG, Kang for reporting the issue)
 - Updated scummvm.sh script to fix scan for new games script (Thanks to wakeboxer for reporting the issue)
 - Added missing shaders folder needed for some scummvm games such as The Longest Journey (Thanks to sammy2142 for reporting the issue)
+
+v2.0 (07/01/2022)
+- Updated Mupen64plus standalone build with tuning for rk3566 chipset
+- Added support for 4:3 aspect ratio for mupen64plus standalone rice video plugin (Thanks to AmberELEC)
