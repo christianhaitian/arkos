@@ -98,3 +98,11 @@ v2.0 (07/01/2022)
 v2.0 (07/01/2022)
 - Updated Mupen64plus standalone build with tuning for rk3566 chipset
 - Added support for 4:3 aspect ratio for mupen64plus standalone rice video plugin (Thanks to AmberELEC)
+
+v2.0 (07/30/2022)
+- Updated PPSSPP to 1.13.1 (commit ab20315)
+- Updated OpenBor
+- Updated Hypseus-Singe to 2.8.2c
+- Updated OpenBor launcher script to speed up pak loading
+- Fixed Restore Default retroarch settings scripts
+- Updated Retroarch and Retroarch32 to commit d7a30f2 and applied input sort patch from EmuELEC to fix default controller not working when connecting an external controller for Retroarch and Retroarch32
