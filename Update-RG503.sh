@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="07302022"
+UPDATE_DATE="08222022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -408,7 +408,7 @@ if [ ! -f "/home/ark/.config/.update07042022" ]; then
 	touch "/home/ark/.config/.update07042022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update07302022" ]; then
 
 	printf "\nUpdate PPSSPPSDL to 1.13.1\nUpdate OpenBOR\nUpdate Hypseus-Singe to 2.8.2c\nUpdate OpenBOR launcher script\nFix Retroarch restore scripts\nUpdate Retroarches to fix external controller issues\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/07302022/rg503/arkosupdate07302022.zip -O /home/ark/arkosupdate07302022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate07302022.zip | tee -a "$LOG_FILE"
@@ -428,6 +428,94 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		sleep 3
 		echo $c_brightness > /sys/class/backlight/backlight/brightness
 		exit 1
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update07302022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix some mali driver issues\nAdd gliden64 video plugin for mupen64plus standalone\nFix retroarch rga scaling\nUpdate mupen64plus, hypseus, ppsspp, and yabasanshirosa\nChange default governor for hypseus and singe to performance\nAdd Duckstation Standalone\nUpdate emulationstation\nDefault ports governor to performance\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/rg503/08222022/arkosupdate08222022.zip -O /home/ark/arkosupdate08222022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate08222022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate08222022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate08222022.zip -d / | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update08222022.bak | tee -a "$LOG_FILE"
+		cd /usr/local/lib/aarch64-linux-gnu/
+		sudo rm -v libMali.so
+		sudo rm -v libEGL.so*
+		sudo rm -v libGLES*
+		sudo rm -v libgbm.so*
+		sudo rm -v libmali.so*
+		sudo rm -v libMali*
+		sudo rm -v libOpenCL*
+		sudo rm -v libwayland-egl*
+		cd /usr/local/lib/arm-linux-gnueabihf/
+		sudo rm -v libMali.so
+		sudo rm -v libEGL.so*
+		sudo rm -v libGLES*
+		sudo rm -v libgbm.so*
+		sudo rm -v libmali.so*
+		sudo rm -v libMali*
+		sudo rm -v libOpenCL*
+		sudo rm -v libwayland-egl*
+		cd /usr/lib/arm-linux-gnueabihf/
+		sudo ln -sf libMali.so libEGL.so.1
+		sudo ln -sf libMali.so libMaliOpenCL.so.1
+		cd /usr/lib/aarch64-linux-gnu/
+		sudo ln -sf libMali.so libEGL.so.1
+		sudo ln -sf libMali.so libMaliOpenCL.so.1
+		ldconfig
+		cd /home/ark
+		sed -i '/sudo perfmax %EMULATOR% %CORE%; nice -n -19 %ROM%; sudo perfnorm/c\\t\t<command>sudo perfmax On; nice -n -19 %ROM%; sudo perfnorm<\/command>' /etc/emulationstation/es_systems.cfg
+		sed -i '/sudo perfmax %EMULATOR% %CORE%; nice -n -19 \/usr\/local\/bin\/daphne.sh standalone %ROM%; sudo perfnorm/c\\t\t<command>sudo perfmax On; nice -n -19 \/usr\/local\/bin\/daphne.sh standalone %ROM%; sudo perfnorm<\/command>' /etc/emulationstation/es_systems.cfg
+		sed -i '/sudo perfmax %EMULATOR% %CORE%; nice -n -19 \/usr\/local\/bin\/singe.sh %ROM%; sudo perfnorm/c\\t\t<command>sudo perfmax On; nice -n -19 \/usr\/local\/bin\/singe.sh %ROM%; sudo perfnorm<\/command>' /etc/emulationstation/es_systems.cfg
+		if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep standalone-duckstation)"
+		then
+		  sed -i -zE 's/<\/emulators>([^\n]*\n[^\n]*<platform>psx<\/platform>)/   <emulator name=\"\standalone-duckstation\">\n\t\t      <\/emulator>\n\t\t   <\/emulators>\1/' /etc/emulationstation/es_systems.cfg
+		fi
+		#if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep Gamecube)"
+		#then
+		#  sed -i -e '/<theme>n64dd<\/theme>/{r /home/ark/add_dolphin.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		#fi
+		#mkdir -v /roms/gc | tee -a "$LOG_FILE"
+		#if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		#  mkdir -v /roms2/gc | tee -a "$LOG_FILE"
+		#  sed -i '/<path>\/roms\/gc/s//<path>\/roms2\/gc/g' /etc/emulationstation/es_systems.cfg
+		#fi
+		if [ ! -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		  sed -i '/<path>\/roms2\//s//<path>\/roms\//g' /home/ark/.config/duckstation/settings.ini
+		  sudo cp -fv "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
+		else
+		  sudo cp -fv "/usr/local/bin/Switch to main SD for Roms.sh" "/opt/system/Advanced/Switch to main SD for Roms.sh" | tee -a "$LOG_FILE"
+		fi
+		if test -z "$(cat /home/ark/.config/mupen64plus/mupen64plus.cfg | grep Video-GLideN64)"
+		then
+		  sed -i -e '/Rotate \= 0/{r /home/ark/add_gliden64_to_mupen64plus_cfg.txt' -e 'd}' /home/ark/.config/mupen64plus/mupen64plus.cfg
+		fi
+		if test -z "$(grep 'GlideN64' /usr/local/bin/perfmax | tr -d '\0')"
+		then
+		  sudo sed -i '/\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\]/s//\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\] || \[\[ \$1 == "standalone-GlideN64" \]\]/' /usr/local/bin/perfmax
+  		  sudo sed -i '/\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\]/s//\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\] || \[\[ \$1 == "standalone-GlideN64" \]\]/' /usr/local/bin/perfmax.pic
+  		  sudo sed -i '/\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\]/s//\[\[ \$1 == "standalone-Rice" \]\] || \[\[ \$1 == "standalone-Glide64mk2" \]\] || \[\[ \$1 == "standalone-GlideN64" \]\]/' /usr/local/bin/perfmax.asc
+		fi
+		sed -i '/<extension>.cue .CUE .ccd .CCD .lha .LHA .nrg .NRG .mds .MDS .iso .ISO .m3u .M3U/s//<extension>.chd .CHD .cue .CUE .ccd .CCD .lha .LHA .nrg .NRG .mds .MDS .iso .ISO .m3u .M3U/' /etc/emulationstation/es_systems.cfg
+		sudo rm -v /home/ark/arkosupdate08222022.zip | tee -a "$LOG_FILE"
+		#sudo rm -v /home/ark/add_dolphin.txt | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/add_gliden64_to_mupen64plus_cfg.txt | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nAdd GLideN64 plugin for mupen64plus standalone to ES\n" | tee -a "$LOG_FILE"
+	if test -z "$(grep 'standalone-GlideN64' /etc/emulationstation/es_systems.cfg | tr -d '\0')"
+	then
+	  sed -i '/<emulator name="standalone-Glide64mk2">/c\              <emulator name="standalone-Glide64mk2">\n\t\t \t<cores>\n\t\t \t  <core>Default_Aspect<\/core>\n\t\t \t  <core>Widescreen_Aspect<\/core>\n\t\t \t<\/cores>\n              <\/emulator>\n              <emulator name="standalone-GlideN64">' /etc/emulationstation/es_systems.cfg
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"

@@ -106,3 +106,23 @@ v2.0 (07/30/2022)
 - Updated OpenBor launcher script to speed up pak loading
 - Fixed Restore Default retroarch settings scripts
 - Updated Retroarch and Retroarch32 to commit d7a30f2 and applied input sort patch from EmuELEC to fix default controller not working when connecting an external controller for Retroarch and Retroarch32
+
+v2.0 (08/22/2022)
+- Fixed some mali driver issues
+- Fixed retroarch and retroarch32 RGA scaling (Thanks to sydarn2)
+- Updated emulationstation for mali driver issues
+- Updated mupen64plus standalone build for mali driver issues
+- Updated Kodi for mali driver issues
+- Updated hypseus build for mali driver issues
+- Updated ppsspp build for mali driver issues
+- Added Duckstation Standalone emulator
+ * To create a specific game config, hold the A button when launching a game to create a game specific settings file that will be placed 
+   in the psx/duckstation_gamesettings folder that will also be created.  
+   Once created, make your changes within the duckstation menu by holding select and pressing x.
+- Added gliden64 video plugin for mupen64plus standalone (Thanks to rishooty)
+- Added support for .chd files for AmigaCD32 (Thanks to borf42 for the suggestion)
+- Defaulted hypseus governor to performance
+- Defaulted singe governor to performance
+- Defaulted ports governor to performance
+- Updated yabasanshiro standalone with low res patch (Thanks to JelOS)
+- Updated switch to main sd and switch to sd2 scripts to account for duckstation settings
