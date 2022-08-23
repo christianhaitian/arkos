@@ -447,3 +447,14 @@ v2.0 (07/30/2022)
 - Updated OpenBor
 - Updated Hypseus-Singe to 2.8.2c
 - Updated OpenBor launcher script to speed up pak loading
+
+v2.0 (08/22/2022)
+- Added Duckstation Standalone emulator
+ * To create a specific game config, hold the A button when launching a game to create a game specific settings file that will be placed 
+   in the psx/duckstation_gamesettings folder that will also be created.  
+   Once created, make your changes within the duckstation menu by holding minus and pressing x.
+- Added gliden64 video plugin for mupen64plus standalone (Thanks to rishooty)
+- Added support for .chd files for AmigaCD32 (Thanks to borf42 for the suggestion)
+- Updated yabasanshiro standalone with low res patch (Thanks to JelOS)
+- Added 4:3 aspect support for rice plugin mupen64plus standalone (Thanks to AmberELEC)
+- Added widescreen support for glide64mk2 plugin for mupen64plus standalone

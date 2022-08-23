@@ -330,3 +330,8 @@ v2.0 (07/30/2022)
 - Updated OpenBor
 - Updated Hypseus-Singe to 2.8.2c
 - Updated OpenBor launcher script to speed up pak loading
+
+v2.0 (08/22/2022)
+- Added gliden64 video plugin for mupen64plus standalone (Thanks to rishooty)
+- Added support for .chd files for AmigaCD32 (Thanks to borf42 for the suggestion)
+- Updated yabasanshiro standalone with low res patch (Thanks to JelOS)
