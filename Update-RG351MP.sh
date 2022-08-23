@@ -1153,7 +1153,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		  sudo rm -fv /usr/local/bin/duckstation-nogui.chirgb10 | tee -a "$LOG_FILE"
 		  if [ -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
 		    sed -i '/Rotate = 1/d' /home/ark/.config/duckstation/settings.ini
-		    if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+		    if [ ! -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
 		      sed -i '/<path>\/roms\//s//<path>\/roms2\//g' /home/ark/.config/duckstation/settings.ini
 		      sudo cp -fv "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
 		    else
