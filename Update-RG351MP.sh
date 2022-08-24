@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="08222022"
+UPDATE_DATE="08232022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1116,7 +1116,7 @@ if [ ! -f "/home/ark/.config/.update07302022" ]; then
 	touch "/home/ark/.config/.update07302022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update08222022" ]; then
 
 	printf "\nAdd gliden64 video plugin for mupen64plus standalone\nUpdate yabasanshirosa with low res patch\nAdd Duckstation Standalone\nDefault ports governor to performance\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08222022/arkosupdate08222022.zip -O /home/ark/arkosupdate08222022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate08222022.zip | tee -a "$LOG_FILE"
@@ -1247,6 +1247,36 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  fi
 	  cp -fv /opt/yabasanshiro/yabasanshiro.640 /opt/yabasanshiro/yabasanshiro | tee -a "$LOG_FILE"
 	  rm -fv /opt/yabasanshiro/yabasanshiro.* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update08222022"
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix Switch to SD2 script\nFix duckstation not launching for 2 sd cards\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08232022/arkosupdate08232022.zip -O /home/ark/arkosupdate08232022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate08232022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate08232022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate08232022.zip -d / | tee -a "$LOG_FILE"
+	    if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+		then
+	      sed -i '/<path>\/roms2\//s//<path>\/roms\//g' /home/ark/.config/duckstation/settings.ini
+		  sudo rm -v "/opt/system/Advanced/Switch to main SD for Roms.sh" | tee -a "$LOG_FILE"
+	      sudo cp -fv "/usr/local/bin/Switch to SD2 for Roms.sh" "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
+	    else
+	      sed -i '/<path>\/roms\//s//<path>\/roms2\//g' /home/ark/.config/duckstation/settings.ini
+		  sudo rm -v "/opt/system/Advanced/Switch to SD2 for Roms.sh" | tee -a "$LOG_FILE"
+	      sudo cp -fv "/usr/local/bin/Switch to main SD for Roms.sh" "/opt/system/Advanced/Switch to main SD for Roms.sh" | tee -a "$LOG_FILE"
+	    fi
+		sudo rm -v /home/ark/arkosupdate08232022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
