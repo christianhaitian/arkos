@@ -1261,7 +1261,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08232022/arkosupdate08232022.zip -O /home/ark/arkosupdate08232022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate08232022.zip | tee -a "$LOG_FILE"
 	if [ -f "/home/ark/arkosupdate08232022.zip" ]; then
 		sudo unzip -X -o /home/ark/arkosupdate08232022.zip -d / | tee -a "$LOG_FILE"
-	    if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	    if test -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
 		then
 	      sed -i '/<path>\/roms2\//s//<path>\/roms\//g' /home/ark/.config/duckstation/settings.ini
 		  sudo rm -v "/opt/system/Advanced/Switch to main SD for Roms.sh" | tee -a "$LOG_FILE"
