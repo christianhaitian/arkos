@@ -462,4 +462,11 @@ v2.0 (08/22/2022)
 - Added support for .chd files for AmigaCD32 (Thanks to borf42 for the suggestion)
 - Updated yabasanshiro standalone with low res patch (Thanks to JelOS)
 - Added 4:3 aspect support for rice plugin mupen64plus standalone (Thanks to AmberELEC)
+
+v2.0 (09/05/2022)
+- Updated Duckstation to prevent unsupported Vulkan setting
+- Cleaned up some system full names in /etc/emulationstation/es_systems.cfg
+- Renamed 3DO to 3do in /etc/emulationstation/es_systems.cfg
+- Added .d64,.n64dd and .ndd as supported extensions for N64DD (Thanks to varkanoid for testing)
+- Updated N64 launch script
 - Added widescreen support for glide64mk2 plugin for mupen64plus standalone

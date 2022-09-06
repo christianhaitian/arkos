@@ -126,3 +126,12 @@ v2.0 (08/22/2022)
 - Defaulted ports governor to performance
 - Updated yabasanshiro standalone with low res patch (Thanks to JelOS)
 - Updated switch to main sd and switch to sd2 scripts to account for duckstation settings
+
+v2.0 (09/05/2022)
+- Updated Duckstation to prevent unsupported Vulkan setting
+- Added Dolphin Standalone emulator (Thanks to JelOS)
+- Updated NES-Box theme to add Gamecube image (Thanks to Jetup)
+- Cleaned up some system full names in /etc/emulationstation/es_systems.cfg
+- Renamed 3DO to 3do in /etc/emulationstation/es_systems.cfg
+- Added .d64,.n64dd and .ndd as supported extensions for N64DD (Thanks to varkanoid for testing)
+- Updated N64 launch script

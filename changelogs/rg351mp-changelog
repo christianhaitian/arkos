@@ -181,3 +181,10 @@ v2.0 (08/22/2022)
 v2.0 (08/23/2022)
 - Fixed Switch to SD2 and Switch to main scripts
 - Fixed duckstation standalone not launching for setups with 2 sd cards in use
+
+v2.0 (09/05/2022)
+- Updated Duckstation to prevent unsupported Vulkan setting
+- Cleaned up some system full names in /etc/emulationstation/es_systems.cfg
+- Renamed 3DO to 3do in /etc/emulationstation/es_systems.cfg
+- Added .d64,.n64dd and .ndd as supported extensions for N64DD (Thanks to varkanoid for testing)
+- Updated N64 launch script
