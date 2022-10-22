@@ -20,19 +20,6 @@ if [[ -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick"
   fi
 fi
 
-# Let's download the right header files depending on the supported unit
-# Minor differences between the same kernel files between units
-# will cause modules to not install. ¯\_(ツ)_/¯
-if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-rg351p-linux.dtb" ]; then
-  unit="rg351"
-elif [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-  unit="chi"
-elif [ -f "/boot/rk3566.dtb" ]; then
-  unit="rg503"
-else
-  unit="goa"
-fi
-
 # Let's check and make sure this is not run with sudo or as root
 isitroot=$(id -u)
 if [ "$isitroot" == "0" ]; then
@@ -107,25 +94,13 @@ fi
 sudo umount /opt/system/Tools
 sudo umount /roms
 
-if [ "$unit" != "rg503" ]; then
-  dev="/dev/mmcblk0"
-  ext="/dev/mmcblk0p2"
-else
-  dev="/dev/mmcblk1"
-  ext="/dev/mmcblk1p4"
-fi
-# Let's delete the existing exfat partition if it exists
+dev="/dev/mmcblk0"
+ext="/dev/mmcblk0p2"
 
-if [ "$unit" != "rg503" ]; then
-  if test ! -z "$(sudo fdisk -l | grep mmcblk0p3 | tr -d '\0')"
-  then
-    printf "d\n3\nw\nq\n" | sudo fdisk $dev
-  fi
-else
-  if test ! -z "$(sudo fdisk -l | grep mmcblk1p5 | tr -d '\0')"
-  then
-    printf "d\n5\nw\nq\n" | sudo fdisk $dev
-  fi
+# Let's delete the existing exfat partition if it exists
+if test ! -z "$(sudo fdisk -l | grep mmcblk0p3 | tr -d '\0')"
+then
+  printf "d\n3\nw\nq\n" | sudo fdisk $dev
 fi
 if [ "$?" -ne "0" ]; then
   msgbox "Uh oh, something went wrong with trying to delete the exfat partition."
@@ -137,34 +112,33 @@ if [ "$?" -ne "0" ]; then
 fi
 
 # We'll resize the ext partition to take up the rest of the available space
-if [ "$unit" != "rg503" ]; then
-  sudo growpart -v $dev 2
-else
-  sudo growpart -v $dev 4
-fi
+sudo growpart -v $dev 2
 sudo resize2fs $ext
 
 # We'll update /etc/fstab to not try to mount a exfat partition on the main system sd card
-if [ "$unit" != "rg503" ]; then
-  sudo sed -i "/\/dev\/mmcblk0p3/d" /etc/fstab
-else
-  sudo sed -i "/\/dev\/mmcblk1p5/d" /etc/fstab  
-fi
+sudo sed -i "/\/dev\/mmcblk0p3/d" /etc/fstab
+
 # Let's recreate the default roms directory structure
 mkdir /roms
 sudo chown -Rv ark:ark /roms
 tar -xvf defaultromsfolderstructure.tar -C /
 rm -fv defaultromsfolderstructure.tar
 
-if [ "$unit" != "rg503" ]; then
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb \
--O ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
+# Let's download the right header files depending on the supported unit
+# Minor differences between the same kernel files between units
+# will cause modules to not install. ¯\_(ツ)_/¯
+if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-rg351p-linux.dtb" ]; then
+  unit="rg351"
+elif [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+  unit="chi"
 else
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb \
--O ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb || rm -f ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb
+  unit="goa"
 fi
 
-if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] && [ ! -f "${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb" ]; then
+wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb \
+-O ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb || rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
+
+if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ]; then
 	msgbox "The ${unit} linux header deb file did not download correctly or is missing. \
 	Either rerun this script or manually download it from the git and place \
 	it in this current folder then run this script again."
@@ -182,60 +156,43 @@ if [ "$?" == "0" ]; then
   sudo rm -rf /usr/src/linux-headers-4.4.189
 fi
 
-dpkg -s "linux-headers-4.19.172"
-if [ "$?" == "0" ]; then
-  sudo dpkg -P linux-headers-4.19.172
-  sudo rm -rf /usr/src/linux-headers-4.19.172
-fi
-
 # Now we install the header files
-if [ "$unit" != "rg503" ]; then
-  sudo dpkg -i --force-all ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
-else
-  sudo dpkg -i --force-all ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb
-fi
+sudo dpkg -i --force-all ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
 
 # Apply some patches to fix some possible compile issues with gcc 9
-if [ "$unit" != "rg503" ]; then
-  cd /usr/src/linux-headers-4.4.189/include/linux/
-else
-  cd /usr/src/linux-headers-4.19.172/include/linux/
-fi
-
-if [ "$unit" != "rg503" ]; then
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/module.patch -O - | sudo patch
-  if [ $? != 0 ]; then
-    msgbox "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
-    exit
-  fi
-fi
-
-if [ "$unit" != "rg503" ]; then
-  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/compiler.patch -O - | sudo patch
-  if [ $? != 0 ]; then
-    msgbox "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
-    exit
-  fi
-fi
-
-if [ "$unit" != "rg503" ]; then
-  # Fix vermagic description so it properly matches
-  sudo sed -i "/#define UTS_RELEASE/c\#define UTS_RELEASE \"4.4.189\"" /usr/src/linux-headers-4.4.189/include/generated/utsrelease.h
-fi
-
-# Install some typically important and handy build tools
-sudo apt update -y && sudo apt-get --reinstall install -y build-essential bc bison \
-flex libssl-dev python linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel
+cd /usr/src/linux-headers-4.4.189/include/linux/
+wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/module.patch -O - | sudo patch
 if [ $? != 0 ]; then
-  msgbox "There was an updating and installing some build tools.  \
+  msgbox "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
+  if [ ! -z $(pidof rg351p-js2xbox) ]; then
+    sudo kill -9 $(pidof rg351p-js2xbox)
+    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  exit
+fi
+wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/compiler.patch -O - | sudo patch
+if [ $? != 0 ]; then
+  msgbox "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
+  if [ ! -z $(pidof rg351p-js2xbox) ]; then
+    sudo kill -9 $(pidof rg351p-js2xbox)
+    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  exit
+fi
+
+# Fix vermagic description so it properly matches
+sudo sed -i "/#define UTS_RELEASE/c\#define UTS_RELEASE \"4.4.189\"" /usr/src/linux-headers-4.4.189/include/generated/utsrelease.h
+
+# Install and reinstall some typically important and handy build tools
+sudo apt update -y && sudo apt remove -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev \
+flex libssl-dev python linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel libasound2-dev \
+libsdl2-ttf-2.0-0 libsdl2-ttf-dev libsdl2-mixer-dev
+
+sudo apt install -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev flex libssl-dev python \
+linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
+libsdl2-ttf-dev libsdl2-mixer-dev
+if [ $? != 0 ]; then
+  msgbox "There was an error updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
   Enable Developer Mode again."
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
@@ -244,12 +201,27 @@ if [ $? != 0 ]; then
   fi
   exit
 fi
+sudo ln -sf /usr/include/libdrm/ /usr/include/drm
 
-if [ "$unit" != "rg503" ]; then
-  cd /usr/src/linux-headers-4.4.189/
-else
-  cd /usr/src/linux-headers-4.19.172/
-fi
+#Install librga headers
+git clone https://github.com/christianhaitian/linux-rga.git
+cd linux-rga
+git checkout 1fc02d56d97041c86f01bc1284b7971c6098c5fb
+sudo mkdir -p /usr/local/include/rga
+sudo cp drmrga.h /usr/local/include/rga/
+sudo cp rga.h /usr/local/include/rga/
+sudo cp RgaApi.h /usr/local/include/rga/
+sudo cp RockchipRgaMacro.h /usr/local/include/rga/
+cd ..
+rm -rf linux-rga
+
+#Install libgo2 development headers
+git clone https://github.com/christianhaitian/libgo2.git
+sudo mkdir -p /usr/include/go2
+sudo cp -L libgo2/src/*.h /usr/include/go2/
+rm -rf libgo2
+
+cd /usr/src/linux-headers-4.4.189/
 
 # This fixes dkms Exec format errors due to deb-pkg packing the
 # build host executables instead of the target executables
@@ -277,11 +249,10 @@ fi
 
 cd ~
 
-if [ "$unit" != "rg503" ]; then
-  rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
-else
-  rm -f ${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb
-fi
+# Set the ES Theme to Freeplay in case other themes are no longer available
+sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-theme-freeplay\" \/>" /home/ark/.emulationstation/es_settings.cfg
+
+rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
 
 touch /home/ark/.config/.devenabled
 
