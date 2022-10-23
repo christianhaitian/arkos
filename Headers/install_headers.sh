@@ -186,11 +186,11 @@ sudo sed -i "/#define UTS_RELEASE/c\#define UTS_RELEASE \"4.4.189\"" /usr/src/li
 # Install and reinstall some typically important and handy build tools
 sudo apt update -y && sudo apt remove -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev \
 flex libssl-dev python linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel libasound2-dev \
-libsdl2-ttf-2.0-0 libsdl2-ttf-dev libsdl2-mixer-dev
+libsdl2-ttf-2.0-0 libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 
 sudo apt install -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev flex libssl-dev python \
 linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
-libsdl2-ttf-dev libsdl2-mixer-dev
+libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 if [ $? != 0 ]; then
   msgbox "There was an error updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
