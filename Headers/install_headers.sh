@@ -203,6 +203,7 @@ if [ $? != 0 ]; then
 fi
 sudo ln -sf /usr/include/libdrm/ /usr/include/drm
 
+cd ~
 #Install librga headers
 git clone https://github.com/christianhaitian/linux-rga.git
 cd linux-rga
@@ -212,7 +213,7 @@ sudo cp drmrga.h /usr/local/include/rga/
 sudo cp rga.h /usr/local/include/rga/
 sudo cp RgaApi.h /usr/local/include/rga/
 sudo cp RockchipRgaMacro.h /usr/local/include/rga/
-cd ..
+cd ~
 rm -rf linux-rga
 
 #Install libgo2 development headers
