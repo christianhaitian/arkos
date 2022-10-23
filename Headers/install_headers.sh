@@ -302,6 +302,9 @@ fi
 
 cd ~
 
+# Set the ES Theme to Freeplay in case other themes are no longer available
+sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-theme-freeplay\" \/>" /home/ark/.emulationstation/es_settings.cfg
+
 if [ "$unit" != "rg503" ]; then
   rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
 else
