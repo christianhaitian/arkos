@@ -1,4 +1,4 @@
-If you wish to build packages that require header files, please follow the instructions below while in SSH on your device.  You must be on Arkos 1.6 or newer for this to work correctly.
+If you wish to build packages that require header files or other projects, please follow the instructions below while in SSH on your device.  You must be on Arkos 1.6 or newer for this to work correctly.
 
 From a SSH terminal in ArkOS, do the following:
 
