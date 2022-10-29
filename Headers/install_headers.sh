@@ -232,8 +232,13 @@ if [ "$unit" != "rg503" ]; then
 fi
 
 # Install some typically important and handy build tools
-sudo apt update -y && sudo apt-get --reinstall install -y build-essential bc bison \
-flex libssl-dev python linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel
+sudo apt update -y && sudo apt remove -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev \
+flex libssl-dev python linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel libasound2-dev \
+libsdl2-ttf-2.0-0 libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
+
+sudo apt install -y build-essential bc bison curl libcurl4-openssl-dev libdrm-dev libsdl2-dev flex libssl-dev python \
+linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
+libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 if [ $? != 0 ]; then
   msgbox "There was an updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
@@ -244,6 +249,26 @@ if [ $? != 0 ]; then
   fi
   exit
 fi
+sudo ln -sf /usr/include/libdrm/ /usr/include/drm
+
+cd ~
+#Install librga headers
+git clone https://github.com/christianhaitian/linux-rga.git
+cd linux-rga
+git checkout 1fc02d56d97041c86f01bc1284b7971c6098c5fb
+sudo mkdir -p /usr/local/include/rga
+sudo cp drmrga.h /usr/local/include/rga/
+sudo cp rga.h /usr/local/include/rga/
+sudo cp RgaApi.h /usr/local/include/rga/
+sudo cp RockchipRgaMacro.h /usr/local/include/rga/
+cd ~
+rm -rf linux-rga
+
+#Install libgo2 development headers
+git clone https://github.com/christianhaitian/libgo2.git
+sudo mkdir -p /usr/include/go2
+sudo cp -L libgo2/src/*.h /usr/include/go2/
+rm -rf libgo2
 
 if [ "$unit" != "rg503" ]; then
   cd /usr/src/linux-headers-4.4.189/
@@ -276,6 +301,9 @@ if [ $? != 0 ]; then
 fi
 
 cd ~
+
+# Set the ES Theme to Freeplay in case other themes are no longer available
+sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-theme-freeplay\" \/>" /home/ark/.emulationstation/es_settings.cfg
 
 if [ "$unit" != "rg503" ]; then
   rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
