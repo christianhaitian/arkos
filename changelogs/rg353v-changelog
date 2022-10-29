@@ -21,4 +21,15 @@ Known Issues/Limitations
 - System boot logo can not be changed at this time.
 - Holding F button then pressing power to boot into Android while the OS SD card is in slot 1 (TF1/INT.) is not functional at this time.
   - To boot Android, make sure your device is off, pop out the OS SD card in slot (TF1/INT.), power on the unit.
-  
+
+v2.0 (10/29/2022)
+- Added Love 11.4 emulator
+- Updated Retroarch and Retroarch32 to 1.12.0 (Commit 22f43a4)
+- Fixed Retroarch wifi configuration not working
+- Updated Emulationstation to support showing pico-8 carts as images when not scraped
+- Updated PPSSPP to 1.13.2
+- Updated pico-8 launch script
+- Updated Enable Developer Mode script
+- Updated timezones script to not change retroarch core repo when timezone is an asian country such as Hong Kong
+- Disabled network manager wait online systemd by default
+- Updated Boot logo (Thanks to jeltron)

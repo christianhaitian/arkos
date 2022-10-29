@@ -465,3 +465,14 @@ v2.0 (09/05/2022)
 - Added .d64,.n64dd and .ndd as supported extensions for N64DD (Thanks to varkanoid for testing)
 - Updated N64 launch script
 - Added widescreen support for glide64mk2 plugin for mupen64plus standalone
+
+v2.0 (10/29/2022)
+- Added Fake-08 (Pico-8) emulator (Thanks to jtothebell)
+- Added Love 11.4 emulator
+- Updated Retroarch and Retroarch32 to 1.12.0 (Commit 22f43a4)
+- Updated Emulationstation to support showing pico-8 carts as images when not scraped
+- Updated PPSSPP to 1.13.2
+- Updated pico-8 launch script
+- Updated Enable Developer Mode script
+- Updated timezones script to not change retroarch core repo when timezone is an asian country such as Hong Kong
+- Disabled network manager wait online systemd by default
