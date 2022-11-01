@@ -151,3 +151,12 @@ v2.0 (10/29/2022)
 - Enabled Threaded DSP for 3DO by default
 - Added workaround for headphone insertion detection
 - Added missing Gamecube roms folder if it doesn't exist already
+
+v2.0 (11/01/2022)
+- Added bluetooth audio support
+
+Known issues
+- The Emulationstation interface needs to be restarted after successfully connecting to bluetooth audio 
+  in order for interface sound effects to route via bluetooth.  Just press start, then go to quit, 
+  then press A on the Restart Emulationstation menu option.
+- Audio from video snapshots and video screensaver does not play when bluetooth audio is connected.

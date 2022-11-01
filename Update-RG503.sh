@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="10292022"
+UPDATE_DATE="11012022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -593,7 +593,7 @@ if [ ! -f "/home/ark/.config/.update09052022" ]; then
 	touch "/home/ark/.config/.update09052022"
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update10292022" ]; then
 
 	printf "\nUpdate to Retroarch 1.12.0\nAdd Fake08 emulator\nUpdate Pico-8.sh script\nDisable Network Manager wait online by default\nAdd Love 11.4 engine\nUpdate Enable Developer Mode script\nUpdate timezones script\nEnable Threaded DSP for 3DO\nAdd headphone insertion detection workaround\Add missing gc folder\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/10292022/arkosupdate10292022.zip -O /home/ark/arkosupdate10292022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate10292022.zip | tee -a "$LOG_FILE"
@@ -832,6 +832,52 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo rm -rfv /var/cache/* | tee -a "$LOG_FILE"
 	sudo rm -rfv /var/backups/* | tee -a "$LOG_FILE"
 	sudo journalctl --vacuum-time=1s
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update10292022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd Bluetooth Audio support\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11012022/arkosupdate11012022.zip -O /home/ark/arkosupdate11012022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate11012022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate11012022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate11012022.zip -d / | tee -a "$LOG_FILE"
+		cd /home/ark/bluez-alsa/build
+		sudo make CFLAGS="-I /home/ark/bluez-alsa/build/depends/include/ -I /home/ark/bluez-alsa/build/depends/include/aarch64-linux-gnu/ \
+		-I /home/ark/bluez-alsa/build/depends/include/dbus-1.0 -I /home/ark/bluez-alsa/build/depends/include/glib-2.0 \
+		-I /home/ark/bluez-alsa/build/depends/include/gio-unix-2.0" LDFLAGS="-L/home/ark/bluez-alsa/build/depends/include/bluetooth \
+		-L/home/ark/bluez-alsa/build/depends/include/sbc" install | tee -a "$LOG_FILE"
+		cd /home/ark
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/sbc/libsbc.so /usr/lib/aarch64-linux-gnu/libsbc.so.1 | tee -a "$LOG_FILE"
+		sudo systemctl daemon-reload
+		bton=$(sudo systemctl status bluetooth | grep "disabled")
+		if [ -z "$bton" ]
+		then
+		  sudo systemctl enable bluealsa
+		  sudo systemctl enable watchforbtaudio
+		fi
+		sudo rm -rfv /home/ark/bluez-alsa | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate11012022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nCopy correct ogage per device\n" | tee -a "$LOG_FILE"
+	if test -z "$(cat /home/ark/.config/.DEVICE | grep RG353V | tr -d '\0')"
+	then
+	  sudo cp -fv /usr/local/bin/ogage.503 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	else
+	  sudo cp -fv /usr/local/bin/ogage.353 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth

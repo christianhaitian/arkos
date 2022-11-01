@@ -33,3 +33,12 @@ v2.0 (10/29/2022)
 - Updated timezones script to not change retroarch core repo when timezone is an asian country such as Hong Kong
 - Disabled network manager wait online systemd by default
 - Updated Boot logo (Thanks to jeltron)
+
+v2.0 (11/01/2022)
+- Added bluetooth audio support
+
+Known issues
+- The Emulationstation interface needs to be restarted after successfully connecting to bluetooth audio 
+  in order for interface sound effects to route via bluetooth.  Just press start, then go to quit, 
+  then press A on the Restart Emulationstation menu option.
+- Audio from video snapshots and video screensaver does not play when bluetooth audio is connected.
