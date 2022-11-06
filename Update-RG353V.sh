@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="11012022"
+UPDATE_DATE="11052022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -286,7 +286,7 @@ if [ ! -f "/home/ark/.config/.update10292022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11012022" ]; then
 
 	printf "\nAdd Bluetooth Audio support\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11012022/arkosupdate11012022.zip -O /home/ark/arkosupdate11012022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate11012022.zip | tee -a "$LOG_FILE"
@@ -308,6 +308,37 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		fi
 		sudo rm -rfv /home/ark/bluez-alsa | tee -a "$LOG_FILE"
 		sudo rm -v /home/ark/arkosupdate11012022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nCopy correct ogage per device\n" | tee -a "$LOG_FILE"
+	if test -z "$(cat /home/ark/.config/.DEVICE | grep RG353V | tr -d '\0')"
+	then
+	  sudo cp -fv /usr/local/bin/ogage.503 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	else
+	  sudo cp -fv /usr/local/bin/ogage.353 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update11012022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Bluetooth script for longer bluetooth names and add ability to turn bluetooth on and off\nFix Bluetooth audio volume control issue\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11052022/arkosupdate11052022.zip -O /home/ark/arkosupdate11052022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate11052022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate11052022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate11052022.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate11052022.zip | tee -a "$LOG_FILE"
 	else 
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sleep 3

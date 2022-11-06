@@ -160,3 +160,8 @@ Known issues
   in order for interface sound effects to route via bluetooth.  Just press start, then go to quit, 
   then press A on the Restart Emulationstation menu option.
 - Audio from video snapshots and video screensaver does not play when bluetooth audio is connected.
+
+v2.0 (11/05/2022)
+- Updated Bluetooth configuration menu to account for longer bluetooth device names better
+- Updated Bluetooth configuration menu to support turning bluetooth on and off
+- Fixed Bluetooth audio volume control issue
