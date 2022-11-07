@@ -221,3 +221,8 @@ v2.0 (10/29/2022)
 - Updated Enable Developer Mode script
 - Updated timezones script to not change retroarch core repo when timezone is an asian country such as Hong Kong
 - Disabled network manager wait online systemd by default
+
+v2.0 (11/06/2022)
+- Fixed Retroarch and Retroarch32 ozone menu crashing when called during game session
+- Added Fake-08 libretro core (Thanks to Jon Bell)
+  * Carts must end with .p8 or .P8 extensions.  .PNG or .png extension will cause the emulator to just display the cart's picture on load.

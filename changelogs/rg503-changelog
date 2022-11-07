@@ -165,3 +165,7 @@ v2.0 (11/05/2022)
 - Updated Bluetooth configuration menu to account for longer bluetooth device names better
 - Updated Bluetooth configuration menu to support turning bluetooth on and off
 - Fixed Bluetooth audio volume control issue
+
+v2.0 (11/06/2022)
+- Fixed Retroarch and Retroarch32 ozone menu crashing when called during game session
+  * Carts must end with .p8 or .P8 extensions.  .PNG or .png extension will cause the emulator to just display the cart's picture on load.
