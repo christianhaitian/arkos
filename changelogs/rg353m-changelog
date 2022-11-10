@@ -23,3 +23,8 @@ Known Issues/Limitations
 - System boot logo can not be changed at this time.
 - Holding F button then pressing power to boot into Android while the OS SD card is in slot 1 (TF1/INT.) is not functional at this time.
   - To boot Android, make sure your device is off, pop out the OS SD card in slot (TF1/INT.), power on the unit.
+
+v2.0 (11/09/2022)
+- Added 60hz panel screen timings (Thanks to TonyJih)
+- Added script to support changing to be able to change to the Original Screen Timings to /opt/Advanced
+- Fixed update script to point to the correct script for future updates.
