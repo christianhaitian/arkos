@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="11092022"
+UPDATE_DATE="11112022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -39,7 +39,7 @@ echo 255 > /sys/class/backlight/backlight/brightness
 touch $LOG_FILE
 tail -f $LOG_FILE >> /dev/tty1 &
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11092022" ]; then
 
 	printf "\nAdd Tony 60hz timing for display panel\nAdd screen timing switching scripts\nFix update script for the RG353M\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11092022/arkosupdate11092022.zip -O /home/ark/arkosupdate11092022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate11092022.zip | tee -a "$LOG_FILE"
@@ -70,6 +70,34 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ]; then
 	  sed -i '/RG353V/s//RG353M/g' /opt/system/Update.sh
 	  echo "Update script has been updated to point to Update-RG353M.sh for future updates" | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update11092022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix deadzone for Hall joysticks\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11112022/arkosupdate11112022.zip -O /home/ark/arkosupdate11112022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate11112022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate11112022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate11112022.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate11112022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nCopy correct dtb for boot\n" | tee -a "$LOG_FILE"
+	if [ -f "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" ]; then
+	  sudo cp -fv /boot/rk3566-OC.dtb.tony /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+	elif [ -f "/opt/system/Advanced/Screen - Switch to Tony Screen Timings.sh" ]; then
+	  sudo cp -fv /boot/rk3566-OC.dtb.orig /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
