@@ -31,3 +31,14 @@ v2.0 (11/09/2022)
 
 v2.0 (11/11/2022)
 - Fixed deadzone for Hall joysticks
+
+v2.0 (11/18/2022)
+- Added Amstrad GX4000 system
+- Added librga.so.2 symlink for arm-linux-gnueabihf to better support users who build their own 32bit retroarch
+- Enabled N64DD hardware in retroarch-core-options.cfg file for parallel-n64 core by default (Thanks to pacman for reporting the issue)
+- Updated retroarch-tate script
+- Updated pico8 script to fix full screen resolution
+- Fixed mupen64plus rice standalone emulator resolution in configuration file for supported 640x480 devices (Thanks to pacman for reporting the issue)
+- Updated N64 script to fix booting N64
+- Updated PS1 M3U Generator script. (Thanks to Rocky5)
+- Defaulted external controller as Player 1 for retroarch and retroarch32 when connected

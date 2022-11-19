@@ -204,3 +204,12 @@ v2.0 (11/06/2022)
 - Fixed Retroarch and Retroarch32 ozone menu crashing when called during game session
 - Added Fake-08 libretro core (Thanks to Jon Bell)
   * Carts must end with .p8 or .P8 extensions.  .PNG or .png extension will cause the emulator to just display the cart's picture on load.
+
+v2.0 (11/18/2022)
+- Added Amstrad GX4000 system
+- Added librga.so.2 symlink for arm-linux-gnueabihf to better support users who build their own 32bit retroarch
+- Enabled N64DD hardware in retroarch-core-options.cfg file for parallel-n64 core by default (Thanks to pacman for reporting the issue)
+- Updated retroarch-tate script
+- Updated pico8 script to fix full screen resolution
+- Fixed mupen64plus rice standalone emulator resolution in configuration file for supported 640x480 devices (Thanks to pacman for reporting the issue)
+- Updated PS1 M3U Generator script. (Thanks to Rocky5)
