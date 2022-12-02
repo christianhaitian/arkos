@@ -179,3 +179,11 @@ v2.0 (11/18/2022)
 - Fixed mupen64plus rice standalone emulator resolution in configuration file for supported 640x480 devices (Thanks to pacman for reporting the issue)
 - Updated PS1 M3U Generator script. (Thanks to Rocky5)
 - Defaulted external controller as Player 1 for retroarch and retroarch32 when connected
+
+v2.0 (12/01/2022)
+- Updated Retroarch and Retroarch32 to 1.13.0 (commit 03c901d)
+- Updated wifi script to better accomodate wpa2/wpa3 configured networks
+- Updated glide64mk2 video plugin for mupen64plus standalone
+- Updated Gliden64 video plugin for mupen64plus standalone (Thanks to rishooty and JelOS)
+- Adjusted file system check interval for ext4 (root) partition
+- Fixed controls not working with retroarch and retroarch32 emulators when bluetooth audio is connected
