@@ -44,7 +44,7 @@ v2.0 (11/18/2022)
 - Defaulted external controller as Player 1 for retroarch and retroarch32 when connected
 
 v2.0 (12/01/2022)
-- Updated Retroarch and Retroarch32 to 1.13.0 (commit 03c901d)
+- Updated Retroarch and Retroarch32 to 1.13.0 (commit 03e71e6)
 - Updated glide64mk2 video plugin for mupen64plus standalone
 - Updated Gliden64 video plugin for mupen64plus standalone (Thanks to rishooty and JelOS)
 - Updated wifi script to better accomodate wpa2/wpa3 configured networks (RG353M/V/VS and RG503 Only!)

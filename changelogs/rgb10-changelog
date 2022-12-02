@@ -491,6 +491,6 @@ v2.0 (11/18/2022)
 - Updated PS1 M3U Generator script. (Thanks to Rocky5)
 
 v2.0 (12/01/2022)
-- Updated Retroarch and Retroarch32 to 1.13.0 (commit 03c901d)
+- Updated Retroarch and Retroarch32 to 1.13.0 (commit 03e71e6)
 - Updated glide64mk2 video plugin for mupen64plus standalone
 - Updated Gliden64 video plugin for mupen64plus standalone (Thanks to rishooty and JelOS)
