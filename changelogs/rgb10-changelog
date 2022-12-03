@@ -494,3 +494,7 @@ v2.0 (12/01/2022)
 - Updated Retroarch and Retroarch32 to 1.13.0 (commit 03e71e6)
 - Updated glide64mk2 video plugin for mupen64plus standalone
 - Updated Gliden64 video plugin for mupen64plus standalone (Thanks to rishooty and JelOS)
+
+v2.0 (12/02/2022)
+- Verified GlideN64 video plugin settings have been properly updated for mupen64plus standalone
+
