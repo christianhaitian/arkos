@@ -221,3 +221,7 @@ v2.0 (12/01/2022)
 
 v2.0 (12/02/2022)
 - Verified GlideN64 video plugin settings have been properly updated for mupen64plus standalone
+
+v2.0 (12/03/2022)
+- Fixed mupen64plus standalone gliden64 and glide64mk2 plugins not booting
+- Fixed Wifi script
