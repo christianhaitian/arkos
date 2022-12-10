@@ -191,3 +191,6 @@ v2.0 (12/01/2022)
 v2.0 (12/02/2022)
 - Removed easyroms partition check on tf1 with everyboot
 - Verified GlideN64 video plugin settings have been properly updated for mupen64plus standalone
+
+v2.0 (12/10/2022)
+- Updated bluetooth audio backend to add support for aptX and aptX-HD

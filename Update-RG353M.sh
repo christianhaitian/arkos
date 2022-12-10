@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12022022"
+UPDATE_DATE="12102022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -290,7 +290,7 @@ if [ ! -f "/home/ark/.config/.update12012022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12022022" ]; then
 
 	printf "\nRemove easyroms partition check on tf1 with everyboot\nVerify GlideN64 plugin settings\n" | tee -a "$LOG_FILE"
 
@@ -308,6 +308,73 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	if test -z "$(cat /home/ark/.config/mupen64plus/mupen64plus.cfg | grep ThreadedVideo | tr -d '\0')"
 	then
 	  sed -i "/\[Video-GLideN64\]/c\\[Video-GLideN64\]\nThreadedVideo \= 1" /home/ark/.config/mupen64plus/mupen64plus.cfg
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12022022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nRestore default analog deadzone in dtb file\nUpdate Bluetooth audio backend\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12102022/arkosupdate12102022.zip -O /home/ark/arkosupdate12102022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate12102022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate12102022.zip" ]; then
+		sudo unzip -X -o /home/ark/arkosupdate12102022.zip -d / | tee -a "$LOG_FILE"
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ]; then
+		  sudo cp -fv /home/ark/rk3566-353m-notimingchange.dtb /boot/rk3566-OC.dtb.orig | tee -a "$LOG_FILE"
+		  sudo cp -fv /home/ark/rk3566-353m.dtb /boot/rk3566-OC.dtb.tony | tee -a "$LOG_FILE"
+		  if [ -f "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" ]; then
+		    sudo cp -fv /boot/rk3566-OC.dtb.tony /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  else 
+		    sudo cp -fv /boot/rk3566-OC.dtb.orig /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  fi
+		fi
+		sudo systemctl stop bluealsa
+		sudo systemctl disable bluealsa
+		sudo systemctl stop watchforbtaudio
+		sudo systemctl disable watchforbtaudio
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/libopenaptx.so /usr/local/lib/. | tee -a "$LOG_FILE"
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/libfdk-aac.so /usr/local/lib/. | tee -a "$LOG_FILE"
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/libmp3lame.so /usr/lib/aarch64-linux-gnu/. | tee -a "$LOG_FILE"
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/libmpg123.so /usr/lib/aarch64-linux-gnu/. | tee -a "$LOG_FILE"
+		sudo cp -fv /home/ark/bluez-alsa/build/depends/include/sbc/libsbc.so /usr/lib/aarch64-linux-gnu/libsbc.so.1 | tee -a "$LOG_FILE"
+		cd /usr/local/lib/
+		sudo ln -sfv libfdk-aac.so libfdk-aac.so.2
+		sudo ln -sfv libopenaptx.so libopenaptx.so.0
+		cd /home/ark/bluez-alsa/build/
+		sudo make CFLAGS="-I /home/ark/bluez-alsa/build/depends/include/ -I /home/ark/bluez-alsa/build/depends/include/aarch64-linux-gnu/ \
+		-I /home/ark/bluez-alsa/build/depends/include/dbus-1.0 -I /home/ark/bluez-alsa/build/depends/include/glib-2.0 \
+		-I /home/ark/bluez-alsa/build/depends/include/gio-unix-2.0" LDFLAGS="-L/home/ark/bluez-alsa/build/depends/include/bluetooth \
+		-L/home/ark/bluez-alsa/build/depends/include/sbc" install
+		sudo rm -rfv /etc/systemd/system/bluetooth.target.wants/bluealsa.service | tee -a "$LOG_FILE"
+		sudo sed -i "/ExecStart\=\/usr\/bin\/bluealsa -S -p a2dp-source -p a2dp-sink/c\ExecStart\=\/usr\/bin\/bluealsa -S -p a2dp-source -c aptX -c aptX-HD -p a2dp-sink -c aptX -c aptX-HD" /lib/systemd/system/bluealsa.service
+		sudo systemctl daemon-reload
+		bton=$(sudo systemctl status bluetooth | grep "disabled")
+		if [ -z "$bton" ]
+		then
+		  sudo systemctl enable bluealsa
+		  sudo systemctl enable watchforbtaudio
+		fi
+		cd /home/ark
+		sudo rm -rfv /home/ark/bluez-alsa | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/rk3566-* | tee -a "$LOG_FILE"
+		sudo rm -v /home/ark/arkosupdate12102022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ]; then
+	  printf "\nDecrease default input analog sensitivity for retroarch and retroarch32\n" | tee -a "$LOG_FILE"
+	  sed -i '/input_analog_sensitivity \= \"1.500000\"/c\input_analog_sensitivity \= \"1.0\"' /home/ark/.config/retroarch32/retroarch.cfg
+	  sed -i '/input_analog_sensitivity \= \"1.500000\"/c\input_analog_sensitivity \= \"1.0\"' /home/ark/.config/retroarch/retroarch.cfg
+	  sed -i '/input_analog_sensitivity \= \"1.500000\"/c\input_analog_sensitivity \= \"1.0\"' /home/ark/.config/retroarch32/retroarch.cfg.bak
+	  sed -i '/input_analog_sensitivity \= \"1.500000\"/c\input_analog_sensitivity \= \"1.0\"' /home/ark/.config/retroarch/retroarch.cfg.bak
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
