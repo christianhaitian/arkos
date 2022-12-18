@@ -378,3 +378,10 @@ v2.0 (12/02/2022)
 v2.0 (12/03/2022)
 - Fixed mupen64plus standalone gliden64 and glide64mk2 plugins not booting
 - Fixed Wifi script
+
+v2.0 (12/18/2022)
+- Updated Retroarch and Retroarch32 to 1.14 (Commit 932b4ad)
+- Updated PPSSPP Standalone Emulator to version 1.14
+- Updated pico8.sh script to support converting .png to .p8 on the fly when using the fake08 libretro core
+- Added separate vic20 system setup
+- Added vic20 rom folder
