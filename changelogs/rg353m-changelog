@@ -69,3 +69,10 @@ v2.0 (12/18/2022)
 - Added vic20 rom folder
 - Updated exfat kernel module
 - Fixed retroarch-tate default controls
+
+v2.0 (12/23/2022)
+- Updated PPSSPP standalone emulator to 1.14.1
+- Disabled Message Of The Day service for ssh logins
+- Fixed EasyRPG scan for new games script
+- Added workaround for auto reconnecting connected bluetooth devices upon wake from sleep (may not always be reliable though)
+- Updated dtb file to allow for full analog range (Thanks to MehStrongBadMeh for the fix)

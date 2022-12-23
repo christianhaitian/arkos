@@ -513,3 +513,8 @@ v2.0 (12/18/2022)
 - Updated pico8.sh script to support converting .png to .p8 on the fly when using the fake08 libretro core
 - Added separate vic20 system setup
 - Added vic20 rom folder
+
+v2.0 (12/23/2022)
+- Updated PPSSPP standalone emulator to 1.14.1
+- Disabled Message Of The Day service for ssh logins
+- Fixed EasyRPG scan for new games script
