@@ -98,3 +98,8 @@ v2.0 (12/23/2022)
 - Fixed EasyRPG scan for new games script
 - Added workaround for auto reconnecting connected bluetooth devices upon wake from sleep (may not always be reliable though)
 - Updated dtb file to allow for full analog range (Thanks to MehStrongBadMeh for the fix)
+
+v2.0 (12/25/2022) (Special thanks to creamydips for testing of important fixes in this update)
+- Updated kernel defaulting mq-deadline IO scheduling to no
+- Update IO scheduling to kyber
+- Added noatime for ext4 partition in /etc/fstab to minimize on writes

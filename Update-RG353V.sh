@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12232022"
+UPDATE_DATE="12252022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -829,7 +829,7 @@ if [ ! -f "/home/ark/.config/.update12182022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12232022" ]; then
 
 	printf "\nAdd workaround for auto reconnecting connected bluetooth devices\nDisable Message Of The Day service for ssh logins\nFix EasyRPG scan script\nUpdate dtb for 353m and 353v for analog range fix\nUpdated PPSSPP standalone to 1.14.1\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12232022/arkosupdate12232022.zip -O /home/ark/arkosupdate12232022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate12232022.zip | tee -a "$LOG_FILE"
@@ -875,6 +875,61 @@ if [ ! -f "$UPDATE_DONE" ]; then
       rm -fv /opt/ppsspp/PPSSPPSDL.rk3326 | tee -a "$LOG_FILE"
     else
       mv -fv /opt/ppsspp/PPSSPPSDL.rk3326 /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12232022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate kernel disabling mq-deadline\n" | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12252022/arkosupdate12252022.zip -O /home/ark/arkosupdate12252022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate12252022.zip | tee -a "$LOG_FILE"
+	if [ -f "/home/ark/arkosupdate12252022.zip" ]; then
+	    sudo unzip -X -o /home/ark/arkosupdate12252022.zip -d / | tee -a "$LOG_FILE"
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+		  sudo cp -fv /home/ark/Image.rg353 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RG503" ]; then
+		  sudo cp -fv /home/ark/Image.rg503 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		else
+		  echo "  This is not a supported rk3566 unit so no need to update the kernel on this unit." | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		fi
+		sudo rm -v /home/ark/arkosupdate12252022.zip | tee -a "$LOG_FILE"
+	else 
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate IO scheduling to kyber for rk3566 devices\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  if test -z "$(grep 'kyber' /etc/udev/rules.d/10-odroid.rules | tr -d '\0')"
+	  then
+	    sudo sed -i -e '$aACTION=="add|change", KERNEL=="sd[a-z]*|mmcblk[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="kyber"' /etc/udev/rules.d/10-odroid.rules
+	  else
+	    echo "  This is unit seems to have kyber IO scheduler already enabled.  Skipping adding it with this update." | tee -a "$LOG_FILE"
+	  fi
+    else
+      echo "  This is not a supported rk3566 unit so no need to change the IO scheduler on this unit." | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nAdd noatime to ext4 partition in fstab\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  if test ! -z "$(grep 'ext4  defaults  0 1' /etc/fstab | tr -d '\0')"
+	  then
+	    sudo sed -i '/ext4  defaults  0 1/s//ext4  defaults,noatime  0 1/' /etc/fstab
+	  else
+	    echo "  /etc/fstab seems to have noatime added to the ext4 partition entry already.  Skipping adding it with this update." | tee -a "$LOG_FILE"
+	  fi
+	else
+	  echo "  This is not a rk3566 unit so no need to change the /etc/fstab file on this unit." | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
