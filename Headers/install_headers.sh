@@ -114,6 +114,9 @@ if [ "$?" -ne "0" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -127,7 +130,10 @@ if [ ! -f "/roms.tar" ]; then
         sudo kill -9 $(pidof rg351p-js2xbox)
         sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
       fi
-	  exit
+      exit
+      if [[ "$es_stopped" == "y" ]]; then
+        sudo systemctl start emulationstation &
+      fi
   fi
 fi
 
@@ -159,6 +165,9 @@ if [ "$?" -ne "0" ]; then
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+   sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -204,7 +213,10 @@ if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] && [ ! -f "${uni
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
     fi
-	exit
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
+    fi
+    exit
 fi
 
 # If a linux header install already exists, get rid of it
@@ -242,6 +254,9 @@ if [ "$unit" != "rg503" ]; then
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
     fi
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
+    fi
     exit
   fi
 fi
@@ -253,6 +268,9 @@ if [ "$unit" != "rg503" ]; then
     if [ ! -z $(pidof rg351p-js2xbox) ]; then
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+    fi
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
     fi
     exit
   fi
@@ -272,12 +290,15 @@ sudo apt install -y build-essential bc bison curl libcurl4-openssl-dev libdrm-de
 linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
 libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 if [ $? != 0 ]; then
-  msgbox "There was an updating and installing some build tools.  \
+  msgbox "There was an error updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
   Enable Developer Mode again."
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -318,6 +339,9 @@ if [ $? != 0 ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -328,6 +352,9 @@ if [ $? != 0 ]; then
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -355,4 +382,7 @@ msgbox "All done!"
 if [ ! -z $(pidof rg351p-js2xbox) ]; then
   sudo kill -9 $(pidof rg351p-js2xbox)
   sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+fi
+if [[ "$es_stopped" == "y" ]]; then
+  sudo systemctl start emulationstation &
 fi
