@@ -194,7 +194,7 @@ if [ ! -f "/roms.tar" ]; then
   rm -fv defaultromsfolderstructure.tar
 else
   tar -xvf /roms.tar -C /
-  git clone https://github.com/Jetup13/es-theme-freeplay.git roms/themes/es-theme-freeplay
+  git clone https://github.com/Jetup13/es-theme-freeplay.git /roms/themes/es-theme-freeplay
 fi
 
 if [ "$unit" != "rg503" ]; then
