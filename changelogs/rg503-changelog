@@ -214,3 +214,7 @@ v2.0 (12/25/2022) (Special thanks to creamydips for testing of important fixes i
 - Updated kernel defaulting mq-deadline IO scheduling to no
 - Update IO scheduling to kyber
 - Added noatime for ext4 partition in /etc/fstab to minimize on writes
+
+v2.0 (12/27/2022)
+- Updated Kodi to 19.5 and include battery life monitoring setting
+- Updated ScummVM to pre-release version 2.7.0

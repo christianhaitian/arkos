@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12252022"
+UPDATE_DATE="12272022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1441,7 +1441,7 @@ if [ ! -f "/home/ark/.config/.update12232022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12252022" ]; then
 
 	printf "\nUpdate kernel disabling mq-deadline\n" | tee -a "$LOG_FILE"
 	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12252022/arkosupdate12252022.zip -O /home/ark/arkosupdate12252022.zip -a "$LOG_FILE" || rm -f /home/ark/arkosupdate12252022.zip | tee -a "$LOG_FILE"
@@ -1487,6 +1487,62 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  fi
 	else
 	  echo "  This is not a rk3566 unit so no need to change the /etc/fstab file on this unit." | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12252022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Kodi to 19.5\nUpdate ScummVM to 2.7.0 pre-release\nUpdate dtb for 353m and 353v for more analog range fixes\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.zip -O /dev/shm/arkosupdate12272022.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.z01 -O /dev/shm/arkosupdate12272022.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z01 | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.z02 -O /dev/shm/arkosupdate12272022.z02 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z02 | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate12272022.zip" ] && [ -f "/dev/shm/arkosupdate12272022.z01" ] && [ -f "/dev/shm/arkosupdate12272022.z02" ]; then
+		zip -FF /dev/shm/arkosupdate12272022.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate12272022.z* | tee -a "$LOG_FILE"
+		sudo unzip -X -o /dev/shm/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ]; then
+		  sudo cp -fv /home/ark/rk3566-353m-notimingchange.dtb /boot/rk3566-OC.dtb.orig | tee -a "$LOG_FILE"
+		  sudo cp -fv /home/ark/rk3566-353m.dtb /boot/rk3566-OC.dtb.tony | tee -a "$LOG_FILE"
+		  if [ -f "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" ]; then
+		    sudo cp -fv /boot/rk3566-OC.dtb.tony /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  else 
+		    sudo cp -fv /boot/rk3566-OC.dtb.orig /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  fi
+		  sudo rm -fv /home/ark/rk3566-* | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+		  sudo cp -fv /home/ark/rk3566-353v-notimingchange.dtb /boot/rk3566-OC.dtb.orig | tee -a "$LOG_FILE"
+		  sudo cp -fv /home/ark/rk3566-353v.dtb /boot/rk3566-OC.dtb.tony | tee -a "$LOG_FILE"
+		  if [ -f "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" ]; then
+		    sudo cp -fv /boot/rk3566-OC.dtb.tony /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  else 
+		    sudo cp -fv /boot/rk3566-OC.dtb.orig /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+		  fi
+		  sudo rm -fv /home/ark/rk3566-* | tee -a "$LOG_FILE"
+		else
+		  echo "  This is not a rg353m or rg353v unit so no need to update the dtb on this unit." | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/rk3566-* | tee -a "$LOG_FILE"
+		fi
+		sudo rm -fv /dev/shm/arkosupdate.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate12272022.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nDefault Kodi battery life visibility to on\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sed -i '/<settings>/s//<settings>\n    <setting id\=\"show_battlife\" type\=\"bool\">true<\/setting>/' /home/ark/.kodi/userdata/addon_data/skin.estuary/settings.xml
+	else
+	  echo "  This is not a rk3566 unit so Kodi is not available on this unit." | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"

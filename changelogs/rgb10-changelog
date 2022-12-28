@@ -513,3 +513,6 @@ v2.0 (12/23/2022)
 - Updated PPSSPP standalone emulator to 1.14.1
 - Disabled Message Of The Day service for ssh logins
 - Fixed EasyRPG scan for new games script
+
+v2.0 (12/27/2022)
+- Updated ScummVM to pre-release version 2.7.0
