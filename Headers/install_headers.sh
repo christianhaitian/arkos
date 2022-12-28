@@ -92,16 +92,18 @@ if [ "$?" -ne "0" ]; then
   exit
 fi
 
-wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/defaultromsfolderstructure.tar \
--O defaultromsfolderstructure.tar || rm -f defaultromsfolderstructure.tar
+if [ ! -f "/roms.tar" ]; then
+  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/defaultromsfolderstructure.tar \
+  -O defaultromsfolderstructure.tar || rm -f defaultromsfolderstructure.tar
 
-if [ ! -f "defaultromsfolderstructure.tar" ]; then
-	msgbox "The defaultromsfolderstructure.tar did not download correctly or is missing."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
-	exit
+  if [ ! -f "defaultromsfolderstructure.tar" ]; then
+	  msgbox "The defaultromsfolderstructure.tar did not download correctly or is missing."
+      if [ ! -z $(pidof rg351p-js2xbox) ]; then
+        sudo kill -9 $(pidof rg351p-js2xbox)
+        sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+      fi
+	  exit
+  fi
 fi
 
 sudo umount /opt/system/Tools
@@ -153,8 +155,12 @@ fi
 # Let's recreate the default roms directory structure
 mkdir /roms
 sudo chown -Rv ark:ark /roms
-tar -xvf defaultromsfolderstructure.tar -C /
-rm -fv defaultromsfolderstructure.tar
+if [ ! -f "/roms.tar" ]; then
+  tar -xvf defaultromsfolderstructure.tar -C /
+  rm -fv defaultromsfolderstructure.tar
+else
+  tar -xvf /roms.tar -C /
+fi
 
 if [ "$unit" != "rg503" ]; then
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb \
@@ -306,7 +312,8 @@ cd ~
 sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-theme-freeplay\" \/>" /home/ark/.emulationstation/es_settings.cfg
 
 # Point libSDL2.so back to latest available sdl2 lib
-cd /lib/aarch64-linux-gnu/ && sudo ln -sf libSDL2-2.0.so.0.18.2 libSDL2.so
+cd /lib/aarch64-linux-gnu/
+sudo ln -sf libSDL2-2.0.so.0.18.2 libSDL2.so
 cd ~
 
 if [ "$unit" != "rg503" ]; then
