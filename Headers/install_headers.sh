@@ -36,9 +36,25 @@ fi
 # Let's check and make sure this is not run with sudo or as root
 isitroot=$(id -u)
 if [ "$isitroot" == "0" ]; then
-  msgbox "Don't run me with sudo or as root! \
-  Run me with ./Enable Developer Mode.sh"
+  msgbox "Don't run me with sudo or as root!"
   exit
+fi
+
+es_stopped="n"
+if test ! -z "$(ps -a | grep pts | tr -d '\0')"
+then
+  if test ! -z "$(pidof emulationstation | tr -d '\0')"
+  then
+    sudo systemctl stop emulationstation
+    es_stopped="y"
+  fi
+elif test ! -z "$(ps -a | grep tty | tr -d '\0')"
+then
+  if test ! -z "$(pidof emulationstation | tr -d '\0')"
+  then
+    sudo systemctl stop emulationstation
+    es_stopped="y"
+  fi
 fi
 
 GW=`ip route | awk '/default/ { print $3 }'`
@@ -50,6 +66,9 @@ if [ -z "$GW" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -58,6 +77,9 @@ if [ -f "/home/ark/.config/.devenabled" ]; then
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -76,6 +98,9 @@ if [ "$my_var" != "GODEV" ] && [ "$my_var" != "godev" ]; then
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
