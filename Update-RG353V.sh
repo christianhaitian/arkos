@@ -943,9 +943,9 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate Kodi to 19.5\nUpdate ScummVM to 2.7.0 pre-release\nUpdate dtb for 353m and 353v for more analog range fixes\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
-	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/rg503/12272022/arkosupdate12272022.zip -O /dev/shm/arkosupdate12272022.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.zip | tee -a "$LOG_FILE"
-	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/rg503/12272022/arkosupdate12272022.z01 -O /dev/shm/arkosupdate12272022.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z01 | tee -a "$LOG_FILE"
-	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/rg503/12272022/arkosupdate12272022.z02 -O /dev/shm/arkosupdate12272022.z02 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z02 | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.zip -O /dev/shm/arkosupdate12272022.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.z01 -O /dev/shm/arkosupdate12272022.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z01 | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12272022/rg503/arkosupdate12272022.z02 -O /dev/shm/arkosupdate12272022.z02 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12272022.z02 | tee -a "$LOG_FILE"
 	if [ -f "/dev/shm/arkosupdate12272022.zip" ] && [ -f "/dev/shm/arkosupdate12272022.z01" ] && [ -f "/dev/shm/arkosupdate12272022.z02" ]; then
 		zip -FF /dev/shm/arkosupdate12272022.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
 		sudo rm -fv /dev/shm/arkosupdate12272022.z* | tee -a "$LOG_FILE"
