@@ -108,3 +108,8 @@ v2.0 (12/27/2022)
 - Updated Kodi to 19.5 and include battery life monitoring setting
 - Updated Analog ranges again (Thanks to dexwerx and MehStrongBadMeh)
 - Updated ScummVM to pre-release version 2.7.0
+
+v2.0 (12/29/2022)
+- Updated kernel to completely remove mq-deadline IO scheduler
+- Changed default IO scheduler to bfq to hopefully further reduce possible corruption of OS partition
+- Updated wifi configuration script to retry ssid scanning automatically if no ssid is found during initial scan

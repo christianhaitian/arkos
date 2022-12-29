@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12272022"
+UPDATE_DATE="12292022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -939,7 +939,7 @@ if [ ! -f "/home/ark/.config/.update12252022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12272022" ]; then
 
 	printf "\nUpdate Kodi to 19.5\nUpdate ScummVM to 2.7.0 pre-release\nUpdate dtb for 353m and 353v for more analog range fixes\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -986,6 +986,51 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sed -i '/<settings>/s//<settings>\n    <setting id\=\"show_battlife\" type\=\"bool\">true<\/setting>/' /home/ark/.kodi/userdata/addon_data/skin.estuary/settings.xml
 	else
 	  echo "  This is not a rk3566 unit so Kodi is not available on this unit." | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12272022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate kernel to completely remove mq-deadline IO scheduler\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12292022/arkosupdate12292022.zip -O /dev/shm/arkosupdate12292022.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12292022.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate12292022.zip" ]; then
+	    sudo unzip -X -o /dev/shm/arkosupdate12292022.zip -d / | tee -a "$LOG_FILE"
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+		  sudo cp -fv /home/ark/Image.rg353 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RG503" ]; then
+		  sudo cp -fv /home/ark/Image.rg503 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		else
+		  echo "  This is not a supported rk3566 unit so no need to update the kernel on this unit." | tee -a "$LOG_FILE"
+		  sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+		fi
+		sudo rm -fv /dev/shm/arkosupdate12292022.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate12272022.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nUpdate IO scheduling to bfq for rk3566 devices\nUpdate Enable Remote Services script\nUpdate wifi script\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  if test -z "$(grep 'bfq' /etc/udev/rules.d/10-odroid.rules | tr -d '\0')"
+	  then
+	    sudo sed -i '/kyber/s//bfq/' /etc/udev/rules.d/10-odroid.rules
+	  else
+	    echo "  This is unit seems to have bfq IO scheduler already enabled.  Skipping adding it with this update." | tee -a "$LOG_FILE"
+	  fi
+    else
+      echo "  This is not a supported rk3566 unit so no need to change the IO scheduler on this unit." | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
