@@ -36,9 +36,25 @@ fi
 # Let's check and make sure this is not run with sudo or as root
 isitroot=$(id -u)
 if [ "$isitroot" == "0" ]; then
-  msgbox "Don't run me with sudo or as root! \
-  Run me with ./Enable Developer Mode.sh"
+  msgbox "Don't run me with sudo or as root!"
   exit
+fi
+
+es_stopped="n"
+if test ! -z "$(ps -a | grep pts | tr -d '\0')"
+then
+  if test ! -z "$(pidof emulationstation | tr -d '\0')"
+  then
+    sudo systemctl stop emulationstation
+    es_stopped="y"
+  fi
+elif test ! -z "$(ps -a | grep tty | tr -d '\0')"
+then
+  if test ! -z "$(pidof emulationstation | tr -d '\0')"
+  then
+    sudo systemctl stop emulationstation
+    es_stopped="y"
+  fi
 fi
 
 GW=`ip route | awk '/default/ { print $3 }'`
@@ -50,6 +66,9 @@ if [ -z "$GW" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -58,6 +77,9 @@ if [ -f "/home/ark/.config/.devenabled" ]; then
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -77,6 +99,9 @@ if [ "$my_var" != "GODEV" ] && [ "$my_var" != "godev" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -89,19 +114,27 @@ if [ "$?" -ne "0" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
-wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/defaultromsfolderstructure.tar \
--O defaultromsfolderstructure.tar || rm -f defaultromsfolderstructure.tar
+if [ ! -f "/roms.tar" ]; then
+  wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/defaultromsfolderstructure.tar \
+  -O defaultromsfolderstructure.tar || rm -f defaultromsfolderstructure.tar
 
-if [ ! -f "defaultromsfolderstructure.tar" ]; then
-	msgbox "The defaultromsfolderstructure.tar did not download correctly or is missing."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
-	exit
+  if [ ! -f "defaultromsfolderstructure.tar" ]; then
+	  msgbox "The defaultromsfolderstructure.tar did not download correctly or is missing."
+      if [ ! -z $(pidof rg351p-js2xbox) ]; then
+        sudo kill -9 $(pidof rg351p-js2xbox)
+        sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+      fi
+      exit
+      if [[ "$es_stopped" == "y" ]]; then
+        sudo systemctl start emulationstation &
+      fi
+  fi
 fi
 
 sudo umount /opt/system/Tools
@@ -133,6 +166,9 @@ if [ "$?" -ne "0" ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+   sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -153,8 +189,13 @@ fi
 # Let's recreate the default roms directory structure
 mkdir /roms
 sudo chown -Rv ark:ark /roms
-tar -xvf defaultromsfolderstructure.tar -C /
-rm -fv defaultromsfolderstructure.tar
+if [ ! -f "/roms.tar" ]; then
+  tar -xvf defaultromsfolderstructure.tar -C /
+  rm -fv defaultromsfolderstructure.tar
+else
+  tar -xvf /roms.tar -C /
+  git clone https://github.com/Jetup13/es-theme-freeplay.git /roms/themes/es-theme-freeplay
+fi
 
 if [ "$unit" != "rg503" ]; then
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb \
@@ -172,7 +213,10 @@ if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] && [ ! -f "${uni
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
     fi
-	exit
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
+    fi
+    exit
 fi
 
 # If a linux header install already exists, get rid of it
@@ -210,6 +254,9 @@ if [ "$unit" != "rg503" ]; then
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
     fi
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
+    fi
     exit
   fi
 fi
@@ -221,6 +268,9 @@ if [ "$unit" != "rg503" ]; then
     if [ ! -z $(pidof rg351p-js2xbox) ]; then
       sudo kill -9 $(pidof rg351p-js2xbox)
       sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+    fi
+    if [[ "$es_stopped" == "y" ]]; then
+      sudo systemctl start emulationstation &
     fi
     exit
   fi
@@ -240,12 +290,15 @@ sudo apt install -y build-essential bc bison curl libcurl4-openssl-dev libdrm-de
 linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
 libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 if [ $? != 0 ]; then
-  msgbox "There was an updating and installing some build tools.  \
+  msgbox "There was an error updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
   Enable Developer Mode again."
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+  fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
   fi
   exit
 fi
@@ -286,6 +339,9 @@ if [ $? != 0 ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -297,6 +353,9 @@ if [ $? != 0 ]; then
     sudo kill -9 $(pidof rg351p-js2xbox)
     sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
   fi
+  if [[ "$es_stopped" == "y" ]]; then
+    sudo systemctl start emulationstation &
+  fi
   exit
 fi
 
@@ -304,6 +363,11 @@ cd ~
 
 # Set the ES Theme to Freeplay in case other themes are no longer available
 sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-theme-freeplay\" \/>" /home/ark/.emulationstation/es_settings.cfg
+
+# Point libSDL2.so back to latest available sdl2 lib
+cd /lib/aarch64-linux-gnu/
+sudo ln -sf libSDL2-2.0.so.0.18.2 libSDL2.so
+cd ~
 
 if [ "$unit" != "rg503" ]; then
   rm -f ${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb
@@ -318,4 +382,7 @@ msgbox "All done!"
 if [ ! -z $(pidof rg351p-js2xbox) ]; then
   sudo kill -9 $(pidof rg351p-js2xbox)
   sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+fi
+if [[ "$es_stopped" == "y" ]]; then
+  sudo systemctl start emulationstation &
 fi
