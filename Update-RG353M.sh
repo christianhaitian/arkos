@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12292022"
+UPDATE_DATE="12302022"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -643,7 +643,7 @@ if [ ! -f "/home/ark/.config/.update12272022" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12292022" ]; then
 
 	printf "\nUpdate kernel to completely remove mq-deadline IO scheduler\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -679,6 +679,29 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  fi
     else
       echo "  This is not a supported rk3566 unit so no need to change the IO scheduler on this unit." | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12292022"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate sleep script\nUpdated mediaplayer script\nUpdate bluetooth manager script\nUpdate Emulationstation\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12302022/arkosupdate12302022.zip -O /dev/shm/arkosupdate12302022.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12302022.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate12302022.zip" ]; then
+	    sudo unzip -X -o /dev/shm/arkosupdate12302022.zip -d / | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate12302022.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate12302022.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"

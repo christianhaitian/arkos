@@ -91,3 +91,9 @@ v2.0 (12/29/2022)
 - Updated kernel to completely remove mq-deadline IO scheduler
 - Changed default IO scheduler to bfq to hopefully further reduce possible corruption of OS partition
 - Updated wifi configuration script to retry ssid scanning automatically if no ssid is found during initial scan
+
+v2.0 (12/30/2022)
+- Updated sleep script to workaround ES video preview crash when awaken from sleep
+- Updated mediaplayer script to restart global hotkey deamon on exit
+- Updated Emulationstation to improve video initialization for video snapshots and video screensaver (Thanks to Batocera)
+- Fixed typo in Bluetooth Manager option 6 (Thanks to deluxx for reporting)
