@@ -393,3 +393,7 @@ v2.0 (12/23/2022)
 
 v2.0 (12/27/2022)
 - Updated ScummVM to pre-release version 2.7.0
+
+v2.0 (01/03/2023)
+- Updated PPSSPP to 1.14.3
+- Changed the default Joypad D-Pad core mapping to keyboard for Nekop2 and Nekop2Kai retroarch cores

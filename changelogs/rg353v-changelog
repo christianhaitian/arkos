@@ -119,3 +119,13 @@ v2.0 (12/30/2022)
 - Updated mediaplayer script to restart global hotkey deamon on exit
 - Updated Emulationstation to improve video initialization for video snapshots and video screensaver (Thanks to Batocera)
 - Fixed typo in Bluetooth Manager option 6 (Thanks to deluxx for reporting)
+
+v2.0 (01/03/2023)
+- Modified default estuary skin in Kodi to make UI elements larger
+- Increased default font sizes for estuary skin in Kodi
+- Added sound loop kernel module for audio loopback support for Bluetooth Audio
+- Fixed no controls for Atari 800 and Atari XEGS
+- Updated bluetooth audio to be used via loopback
+  - Fixes no audio from video screensavers and video snapshots in ES and no audio for some ports like Celeste.
+- Updated PPSSPP to 1.14.3
+- Changed the default Joypad D-Pad core mapping to keyboard for Nekop2 and Nekop2Kai retroarch cores
