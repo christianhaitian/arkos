@@ -237,3 +237,9 @@ v2.0 (01/03/2023)
   - Fixes no audio from video screensavers and video snapshots in ES and no audio for some ports like Celeste.
 - Updated PPSSPP to 1.14.3
 - Changed the default Joypad D-Pad core mapping to keyboard for Nekop2 and Nekop2Kai retroarch cores
+
+v2.0 (01/14/2023)
+- Defaulted Pico-8 execution script to look for the 64 bit official executable first instead of the 32 bit official executable
+- Updated PPSSPP standalone emulator to 1.14.4
+- Updated Hypseus-Singe standalone emulator to 2.10.1
+- Updated uInitrd for better recovery of the ext4 partition from abrupt reboots
