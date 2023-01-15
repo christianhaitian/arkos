@@ -135,3 +135,13 @@ v2.0 (01/14/2023)
 - Updated PPSSPP standalone emulator to 1.14.4
 - Updated Hypseus-Singe standalone emulator to 2.10.1
 - Updated uInitrd for better recovery of the ext4 partition from abrupt reboots
+
+v2.0 (01/15/2023)
+- Fixed Emulationstation system scraping for Super Famicom system
+- Fixed issue with retroarch screenshots being saved to the ark home folder instead of the content directory by default.
+ - (Thanks to grantbacon for reporting the issue and thanks to gouchi with Libretro for helping to identify the configuration issue.)
+- Updated OpenMSX Standalone emulator to 18.0
+- Added CoolCV retroarch32 core as the default core for Colecovision (includes support for SGM games) 
+ - (Thanks to nanochess for the core, thanks to John Boy for the suggestion, thanks to Slaminger for verifying permission to use the core)
+- Added bluetooth audio delay improvement
+- Reupdated PPSSPP to 1.14.4 due to potential update script issue that may have revert it to a previous version.
