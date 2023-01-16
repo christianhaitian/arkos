@@ -258,3 +258,6 @@ v2.0 (01/15/2023)
 - Added CoolCV retroarch32 core as the default core for Colecovision (includes support for SGM games) 
  - (Thanks to nanochess for the core, thanks to John Boy for the suggestion, thanks to Slaminger for verifying permission to use the core)
 - Reupdated PPSSPP to 1.14.4 due to potential update script issue that may have revert it to a previous version.
+
+v2.0 (01/15/2023-1)
+- Reverted OpenMSX Standalone emulator to 17.0 due to compatibility issue with rk3326 devices
