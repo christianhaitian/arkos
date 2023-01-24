@@ -253,3 +253,10 @@ v2.0 (01/15/2023)
  - (Thanks to nanochess for the core, thanks to John Boy for the suggestion, thanks to Slaminger for verifying permission to use the core)
 - Added bluetooth audio delay improvement
 - Reupdated PPSSPP to 1.14.4 due to potential update script issue that may have revert it to a previous version.
+
+v2.0 (01/24/2023)
+- Updated sleep script to fix some benign errors
+- Updated the sleep.conf file to use freeze for sleep instead of mem.  Should improve sleep stability especially when waking the device.
+- Updated kernel to stop spamming the kernel buffer with battery charge info
+- Updated controller setup script to better support PS4 controllers (Thanks to Baco for the fix)
+- Defaulted True drive emulation to off for Commodore 64

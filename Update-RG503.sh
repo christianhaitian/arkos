@@ -1812,7 +1812,9 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	    elif test ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')"
 		then
 	      sudo mv -fv /home/ark/Image.353 /boot/Image | tee -a "$LOG_FILE"
-	    fi
+		else 
+		  sudo rm -fv /home/ark/Image.353 | tee -a "$LOG_FILE"
+		fi
 	  else
 		sudo rm -fv /home/ark/Image.353 | tee -a "$LOG_FILE"
 	  fi

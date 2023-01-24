@@ -261,3 +261,6 @@ v2.0 (01/15/2023)
 
 v2.0 (01/15/2023-1)
 - Reverted OpenMSX Standalone emulator to 17.0 due to compatibility issue with rk3326 devices
+
+v2.0 (01/24/2023)
+- Defaulted True drive emulation to off for Commodore 64
