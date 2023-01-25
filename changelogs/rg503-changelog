@@ -260,3 +260,7 @@ v2.0 (01/24/2023)
 - Updated kernel to stop spamming the kernel buffer with battery charge info
 - Updated controller setup script to better support PS4 controllers (Thanks to Baco for the fix)
 - Defaulted True drive emulation to off for Commodore 64
+
+v2.0 (01/25/2023)
+- Added ability to switch to Deep sleep mode to Option>Advanced section
+ - Deep sleep provides greater battery life savings during sleep but may be unstable for some units.
