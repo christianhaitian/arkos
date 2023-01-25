@@ -811,7 +811,7 @@ if [ ! -f "/home/ark/.config/.update01142023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01152023" ]; then
 
 	printf "\nFix scraping for SFC\nAdd coolCV retroarch core\nUpdate OpenMSC Standalone emulator to 18.0\nBluetooth audio delay improvement\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
