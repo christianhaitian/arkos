@@ -1248,6 +1248,7 @@ if [ ! -f "/home/ark/.config/.update01242023" ]; then
 
 	printf "\nCopy updated kernel based on device\n" | tee -a "$LOG_FILE"
 	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
 	    if test ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')"
 	    then
 	      sudo mv -fv /home/ark/Image.353 /boot/Image | tee -a "$LOG_FILE"
