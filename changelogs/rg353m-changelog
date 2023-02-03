@@ -128,8 +128,8 @@ v2.0 (01/24/2023)
 - Updated sleep script to fix some benign errors
 - Updated the sleep.conf file to use freeze for sleep instead of mem.  Should improve sleep stability especially when waking the device.
 - Updated kernel to stop spamming the kernel buffer with battery charge info
-- Updated controller setup script to better support PS4 controllers
-- Defaulted True drive emulation to off for Commodore 64 (Thanks to Baco for the fix)
+- Updated controller setup script to better support PS4 controllers (Thanks to Baco for the fix)
+- Defaulted True drive emulation to off for Commodore 64
 
 v2.0 (01/25/2023)
 - Added ability to switch to Deep sleep mode to Option>Advanced section
