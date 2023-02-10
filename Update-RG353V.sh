@@ -5,7 +5,7 @@ LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
 if [ -f "$UPDATE_DONE" ]; then
-	msgbox "No more updates available.  Check back later."
+	msgbox "No more updates available.  Check back later. "
 	rm -- "$0"
 	exit 187
 fi
