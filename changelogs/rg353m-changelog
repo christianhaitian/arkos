@@ -134,3 +134,17 @@ v2.0 (01/24/2023)
 v2.0 (01/25/2023)
 - Added ability to switch to Deep sleep mode to Option>Advanced section
  - Deep sleep provides greater battery life savings during sleep but may be unstable for some units.
+
+v2.0 (02/09/2023)
+- Updated ArkOS Browser by filebrowser to version 2.23.0
+- Updated Hypseus-Singe to version 2.10.2
+- Updated SDL2 to 2.0.26.2
+- Defaulted drastic to performance mode
+- Added wifi importer tool
+  - At boot, ArkOS will check for a wifikeyfile.txt file in the roms/tools 
+    folder (or roms2/tools folder for 2 sd card setups) and start a wifi 
+    credentials importing process.
+- Added support for .7z to Pokemon Mini in Emulationstation (Thanks to nicjansma for the suggestion)
+- Enabled LED to remain on while unit is sleeping
+- Fixed Drastic, PPSSPP standalone, Hypseus-Singe, ecwolf, and 351Files not displaying via HDMI
+- Updated retroarch and retroarch32 with drm connection patch to force a set hdmi resolution (Thanks to Batocera)
