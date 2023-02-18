@@ -277,3 +277,7 @@ v2.0 (02/09/2023)
 - Added support for .7z to Pokemon Mini in Emulationstation (Thanks to nicjansma for the suggestion)
 - Fixed Drastic, PPSSPP standalone, Hypseus-Singe, ecwolf, and 351Files not displaying via HDMI
 - Updated retroarch and retroarch32 with drm connection patch to force a set hdmi resolution (Thanks to Batocera)
+
+v2.0 (02/17/2023)
+- Added IPTV Simple PVR Client for Kodi (Thanks to yzzyzz for the request)
+- Fixed connecting and disconnecting joysticks causing emulationstation to restart

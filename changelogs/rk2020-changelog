@@ -556,3 +556,6 @@ v2.0 (02/09/2023)
     folder (or roms2/tools folder for 2 sd card setups) and start a wifi 
     credentials importing process.
 - Added support for .7z to Pokemon Mini in Emulationstation (Thanks to nicjansma for the suggestion)
+
+v2.0 (02/17/2023)
+- Fixed emulationstation restarting when waking from sleep (Impacts mostly the 351V but may impact other rk3326 units)
