@@ -554,3 +554,4 @@ v2.0 (02/09/2023)
 
 v2.0 (02/17/2023)
 - Fixed emulationstation restarting when waking from sleep (Impacts mostly the 351V but may impact other rk3326 units)
+- Fixed controls not working on boot in emulationstation after updating to 02092023 for OGA 1.1 units.
