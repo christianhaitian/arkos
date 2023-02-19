@@ -3626,7 +3626,7 @@ if [ ! -f "/home/ark/.config/.update02092023" ]; then
 		  sudo unzip -X -o /dev/shm/arkosupdate02092023.zip -x usr/local/bin/hdmi-test.sh opt/retroarch/bin/retroarch opt/retroarch/bin/retroarch32 -d / | tee -a "$LOG_FILE"
 		fi
 	  sudo sed -i '/filebrowser.db \&/s//filebrowser.db -r \/ \&/' /opt/system/Enable\ Remote\ Services.sh
-	  sed -i '/190000004b4800000010000001010000/s//1900f01f4b4800000010000001010000/' /etc/emulationstation/es_input.cfg
+	  #sed -i '/190000004b4800000010000001010000/s//1900f01f4b4800000010000001010000/' /etc/emulationstation/es_input.cfg
 	  sudo chown ark:ark /opt/system/Enable\ Remote\ Services.sh
 	  sudo systemctl daemon-reload
 	  sudo systemctl enable wifi_importer.service
