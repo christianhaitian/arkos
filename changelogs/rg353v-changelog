@@ -174,3 +174,9 @@ v2.0 (02/09/2023)
 v2.0 (02/17/2023)
 - Added IPTV Simple PVR Client for Kodi (Thanks to yzzyzz for the request)
 - Fixed connecting and disconnecting joysticks causing emulationstation to restart
+
+v2.0 (02/25/2023)
+- Added Ignore Leading Articles when sorting features form batocera emulationsation (Thanks to Dantasstic for the suggestion)
+- Fixed shoulder buttons losing paging function after reconfiguration in emulationstation
+- Added controls for panel brightness, contrast, saturation and hue
+  - Thanks to Nicolas Cisco for the drm_tool program that this feature uses to achieve this control (https://github.com/NickCis/drm_tool)
