@@ -158,3 +158,6 @@ v2.0 (02/25/2023)
 - Fixed shoulder buttons losing paging function after reconfiguration in emulationstation
 - Added controls for panel brightness, contrast, saturation and hue
   - Thanks to Nicolas Cisco for the drm_tool program that this feature uses to achieve this control (https://github.com/NickCis/drm_tool)
+
+v2.0 (02/27/2023)
+- Added a failsafe for saving and restoring color profile (RG353M, RG353V/VS, and RG503 units Only!) (Thanks to mega-joe for reporting the issue)
