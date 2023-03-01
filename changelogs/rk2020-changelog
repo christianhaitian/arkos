@@ -564,3 +564,7 @@ v2.0 (02/25/2023)
 - Added Ignore Leading Articles when sorting features form batocera emulationsation (Thanks to Dantasstic for the suggestion)
 - Fixed SDL controls for pico-8
 - Fixed SDL controls for PSP
+
+v2.0 (02/28/2023)
+- Added Greek translation to emulationstation (Thanks to George S.)
+- Updated ScummVM to 2.8.0

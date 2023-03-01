@@ -2152,7 +2152,7 @@ fi
 
 if [ ! -f "$UPDATE_DONE" ]; then
 
-	printf "\nUpdate ES for rk3566 devices to disable display settings via hdmi\n" | tee -a "$LOG_FILE"
+	printf "\nUpdate ES for rk3566 devices to disable display settings via hdmi\nUpdate ScummVM\nUpdate color profile restore settings failsafe for rk3566 devices\nAdded Greek translation for es\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
 	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
 	  sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/02282023/arkosupdate02282023.zip -O /dev/shm/arkosupdate02282023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate02282023.zip | tee -a "$LOG_FILE"
@@ -2164,7 +2164,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	if [ -f "/dev/shm/arkosupdate02282023.zip" ] && [ -f "/dev/shm/arkosupdate02282023.z01" ]; then
 	  zip -FF /dev/shm/arkosupdate02282023.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
 	  sudo rm -fv /dev/shm/arkosupdate02282023.z* | tee -a "$LOG_FILE"
-      sudo unzip -X -o /dev/shm/arkosupdate.zip -d -x opt/scummvm/extra/gamecontrollerdb.txt  / | tee -a "$LOG_FILE"
+      sudo unzip -X -o /dev/shm/arkosupdate.zip -x opt/scummvm/extra/gamecontrollerdb.txt -d / | tee -a "$LOG_FILE"
       sudo rm -fv /dev/shm/arkosupdate02282023.zip | tee -a "$LOG_FILE"
 	else
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"

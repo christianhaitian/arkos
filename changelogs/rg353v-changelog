@@ -183,3 +183,9 @@ v2.0 (02/25/2023)
 
 v2.0 (02/27/2023)
 - Added a failsafe for saving and restoring color profile (Thanks to mega-joe for reporting the issue)
+
+v2.0 (02/28/2023)
+- Updated color profile restore settings failsafe
+- Updated emulationstation to disable display settings in start menu when displaying via hdmi
+- Added Greek translation to emulationstation (Thanks to George S.)
+- Updated ScummVM to 2.8.0
