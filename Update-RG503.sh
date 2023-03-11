@@ -2197,7 +2197,9 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
 		then
 		  mkdir -v /roms2/pico | tee -a "$LOG_FILE"
-		  sed -i '/<path>\/roms\/pico/s//<path>\/roms2\/pico/g' /etc/emulationstation/es_systems.cfg
+		  sed -i '/<path>\/roms\/gc/s//<path>\/roms2\/gc/g' /etc/emulationstation/es_systems.cfg
+		else
+		  sed -i '/roms2\//s//roms\//g'  /home/ark/.config/duckstation/settings.ini
 		fi
 	    sudo rm -fv /dev/shm/arkosupdate03112023.zip | tee -a "$LOG_FILE"
 	    sudo rm -fv /home/ark/add_pico.txt | tee -a "$LOG_FILE"
@@ -2253,7 +2255,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
-	sudo chmod -R 755 /home/ark
+	sudo chmod -Rv 755 /home/ark | tee -a "$LOG_FILE"
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth

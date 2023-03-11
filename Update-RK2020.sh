@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="03112023"
+UPDATE_DATE="02282023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -3902,7 +3902,7 @@ if [ ! -f "/home/ark/.config/.update02252023" ]; then
 
 fi
 
-if [ ! -f "/home/ark/.config/.update02282023" ]; then
+if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate ES for rk3566 devices to disable display settings via hdmi\nUpdate ScummVM\nUpdate color profile restore settings failsafe for rk3566 devices\nAdded Greek translation for es\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -3927,86 +3927,6 @@ if [ ! -f "/home/ark/.config/.update02282023" ]; then
 		exit 1
 	fi
 
-	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
-	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
-
-	touch "/home/ark/.config/.update02282023"
-
-fi
-
-if [ ! -f "$UPDATE_DONE" ]; then
-
-	printf "\nUpdate Retroarch to 1.15.0\nAdd force kill capability for drastic and scummvm\nAdd Sega Pico platform\nUpdate emulationstation for scraping sega pico\nUpdate nes-box theme\n" | tee -a "$LOG_FILE"
-	sudo rm -rf /dev/shm/*
-	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/03112023/arkosupdate03112023.zip -O /dev/shm/arkosupdate03112023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate03112023.zip | tee -a "$LOG_FILE"
-	if [ -f "/dev/shm/arkosupdate03112023.zip" ]; then
-        sudo unzip -X -o /dev/shm/arkosupdate03112023.zip -d / | tee -a "$LOG_FILE"
-		if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep '<name>pico</name>')"
-		then
-		  sed -i -e '/<theme>gamegear<\/theme>/{r /home/ark/add_pico.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
-		fi
-		mkdir -v /roms/pico | tee -a "$LOG_FILE"
-		if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
-		then
-		  mkdir -v /roms2/pico | tee -a "$LOG_FILE"
-		  sed -i '/<path>\/roms\/pico/s//<path>\/roms2\/pico/g' /etc/emulationstation/es_systems.cfg
-		fi
-	    sudo rm -fv /dev/shm/arkosupdate03112023.zip | tee -a "$LOG_FILE"
-	    sudo rm -fv /home/ark/add_pico.txt | tee -a "$LOG_FILE"
-	else
-		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-		sudo rm -fv /dev/shm/arkosupdate03112023.z* | tee -a "$LOG_FILE"
-		sleep 3
-		echo $c_brightness > /sys/class/backlight/backlight/brightness
-		exit 1
-	fi
-
-	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
-	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
-	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
-	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
-	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ]; then
-	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
-	  if [ "$test" = "3203664" ]; then
-	    sudo cp -fv /home/ark/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
-	  else
-	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
-	  fi
-	  sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
-	  sudo cp -fv /home/ark/emulationstation.fullscreen /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
-	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
-	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
-	elif [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
-	  sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
-	  sudo mv -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
-	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
-	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
-	elif [ -f "/boot/rk3566.dtb" ]; then
-	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
-	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
-	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
-	fi
-
-	printf "\nCopy correct Retroarches depending on device\n" | tee -a "$LOG_FILE"
-	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-	  cp -fv /opt/retroarch/bin/retroarch32.rk3326.unrot /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
-	  cp -fv /opt/retroarch/bin/retroarch.rk3326.unrot /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
-	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
-	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
-	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
-	  cp -fv /opt/retroarch/bin/retroarch32.rk3326.rot /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
-	  cp -fv /opt/retroarch/bin/retroarch.rk3326.rot /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
-	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
-	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
-	else
-	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
-	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
-	fi
-
-	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
-	sudo chmod -R 755 /home/ark
-	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
