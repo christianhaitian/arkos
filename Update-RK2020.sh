@@ -4005,6 +4005,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
 	sudo chmod -R 755 /home/ark
 	
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
