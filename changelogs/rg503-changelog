@@ -305,3 +305,19 @@ v2.0 (03/11/2023)
 - Updated emulationstation to add scraping support for Sega Pico 
 - Improved randomness of video screensaver for emulationstation (Thanks to builtinhold for the PR)
 - Updated nes-box theme to add Sega Pico (Thanks to Jetup)
+
+v2.0 (03/21/2023)
+- Updated Emulationstation to add option for volume and brightness adjustment onscreen display (Thanks to Baco)
+- Updated Backup Settings to create an additional copy of the backup file to SD2 if available
+- Updated Backup Settings to include backing up the display color profile
+- Updated bluetooth audio backend to bluez-alsa (commit 5466efc)
+- Updated Restore Settings to ask for confirmation before proceeding with a restore.
+- Fixed GZDoom not loading by updating to latest build (Commit 3d38d5e) (Thanks to Pash-tet for reporting the issue and testing the update)
+- Fixed Duckstation Standalone not booting with 1 SD card setup
+- Added Microvision emulator (Thanks to Paul Robson)
+- Added restore default drastic settings script to Options/Advance section
+- Added Swanstation retroarch core for PSX (Thanks to Mr_Boo_Berry for the request and testing)
+- Defaulted Swanstation gpu renderer to software (Thanks to Mr_Boo_Berry for the recommendation)
+- Defaulted dreamcast emulator and core to retroarch32 and flycast32_rumble
+- Defaulted amiga emulator and core to retroarch32 and uae4arm (RG353M, RG353V/VS, and RG503 Only!)
+- Added puae2021 retroarch core for Amiga (Thanks to iconocluster.exe for the request)
