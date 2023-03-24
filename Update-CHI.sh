@@ -2818,7 +2818,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  cp -fv /home/ark/swanstation_libretro.so /home/ark/.config/retroarch/cores/. | tee -a "$LOG_FILE"
 	  sudo rm -rf /home/ark/swanstation_libretro* | tee -a "$LOG_FILE"
 	else
-	  cp -fv /home/ark/swanstation_libretro.so.rk3326 /home/ark/.config/retroarch/cores/. | tee -a "$LOG_FILE"
+	  cp -fv /home/ark/swanstation_libretro.so.rk3326 /home/ark/.config/retroarch/cores/swanstation_libretro.so | tee -a "$LOG_FILE"
 	  sudo rm -rf /home/ark/swanstation_libretro* | tee -a "$LOG_FILE"
 	fi
 
@@ -2827,7 +2827,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  cp -fv /home/ark/puae2021_libretro.so /home/ark/.config/retroarch/cores/. | tee -a "$LOG_FILE"
 	  sudo rm -rf /home/ark/puae2021_libretro* | tee -a "$LOG_FILE"
 	else
-	  cp -fv /home/ark/puae2021_libretro.so.rk3326 /home/ark/.config/retroarch/cores/. | tee -a "$LOG_FILE"
+	  cp -fv /home/ark/puae2021_libretro.so.rk3326 /home/ark/.config/retroarch/cores/puae2021_libretro.so | tee -a "$LOG_FILE"
 	  sudo rm -rf /home/ark/puae2021_libretro* | tee -a "$LOG_FILE"
 	fi
 
