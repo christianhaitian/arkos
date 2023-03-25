@@ -590,3 +590,9 @@ v2.0 (03/21/2023)
 - Defaulted Swanstation gpu renderer to software (Thanks to Mr_Boo_Berry for the recommendation)
 - Defaulted dreamcast emulator and core to retroarch32 and flycast32_rumble
 - Added puae2021 retroarch core for Amiga (Thanks to iconocluster.exe for the request)
+
+v2.0 (03/25/2023)
+- Updated Mupen64plus standalone
+- Fixed preconfigured controls for Super Blockbuster for Microvision
+- Fixed preconfigured controls for Space Invaders (homebrew) for Microvision
+- Fixed swanstation and puae2021 emulators not loading from previous update (Thanks to TSS_Killer for reporting the issue)
