@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="03252023"
+UPDATE_DATE="03302023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -4166,7 +4166,7 @@ if [ ! -f "/home/ark/.config/.update03212023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update03252023" ]; then
 
 	printf "\nUpdate Mupen64plus standalone\nFix swanstation and puae2021 not loading for rk3326 devices\nFix Space Invaders and Super Blockbuster controls for Microvision\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -4235,6 +4235,71 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -R ark:ark /home/ark
 	sudo chmod -R 755 /home/ark
 	
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update03252023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate ECWolf to 1.4.1\nFix ability to reconfigure keys in drastic\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/03302023/arkosupdate03302023.zip -O /dev/shm/arkosupdate03302023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate03302023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate03302023.zip" ]; then
+        sudo unzip -X -o /dev/shm/arkosupdate03302023.zip -d / | tee -a "$LOG_FILE"
+        sudo rm -fv /dev/shm/arkosupdate03302023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate03302023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix drastic ability to change key configuration\n" | tee -a "$LOG_FILE"
+	sudo cp -fv /usr/local/bin/ti99keydemon.py /usr/local/bin/drastickeydemon.py | tee -a "$LOG_FILE"
+	sudo chmod 777 /usr/local/bin/drastickeydemon.py
+	sudo sed -i 's/ti99sim-sdl/drastic/' /usr/local/bin/drastickeydemon.py
+
+	printf "\nCopy updated kernel based on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    if test ! -z "$(grep "RG353" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /boot/Image.353 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /boot/Image.503 | tee -a "$LOG_FILE"
+	    else
+	      sudo mv -fv /boot/Image.503 /boot/Image | tee -a "$LOG_FILE"
+		  sudo rm -fv /boot/Image.353 | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	else
+	  sudo rm -fv /boot/Image.503 | tee -a "$LOG_FILE"
+	  sudo rm -fv /boot/Image.353 | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nDefault mgba libretro emulator governor to performance\n" | tee -a "$LOG_FILE"
+	if test -z "$(grep 'mgba' /usr/local/bin/perfmax.pic | tr -d '\0')"
+	then
+	  sudo sed -i '/\[\[ \$1 == "On" \]\]/s//\[\[ \$1 == "On" \]\] || \[\[ \$2 == *"mgba"* \]\]/' /usr/local/bin/perfmax
+  	  sudo sed -i '/\[\[ \$1 == "On" \]\]/s//\[\[ \$1 == "On" \]\] || \[\[ \$2 == *"mgba"* \]\]/' /usr/local/bin/perfmax.pic
+  	  sudo sed -i '/\[\[ \$1 == "On" \]\]/s//\[\[ \$1 == "On" \]\] || \[\[ \$2 == *"mgba"* \]\]/' /usr/local/bin/perfmax.asc
+	fi
+
+	printf "\nReplace interactive cpu governor with schedutil\n" | tee -a "$LOG_FILE"
+	if test -z "$(grep 'echo schedutil' /usr/local/bin/perfmax.pic | tr -d '\0')"
+	then
+	  sudo sed -i 's/echo interactive/echo schedutil/' /usr/local/bin/perfmax
+	  sudo sed -i 's/echo interactive/echo schedutil/' /usr/local/bin/perfmax.pic
+	  sudo sed -i 's/echo interactive/echo schedutil/' /usr/local/bin/perfmax.asc
+	fi
+
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 

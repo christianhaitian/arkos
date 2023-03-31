@@ -596,3 +596,9 @@ v2.0 (03/25/2023)
 - Fixed preconfigured controls for Super Blockbuster for Microvision
 - Fixed preconfigured controls for Space Invaders (homebrew) for Microvision
 - Fixed swanstation and puae2021 emulators not loading from previous update (Thanks to TSS_Killer for reporting the issue)
+
+v2.0 (03/30/2023)
+- Updated ECWolf to 1.4.1
+- Fixed ability to reconfigure keys in drastic emulator
+- Updated default scaling governor to performance for mgba emulator (Thanks to Sanelessone for reporting performance issues and testing this change) 
+- Updated default scaling governor for cpu to schedutil for low end emulators

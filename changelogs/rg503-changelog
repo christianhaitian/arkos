@@ -326,3 +326,10 @@ v2.0 (03/25/2023)
 - Updated Mupen64plus standalone
 - Fixed preconfigured controls for Super Blockbuster for Microvision
 - Fixed preconfigured controls for Space Invaders (homebrew) for Microvision
+
+v2.0 (03/30/2023)
+- Updated ECWolf to 1.4.1
+- Fixed ability to reconfigure keys in drastic emulator
+- Updated default scaling governor to performance for mgba emulator (Thanks to Sanelessone for reporting performance issues and testing this change) 
+- Added support for schedutil scaling governor to the kernel (Thanks to fewt/JelOS for the advice)
+- Updated default scaling governor for cpu to schedutil for low end emulators
