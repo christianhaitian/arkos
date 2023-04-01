@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="03302023"
+UPDATE_DATE="04012023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -2195,7 +2195,7 @@ if [ ! -f "/home/ark/.config/.update03252023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update03302023" ]; then
 
 	printf "\nUpdate ECWolf to 1.4.1\nFix ability to reconfigure keys in drastic\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -2248,6 +2248,38 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo sed -i 's/echo interactive/echo schedutil/' /usr/local/bin/perfmax.pic
 	  sudo sed -i 's/echo interactive/echo schedutil/' /usr/local/bin/perfmax.asc
 	fi
+
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update03302023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix gzdoom and lzdoom ability to change key configuration\nUpdate fake-08 standalone emulator\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/04012023/arkosupdate04012023.zip -O /dev/shm/arkosupdate04012023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate04012023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate04012023.zip" ]; then
+        sudo unzip -X -o /dev/shm/arkosupdate04012023.zip -d / | tee -a "$LOG_FILE"
+        sudo rm -fv /dev/shm/arkosupdate04012023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate04012023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nFix gzdoom and lzdoom ability to change key configuration\n" | tee -a "$LOG_FILE"
+	sudo cp -fv /usr/local/bin/ti99keydemon.py /usr/local/bin/doomkeydemon.py | tee -a "$LOG_FILE"
+	sudo chmod 777 /usr/local/bin/doomkeydemon.py
+	sudo sed -i 's/ti99sim-sdl/-f doom/' /usr/local/bin/doomkeydemon.py
 
 	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
 	sudo chown -R ark:ark /home/ark

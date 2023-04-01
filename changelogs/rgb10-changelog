@@ -596,3 +596,7 @@ v2.0 (03/30/2023)
 - Fixed ability to reconfigure keys in drastic emulator
 - Updated default scaling governor to performance for mgba emulator (Thanks to Sanelessone for reporting performance issues and testing this change) 
 - Updated default scaling governor for cpu to schedutil for low end emulators
+
+v2.0 (04/01/2023)
+- Updated fake-08 standalone emulator (commit e9fe530)
+- Fixed ability to reconfigure keys in gzdoom and lzdoom
