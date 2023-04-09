@@ -19,3 +19,9 @@ Initial Stable Release (04/01/2023)
 
 Known Issues/Limitations
 - System boot logo can not be changed at this time.
+
+v2.0 (04/09/2023)
+- Fixed Mupen64plus standalone emulators not working
+- Removed wifioff and wifion scripts in options/advanced section
+- Updated kernel to stop spamming the kernel buffer with policy NULL messages
+- Disabled cpufreq scaling governor setting since it doesn't work on this device
