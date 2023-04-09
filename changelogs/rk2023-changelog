@@ -1,0 +1,21 @@
+Initial Stable Release (04/01/2023)
+- Only authentic Sandisk and Samsung cards are supported and recommended.
+  - In my initial testing poor or unknown quality sd cards somestimes fail to reboot.  TO MINIMIZE ON POTENTIAL FRUSTRATION, ONLY USE AN AUTHENTIC SAMSUNG OR SANDISK SD CARD
+- Follow the instructions from the wiki to properly loading this image: https://github.com/christianhaitian/arkos/wiki#instructions-for-loading
+- Initial boot and preparation can take about 5 minutes to complete due to the themes being copied.  Be patient!
+- Be sure during initial boot, Only have the OS SD card in slot 1 (TF1/INT.) during the initial boot!.  Do not put an SD card in slot 2 (TF2/Ext.) during the initial boot!  Failure to follow this may result in strange behavior during the intial boot preparation process.
+- Once the initial boot has completed and you're at the Emulationstation menu, you can insert your second sd card into slot 2 (TF2/Ext.).
+- To make use of your second sd card for your games, go to options/Advancec/Switch to SD2 for ROMS.  For more information, see: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---rk2023#q-how-do-i-make-use-of-the-second-sd-slot-for-roms-and-games
+- Philips CDI and Panasonic 3DO gaming systems work decently on this chipset.
+- Gamecube support is included but don't expect good performance on this chipset with it.
+- Jon Bell's Fake08 standalone and retroarch pico-8 emulators are included as an alternative to the pico-8 player.
+  - The paid pico-8 player from Lexaloffel is still highly encouraged for purchase for best performance, compatibility and to support the platform.
+- Jon Bell's Fake08 libretro core is also included as an alternative to the pico-8 player.  It supports savestates.
+- Kodi 19.5 64-bit is available from the Start Menu
+- HDMI out is functional
+- Connectivity with external controllers is supported and works with retroarch based emulators.  Other standalone emulators may or may not work.
+- Supported Wifi adapters: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---rk2023#q-how-do-i-configure-my-wifi-connection-in-arkos
+- Hotkey information: https://github.com/christianhaitian/arkos/wiki/Frequently-Asked-Questions---RK2023#q-what-are-the-global-event-keys-and-emulator-event-keys-in-ArkOS
+
+Known Issues/Limitations
+- System boot logo can not be changed at this time.
