@@ -25,3 +25,8 @@ v2.0 (04/09/2023)
 - Removed wifioff and wifion scripts in options/advanced section
 - Updated kernel to stop spamming the kernel buffer with policy NULL messages
 - Disabled cpufreq scaling governor setting since it doesn't work on this device
+
+v2.0 (04/13/2023)
+- Added Ralink 2800USB wireless drivers (Thanks to Fkhie for testing)
+- Fixed cpu_freq driver loading issue (Major thanks to fewt and JelOS!)
+- Re-enabled cpufreq scaling governer

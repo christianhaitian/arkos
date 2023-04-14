@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="04092023"
+UPDATE_DATE="04132023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -1709,7 +1709,7 @@ if [ ! -f "/home/ark/.config/.update04012023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04092023" ]; then
 
 	printf "\nFix mupen64plus standalone not launching\nRemove wifioff and wifion scripts from options/advanced section\nUpdate kernel to remove cpu policy null log spam\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -1756,6 +1756,56 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	touch "/home/ark/.config/.update04092023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate kernel and DTB to fix cpu policy setting thanks to fewt and JelOS\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/04132023/arkosupdate04132023.zip -O /dev/shm/arkosupdate04132023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate04132023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate04132023.zip" ]; then
+        sudo unzip -X -o /dev/shm/arkosupdate04132023.zip -d / | tee -a "$LOG_FILE"
+        sudo rm -fv /dev/shm/arkosupdate04132023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate04132023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if test ! -z "$(grep "RK2023" /home/ark/.config/.DEVICE | tr -d '\0')"
+	then
+	  sudo depmod -a
+	  printf "\nCompleted depmod for additional rt2800usb kernel modules\n" | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nEnable cpufreq scaling governor setting since it works on this device now\n"
+	if test -z "$(grep '#chmod 777' /usr/local/bin/perfmax.pic | tr -d '\0')"
+	then
+	  sudo sed -i 's/\#chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax
+	  sudo sed -i 's/\#chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.pic
+	  sudo sed -i 's/\#chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.asc
+	  sudo sed -i 's/\#echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax
+	  sudo sed -i 's/\#echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.pic
+	  sudo sed -i 's/\#echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo performance > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.asc
+	  sudo sed -i 's/\#echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax
+	  sudo sed -i 's/\#echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.pic
+	  sudo sed -i 's/\#echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo schedutil > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.asc
+	  sudo sed -i 's/\#echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfnorm
+	  sudo sed -i 's/\#echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfnorm.pic
+	  sudo sed -i 's/\#echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/echo ondemand > \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfnorm.asc
+	fi
+
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
@@ -1768,3 +1818,4 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo reboot
 	exit 187
 fi
+
