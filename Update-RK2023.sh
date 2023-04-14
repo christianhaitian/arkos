@@ -1783,7 +1783,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	fi
 
 	printf "\nEnable cpufreq scaling governor setting since it works on this device now\n"
-	if test -z "$(grep '#chmod 777' /usr/local/bin/perfmax.pic | tr -d '\0')"
+	if test ! -z "$(grep '#chmod 777' /usr/local/bin/perfmax.pic | tr -d '\0')"
 	then
 	  sudo sed -i 's/\#chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax
 	  sudo sed -i 's/\#chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/chmod 777 \/sys\/devices\/system\/cpu\/cpufreq\/policy0\/scaling_governor/' /usr/local/bin/perfmax.pic
