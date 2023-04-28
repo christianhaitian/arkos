@@ -4403,6 +4403,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		    if [ ! -d "/roms2/advision" ]; then
 		      mkdir -v /roms2/advision | tee -a "$LOG_FILE"
 		      sed -i '/<path>\/roms\/advision/s//<path>\/roms2\/advision/g' /etc/emulationstation/es_systems.cfg
+			  cp -fv /roms/bios/mame/hash/advision.xml /roms2/bios/mame/hash/advision.xml | tee -a "$LOG_FILE"
 			fi
 		  fi
 		fi
