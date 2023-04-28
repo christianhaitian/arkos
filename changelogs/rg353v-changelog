@@ -230,3 +230,18 @@ v2.0 (03/30/2023)
 v2.0 (04/01/2023)
 - Updated fake-08 standalone emulator (commit e9fe530)
 - Fixed ability to reconfigure keys in gzdoom and lzdoom
+
+v2.0 (04/27/2023)
+- Added Entex Adventure Vision (Thanks to pacman for the suggestion)
+- Added puae2021 core support to emulationstation that was missing from 03212023 update for some devices
+- Added fbneo core as optional for NeoGeo CD (Thanks to zomgugoff for the suggestion)
+- Added .cmd extension support for PC98 (Thanks to zomgugoff for the suggestion)
+- Rebuilt Retroarch and Retroarch32 1.15.0 (commit 5eddcfe) to hopefully resolve some possible micro stutter issues
+- Added retroarch and retroarch32 audio filters
+- Updated SDL2 to 2.26.5
+- Updated retroarch only mode to default to performance governor (Thanks to Vanfanel for reporting the issue and testing)
+- Updated hypseus-singe to 2.10.3
+- Changed gpu default governor from simple_ondemand to dmc_ondemand
+- Updated dtb file for compatibility with V1 and V2 displays (including 60hz for v2 display) (Thanks to dexwerx and TheGammaSqueeze for the work on this)
+- Removed Screen switch scripts from Options/Advanced section since it's no longer needed
+- Updated vibration script to support strong and weak vibration for cores such as pcsx_rearmed and swanstation

@@ -30,3 +30,16 @@ v2.0 (04/13/2023)
 - Added Ralink 2800USB wireless drivers (Thanks to Fkhie for testing)
 - Fixed cpu_freq driver loading issue (Major thanks to fewt and JelOS!)
 - Re-enabled cpufreq scaling governer
+
+v2.0 (04/27/2023)
+- Added Entex Adventure Vision (Thanks to pacman for the suggestion)
+- Added puae2021 core support to emulationstation that was missing from 03212023 update for some devices
+- Added fbneo core as optional for NeoGeo CD (Thanks to zomgugoff for the suggestion)
+- Added .cmd extension support for PC98 (Thanks to zomgugoff for the suggestion)
+- Rebuilt Retroarch and Retroarch32 1.15.0 (commit 5eddcfe) to hopefully resolve some possible micro stutter issues
+- Added retroarch and retroarch32 audio filters
+- Updated SDL2 to 2.26.5
+- Updated retroarch only mode to default to performance governor (Thanks to Vanfanel for reporting the issue and testing)
+- Updated hypseus-singe to 2.10.3
+- Changed gpu default governor from simple_ondemand to dmc_ondemand
+- Updated dtb to hopefully reduce occurrences of soft bricking
