@@ -245,3 +245,14 @@ v2.0 (04/27/2023)
 - Updated dtb file for compatibility with V1 and V2 displays (including 60hz for v2 display) (Thanks to dexwerx and TheGammaSqueeze for the work on this)
 - Removed Screen switch scripts from Options/Advanced section since it's no longer needed
 - Updated vibration script to support strong and weak vibration for cores such as pcsx_rearmed and swanstation
+
+v2.0 (05/04/2023)
+- Updated PPSSPP standalone emulator to 1.15.0
+- Updated EasyRPG libretro to version 0.8 "Paralyze"
+- Updated liblcf to version 0.8 for EasyRPG 0.8
+- Added battery level text support to Emulationstation
+- Updated Emulationstation to show screen version info and ID in Display Settings and Info in start menu
+- Added Polish translation for Emulationstation (Thanks to Pan Antonio)
+- Fixed Amiga, Amiga CD32, Dreamcast and Microvision not showing up with single sd card setup (Thanks to kielyallen for reporting the issue)
+- Fixed some GlideN64 plugin default settings for Mupen64Plus (Thanks to EmperorOfTigers for reporting the issue)
+- Removed .m3u support in Emulationstation for Amiga and Amiga CD32 since puae and uae4arm can not load m3u files when launched from Emulationstation. (Thanks to lauren7ino for testing and the request)

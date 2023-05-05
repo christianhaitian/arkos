@@ -337,3 +337,14 @@ v2.0 (04/27/2023)
 - Updated retroarch only mode to default to performance governor (Thanks to Vanfanel for reporting the issue and testing)
 - Updated hypseus-singe to 2.10.3
 - Changed gpu default governor from simple_ondemand to dmc_ondemand
+
+v2.0 (05/04/2023)
+- Updated PPSSPP standalone emulator to 1.15.0
+- Updated EasyRPG libretro to version 0.8 "Paralyze"
+- Updated liblcf to version 0.8 for EasyRPG 0.8
+- Added battery level text support to Emulationstation
+- Reverted default schedutil governor setting back to interactive due to performance regression
+- Added Polish translation for Emulationstation (Thanks to Pan Antonio)
+- Fixed Amiga, Amiga CD32, Dreamcast and Microvision not showing up with single sd card setup (Thanks to kielyallen for reporting the issue)
+- Fixed some GlideN64 plugin default settings for Mupen64Plus (Thanks to EmperorOfTigers for reporting the issue)
+- Removed .m3u support in Emulationstation for Amiga and Amiga CD32 since puae and uae4arm can not load m3u files when launched from Emulationstation. (Thanks to lauren7ino for testing and the request)
