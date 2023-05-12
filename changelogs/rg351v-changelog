@@ -499,3 +499,9 @@ v2.0 (05/04/2023)
 - Fixed Amiga, Amiga CD32, Dreamcast and Microvision not showing up with single sd card setup (Thanks to kielyallen for reporting the issue)
 - Fixed some GlideN64 plugin default settings for Mupen64Plus (Thanks to EmperorOfTigers for reporting the issue)
 - Removed .m3u support in Emulationstation for Amiga and Amiga CD32 since puae and uae4arm can not load m3u files when launched from Emulationstation. (Thanks to lauren7ino for testing and the request)
+
+v2.0 (05/11/2023)
+- Updated PPSSPP to 1.15.3
+- Updated Hypseus-Singe to 2.10.4
+- Added Gearsystem libretro core as an optional core for Sega Game Gear and Sega Master System (Thanks to TSS_Killer for the suggestion)
+- Added Picodrive libretro core as an optional core for Sega Game Gear (Thanks to kikkk43 for the suggestion)
