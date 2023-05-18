@@ -366,3 +366,9 @@ v2.0 (05/11/2023)
 - Updated Hypseus-Singe to 2.10.4
 - Added Gearsystem libretro core as an optional core for Sega Game Gear and Sega Master System (Thanks to TSS_Killer for the suggestion)
 - Added Picodrive libretro core as an optional core for Sega Game Gear (Thanks to kikkk43 for the suggestion)
+
+v2.0 (05/17/2023)
+- Fixed scraping in emulationstation for Daphne (Thanks to TheRetroByte for reporting the issue)
+- Fixed Backup of symlinks in Backup Settings script (Thanks to lauren7ino for reporting the issue)
+- Updated Restore Settings script to check for a backup file in the /roms/backup folder
+- Reverted default schedutil governor setting back to interactive due to performance regression
