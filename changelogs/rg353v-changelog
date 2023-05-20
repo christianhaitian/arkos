@@ -271,3 +271,6 @@ v2.0 (05/17/2023)
 - Updated sleep script to reduce governors to powersave and restore previous set governors on wake
 - Fixed Deep Sleep for units that can reliably support it
 - Reverted default schedutil governor setting back to interactive due to performance regression
+
+v2.0 (05/19/2023)
+- Changed the default governor for all emulators to performance

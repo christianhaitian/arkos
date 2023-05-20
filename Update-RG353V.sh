@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="05172023"
+UPDATE_DATE="05192023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -2450,7 +2450,7 @@ if [ ! -f "/home/ark/.config/.update05112023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05172023" ]; then
 
 	printf "\nUpdate sleep script to go to powersave on sleep then restore previous governors on wake\nFix Deep sleep for 353 and rk2023\nUpdate Restore Settings script to check for a backup file in the roms backup folder\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -2545,6 +2545,37 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  fi
 	fi
 		
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05172023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nChange default governor for emulators to performance\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/05192023/arkosupdate05192023.zip -O /dev/shm/arkosupdate05192023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate05192023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate05192023.zip" ]; then
+		if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	      sudo unzip -X -o /dev/shm/arkosupdate05192023.zip -d / | tee -a "$LOG_FILE"
+		else
+          sudo unzip -X -o /dev/shm/arkosupdate05192023.zip -x "usr/local/bin/perfmax*" -d / | tee -a "$LOG_FILE"
+		fi
+        sudo rm -fv /dev/shm/arkosupdate05192023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate05192023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
 	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
 	sudo chown -R ark:ark /home/ark
 	sudo chmod -R 755 /home/ark

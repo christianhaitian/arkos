@@ -372,3 +372,6 @@ v2.0 (05/17/2023)
 - Fixed Backup of symlinks in Backup Settings script (Thanks to lauren7ino for reporting the issue)
 - Updated Restore Settings script to check for a backup file in the /roms/backup folder
 - Reverted default schedutil governor setting back to interactive due to performance regression
+
+v2.0 (05/19/2023)
+- Changed the default governor for all emulators to performance
