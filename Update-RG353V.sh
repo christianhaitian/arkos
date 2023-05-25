@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="05192023"
+UPDATE_DATE="05242023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -2556,7 +2556,7 @@ if [ ! -f "/home/ark/.config/.update05172023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update05192023" ]; then
 
 	printf "\nChange default governor for emulators to performance\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -2571,6 +2571,40 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	else
 		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
 		sudo rm -fv /dev/shm/arkosupdate05192023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update05192023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd experimental touchscreen support\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/05242023/arkosupdate05242023.zip -O /dev/shm/arkosupdate05242023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate05242023.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/05242023/arkosupdate05242023.z01 -O /dev/shm/arkosupdate05242023.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate05242023.z01 | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate05242023.zip" ] && [ -f "/dev/shm/arkosupdate05242023.z01" ]; then
+		if [ ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')" ] || [ ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+	      zip -FF /dev/shm/arkosupdate05242023.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+	      sudo rm -fv /dev/shm/arkosupdate05242023.z* | tee -a "$LOG_FILE"
+	      sudo unzip -X -o /dev/shm/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+		else
+          printf "\nThis update is not meant for this device.  Skipping..." | tee -a "$LOG_FILE"
+		fi
+        sudo rm -fv /dev/shm/arkosupdate.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate05242023.z* | tee -a "$LOG_FILE"
 		sleep 3
 		echo $c_brightness > /sys/class/backlight/backlight/brightness
 		exit 1

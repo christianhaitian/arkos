@@ -274,3 +274,10 @@ v2.0 (05/17/2023)
 
 v2.0 (05/19/2023)
 - Changed the default governor for all emulators to performance
+
+v2.0 (05/24/2023)
+- Added experimental support for the touchscreen(Thanks to tomtomp for the findings and work on this)
+ * To enable, just go to the Options/Advanced section and select Enable Experimental Touch support and follow the instructions to enable.
+ * Touch capability is available for Drastic(NDS), Kodi, ScummVM Standalone and some Retroarch based emulators like fceumm.
+ * If you encounter operational issues, you can switch back to the previous no touchscreen support state by going to the Options/Advanced 
+   section and select Disable Experimental Touch support.
