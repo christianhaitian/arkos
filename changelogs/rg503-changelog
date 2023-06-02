@@ -375,3 +375,8 @@ v2.0 (05/17/2023)
 
 v2.0 (05/19/2023)
 - Changed the default governor for all emulators to performance
+
+v2.0 (06/01/2023)
+- Updated PPSSPP standalone emulator to 1.15.4
+- Added retroarch and retroarch32 core options to backup script (Thanks to lauren7ino for reporting the issue)
+- Fixed ScummVM game save location not changing to roms2 when using 2 sd card setup (Thanks to lauren7ino for reporting the issue)

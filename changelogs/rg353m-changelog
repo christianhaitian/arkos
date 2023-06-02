@@ -259,3 +259,11 @@ v2.0 (05/24/2023)
  * Touch capability is available for Drastic(NDS), Kodi, ScummVM Standalone and some Retroarch based emulators like fceumm.
  * If you encounter operational issues, you can switch back to the previous no touchscreen support state by going to the Options/Advanced 
    section and select Disable Experimental Touch support.
+
+v2.0 (06/01/2023)
+- Updated PPSSPP standalone emulator to 1.15.4
+- Added retroarch and retroarch32 core options to backup script (Thanks to lauren7ino for reporting the issue)
+- Fixed ScummVM game save location not changing to roms2 when using 2 sd card setup (Thanks to lauren7ino for reporting the issue)
+- Added missing assets for ScummVM for experimental support for the touchscreen (Thanks to jqno for reporting and researching the issue)
+- Added experimental touch support for retroarch32 for uae4arm 32bit
+- Updated retroarch experimental touch

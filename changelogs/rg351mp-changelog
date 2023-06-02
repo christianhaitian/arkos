@@ -359,3 +359,9 @@ v2.0 (05/17/2023)
 - Fixed scraping in emulationstation for Daphne (Thanks to TheRetroByte for reporting the issue)
 - Fixed Backup of symlinks in Backup Settings script (Thanks to lauren7ino for reporting the issue)
 - Updated Restore Settings script to check for a backup file in the /roms/backup folder
+
+v2.0 (06/01/2023)
+- Updated PPSSPP standalone emulator to 1.15.4
+- Added retroarch and retroarch32 core options to backup script (Thanks to lauren7ino for reporting the issue)
+- Fixed ScummVM game save location not changing to roms2 when using 2 sd card setup (Thanks to lauren7ino for reporting the issue)
+- Removed standalone-stock option from Emulationstation for psp and pspmini since it no longer works
