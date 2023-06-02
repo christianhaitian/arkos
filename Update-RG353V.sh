@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06012023"
+UPDATE_DATE="06022023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -2621,7 +2621,7 @@ if [ ! -f "/home/ark/.config/.update05242023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06012023" ]; then
 
 	printf "\nAdd retroarch and retroarch32 core options to backup script\nAdd missing assets for scummvm touch\nFix scummvm save location for sd2 setup and script\nAdd retroarch32 with touch support\nUpdate retroarch touch\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -2696,6 +2696,43 @@ if [ ! -f "$UPDATE_DONE" ]; then
       rm -fv /opt/ppsspp/PPSSPPSDL.rk3326 | tee -a "$LOG_FILE"
     else
       mv -fv /opt/ppsspp/PPSSPPSDL.rk3326 /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"
+	sudo chown -R ark:ark /home/ark
+	sudo chmod -R 755 /home/ark
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06012023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix updated retroarch and retroarch32 experimental touch support\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/06022023/arkosupdate06022023.zip -O /dev/shm/arkosupdate06022023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate06022023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate06022023.zip" ]; then
+		if [ ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')" ] || [ ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+          sudo unzip -X -o /dev/shm/arkosupdate06022023.zip -d / | tee -a "$LOG_FILE"
+		else
+          printf "\nThis update is not meant for this device.  Skipping..." | tee -a "$LOG_FILE"
+		fi
+        sudo rm -fv /dev/shm/arkosupdate06022023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate06022023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	if [ -f "/opt/system/Advanced/Disable Experimental Touch support.sh" ]; then
+	  printf "\nUpdate Experimental Touch support retroarch and retroarch32...\n" | tee -a "$LOG_FILE"
+      cp -fv /opt/retroarch/bin/retroarch32.touch /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
+	  cp -fv /opt/retroarch/bin/retroarch.touch /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nMake sure permissions for the ark home directory are set to 755\n" | tee -a "$LOG_FILE"

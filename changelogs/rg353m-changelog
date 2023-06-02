@@ -267,3 +267,6 @@ v2.0 (06/01/2023)
 - Added missing assets for ScummVM for experimental support for the touchscreen (Thanks to jqno for reporting and researching the issue)
 - Added experimental touch support for retroarch32 for uae4arm 32bit
 - Updated retroarch experimental touch
+
+v2.0 (06/02/2023)
+- Fixed updated retroarch and retroarch32 experimental touch support (Thanks to lauren7ino for reporting the issue) (Thanks to anaximan for the fix)
