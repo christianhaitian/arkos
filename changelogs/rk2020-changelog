@@ -645,3 +645,14 @@ v2.0 (06/01/2023)
 - Updated PPSSPP standalone emulator to 1.15.4
 - Added retroarch and retroarch32 core options to backup script (Thanks to lauren7ino for reporting the issue)
 - Fixed ScummVM game save location not changing to roms2 when using 2 sd card setup (Thanks to lauren7ino for reporting the issue)
+
+v2.0 (06/22/2023)
+- Updated Emulationstation to support 12 hour clock format (Thanks to Batocera) (Thanks to kaath for the suggestion)
+- Updated Emulationstation to fix possible black screen after adding a game to favorites on returning from playing a game (Thanks to Batocera)
+- Updated doom launch script to automatically remove windows carriage returns from .sh scripts (Thanks to Solid One for reporting the issue)
+- Updated perfmax script to not remove .asoundrc file when launching ports (Thanks to romadu and Johnny On Flame for reporting the issue)
+- Added RACE libretro as an additional retroarch core for NeoGeo Pocket and NeoGeo Pocket Color (Thanks to Josep for the suggestion)
+- Added gearcoleco libretro as an additional retroarch core for colecovision
+- Added .d71 and .d81 as supported extensions for Commodore64 (Thanks to zomgugoff for the suggestion)
+- Fixed alt-right contstant input issue for scummvm due to force quit hotkey daemon (Thanks to tonno95 for reporting the issue)
+- Fixed horizontal borders issue for mednafen emulator for SMS (Thanks to sydarn for the fix)
