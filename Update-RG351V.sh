@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="06222023"
+UPDATE_DATE="07232023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -4418,7 +4418,7 @@ if [ ! -f "/home/ark/.config/.update06012023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06222023" ]; then
 
 	printf "\nUpdate emulationstation with 12hr clock and potential black screen on return from gaming\nAdd RACE libretro core\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -4505,6 +4505,103 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  fi
 	fi
 	  
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update06222023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd ONScripter\nAdd mbrola and US voices for espeak-ng\nAdd Quick Mode\nAdd GZdoom and LZdoom settings reset options\nUpdate pico8 script\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/07232023/arkosupdate07232023.zip -O /dev/shm/arkosupdate07232023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate07232023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate07232023.zip" ]; then
+		sudo unzip -X -o /dev/shm/arkosupdate07232023.zip -d / | tee -a "$LOG_FILE"
+		cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update07232023.bak | tee -a "$LOG_FILE"
+		sed -i '/<extension>.32x .32X .smd .SMD .bin .BIN .md .MD .gen .GEN .cue .CUE .iso .ISO .sms .SMS .68k .68K .zip .ZIP .7z .7Z/s//<extension>.32x .32X .smd .SMD .bin .BIN .chd .CHD .md .MD .gen .GEN .cue .CUE .iso .ISO .sms .SMS .68k .68K .zip .ZIP .7z .7Z/' /etc/emulationstation/es_systems.cfg
+		if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep onscripter)"
+		then
+		  sed -i -e '/<theme>microvision<\/theme>/{r /home/ark/add_onscripter.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+		fi
+		if [ ! -d "/roms/onscripter" ]; then
+		  mkdir -v /roms/onscripter | tee -a "$LOG_FILE"
+		  if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+		  then
+		    if [ ! -d "/roms2/onscripter" ]; then
+		      mkdir -v /roms2/onscripter | tee -a "$LOG_FILE"
+			fi
+		    sed -i '/<path>\/roms\/onscripter/s//<path>\/roms2\/onscripter/g' /etc/emulationstation/es_systems.cfg
+		  fi
+		fi
+		if [ -f "/opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh" ]; then
+		  if test -z "$(cat /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | grep mv | tr -d '\0')"
+		  then
+		    sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/onscripter\/" ]\; then\n      sudo mkdir \/roms2\/onscripter\n  fi\n  sudo pkill filebrowser/' /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh
+		  else
+		    printf "\nONScripter is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+		  fi
+		fi
+		if [ -f "/usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh" ]; then
+		  if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep mv | tr -d '\0')"
+		  then
+		    sudo sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/onscripter\/" ]\; then\n      sudo mkdir \/roms2\/onscripter\n  fi\n  sudo pkill filebrowser/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
+		  else
+		    printf "\nONScripter is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+		  fi
+		fi
+		sudo cp -fv /usr/local/bin/finish.sh.orig /usr/local/bin/finish.sh | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/add_onscripter.txt | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate07232023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate07232023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nInstall espeak-ng package\n" | tee -a "$LOG_FILE"
+	sudo apt update -y | tee -a "$LOG_FILE"
+	sudo apt install -y espeak-ng | tee -a "$LOG_FILE"
+
+	printf "\nCopy correct updated ogage depending on device\n" | tee -a "$LOG_FILE"
+	sudo systemctl stop oga_events
+	if [ -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick" ]; then
+	  sudo cp -fv /usr/local/bin/ogage.351v /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	elif [ -e "/dev/input/by-path/platform-odroidgo2-joypad-event-joystick" ]; then
+		if [ ! -z "$(cat /etc/emulationstation/es_input.cfg | grep "190000004b4800000010000001010000" | tr -d '\0')" ]; then
+			sudo cp -fv /usr/local/bin/ogage.rgb10 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+		else
+			sudo cp -fv /usr/local/bin/ogage.2020 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+		fi
+	elif [ -e "/dev/input/by-path/platform-odroidgo3-joypad-event-joystick" ]; then
+		if [ "$(cat ~/.config/.OS)" == "ArkOS" ] && [ "$(cat ~/.config/.DEVICE)" == "RGB10MAX" ]; then
+			sudo cp -fv /usr/local/bin/ogage.rgb10max /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+		else
+			sudo cp -fv /usr/local/bin/ogage.351mp /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+		fi
+	elif [ -e "/dev/input/by-path/platform-gameforce-gamepad-event-joystick" ]; then
+		sudo cp -fv /usr/local/bin/ogage.chi /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	elif [ ! -z "$(grep "RK2023" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+		sudo cp -fv /usr/local/bin/ogage.2023 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	elif [ ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')" ] || [ ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+		sudo cp -fv /usr/local/bin/ogage.353 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	elif [ ! -z "$(grep "RG503" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+		sudo cp -fv /usr/local/bin/ogage.503 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
+	fi
+	sudo systemctl start oga_events
+
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 

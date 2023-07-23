@@ -302,3 +302,23 @@ v2.0 (06/22/2023)
 - Added .d71 and .d81 as supported extensions for Commodore64 (Thanks to zomgugoff for the suggestion)
 - Fixed alt-right contstant input issue for scummvm due to force quit hotkey daemon (Thanks to tonno95 for reporting the issue)
 - Fixed horizontal borders issue for mednafen emulator for SMS (Thanks to sydarn for the fix)
+
+v2.0 (07/23/2023)
+- Added ONScripter libretro core (Thanks to lcdyk for the request)
+- Updated NES-Box Theme to include ONScripter (Thanks to Jetup13 for the update)
+- Updated pico-8 script to modify retroarch config to not load builtin imageviewer if launching a .png
+  file with fake08 core (Thanks to jtothebell for the tip)
+- Installed espeak-ng package for battery level reading
+- Included mbrola us2 male voice for use with espeak-ng
+- Added support for CHD files to Sega 32x (Thanks to thorias for the request)
+- Added ability to speak the current battery level reading (Thanks to JelOS for the idea)
+    RG351MP, RG353M/V/VS, RG503, and RK2023 units = Select + R3
+    RG351V, RK2020/OGA 1.0, RGB10/RGB10s/RGB20/OGA 1.1, and Chi units = Select + R2
+- Added verbal warning when in games if battery level is below 30 percent, then below 20 percent, then below 10 percent
+- Added ability to reset settings for GZdoom and LZdoom (Thanks to jsanchesleao for reporting the issue)
+- Added Quick Mode (Thanks to stupidhoroscope for the guidance and OnionOS for the inspiration)
+    To enable this mode, select Enable Quick Mode from the Options>Advanced menu section in Emulationstation
+    Only works with Retroarch and Retroarch32 based emulators
+    Once enabled, if you do a safe shutdown while in a Retroarch or Retroarch32 emulator,
+    An autosavestate will be created of the current game and the unit will shutdown.  Upon
+    power on, the system will autoboot into the last game and resume the auto savestate.
