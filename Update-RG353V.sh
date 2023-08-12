@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="07232023"
+UPDATE_DATE="08112023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -2840,7 +2840,7 @@ if [ ! -f "/home/ark/.config/.update06222023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update07232023" ]; then
 
 	printf "\nAdd ONScripter\nAdd mbrola and US voices for espeak-ng\nAdd Quick Mode\nAdd GZdoom and LZdoom settings reset options\nUpdate pico8 script\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -2929,6 +2929,115 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		sudo rm -fv /usr/local/bin/ogage.* | tee -a "$LOG_FILE"
 	fi
 	sudo systemctl start oga_events
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update07232023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd workaround for audio channel issue for RG353V/VS units\nAdd ability to disable and change verbal battery warning\nFix wifi osk does not exit for rk3566 devices\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08112023/arkosupdate08112023.zip -O /dev/shm/arkosupdate08112023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate08112023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate08112023.zip" ]; then
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+		  sudo unzip -X -o /dev/shm/arkosupdate08112023.zip -d / | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG503" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+		  sudo unzip -X -o /dev/shm/arkosupdate08112023.zip -x home/ark/.asoundrc-hp usr/local/bin/hpwatchdaemon.sh -d / | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RGB10MAX" ]; then
+		  sudo unzip -X -o /dev/shm/arkosupdate08112023.zip -x home/ark/.asoundrc-hp usr/local/bin/hpwatchdaemon.sh opt/wifi/oga_controls -d / | tee -a "$LOG_FILE"
+		  sudo cp -fv /usr/local/bin/ogage.rgb10max /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		  sudo rm -f /usr/local/bin/ogage.rgb10max | tee -a "$LOG_FILE"
+		else
+		  sudo unzip -X -o /dev/shm/arkosupdate08112023.zip -x home/ark/.asoundrc-hp usr/local/bin/hpwatchdaemon.sh opt/wifi/oga_controls usr/local/bin/ogage.rgb10max -d / | tee -a "$LOG_FILE"
+		fi
+		sudo rm -fv /dev/shm/arkosupdate08112023.zip | tee -a "$LOG_FILE"
+	else
+		printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+		sudo rm -fv /dev/shm/arkosupdate08112023.z* | tee -a "$LOG_FILE"
+		sleep 3
+		echo $c_brightness > /sys/class/backlight/backlight/brightness
+		exit 1
+	fi
+
+	printf "\nCheck if quickboot mode is enabled and if it is, replace quickmode.sh script\n" | tee -a "$LOG_FILE"
+	if [ -f "/opt/system/Advanced/Disable\ Quick\ Mode.sh" ]; then
+	  printf " quickmode.sh has been udpated" | tee -a "$LOG_FILE"
+	else
+	  sudo rm -fv /usr/local/bin/quickmode.sh | tee -a "$LOG_FILE"
+	  sudo cp -fv /usr/local/bin/Enable\ Quick\ Mode.sh /opt/system/Advanced/Enable\ Quick\ Mode.sh | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	  if [ "$test" = "3314512" ]; then
+	    sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  elif [ -f "/home/ark/.config/.DEVICE" ]; then
+		sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  fi
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  fi
+	  sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nComment out the need to switch SDL when enabling touch mode as new SDL now has touch support included by default\n" | tee -a "$LOG_FILE"
+	sudo sed -i 's/sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/\# sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/' /usr/local/bin/experimental/Enable\ Experimental\ Touch\ support.sh
+	sudo sed -i 's/sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/\# sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/' /usr/local/bin/experimental/Disable\ Experimental\ Touch\ support.sh
+	if [ -f "/opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh" ]; then
+	  sed -i 's/sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/\# sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/' /opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh
+	fi
+	if [ -f "/opt/system/Advanced/Disable\ Experimental\ Touch\ support.sh" ]; then
+	  sed -i 's/sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/\# sudo cp -fv \/usr\/local\/bin\/experimental\/libSDL2/' /opt/system/Advanced/Disable\ Experimental\ Touch\ support.sh
+	fi
+	
+	printf "\nInstall and link new SDL 2.0.2800.2 (aka SDL 2.0.28.2)\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.2800.2.rk3566 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.2800.2.rk3566 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.2800.2.rk3326 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.2800.2.rk3326 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
+	else
+	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.2800.2.rotated /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.2800.2.rotated /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
+	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
+	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
+	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
