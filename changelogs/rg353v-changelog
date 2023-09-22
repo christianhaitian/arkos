@@ -335,3 +335,21 @@ v2.0 (08/11/2023)
 - Fixed force quit fails if onscreen keyboard is active while in the wifi setup script (Thanks to RumblePen for reporting the issue)
 - Fixed Quick mode to not start Emulationstation during shutdown while in quickboot mode from previous quickboot (Thanks to EchoFiend2000 for reporting the issue and helping to test the fix)
 - Updated SDL2 to version 2.0.28.2
+
+v2.0 (09/21/2023)
+- Fixed Quick mode not starting emulationstation when quitting to emulationstation (Thanks to arnomolly for reporting the issue and testing the fix)
+- Fixed Quick mode sometimes fails to shutdown with some emulators
+- Fixed typo in Disable Quick Mode script
+- Updated Hypseus-Singe to 2.11.1
+- Updated PPSSPP Standalone emulator to 1.16.2
+- Updated pico8 script to be able to load splore by holding the B button after launching a cart from ES
+- Updated Fake08 standalone emulator
+- Updated restore default drastic settings script to include rk2023 and rgb30 units
+- Update sleep script to check if unit is loaded in quick mode when coming out of sleep
+- Added ability to boot into pico-8 standalone via Quick mode
+- Added ability to swap power button tap from suspend to power off to emulationstation.
+- Added ppsspp default controls script to Options>Advanced section
+- Added Wasm-4 fantasy console emulation support (Thanks to akhenakh for the recommendation)
+- Added Thomson computer emulation support (Thanks to kamelie1706 for the recommendation)
+- Added scraping support for Thomson computer to emulationstation
+- Added symlink for /home/ark/.asoundrc to /etc/asound.cfg
