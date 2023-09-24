@@ -572,3 +572,9 @@ v2.0 (09/21/2023)
 - Added Wasm-4 fantasy console emulation support (Thanks to akhenakh for the recommendation)
 - Added Thomson computer emulation support (Thanks to kamelie1706 for the recommendation)
 - Added scraping support for Thomson computer to emulationstation
+
+v2.0 (09/23/2023)
+- Fixed slowdown of Emulationstation booting when scanning the ports folder with many ports installed
+- Fixed restore psp default controls script from last update in Options/Advanced section (Thanks to TBS for reporting the issue)
+- Updated Fix Global Hotkeys script in Options/Advanced section
+- Updated retroarch and retroarch32 to version 1.16

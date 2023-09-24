@@ -134,3 +134,10 @@ v2.0 (09/21/2023)
 - Added Thomson computer emulation support (Thanks to kamelie1706 for the recommendation)
 - Added scraping support for Thomson computer to emulationstation
 - Added symlink for /home/ark/.asoundrc to /etc/asound.cfg
+
+v2.0 (09/23/2023)
+- Added support for USB DAC (Beta feature and needs further testing) (Thanks to Zomgugoff for the request and MetroidFusion for testing)
+- Fixed slowdown of Emulationstation booting when scanning the ports folder with many ports installed
+- Fixed restore psp default controls script from last update in Options/Advanced section (Thanks to TBS for reporting the issue)
+- Updated Fix Global Hotkeys script in Options/Advanced section
+- Updated retroarch and retroarch32 to version 1.16
