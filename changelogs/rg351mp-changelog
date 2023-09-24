@@ -427,3 +427,6 @@ v2.0 (09/23/2023)
 - Fixed restore psp default controls script from last update in Options/Advanced section (Thanks to TBS for reporting the issue)
 - Updated Fix Global Hotkeys script in Options/Advanced section
 - Updated retroarch and retroarch32 to version 1.16
+
+v2.0 (09/24/2023)
+- Updated quickmode scripts to disable while statement as it caused issues with quickmode when initiated again while in an existing quickmode
