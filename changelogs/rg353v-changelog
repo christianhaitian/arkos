@@ -364,3 +364,14 @@ v2.0 (09/23/2023)
 v2.0 (09/24/2023)
 - Updated quickmode scripts to disable while statement as it caused issues with quickmode when initiated again while in an existing quickmode
 - Updated support for USB DAC (Beta feature and needs further testing)
+
+v2.0 (09/29/2023)
+- Updated PPSSPP Standalone to 1.16.5
+- Updated GZDoom to 4.11.0
+- Updated Emulationstation to update last played collection before launch of game when quickmode is enabled (Thanks to MetroidFusion for the suggestion)
+- Updated Emulationstation to set brightness to 0 when in black screensaver behavior is set
+- Updated Enable and Disable quick mode scripts so that restoring retroarch and retroarch32 defaults doesn't impact quick mode when enabled. (Thanks to fishku for reporting the issue)
+- Updated quickmode script to improve reliability with ps1 games
+- Updated support for USB DAC (Beta feature and needs further testing)
+- Removed PowerSaverMode setting from emulationstation
+- Renamed videos folder to movies to fix subfolders not showing up
