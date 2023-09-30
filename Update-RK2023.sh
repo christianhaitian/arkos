@@ -3139,7 +3139,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nRename videos folder to movies\n" | tee -a "$LOG_FILE"
 	sudo mv -v /roms/videos/ /roms/movies/ | tee -a "$LOG_FILE"
-	if [ ! -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
+	if [ -f "/opt/system/Advanced/Switch to main SD for Roms.sh" ]; then
 	  sudo mv -v /roms2/videos/ /roms2/movies/ | tee -a "$LOG_FILE"
 	fi
 	sed -i '/\/videos\//s//\/movies\//' /etc/emulationstation/es_systems.cfg
