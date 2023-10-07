@@ -721,3 +721,8 @@ v2.0 (09/29/2023)
 - Updated Enable and Disable quick mode scripts so that restoring retroarch and retroarch32 defaults doesn't impact quick mode when enabled. (Thanks to fishku for reporting the issue)
 - Updated quickmode script to improve reliability with ps1 games
 - Renamed videos folder to movies to fix subfolders not showing up
+
+v2.0 (10/06/2023)
+- Updated Retroarch and Retroarch32 to 1.16.0.3 (14cb3732eb)
+- Updated wpasupplicant to version 2.10 to fix compatibility with wireless fast roaming
+- Updated NetworkManager to version 1.22.10

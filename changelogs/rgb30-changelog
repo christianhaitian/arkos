@@ -55,3 +55,10 @@ v2.0 (09/29/2023)
 - Updated support for USB DAC (Beta feature and needs further testing)
 - Removed PowerSaverMode setting from emulationstation
 - Renamed videos folder to movies to fix subfolders not showing up
+
+v2.0 (10/06/2023)
+- Updated Retroarch and Retroarch32 to 1.16.0.3 (14cb3732eb)
+- Updated wpasupplicant to version 2.10 to fix compatibility with wireless fast roaming
+- Updated NetworkManager to version 1.22.10
+- Updated Wifi script
+- Updated Kodi to 20.2 Nexus
