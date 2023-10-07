@@ -4321,6 +4321,10 @@ if [ ! -f "/home/ark/.config/.update09292023" ]; then
 	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
 	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	  cd /usr/lib/aarch64-linux-gnu/
+	  sudo ln -sf libMali.so libGLES_CM.so
+	  ldconfig
+	  cd /home/ark
 	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
 	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
 	  if [ "$test" = "3318608" ]; then
@@ -4434,6 +4438,10 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.2800.2 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
 	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.2800.2 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
+	  cd /usr/lib/aarch64-linux-gnu/
+	  sudo ln -sf libMali.so libGLES_CM.so
+	  ldconfig
+	  cd /home/ark
 	else
 	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
 	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
