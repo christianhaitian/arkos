@@ -468,3 +468,15 @@ v2.0 (10/06/2023)
 - Updated Wifi script
 - Updated Emulationstation to not reduce brightness on the rg503 when going black as it's not needed and causes the screen to stay on instead
 - Updated Kodi to 20.2 Nexus
+
+v2.0 (10/16/2023)
+- Cleaned up unneeded left over files in the Kodi folder from last udpate
+- Replaced OnScreen Keyboard (osk) with Onscreen Keyboard from RetroPie (Thanks to cmitu and the RetroPie project)
+- Replaced msgbox with an open source msgbox solution
+- Installed urwid python3 module for use with the new osk
+- Updated bluetooth watch script to not impact quickmode when shutting down while in a quick mode boot sequence (Thanks to Lamcza for reporting the issue and troubleshooting assist)
+- Updated wifion script to properly enable NetworkManager when run (Thanks to TapperP for reporting the issue.  Thanks to Omanni for confirming the issue and testing the solution)
+- Updated PPSSPP Standalone to 1.16.6
+- Removed Enable Developer Mode script from Options>Advanced section
+  - Best to follow the directions at https://github.com/christianhaitian/arkos/tree/main/Headers for enabling developer mode
+- Removed bionic and focal apt repositories as they may cause issues for future updates

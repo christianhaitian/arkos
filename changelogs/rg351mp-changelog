@@ -445,3 +445,9 @@ v2.0 (10/06/2023)
 - Updated Retroarch and Retroarch32 to 1.16.0.3 (14cb3732eb)
 - Updated wpasupplicant to version 2.10 to fix compatibility with wireless fast roaming
 - Updated NetworkManager to version 1.22.10
+
+v2.0 (10/16/2023)
+- Updated PPSSPP Standalone to 1.16.6
+- Removed Enable Developer Mode script from Options>Advanced section
+  - Best to follow the directions at https://github.com/christianhaitian/arkos/tree/main/Headers for enabling developer mode
+- Removed bionic and focal apt repositories as they may cause issues for future updates
