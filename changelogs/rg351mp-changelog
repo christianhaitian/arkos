@@ -451,3 +451,13 @@ v2.0 (10/16/2023)
 - Removed Enable Developer Mode script from Options>Advanced section
   - Best to follow the directions at https://github.com/christianhaitian/arkos/tree/main/Headers for enabling developer mode
 - Removed bionic and focal apt repositories as they may cause issues for future updates
+
+v2.0 (11/04/2023)
+- Updated wifi setup tool
+- Updated pico8 launch script to use msgbox for warnings about missing pico8 official binaries.
+- Updated wifi script to account for special characters such as spaces in SSIDs. (Thanks to Quack for the fix)
+- Updated osk to not change the screen font for 480x320 devices
+- Updated msgbox to not change the screen font for 480x320 devices
+- Updated ogage to account for usb dac support
+- Cleaned up Backup ArkOS settings and Restore ArkOS settings scripts
+- Added USB DAC support for rk3326 devices

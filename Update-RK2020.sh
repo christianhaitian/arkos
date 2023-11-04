@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10162023"
+UPDATE_DATE="11042023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -5767,7 +5767,7 @@ if [ ! -f "/home/ark/.config/.update10062023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update10162023" ]; then
 
 	printf "\nUpdate bluetooth watch script\nUpdate Wifi script and OSK\nUpdated wifion script\nUpdated PPSSPP to 1.16.6\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -5836,14 +5836,151 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
+	touch "/home/ark/.config/.update10162023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd ability to hide Kodi in emulationstation\nUpdate bluetooth script for rk3566 devices\nUpdate wifi script\nUpdate osk\nUpdate msgbox\nReplace wifi script, osk and msgbox on rk3326 devices\nUpdate ogage for rk3326 devices\nUpdated extlinux.conf file\nUpdate pico8.sh script\nUpdate volume.sh file for rk3566 devices\nUpdate spktoggle.sh for powkiddy rk3566 devices\nUpdate rk3566 kernel to support double buffering and disable some unneeded control groups\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/11042023/arkosupdate11042023.zip -O /dev/shm/arkosupdate11042023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate11042023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate11042023.zip" ]; then
+	  if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	    if [ "$(cat ~/.config/.DEVICE)" = "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+	      sudo unzip -X -o /dev/shm/arkosupdate11042023.zip -d / | tee -a "$LOG_FILE"
+		else
+	      sudo unzip -X -o /dev/shm/arkosupdate11042023.zip -x usr/local/bin/spktoggle.sh -d / | tee -a "$LOG_FILE"
+		fi
+	  else
+	    sudo unzip -X -o /dev/shm/arkosupdate11042023.zip -x home/ark/Image.* opt/system/Bluetooth.sh usr/bin/emulationstation/emulationstation boot/extlinux/extlinux.conf usr/local/bin/volume.sh -d / | tee -a "$LOG_FILE"
+	  fi
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+	  printf "\nRemoving second scummvm install\n" | tee -a "$LOG_FILE"
+	  sed -i "/mv -fv \/opt\/scummvm/s//#mv -fv \/opt\/scummvm/" /opt/system/Advanced/"Enable Experimental Touch support".sh
+	  sed -i "/mv -fv \/opt\/scummvm/s//#mv -fv \/opt\/scummvm/" /opt/system/Advanced/"Disable Experimental Touch support".sh
+	  sudo sed -i "/mv -fv \/opt\/scummvm/s//#mv -fv \/opt\/scummvm/" /usr/local/bin/experimental/"Enable Experimental Touch support".sh
+	  sudo sed -i "/mv -fv \/opt\/scummvm/s//#mv -fv \/opt\/scummvm/" /usr/local/bin/experimental/"Disable Experimental Touch support".sh
+	  sed -i "/cp -fv \/opt\/retroarch\/bin\/retroarch/s//#cp -fv \/opt\/retroarch\/bin\/retroarch/" /opt/system/Advanced/"Enable Experimental Touch support".sh
+	  sed -i "/cp -fv \/opt\/retroarch\/bin\/retroarch/s//#cp -fv \/opt\/retroarch\/bin\/retroarch/" /opt/system/Advanced/"Disable Experimental Touch support".sh
+	  sudo sed -i "/cp -fv \/opt\/retroarch\/bin\/retroarch/s//#cp -fv \/opt\/retroarch\/bin\/retroarch/" /usr/local/bin/experimental/"Enable Experimental Touch support".sh
+	  sudo sed -i "/cp -fv \/opt\/retroarch\/bin\/retroarch/s//#cp -fv \/opt\/retroarch\/bin\/retroarch/" /usr/local/bin/experimental/"Disable Experimental Touch support".sh
+	  if [ -d "/opt/scummvm.orig" ]; then
+	    sudo rm -rfv /opt/scummvm.orig | tee -a "$LOG_FILE"
+	  elif [ -d "/opt/scummvm.touch" ]; then
+	    sudo rm -rfv /opt/scummvm | tee -a "$LOG_FILE"
+		sudo mv -fv /opt/scummvm.touch/ /opt/scummvm/ | tee -a "$LOG_FILE"
+		sudo chown -Rv ark:ark /opt/scummvm/ | tee -a "$LOG_FILE"
+	  fi
+	fi
+
+	if [ -f "/boot/rk3326-rg351v-linux.dtb" ]; then
+	  sudo rm -fv /usr/local/bin/msgbox | tee -a "$LOG_FILE"
+	fi
+
+	if [ -f "/opt/system/Advanced/Backup Settings.sh" ]; then
+	  sudo rm -fv /opt/system/Advanced/"Backup Settings.sh" | tee -a "$LOG_FILE"
+	  sudo rm -fv /opt/system/Advanced/"Restore Settings.sh" | tee -a "$LOG_FILE"
+	fi
+
+	if [ ! -f "/boot/rk3566.dtb" ] && [ ! -f "/boot/rk3566-OC.dtb" ]; then
+	  printf "\nCreating 20-usb-alsa.rules udev for usb dac support\n" | tee -a "$LOG_FILE"
+	  echo 'KERNEL=="controlC[0-9]*", DRIVERS=="usb", SYMLINK="snd/controlC7"' | sudo tee /etc/udev/rules.d/20-usb-alsa.rules | tee -a "$LOG_FILE"
+	  printf "\nAdd check on boot for a connected usb dac\n" | tee -a "$LOG_FILE"
+	  if test -z "$(sudo cat /var/spool/cron/crontabs/root | grep 'checknswitchforusbdac' | tr -d '\0')"
+	  then
+	    echo "@reboot /usr/local/bin/checknswitchforusbdac.sh &" | sudo tee -a /var/spool/cron/crontabs/root | tee -a "$LOG_FILE"
+	  else
+	    printf " USB Dac check script has already been added to crontab.  No need to do it again." | tee -a "$LOG_FILE"
+	  fi
+	fi
+
+	printf "\nCopy correct updated ogage depending on device\n" | tee -a "$LOG_FILE"
+	sudo systemctl stop oga_events
+	if [ "$(cat ~/.config/.DEVICE)" = "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+	  sudo cp -fv /home/ark/ogage-rk2023 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	elif [ "$(cat ~/.config/.DEVICE)" = "RG353V" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353M" ]; then
+	  sudo cp -fv /home/ark/ogage-rg353v /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	elif [ "$(cat ~/.config/.DEVICE)" = "RG503" ]; then
+	  sudo cp -fv /home/ark/ogage-rg503 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	elif [ -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick" ]; then
+	  sudo cp -fv /home/ark/ogage-rg351v /usr/local/bin/ogage | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	elif [ -e "/dev/input/by-path/platform-odroidgo2-joypad-event-joystick" ]; then
+		if [ ! -z "$(cat /etc/emulationstation/es_input.cfg | grep "190000004b4800000010000001010000" | tr -d '\0')" ]; then
+			sudo cp -fv /home/ark/ogage-rgb10 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+		else
+			sudo cp -fv /home/ark/ogage-rk2020 /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+		fi
+	elif [ -e "/dev/input/by-path/platform-odroidgo3-joypad-event-joystick" ]; then
+		if [ "$(cat ~/.config/.OS)" = "ArkOS" ] && [ "$(cat ~/.config/.DEVICE)" = "RGB10MAX" ]; then
+			sudo cp -fv /home/ark/ogage-rgb10max /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+		else
+			sudo cp -fv /home/ark/ogage-rg351mp /usr/local/bin/ogage | tee -a "$LOG_FILE"
+			sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+		fi
+	elif [ -e "/dev/input/by-path/platform-gameforce-gamepad-event-joystick" ]; then
+		sudo cp -fv /home/ark/ogage-gameforce-chi /usr/local/bin/ogage | tee -a "$LOG_FILE"
+		sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	else
+	    sudo rm -fv /home/ark/ogage-* | tee -a "$LOG_FILE"
+	fi
+	sudo systemctl start oga_events
+
+	if [ "$(cat ~/.config/.DEVICE)" = "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+	  printf "\nMaking sure this unit is not muted in case it was done accidently and user is unaware of the hotkey to unmute it\n" | tee -a "$LOG_FILE"
+	  amixer -q sset 'Playback Path' HP
+	fi
+
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  printf "\nCopy updated kernel based on device\n" | tee -a "$LOG_FILE"
+	  if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
+	    sudo mv -fv /home/ark/Image.353 /boot/Image | tee -a "$LOG_FILE"
+	    sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+	  elif [ "$(cat ~/.config/.DEVICE)" = "RGB30" ]; then
+        sudo mv -fv /home/ark/Image.rgb30 /boot/Image | tee -a "$LOG_FILE"
+	    sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+	  elif [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+        sudo mv -fv /home/ark/Image.rk2023 /boot/Image | tee -a "$LOG_FILE"
+	    sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+	  else
+        sudo mv -fv /home/ark/Image.503 /boot/Image | tee -a "$LOG_FILE"
+	    sudo rm -fv /home/ark/Image.* | tee -a "$LOG_FILE"
+	  fi
+	fi
+
+	if [ ! -f "/boot/rk3566.dtb" ] && [ ! -f "/boot/rk3566-OC.dtb" ]; then
+	  printf "\nInstall python3 urwid module\n" | tee -a "$LOG_FILE"
+	  sudo apt -y update && sudo apt -y install -t eoan python3-urwid | tee -a "$LOG_FILE"
+	fi
+
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  printf "\nVerify old abandoned bluetooth settings are deleted\n" | tee -a "$LOG_FILE"
+	  sudo rm -rfv /var/lib/bluetooth/* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
-	if [ -f "/boot/rk3326-rg351v-linux.dtb" ]; then
-	  LD_LIBRARY_PATH=/usr/local/bin msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
-	else
-	  msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
-	fi
+	msgbox "Updates have been completed.  System will now restart after you hit the A button to continue.  If the system doesn't restart after pressing A, just restart the system manually."
 	echo $c_brightness > /sys/class/backlight/backlight/brightness
 	sudo reboot
 	exit 187
