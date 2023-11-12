@@ -91,7 +91,7 @@ AS WELL.  DO NOT STOP THIS SCRIPT UNTIL IT IS COMPLETED OR THIS DISTRIBUTION MAY
 IN A STATE OF UNUSABILITY.  You've been warned!  Type GODEV in the next screen to proceed."
 my_var=`osk "Enter GODEV here to proceed." | tail -n 1`
 
-echo "$my_var" | tee -a "$LOG_FILE"
+echo "$my_var"
 
 if [ "$my_var" != "GODEV" ] && [ "$my_var" != "godev" ]; then
   sudo msgbox "You didn't type GODEV.  This script will exit now and no changes have been made from this process."
