@@ -102,6 +102,7 @@ v2.0 (11/04/2023)
 
 v2.0 (12/08/2023)
 - Updated emulationstation to add Update Games List option to gamelist menu
+- Updated emulationstation to add the ability to sort systems alphabetically (Thanks to Froist for adding this capability)
 - Updated emulationstation to not show hidden folders and their content in system folders (Thanks to Manfred282 for the request and testing)
 - Updated emulationstation to not show DLC content for PSP (Thanks to Manfred282 for the request and testing)
 - Updated emulationstation to add the ability to scan the ports folder on boot or not (Thanks to Metrograde for reporting the m8 headless project issue and testing)
