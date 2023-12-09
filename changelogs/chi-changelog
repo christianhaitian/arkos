@@ -481,3 +481,27 @@ v2.0 (11/04/2023)
 - Updated ogage to account for usb dac support
 - Cleaned up Backup ArkOS settings and Restore ArkOS settings scripts
 - Added USB DAC support for rk3326 devices
+
+v2.0 (12/08/2023)
+- Updated emulationstation to add Update Games List option to gamelist menu
+- Updated emulationstation to not show hidden folders and their content in system folders (Thanks to Manfred282 for the request and testing)
+- Updated emulationstation to not show DLC content for PSP (Thanks to Manfred282 for the request and testing)
+- Updated emulationstation to add the ability to scan the ports folder on boot or not (Thanks to Metrograde for reporting the m8 headless project issue and testing)
+- Updated buttonmon.sh to add support for detecting X, Y, L1, L2, R1, and R2 buttons
+- Updated Quick Mode to add the ability to delete a corrupted auto save state by holding R1 while booting into a quick mode game
+- Updated osk and msgbox to default to Lat7-TerminusBold20x10 console font if a odroid go 2 input is found for any reason
+- Updated keys.gptk in /opt/inttools to set L1 and R1 to Page Up and Page Down respectively
+- Updated NetworkManager to 1.44.2
+- Updated wpa_supplicant.service to make use of wpa_supplicant.conf file
+- Updated Wifi setup script to fix console font
+- Updated 8821cs.conf file
+- Fixed restore default settings scripts for GZdoom and LZdoom (Thanks to Wilderness for reporting the issue)
+- Added solution to automatically restore audio on reboot if /home/ark/.asoundrc file is missing or empty to address potential no audio issues
+- Added Sameboy retroarch emulator for Game Boy and Game Boy color
+- Added wpa_supplicant.conf to allow wpa_cli to scan for networks
+- Added Backup and Restore ArkOS settings options to BaRT
+- Added Adhoc Netplay support for retroarch and retroarch32
+ - Just hold the X button after launching a retroarch or retroarch32 based game from Emulationstation then pick host or client mode
+   See the FAQ available from the ArkOS wiki (http://arkos.hopto.me) for your unit for more info on this feature.
+- Added Game Share feature for retroarch and retroarch32 from the Adhoc Netplay session menu
+  See the FAQ available from the ArkOS wiki (http://arkos.hopto.me) for your unit for more info on this feature.

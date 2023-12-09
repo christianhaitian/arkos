@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="11042023"
+UPDATE_DATE="12082023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -636,7 +636,7 @@ if [ ! -f "/home/ark/.config/.update10162023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11042023" ]; then
 
 	printf "\nAdd ability to hide Kodi in emulationstation\nUpdate bluetooth script for rk3566 devices\nUpdate wifi script\nUpdate osk\nUpdate msgbox\nReplace wifi script, osk and msgbox on rk3326 devices\nUpdate ogage for rk3326 devices\nUpdated extlinux.conf file\nUpdate pico8.sh script\nUpdate volume.sh file for rk3566 devices\nUpdate spktoggle.sh for powkiddy rk3566 devices\nUpdate rk3566 kernel to support double buffering and disable some unneeded control groups\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -769,6 +769,113 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  printf "\nVerify old abandoned bluetooth settings are deleted\n" | tee -a "$LOG_FILE"
 	  sudo rm -rfv /var/lib/bluetooth/* | tee -a "$LOG_FILE"
 	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update11042023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Emulationstation to add Update Games list option to gamelist menu\nUpdate Emulationstation to not show hidden folders\nFix restore default settings scripts for GZdoom and LZdoom\nUpdate NetworkManager to 1.44.2\nUpdate 8821cs.conf file\nAdd missing inputstream.adaptive addon for Kodi 20.2\nAdd workaround for possible audio disappearing issue\nUpdate buttonmon.sh to add r1,r2,l1,l2 buttons\nAdd ability to delete auto savestates during quick mode boot\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12082023/arkosupdate12082023.zip -O /dev/shm/arkosupdate12082023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12082023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate12082023.zip" ]; then
+	  if [ "$(cat ~/.config/.DEVICE)" = "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ]; then
+	    sudo unzip -X -o /dev/shm/arkosupdate12082023.zip -d / | tee -a "$LOG_FILE"
+	  elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	    sudo unzip -X -o /dev/shm/arkosupdate12082023.zip -x usr/local/bin/volume.sh -d / | tee -a "$LOG_FILE"
+	  else
+	    sudo unzip -X -o /dev/shm/arkosupdate12082023.zip -x usr/local/bin/volume.sh "opt/kodi/*" -d / | tee -a "$LOG_FILE"
+	  fi
+	  cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update12082023.bak | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nInstall some local netplay hosting needed services\n" | tee -a "$LOG_FILE"
+	sudo apt update -y && sudo apt -y -o Dpkg::Options::="--force-confold" install dnsmasq ed hostapd sshpass | tee -a "$LOG_FILE"
+	sudo systemctl unmask hostapd.service
+	sudo systemctl disable hostapd.service
+	sudo systemctl disable dnsmasq.service
+	sudo systemctl daemon-reload
+
+	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	  if [ "$test" = "3318608" ]; then
+	    sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  elif [ -f "/home/ark/.config/.DEVICE" ]; then
+		sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  fi
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  fi
+	  sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'sameboy' | tr -d '\0')"
+	then
+	  printf "\nAdd sameboy core for Game Boy and Game boy color\n"
+	  sed -i '/<core>tgbdual<\/core>/c\\t\t\t  <core>sameboy<\/core>\n\t\t\t  <core>tgbdual<\/core>' /etc/emulationstation/es_systems.cfg
+	fi
+
+	#if test -z "$(grep "<manufacturer>" /etc/emulationstation/es_systems.cfg | tr -d '\0')"
+	#then
+	#  printf "\nBackup and update es_systems.cfg for new sorting and go to function\n"
+	#  ed /etc/emulationstation/es_systems.cfg < /home/ark/es_man_year_hardware.txt | tee -a "$LOG_FILE"
+	#  sudo rm -rf /home/ark/es_man_year_hardware.txt | tee -a "$LOG_FILE"
+	#fi
+
+	if test -z "$(cat /usr/bin/emulationstation/emulationstation.sh | grep 'Backup' | tr -d '\0')"
+	then
+	  printf "\nAdd Backup and Restore ArkOS settings to BaRT\n" | tee -a "$LOG_FILE"
+	  sudo sed -i "/\"7)\"/s//\"9)\"/" /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.ra /usr/bin/emulationstation/emulationstation.sh.es
+	  sudo sed -i "/\"6)\"/s//\"8)\"/" /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.ra /usr/bin/emulationstation/emulationstation.sh.es
+	  sudo sed -i "/\"5)\" \"351Files\"/s//\"5)\" \"351Files\"\n                  \"6)\" \"Backup ArkOS Settings\"\n                  \"7)\" \"Restore ArkOS Settings\"/" /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.ra /usr/bin/emulationstation/emulationstation.sh.es
+	  sudo sed -i "/\"8)\") sudo reboot/s//\"6)\") sudo kill -9 \$(pidof boot_controls)\n                                \/opt\/system\/Advanced\/\"Backup ArkOS Settings.sh\" 2>\&1 > \/dev\/tty1\n                                sudo .\/boot_controls none \$param_device \&\n                                ;;\n                          \"7)\") sudo kill -9 \$(pidof boot_controls)\n                                \/opt\/system\/Advanced\/\"Restore ArkOS Settings.sh\" 2>\&1 > \/dev\/tty1\n                                sudo .\/boot_controls none \$param_device \&\n                                ;;\n                          \"8)\") sudo reboot/" /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.ra /usr/bin/emulationstation/emulationstation.sh.es
+	fi
+
+	if [ ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')" ] || [ ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')" ]; then
+	  if [ -z "$(grep 'event_num="4"' /usr/bin/emulationstation/emulationstation.sh | tr -d '\0')" ]; then
+	    printf "\nFix access to BarT when touch support is enabled...\n" | tee -a "$LOG_FILE"
+	    if [ -f "/opt/system/Advanced/Enable Experimental Touch support.sh" ]; then
+	      cp -fv /usr/local/bin/experimental/Enable\ Experimental\ Touch\ support.sh /opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh | tee -a "$LOG_FILE"
+	    else
+	      sudo sed -i "0,/event_num=\"3\"/s//event_num=\"4\"/" /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.ra /usr/bin/emulationstation/emulationstation.sh.es
+	      cp -fv /usr/local/bin/experimental/Disable\ Experimental\ Touch\ support.sh /opt/system/Advanced/Disable\ Experimental\ Touch\ support.sh | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	else
+	  if [ -d "/usr/local/bin/experimental" ]; then
+	    sudo rm -rfv /usr/local/bin/experimental/
+	  fi
+	fi
+
+	printf "\nRemoving settings in emulationstation.sh that can be impacting .asoundrc being inadvertently deleted\n" | tee -a "$LOG_FILE"
+	sudo sed -i '/sudo chown ark:ark/d' /usr/bin/emulationstation/emulationstation.sh*
+	sudo sed -i '/cp \/home\/ark\/.asoundrcbak/d' /usr/bin/emulationstation/emulationstation.sh*
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
