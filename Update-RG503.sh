@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="12082023"
+UPDATE_DATE="12152023"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -4260,7 +4260,7 @@ if [ ! -f "/home/ark/.config/.update11042023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12082023" ]; then
 
 	printf "\nUpdate Emulationstation to add Update Games list option to gamelist menu\nUpdate Emulationstation to not show hidden folders\nFix restore default settings scripts for GZdoom and LZdoom\nUpdate NetworkManager to 1.44.2\nUpdate 8821cs.conf file\nAdd missing inputstream.adaptive addon for Kodi 20.2\nAdd workaround for possible audio disappearing issue\nUpdate buttonmon.sh to add r1,r2,l1,l2 buttons\nAdd ability to delete auto savestates during quick mode boot\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -4359,6 +4359,132 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nRemoving settings in emulationstation.sh that can be impacting .asoundrc being inadvertently deleted\n" | tee -a "$LOG_FILE"
 	sudo sed -i '/sudo chown ark:ark/d' /usr/bin/emulationstation/emulationstation.sh*
 	sudo sed -i '/cp \/home\/ark\/.asoundrcbak/d' /usr/bin/emulationstation/emulationstation.sh*
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12082023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd ep128emu and update default theme\nFix emulationstation not showing folders containing dots within the name but not at the beginning\nFix osk, msgbox and Wifi.sh for 480x320 devices\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/12152023/arkosupdate12152023.zip -O /dev/shm/arkosupdate12152023.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate12152023.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate12152023.zip" ]; then
+	  if [ "$(cat ~/.config/.DEVICE)" = "RGB30" ]; then
+	    sudo unzip -X -o /dev/shm/arkosupdate12152023.zip -x "roms/themes/es-theme-nes-box/*" -d / | tee -a "$LOG_FILE"
+	  else
+	    sudo unzip -X -o /dev/shm/arkosupdate12152023.zip -x "roms/themes/es-theme-sagabox/*" -d / | tee -a "$LOG_FILE"
+	  fi
+	  if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep ep128emu)"
+	  then
+	    cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update12152023.bak | tee -a "$LOG_FILE"
+	    sed -i -e '/<theme>pico-8<\/theme>/{r /home/ark/add_ep128emu.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+	  fi
+	  if [ ! -d "/roms/enterprise" ]; then
+	    mkdir -v /roms/enterprise | tee -a "$LOG_FILE"
+	  fi
+	  if [ ! -d "/roms/tvc" ]; then
+	    mkdir -v /roms/tvc | tee -a "$LOG_FILE"
+	  fi
+	  if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	  then
+	    if [ ! -d "/roms2/enterprise" ]; then
+	  	  mkdir -v /roms2/enterprise | tee -a "$LOG_FILE"
+	  	  sed -i '/<path>\/roms\/enterprise/s//<path>\/roms2\/enterprise/g' /etc/emulationstation/es_systems.cfg
+	    fi
+	    if [ ! -d "/roms2/tvc" ]; then
+	  	  mkdir -v /roms2/tvc | tee -a "$LOG_FILE"
+	  	  sed -i '/<path>\/roms\/tvc/s//<path>\/roms2\/tvc/g' /etc/emulationstation/es_systems.cfg
+	    fi
+	  fi
+	  if [ -f "/opt/system/Advanced/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | grep enterprise | tr -d '\0')"
+	    then
+	  	  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+	  	  sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/enterprise\/" ]\; then\n      sudo mkdir \/roms2\/enterprise\n  fi\n  sudo pkill filebrowser/' /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+	  	  printf "\nEnterprise 64/128 is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	    if test -z "$(cat /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | grep tvc | tr -d '\0')"
+	    then
+	  	  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+	  	  sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/tvc\/" ]\; then\n      sudo mkdir \/roms2\/tvc\n  fi\n  sudo pkill filebrowser/' /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+	  	  printf "\nVideoton TV Computer is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  if [ -f "/usr/local/bin/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep enterprise | tr -d '\0')"
+	    then
+	  	  sudo sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/enterprise\/" ]\; then\n      sudo mkdir \/roms2\/enterprise\n  fi\n  sudo pkill filebrowser/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+	  	  printf "\nEnterprise 64/128 is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  if [ -f "/usr/local/bin/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep tvc | tr -d '\0')"
+	    then
+	  	  sudo sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/tvc\/" ]\; then\n      sudo mkdir \/roms2\/tvc\n  fi\n  sudo pkill filebrowser/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+	  	  printf "\nVideoton TV Computer is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  sudo rm -fv /home/ark/add_ep128emu.txt | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	  if [ "$test" = "3339088" ]; then
+	    sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  elif [ -f "/home/ark/.config/.DEVICE" ]; then
+		sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  fi
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  fi
+	  sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	if test ! -z "$(cat /usr/bin/emulationstation/emulationstation.sh | grep 'setfont' | tr -d '\0')"
+	then
+	  printf "\nFix plymouth ArkOS version changing font during boot up\n"
+	  sudo sed -i '/sudo setfont \/usr\/share\/consolefonts\/Lat7-Terminus20x10.psf.gz/c\' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	  if [ "$(cat /usr/bin/emulationstation/emulationstation.sh | grep '033c' | tr -d '\0' | wc -l)" = "3" ]; then
+	    sudo sed -i '0,/printf \"\\033c\" > \/dev\/tty1/s///' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	    sudo sed -i '/sudo \/bin\/plymouth hide-splash/c\  sudo \/bin\/plymouth hide-splash\n  printf \"\\033c\" \> \/dev\/tty1\n  sudo setfont \/usr\/share\/consolefonts\/Lat7-Terminus20x10.psf.gz' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	  else
+	    sudo sed -i '/sudo \/bin\/plymouth hide-splash/c\  sudo \/bin\/plymouth hide-splash\n  sudo setfont \/usr\/share\/consolefonts\/Lat7-Terminus20x10.psf.gz' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	  fi
+	elif [ "$(cat /usr/bin/emulationstation/emulationstation.sh | grep '033c' | tr -d '\0' | wc -l)" = "3" ]; then
+	  sudo sed -i '0,/printf \"\\033c\" > \/dev\/tty1/s///' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	  sudo sed -i '/sudo \/bin\/plymouth hide-splash/c\  sudo \/bin\/plymouth hide-splash\n  printf \"\\033c\" \> \/dev\/tty1' /usr/bin/emulationstation/emulationstation.sh /usr/bin/emulationstation/emulationstation.sh.es /usr/bin/emulationstation/emulationstation.sh.ra
+	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth

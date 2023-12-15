@@ -126,3 +126,9 @@ v2.0 (12/08/2023)
 - Added Game Share feature for retroarch and retroarch32 from the Adhoc Netplay session menu
   See the FAQ available from the ArkOS wiki (http://arkos.hopto.me) for your unit for more info on this feature.
 - Added updated inputstream-adaptive addon for Kodi 20.2 (Thanks to milankosk for reporting the issue and helping to test the update)
+
+v2.0 (12/15/2023)
+- Added enterprise 64/128 and videoton tvc emulator (Thanks to slaminger for the suggestion)
+- Added enterprise 64/128 and videoton tvc images to sagabox theme (Thanks to Jetup13 for the theme update)
+- Fixed emulationstation not showing folders that contain a period in the name but is not at the beginning of the folder name (Thanks to kane159 for reporting the issue)
+- Fixed plymouth ArkOS version changing font during boot up
