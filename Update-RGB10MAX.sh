@@ -4158,8 +4158,9 @@ if [ ! -f "$UPDATE_DONE" ]; then
 		sed -i 's/sudo perfmax mvem/sudo perfmax \%GOVERNOR\%/' /etc/emulationstation/es_systems.cfg
 		sed -i 's/<command>\%ROM\%<\/command>/<command>sudo perfmax \%GOVERNOR\%; \%ROM\%; sudo perfnorm<\/command>/' /etc/emulationstation/es_systems.cfg
 		sed -i 's/sudo perfmax;/sudo perfmax \%GOVERNOR\%;/' /etc/emulationstation/es_systems.cfg
+		sed -i 's/<name>Options<\/name>/<name>options<\/name>/' /etc/emulationstation/es_systems.cfg
 	  fi
-	  if [ ! -f "/opt/system/Switch Launchimage to jpg.sh" ]; then
+	  if [ -f "/opt/system/Switch Launchimage to jpg.sh" ]; then
 	    sudo cp -fv /usr/local/bin/perfmax.asc /usr/local/bin/perfmax | tee -a "$LOG_FILE"
 	  fi
 	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"

@@ -768,3 +768,9 @@ v2.0 (12/15/2023)
 - Fixed emulationstation not showing folders that contain a period in the name but is not at the beginning of the folder name (Thanks to kane159 for reporting the issue)
 - Fixed osk, msgbox and Wifi.sh to not default to Lat7-TerminusBold20x10 console font for 480x320 displays (Thanks to ommokazza for reporting the issue)
 - Fixed plymouth ArkOS version changing font during boot up
+
+v2.0 (12/22/2023)
+- Updated emulationstation to include performance governor control settings per system and per game
+- Updated emulationstation to fix the games counter including hidden games in the count (Thanks to EnsignRutherford for reporting the issue and confirming the fix)
+- Updated perfmax scripts to support performance governor control settings from emulationstation
+- Updated quickmode scripts to accomodate governor control changes and BaRT
