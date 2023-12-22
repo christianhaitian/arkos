@@ -4059,7 +4059,6 @@ if [ ! -f "/home/ark/.config/.update12152023" ]; then
 	    else
 	  	  printf "\nVideoton TV Computer is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
 	    fi
-	  fi
 	  if [ -f "/usr/local/bin/Switch to SD2 for Roms.sh" ]; then
 	    if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep enterprise | tr -d '\0')"
 	    then
