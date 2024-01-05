@@ -114,6 +114,9 @@ fi
 printf "\nWriting the ArkOS image to emmc, please wait...\n"
 (pv -n "$image" | sudo dd of=/dev/mmcblk0 bs=1M) 2>&1 | dialog --gauge "Writing the ArkOS image to emmc, please wait..." 10 70 0
 #pv -tpreb "$image" | sudo dd of=/dev/mmcblk0 bs=1M
+sudo mount /dev/mmcblk0p4 /mnt/usbdrive
+sudo sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/usr/local/bin/Sleep\ -\ Switch\ to\ *
+sudo umount /mnt/usbdrive/
 msgbox "Done.  Please reboot without a SD card in slot 1 to boot into ArkOS from emmc.  If you'd like to \
 load Android back onto the internal memory, check out GammaOS-RK3566 by TheGammaSqueeze.  If you'd like to load the original stock \
 Android OS, check out the GammaOS-RK3566 github page for information on how to reinstall the stock Android OS."
