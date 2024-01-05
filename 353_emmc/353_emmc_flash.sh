@@ -82,6 +82,7 @@ if [ -z "$image" ]; then
 fi
 
 printf "\nGrabing the md5sum info for authentication purposes.  Please wait...\n"
+rm -f /dev/shm/md5sum
 wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/353_emmc/md5sum -O /dev/shm/md5sum || rm -f /dev/shm/md5sum
 if [ -f "/dev/shm/md5sum" ]; then
   short_rgm="$(grep -i 353m /dev/shm/md5sum | awk '{ print $3 }')"
@@ -95,7 +96,7 @@ else
 fi
 
 if [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
-  if [ "$(head -c 1M $image | md5sum)" != "$short_rgv" ]; then
+  if [ "$(head -c 1M $image | md5sum | awk '{ print $1 }')" != "$short_rgv" ]; then
     msgbox "The md5sum of the emmc image found is not correct for this unit. \
 	Please download and copy the correct emmc image for this unit. \
     The correct md5sum should be: $complete_rgv"
