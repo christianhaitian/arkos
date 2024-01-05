@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export TERM=linux
+
 msgbox "ONCE YOU PROCEED WITH THIS process, DO NOT STOP THIS PROCESS UNTIL IT IS COMPLETED OR YOUR INTERNAL EMMC MAY BE LEFT IN AN UNUSUABLE STATE.  This process will remove Android from your device and replace it with ArkOS.  You've been warned!  Type OK in the next screen to proceed."
 my_var=`osk "Enter OK here to proceed." | tail -n 1`
 
