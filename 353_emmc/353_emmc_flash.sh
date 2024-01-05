@@ -125,6 +125,14 @@ sudo sed -i '/\/dev\/input\/event3/s//\/dev\/input\/event4/g' /mnt/usbdrive/usr/
 # Remove experimental touch scripts as touch is enabled by default now
 sudo rm -f /mnt/usbdrive/opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh
 sudo rm -Rf /mnt/usbdrive/usr/local/bin/experimental/
+# Copy some settings over that shouldn't intefere with the intial setup process
+cp -f /home/ark/.config/panel_settings.txt /mnt/usbdrive/home/ark/.config/panel_settings.txt
+cp -Rf /home/ark/.kodi/* /mnt/usbdrive/home/ark/.kodi/
+cp -f /opt/drastic/config/drastic.cfg /mnt/usbdrive/opt/drastic/config/drastic.cfg 
+cp -f /home/ark/.emulationstation/es_settings.cfg /mnt/usbdrive/home/ark/.emulationstation/es_settings.cfg
+cp -Rf /home/ark/.emulationstation/collections/* /mnt/usbdrive/home/ark/.emulationstation/collections/
+sudo cp -f /etc/localtime /mnt/usbdrive/etc/localtime
+sudo cp -Rf /etc/NetworkManager/system-connections/* /mnt/usbdrive/etc/NetworkManager/system-connections/
 sudo umount /mnt/usbdrive/
 msgbox "Done.  Please reboot without a SD card in slot 1 to boot into ArkOS from emmc.  If you'd like to \
 load Android back onto the internal memory, check out GammaOS-RK3566 by TheGammaSqueeze.  If you'd like to load the original stock \
