@@ -95,14 +95,14 @@ else
 fi
 
 if [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
-  if [ "$(head -c 1M /roms/backup/$image | md5sum)" != "$short_rgv" ]; then
+  if [ "$(head -c 1M $image | md5sum)" != "$short_rgv" ]; then
     msgbox "The md5sum of the emmc image found is not correct for this unit. \
 	Please download and copy the correct emmc image for this unit. \
     The correct md5sum should be: $complete_rgv"
     exit
   fi
 else
-  if [ "$(head -c 1M /roms/backup/$image | md5sum)" != "$short_rgm" ]; then
+  if [ "$(head -c 1M $image | md5sum)" != "$short_rgm" ]; then
     msgbox "The md5sum of the emmc image found is not correct for this unit. \
 	Please download and copy the correct emmc image for this unit. \
     The correct md5sum should be: $complete_rgm"
