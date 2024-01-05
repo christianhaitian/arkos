@@ -115,8 +115,16 @@ printf "\nWriting the ArkOS image to emmc, please wait...\n"
 (pv -n "$image" | sudo dd of=/dev/mmcblk0 bs=1M) 2>&1 | dialog --gauge "Writing the ArkOS image to emmc, please wait..." 10 70 0
 #pv -tpreb "$image" | sudo dd of=/dev/mmcblk0 bs=1M
 sudo mount /dev/mmcblk0p4 /mnt/usbdrive
+# Fix light and deep sleep scripts
 sudo sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/usr/local/bin/Sleep\ -\ Switch\ to\ *
 sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/opt/system/Advanced/Sleep\ -\ Switch\ to\ *
+# Fix BaRT
+sudo sed -i 's/event_num=\"3\"/if [[ -e \"\/dev\/input\/by-path\/platform-fe5b0000.i2c-event\" ]]; then\n  event_num=\"4\"\nelse\n  event_num=\"3\"\nfi/g' /mnt/usbdrive/usr/bin/emulationstation/emulationstation.sh*
+# Fix some exit hotkeys
+sudo sed -i '/\/dev\/input\/event3/s//\/dev\/input\/event4/g' /mnt/usbdrive/usr/local/bin/*.py
+# Remove experimental touch scripts as touch is enabled by default now
+sudo rm -f /mnt/usbdrive/opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh
+sudo rm -Rf /mnt/usbdrive/usr/local/bin/experimental/
 sudo umount /mnt/usbdrive/
 msgbox "Done.  Please reboot without a SD card in slot 1 to boot into ArkOS from emmc.  If you'd like to \
 load Android back onto the internal memory, check out GammaOS-RK3566 by TheGammaSqueeze.  If you'd like to load the original stock \
