@@ -2,6 +2,13 @@
 
 export TERM=linux
 
+if (( $(cat /sys/class/power_supply/battery/capacity) < 60 )); then
+  msgbox "You have less than 60 percent battery life.  Please \
+  charge your device to at least 60 percent battery life then \
+  launch this tool again."
+  exit
+fi
+
 msgbox "ONCE YOU PROCEED WITH THIS process, DO NOT STOP THIS PROCESS UNTIL IT IS COMPLETED OR YOUR INTERNAL EMMC MAY BE LEFT IN AN UNUSUABLE STATE.  This process will remove Android from your device and replace it with ArkOS.  You've been warned!  Type OK in the next screen to proceed."
 my_var=`osk "Enter OK here to proceed." | tail -n 1`
 
