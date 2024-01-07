@@ -42,15 +42,19 @@ if [ -z "$testforemmc" ]; then
     exit
   fi
   printf "\nInstalling updated dtb to be able to access the emmc.  Please wait...\n"
+  dialog --clear
+  dialog --infobox "Installing updated dtb to be able to access the emmc, please wait..." 10 50
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/353_emmc/rk3566-OC.dtb.${unit} -O /dev/shm/rk3566-OC.dtb.${unit} || rm -f /dev/shm/rk3566-OC.dtb.${unit}
   if [ -f "/dev/shm/rk3566-OC.dtb.${unit}" ]; then
     sudo cp -f /dev/shm/rk3566-OC.dtb.${unit} /boot/rk3566-OC.dtb
     touch /home/ark/.config/.newdtb
+    dialog --clear
     msgbox "An udpated dtb file from the ArkOS github was successfully downloaded. \
 	For the change to take effect, your unit must be rebooted.  Please run this script \
 	again when the unit has been rebooted and you have a stable internet connection."
 	sudo reboot
   else
+    dialog --clear
     msgbox "Couldn't download an updated dtb file from the ArkOS github.  Please verify your \
 	internet connection is stable and run this script again."
 	exit
@@ -76,6 +80,7 @@ if [ -z "$image" ]; then
   image=`find /roms2/backup/ -name "*_emmc.img" | head -n 1`
 fi
 if [ -z "$image" ]; then
+  dialog --clear
   msgbox "An image to flash to your emmc couldn't be found. \
   Make you've copied one to your backup folder on your sd \
   card."
@@ -93,6 +98,7 @@ if [ -f "/dev/shm/md5sum" ]; then
   complete_rgm="$(grep -i 353m /dev/shm/md5sum | awk '{ print $2 }')"
   complete_rgv="$(grep -i 353v /dev/shm/md5sum | awk '{ print $2 }')"
 else
+  dialog --clear
   msgbox "Could not download the md5sum from the ArkOS github.  Please verify your \
   internet connection is stable and run this script again."
   exit
@@ -100,6 +106,7 @@ fi
 
 if [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
   if [ "$(head -c 1M $image | md5sum | awk '{ print $1 }')" != "$short_rgv" ]; then
+    dialog --clear
     msgbox "The md5sum of the emmc image found is not correct for this unit. \
 	Please download and copy the correct emmc image for this unit. \
     The correct md5sum should be: $complete_rgv"
@@ -107,6 +114,7 @@ if [ "$(cat ~/.config/.DEVICE)" = "RG353V" ]; then
   fi
 else
   if [ "$(head -c 1M $image | md5sum | awk '{ print $1 }')" != "$short_rgm" ]; then
+    dialog --clear
     msgbox "The md5sum of the emmc image found is not correct for this unit. \
 	Please download and copy the correct emmc image for this unit. \
     The correct md5sum should be: $complete_rgm"
