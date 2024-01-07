@@ -67,6 +67,7 @@ if [ "$?" != "0" ]; then
     exit
   fi
   printf "\nInstalling pv.  Please wait...\n"
+  dialog --infobox "Installing pv, please wait..." 10 50
   sudo apt -y update && sudo apt -t eoan install -y pv
 fi
 
@@ -82,6 +83,8 @@ if [ -z "$image" ]; then
 fi
 
 printf "\nGrabing the md5sum info for authentication purposes.  Please wait...\n"
+dialog --clear
+dialog --infobox "Grabing the md5sum info for authentication purposes, please wait..." 10 50
 rm -f /dev/shm/md5sum
 wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/353_emmc/md5sum -O /dev/shm/md5sum || rm -f /dev/shm/md5sum
 if [ -f "/dev/shm/md5sum" ]; then
@@ -112,8 +115,10 @@ else
 fi
 
 printf "\nWriting the ArkOS image to emmc, please wait...\n"
-(pv -n "$image" | sudo dd of=/dev/mmcblk0 bs=1M) 2>&1 | dialog --gauge "Writing the ArkOS image to emmc, please wait..." 10 70 0
-#pv -tpreb "$image" | sudo dd of=/dev/mmcblk0 bs=1M
+dialog --clear
+(pv -n "$image" | sudo dd of=/dev/mmcblk0 bs=1M) 2>&1 | dialog --gauge "Writing the ArkOS image to emmc, please wait..." 10 50 0
+dialog --clear
+dialog --infobox "Updating some scripts and copying some settings to the linux partition of the internal emmc, please wait..." 10 50
 sudo mount /dev/mmcblk0p4 /mnt/usbdrive
 # Fix light and deep sleep scripts
 sudo sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/usr/local/bin/Sleep\ -\ Switch\ to\ *
@@ -134,6 +139,7 @@ cp -Rf /home/ark/.emulationstation/collections/* /mnt/usbdrive/home/ark/.emulati
 sudo cp -f /etc/localtime /mnt/usbdrive/etc/localtime
 sudo cp -Rf /etc/NetworkManager/system-connections/* /mnt/usbdrive/etc/NetworkManager/system-connections/
 sudo umount /mnt/usbdrive/
+dialog --clear
 msgbox "Done.  Please reboot without a SD card in slot 1 to boot into ArkOS from emmc.  If you'd like to \
 load Android back onto the internal memory, check out GammaOS-RK3566 by TheGammaSqueeze.  If you'd like to load the original stock \
 Android OS, check out the GammaOS-RK3566 github page for information on how to reinstall the stock Android OS."
