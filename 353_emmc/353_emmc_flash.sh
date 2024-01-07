@@ -2,6 +2,16 @@
 
 export TERM=linux
 
+if [ ! -z "$(df | grep mmcblk0)" ]; then
+  msgbox "The internal emmc storage seems to be \
+  mounted or you're running this tool from ArkOS \
+  that is mounted on the internal emmc storage.  \
+  Please make sure to run this tool from a sd card based \
+  boot of ArkOS and make sure the internal storage is not \
+  mounted prior to running this tool."
+  exit
+fi
+
 if (( $(cat /sys/class/power_supply/battery/capacity) < 60 )); then
   msgbox "You have less than 60 percent battery life.  Please \
   charge your device to at least 60 percent battery life then \
@@ -50,13 +60,13 @@ if [ -z "$testforemmc" ]; then
     touch /home/ark/.config/.newdtb
     dialog --clear
     msgbox "An udpated dtb file from the ArkOS github was successfully downloaded. \
-	For the change to take effect, your unit must be rebooted.  Please run this script \
+	For the change to take effect, your unit must be rebooted.  Please run this tool \
 	again when the unit has been rebooted and you have a stable internet connection."
 	sudo reboot
   else
     dialog --clear
     msgbox "Couldn't download an updated dtb file from the ArkOS github.  Please verify your \
-	internet connection is stable and run this script again."
+	internet connection is stable and run this tool again."
 	exit
   fi
 fi
@@ -100,7 +110,7 @@ if [ -f "/dev/shm/md5sum" ]; then
 else
   dialog --clear
   msgbox "Could not download the md5sum from the ArkOS github.  Please verify your \
-  internet connection is stable and run this script again."
+  internet connection is stable and run this tool again."
   exit
 fi
 
