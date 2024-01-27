@@ -673,3 +673,6 @@ v2.0 (01/27/2024)
 - Added .7z and .7Z as supported extensions for Nintendo DS
 - Added PPSSPP-2021 (standalone-2021) emulator build with fps patch
   - May help with better performance on some psp games
+
+v2.0 (01/27/2024-1)
+- Fixed Switch to SD2 script for RG351V, RG351MP, and R35s units

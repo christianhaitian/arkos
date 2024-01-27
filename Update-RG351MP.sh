@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="01272024"
+UPDATE_DATE="01272024-1"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -5014,7 +5014,7 @@ if [ ! -f "/home/ark/.config/.update12222023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01272024" ]; then
 
 	printf "\nWifi and Bluetooth scripts to fix screen corruption\nAdd Mu libretro core\nUpdate netplay script to fix screen corruption\nUpdate emulationstation\nAdded uae4arm for retroarch 64bit\nAdd missing stark_shader_fill shader files\nUpdate scummvm.sh and scan for new games for scummvm\nUpdated Amiberry to 5.6.5\nAdd files for libretro scummvm\nUpdate solarus.sh\nUpdate filebrowser to 2.26.0\nUpdate speak_bat_life.sh\nFix governor setting for virtualjaguar system\nAdd PPSSPP-2021 emulator\nUpdate Kodi to 20.3\nUpdate nes-box theme\nAdd TRS-80 support\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -5274,6 +5274,34 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  printf "\nEnable the left joystick as mouse by default for Palm OS\n" | tee -a "$LOG_FILE"
 	  sed -i -e '$a\\palm_emu_use_joystick_as_mouse \= \"enabled\"' /home/ark/.config/retroarch/retroarch-core-options.cfg
 	  sed -i -e '$a\\palm_emu_use_joystick_as_mouse \= \"enabled\"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update01272024"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix Switch to SD2 script for RG351V and RG351MP units\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/01272024-1/arkosupdate01272024-1.zip -O /dev/shm/arkosupdate01272024-1.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate01272024-1.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate01272024-1.zip" ]; then
+	  sudo unzip -X -o /dev/shm/arkosupdate01272024-1.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	if [ -f "/opt/system/Advanced/Switch to SD2 for Roms.sh" ]; then
+	  cp -fv /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+	  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
