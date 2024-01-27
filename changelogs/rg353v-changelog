@@ -458,3 +458,31 @@ v2.0 (12/22/2023)
 - Updated Wifi script to allow enabling and disabling of Wifi
 - Updated sleep_governors script to accomodate performance gorvernor control settings
 - Updated Kodi script to fix OS volume control while using Kodi
+
+v2.0 (01/27/2024)
+- Updated ArkOS Browser by filebrowser to version 2.27.0
+- Updated Bluetooth script to fix exit and relaunch screen corruption bug
+- Updated Kodi to 20.3
+- Updated Python exit key daemons for Doom, Drastic, OpenBOR, Pico-8, PPSSPP, ScummVM, Daphne/Singe, Solarus and TI-99
+- Updated DTBs in the boot folder to support emmc and touchscreen by default
+- Updated Wifi script to fix exit and relaunch screen corruption bug
+- Updated adhoc netplay script to fix exit and relaunch screen corruption bug
+- Updated emulationstation to fix an icon and locale language related problem and another minor cleanup for governors (Thanks to ljhmd0825 for the find and fix)
+- Updated scummvm.sh to support starting ScummVM games without needing drilling down into sub folders (Thanks to EnsignRutherford for the script update)
+- Updated scan for new games script for ScummVM to place the created .scummvm files into the root scummvm subfolder (Thanks to EnsignRutherford for the suggestion)
+- Updated solarus.sh to use a different symlink for saves to not inflate the count of games for the Solarus system in Emulationstation (Thanks to EnsignRutherford for reporting the issue)
+- Updated speak_bat_life.sh to speak the current performance governor if R2 is held down while initiating the speak battery life key combo or during the speaking of the current battery life.
+- Updated libretro scummvm.ini file to point to roms/bios/scummvm folder by default instead of to /home/ark/.config/retroarch/system
+- Updated Switch to SD2 script to update retroarch system location in scummvm.ini
+- Fixed governor setting for virtualjaguar system
+- Added Palm OS (Mu) emulator
+- Added Radioshack TRS-80 (CoCo3) support (Thanks to EnsignRutherford for the suggestion and setup)
+  - Thanks to Ciaran Anscomb for creating the XRoar emulator and responding to inquiries about the emulator.
+- Updated Nes-Box theme to add art for Radioshack TRS-80 (Thanks to EnsignRutherford)
+- Added uae4arm core option for Retroarch emulator in emulationstation
+- Added missing stark_surface_fill shader files for ScummVM Standalone (Thanks to eth3real for reporting the issue)
+- Added gui-icons.dat, residualvm.zip, shaders.dat and translations.dat for libretro scummvm
+- Added .chd and .CHD as supported extensions for PSP
+- Added .7z and .7Z as supported extensions for Nintendo DS
+- Added PPSSPP-2021 (standalone-2021) emulator build with fps patch
+  - May help with better performance on some psp games

@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="12222023"
+UPDATE_DATE="01272024"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -5678,7 +5678,7 @@ if [ ! -f "/home/ark/.config/.update12152023" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update12222023" ]; then
 
 	printf "\nUpdate emulationstation to add performance governor control per system and game\nUpdated emulationstation to fix game counter for hidden games\nUpdate perfmax scripts\nUpdate Kodi script to fix OS volume controls\nUpdate sleep_governors script\nUpdate quick mode scripts\nUpdate wifioff, wifion, Wifi scripts\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -5751,6 +5751,275 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo cp -fv /usr/local/bin/Enable\ Quick\ Mode.sh /opt/system/Advanced/Enable\ Quick\ Mode.sh | tee -a "$LOG_FILE"
 	  sudo chmod -v 777 /opt/system/Advanced/Enable\ Quick\ Mode.sh | tee -a "$LOG_FILE"
 	  sudo chown -v ark:ark /opt/system/Advanced/Enable\ Quick\ Mode.sh | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update12222023"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nWifi and Bluetooth scripts to fix screen corruption\nAdd Mu libretro core\nUpdate netplay script to fix screen corruption\nUpdate emulationstation\nAdded uae4arm for retroarch 64bit\nAdd missing stark_shader_fill shader files\nUpdate scummvm.sh and scan for new games for scummvm\nUpdated Amiberry to 5.6.5\nAdd files for libretro scummvm\nUpdate solarus.sh\nUpdate filebrowser to 2.26.0\nUpdate speak_bat_life.sh\nFix governor setting for virtualjaguar system\nAdd PPSSPP-2021 emulator\nUpdate Kodi to 20.3\nUpdate nes-box theme\nAdd TRS-80 support\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	tmp_mem_size=$(df -h /dev/shm | grep shm | awk '{print $2}' | cut -d 'M' -f1)
+	if [ ${tmp_mem_size} -lt 450 ]; then
+	  printf "\nTemporarily raising temp memory storage for this large update\n" | tee -a "$LOG_FILE"
+	  sudo mount -o remount,size=450M /dev/shm
+	fi
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/01272024/arkosupdate01272024.zip -O /dev/shm/arkosupdate01272024.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate01272024.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/01272024/arkosupdate01272024.z01 -O /dev/shm/arkosupdate01272024.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate01272024.z01 | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate01272024.zip" ] && [ -f "/dev/shm/arkosupdate01272024.z01" ]; then
+	  zip -FF /dev/shm/arkosupdate01272024.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate01272024.z* | tee -a "$LOG_FILE"
+	  if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	    rm -rfv /opt/kodi/lib/kodi/addons/* /opt/kodi/share/kodi/addons/* /opt/kodi/lib/addons/* /opt/kodi/lib/pkgconfig/* /opt/kodi/lib/libdumb.a | tee -a "$LOG_FILE"
+	    if test ! -z "$(grep "RG353" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo unzip -X -o /dev/shm/arkosupdate.zip -x "opt/amiberry/*" "roms/themes/es-theme-sagabox/*" -d / | tee -a "$LOG_FILE"
+	      printf "\nUpdating dtb files in the boot partition to support touchscreen and emmc if applicable\n" | tee -a "$LOG_FILE"
+		  if test ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')"
+	      then
+	           sudo cp -fv /home/ark/353/rk3566-353v.dtb /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+	           sudo cp -fv /home/ark/353/rk3566-353v-notimingchange.dtb /boot/rk3566-OC.dtb.bright | tee -a "$LOG_FILE"
+		  elif test ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')"
+	      then
+	           sudo cp -fv /home/ark/353/rk3566-353m.dtb /boot/rk3566-OC.dtb | tee -a "$LOG_FILE"
+	           sudo cp -fv /home/ark/353/rk3566-353m-notimingchange.dtb /boot/rk3566-OC.dtb.bright | tee -a "$LOG_FILE"
+		  fi
+	      sudo rm -rfv /home/ark/353/ | tee -a "$LOG_FILE"
+		elif [ "$(cat ~/.config/.DEVICE)" = "RGB30" ]; then
+		  sudo unzip -X -o /dev/shm/arkosupdate.zip -x "opt/amiberry/*" "home/ark/353/*" "roms/themes/es-theme-nes-box/*" -d / | tee -a "$LOG_FILE"
+		else
+	      sudo unzip -X -o /dev/shm/arkosupdate.zip -x "opt/amiberry/*" "home/ark/353/*" "roms/themes/es-theme-sagabox/*" -d / | tee -a "$LOG_FILE"
+		fi
+	    #Remove experimental touch scripts as touch is enabled by default now
+		if [ -f "/opt/system/Advanced/Enable Experimental Touch support.sh" ]; then
+	      sudo rm -fv /opt/system/Advanced/Enable\ Experimental\ Touch\ support.sh | tee -a "$LOG_FILE"
+		fi
+		if [ -f "/opt/system/Advanced/Disable Experimental Touch support.sh" ]; then
+	      sudo rm -fv /opt/system/Advanced/Disable\ Experimental\ Touch\ support.sh | tee -a "$LOG_FILE"
+		fi
+		if [ -d "/usr/local/bin/experimental" ]; then
+	      sudo rm -Rfv /usr/local/bin/experimental/ | tee -a "$LOG_FILE"
+		fi
+	    if test -z "$(grep 'platform-fe5b0000.i2c-event' /usr/bin/emulationstation/emulationstation.sh | tr -d '\0')"
+		then
+	         #Fix BaRT
+	         sudo sed -i 's/event_num=\"3\"/if [[ -e \"\/dev\/input\/by-path\/platform-fe5b0000.i2c-event\" ]]; then\n  event_num=\"4\"\nelse\n  event_num=\"3\"\nfi/g' /usr/bin/emulationstation/emulationstation.sh*
+	    fi
+		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ] || [ "$(cat ~/.config/.DEVICE)" = "RGB30" ]; then
+		  sed -i '/<res width\="1920" height\="1440" aspect\="4:3"/s//<res width\="1623" height\="1180" aspect\="4:3"/g' /opt/kodi/share/kodi/addons/skin.estuary/addon.xml
+		else
+		  echo "  This is not a RG353M, RG353V/VS, RGB30 or RK2023 unit so no modification to the esturary skin ui element size will be done here." | tee -a "$LOG_FILE"
+		fi
+	  else
+	    sudo unzip -X -o /dev/shm/arkosupdate.zip -x opt/system/Bluetooth.sh "home/ark/353/*" "usr/local/bin/*keydemon.py" "opt/kodi/*" "roms/themes/es-theme-sagabox/*" -d / | tee -a "$LOG_FILE"
+	  fi
+	  if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	  then
+	    install -Dv /roms/scummvm/Scan_for_new_games.scummvm /roms2/scummvm/Scan_for_new_games.scummvm | tee -a "$LOG_FILE"
+	    install -Dv /roms/bios/scummvm/theme/gui-icons.dat /roms2/bios/scummvm/theme/gui-icons.dat | tee -a "$LOG_FILE"
+	    install -Dv /roms/bios/scummvm/theme/residualvm.zip /roms2/bios/scummvm/theme/residualvm.zip | tee -a "$LOG_FILE"
+	    install -Dv /roms/bios/scummvm/theme/shaders.dat /roms2/bios/scummvm/theme/shaders.dat | tee -a "$LOG_FILE"
+	    install -Dv /roms/bios/scummvm/theme/translations.dat /roms2/bios/scummvm/theme/translations.dat | tee -a "$LOG_FILE"
+	    install -Dv /roms/bios/mame/hash/coco* /roms2/bios/mame/hash/. | tee -a "$LOG_FILE"
+	  fi
+	  cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update01272024.bak | tee -a "$LOG_FILE"
+	  if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'standalone-2021' | tr -d '\0')"
+	  then
+	    sed -i -zE 's/<\/emulators>([^\n]*\n[^\n]*<platform>psp<\/platform>)/   <emulator name=\"\standalone-2021\">\n\t\t      <\/emulator>\n\t\t   <\/emulators>\1/' /etc/emulationstation/es_systems.cfg
+	  fi
+	  printf "\nAdd palm libretro emulator\n" | tee -a "$LOG_FILE"
+	  if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'palm' | tr -d '\0')"
+	  then
+	    sed -i -e '/<theme>pico-8<\/theme>/{r /home/ark/add_palm.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+	  fi
+	  if [ ! -d "/roms/palm" ]; then
+	    mkdir -v /roms/palm | tee -a "$LOG_FILE"
+	    if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	    then
+		  if [ ! -d "/roms2/palm" ]; then
+		    mkdir -v /roms2/palm | tee -a "$LOG_FILE"
+		    sed -i '/<path>\/roms\/palm/s//<path>\/roms2\/palm/g' /etc/emulationstation/es_systems.cfg
+		  fi
+	    fi
+	  fi
+	  if [ -f "/opt/system/Advanced/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | grep palm | tr -d '\0')"
+	    then
+		  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+		  sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/palm\/" ]\; then\n      sudo mkdir \/roms2\/palm\n  fi\n  sudo pkill filebrowser/' /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+		  printf "\npalm is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  if [ -f "/usr/local/bin/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep palm | tr -d '\0')"
+	    then
+		  sudo sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/palm\/" ]\; then\n      sudo mkdir \/roms2\/palm\n  fi\n  sudo pkill filebrowser/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+		  printf "\npalm is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  printf "\nAdd coco3 libretro emulator\n" | tee -a "$LOG_FILE"
+	  if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'coco3' | tr -d '\0')"
+	  then
+	    sed -i -e '/<theme>thomson<\/theme>/{r /home/ark/add_coco3.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+	  fi
+	  if [ ! -d "/roms/coco3" ]; then
+	    mkdir -pv /roms/coco3/controls | tee -a "$LOG_FILE"
+	    if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	    then
+		  if [ ! -d "/roms2/coco3" ]; then
+		    mkdir -pv /roms2/coco3/controls | tee -a "$LOG_FILE"
+		    sed -i '/<path>\/roms\/coco3/s//<path>\/roms2\/coco3/g' /etc/emulationstation/es_systems.cfg
+		  fi
+	    fi
+	  fi
+	  if [ -f "/opt/system/Advanced/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | grep coco3 | tr -d '\0')"
+	    then
+		  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+		  sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/coco3\/" ]\; then\n      sudo mkdir \/roms2\/coco3\n  fi\n  sudo pkill filebrowser/' /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+		  printf "\ncoco3 is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  if [ -f "/usr/local/bin/Switch to SD2 for Roms.sh" ]; then
+	    if test -z "$(cat /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh | grep coco3 | tr -d '\0')"
+	    then
+		  sudo sed -i '/sudo pkill filebrowser/s//if [ \! -d "\/roms2\/coco3\/" ]\; then\n      sudo mkdir \/roms2\/coco3\n  fi\n  sudo pkill filebrowser/' /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh
+	    else
+		  printf "\ncoco3 is already being accounted for in the switch to sd2 script\n" | tee -a "$LOG_FILE"
+	    fi
+	  fi
+	  if [ -f "/etc/emulationstation/es_systems.cfg.update01272024.bak" ]; then
+		sed -i 's/<core>puae<\/core>/<core>puae<\/core>\n\t\t\t  <core>uae4arm<\/core>/' /etc/emulationstation/es_systems.cfg
+	  fi
+	  if [ -f "/opt/system/Switch Launchimage to jpg.sh" ]; then
+	    sudo cp -fv /usr/local/bin/perfmax.asc /usr/local/bin/perfmax | tee -a "$LOG_FILE"
+	  fi
+	  sed -i 's/sudo perfmax retroarch virtualjaguar/sudo perfmax \%GOVERNOR\%/' /etc/emulationstation/es_systems.cfg
+	  rm -fv /home/ark/add_palm.txt | tee -a "$LOG_FILE"
+	  rm -fv /home/ark/add_coco3.txt | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	  if [ "$test" = "3351376" ]; then
+	    sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  elif [ -f "/home/ark/.config/.DEVICE" ]; then
+		sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  fi
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  fi
+	  sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nInstall libserialport0 and libportmidi0 for amiberry\n" | tee -a "$LOG_FILE"
+	sudo apt -y update && sudo apt -y install libserialport0 libportmidi0 | tee -a "$LOG_FILE"
+
+	printf "\nCopy correct uae4arm libretro core for device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+      rm -fv /home/ark/.config/retroarch/cores/uae4arm_libretro.so.rk3326 | tee -a "$LOG_FILE"
+    else
+	  rm -fv /home/ark/.config/retroarch/cores/uae4arm_libretro.so | tee -a "$LOG_FILE"
+      mv -fv /home/ark/.config/retroarch/cores/uae4arm_libretro.so.rk3326 /home/ark/.config/retroarch/cores/uae4arm_libretro.so | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdated libretro scummvm.ini file to point to roms/bios/scummvm by default or roms2/bios/scummvm for 2 sd card setup\n" | tee -a "$LOG_FILE"
+	sed -i 's/home\/ark\/.config\/retroarch\/system/roms\/bios/' /roms/bios/scummvm.ini
+	sed -i '/gui_theme=builtin/s//gui_theme=residualvm/' /roms/bios/scummvm.ini
+	sed -i '/gui_scale=125/s//gui_scale=150/' /roms/bios/scummvm.ini
+	sed -i '/scummvm_mapper_a = "RETROK_ESCAPE"/s//scummvm_mapper_a = "RETROKE_RIGHT_BUTTON"/' /home/ark/.config/retroarch/retroarch-core-options.cfg /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+	sed -i '/scummvm_mapper_b = "RETROK_RETURN"/s//scummvm_mapper_b = "RETROKE_LEFT_BUTTON"/' /home/ark/.config/retroarch/retroarch-core-options.cfg /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
+	if [ -f "/opt/system/Advanced/Switch to SD2 for Roms.sh" ]; then
+	  cp -fv /usr/local/bin/Switch\ to\ SD2\ for\ Roms.sh /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+	  sudo chown -v ark:ark /opt/system/Advanced/Switch\ to\ SD2\ for\ Roms.sh | tee -a "$LOG_FILE"
+	fi
+	if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	then
+	  sed -i 's/home\/ark\/.config\/retroarch\/system/roms2\/bios/' /roms2/bios/scummvm.ini
+	  sed -i '/gui_theme=builtin/s//gui_theme=residualvm/' /roms2/bios/scummvm.ini
+	  sed -i '/gui_scale=125/s//gui_scale=150/' /roms2/bios/scummvm.ini
+	  mkdir -pv /roms2/bios/scummvm/theme/ | tee -a "$LOG_FILE"
+	  mkdir -pv /roms2/bios/scummvm/extra/ | tee -a "$LOG_FILE"
+	  install -Dv /roms/bios/scummvm/theme/gui-icons.dat /roms2/bios/scummvm/theme/gui-icons.dat | tee -a "$LOG_FILE"
+	  install -Dv /roms/bios/scummvm/theme/residualvm.zip /roms2/bios/scummvm/theme/residualvm.zip | tee -a "$LOG_FILE"
+	  install -Dv /roms/bios/scummvm/theme/shaders.dat /roms2/bios/scummvm/theme/shaders.dat | tee -a "$LOG_FILE"
+	  install -Dv /roms/bios/scummvm/theme/translations.dat /roms2/bios/scummvm/theme/translations.dat | tee -a "$LOG_FILE"
+	fi
+
+	if [ ! -f "/boot/rk3566.dtb" ] && [ ! -f "/boot/rk3566-OC.dtb" ]; then
+	  if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	  then
+	    printf "\nUpdating amiberry.conf to look for kickstart bios files from roms2 instead of roms\n" | tee -a "$LOG_FILE"
+	    sed -i '/roms\/bios/s//roms2\/bios/g' /opt/amiberry/conf/amiberry.conf
+	  fi
+	fi
+
+	printf "\nAdd support for .chd and .CHD for PSP\n" | tee -a "$LOG_FILE"
+	sed -i '/<extension>.iso .ISO .cso .CSO .pbp .PBP</s//<extension>.chd .CHD .cso .CSO .iso .ISO .pbp .PBP</' /etc/emulationstation/es_systems.cfg
+
+	printf "\nAdd support for .7z and .7Z for Nintendo DS\n" | tee -a "$LOG_FILE"
+	sed -i '/<extension>.zip .ZIP .nds .NDS</s//<extension>.7z .7Z .nds .NDS .zip .ZIP</' /etc/emulationstation/es_systems.cfg
+
+	printf "\nCopy correct PPSSPPSDL-2021 for device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ]; then
+      rm -fv /opt/ppsspp-2021/PPSSPPSDL.rk3326 | tee -a "$LOG_FILE"
+	  cp -fv /opt/ppsspp/assets/gamecontrollerdb.txt /opt/ppsspp-2021/assets/gamecontrollerdb.txt | tee -a "$LOG_FILE"
+    else
+      mv -fv /opt/ppsspp-2021/PPSSPPSDL.rk3326 /opt/ppsspp-2021/PPSSPPSDL | tee -a "$LOG_FILE"
+	  cp -fv /opt/ppsspp/assets/gamecontrollerdb.txt /opt/ppsspp-2021/assets/gamecontrollerdb.txt | tee -a "$LOG_FILE"
+	fi
+
+	if [ -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
+	  printf "\nCopy updated updated dtb file with FN button activated for R35s units\n" | tee -a "$LOG_FILE"
+	  sudo cp -fv /home/ark/rg351mp/rk3326-rg351mp* /boot/. | tee -a "$LOG_FILE"
+	  if [ -f "/boot/rk3326-r35s-linux.dtb" ]; then
+	    sudo cp -fv /home/ark/rg351mp/rk3326-r35s* /boot/. | tee -a "$LOG_FILE"
+	  fi
+	  sudo rm -Rfv /home/ark/rg351mp/ | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-r35s-linux.dtb" ]; then
+	  printf "\nCopy updated updated dtb file with FN button activated for R35s units\n" | tee -a "$LOG_FILE"
+	  sudo cp -fv /home/ark/rg351mp/rk3326-r35s* /boot/. | tee -a "$LOG_FILE"
+	  sudo rm -Rfv /home/ark/rg351mp/ | tee -a "$LOG_FILE"
+	else
+	  printf "\nThis does not seem to be a rg351mp or related clone.  Removing some unneeded files included with this update that are not needed.\n" | tee -a "$LOG_FILE"
+	  sudo rm -Rfv /home/ark/rg351mp/ | tee -a "$LOG_FILE"
+	fi
+
+	if test -z "$(cat /home/ark/.config/retroarch/retroarch-core-options.cfg | grep 'palm_emu_use_joystick_as_mouse' | tr -d '\0')"
+	then
+	  printf "\nEnable the left joystick as mouse by default for Palm OS\n" | tee -a "$LOG_FILE"
+	  sed -i -e '$a\\palm_emu_use_joystick_as_mouse \= \"enabled\"' /home/ark/.config/retroarch/retroarch-core-options.cfg
+	  sed -i -e '$a\\palm_emu_use_joystick_as_mouse \= \"enabled\"' /home/ark/.config/retroarch/retroarch-core-options.cfg.bak
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
