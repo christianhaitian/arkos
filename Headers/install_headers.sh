@@ -107,7 +107,7 @@ fi
 
 cd ~
 
-sudo apt -y update && sudo apt -t eoan install -y cloud-guest-utils
+sudo apt -y update && sudo apt -y --fix-broken install && sudo apt -t eoan install -y cloud-guest-utils
 if [ "$?" -ne "0" ]; then
   msgbox "Couldn't install an important package from apt.  Are you connected to the internet?"
   if [ ! -z $(pidof rg351p-js2xbox) ]; then
