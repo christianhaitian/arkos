@@ -146,6 +146,8 @@ rm -rf initrd
 sudo sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/expandtoexfat.sh
 # Updated fstab to point to mmckblk0 for vfat and exfat partitions
 sudo sed -i 's/mmcblk1/mmcblk0/' /mnt/usbdrive/fstab.exfat
+# Make sure backlight is set to match current backlight level after initialization
+sudo sed -i "s/sudo rm -f \/boot\/fstab.exfat/sudo rm -f \/boot\/fstab.exfat\necho $(cat \/sys\/devices\/platform\/backlight\/backlight\/backlight\/brightness) \| sudo tee \/sys\/devices\/platform\/backlight\/backlight\/backlight\/brightness/" /mnt/usbdrive/expandtoexfat.sh
 sudo umount /mnt/usbdrive/
 dialog --clear
 msgbox "Done.  Please reboot without a SD card in slot 1 to boot into ArkOS from emmc.  If you'd like to \
