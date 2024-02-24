@@ -527,3 +527,21 @@ v2.0 (01/27/2024)
 
 v2.0 (01/27/2024-1)
 - Fixed Switch to SD2 script for RG351V, RG351MP, and R35s units
+
+v2.0 (02/23/2024)
+- Added Videopac support (Thanks to EnsignRutherford for the suggestion)
+- Added additional missing supported extensions for Commodore 8 bit systems (Thanks to vonmillhausen for the detailed research and list)
+- Added ipf support for Amiga (Thanks to gameforcecadet for the suggestion)
+- Added exit hotkey daemon for ECWolf standalone emulator (Thanks to EnsignRutherford for the suggestion)
+- Added Yabasanshiro as an additional selectable retroarch core for Sega Saturn (Thanks to mrplow for the suggestion)
+- Fixed standalone-duckstation script to allow holding the A button for creating per game custom settings for the standalone duckstation emulator
+- Fixed standalone-duckstation settings now being able to load with single sd card setups
+- Fixed mednafen movie recordings so they are saved to the movies folder (Thanks to kane159 for the report)
+- Fixed mednafen standalone controls (Thanks to AeolusUX for the report)
+- Removed edit metadata for options section (Thanks to dani7959 for reporting the issue)
+- Updated USB DAC control script
+- Updated PPSSPP standalone emulator to 1.17.1
+- Updated XRoar standalone emulator to 1.5.3
+- Updated Retroarch and Retroarch32 to 1.17
+- Updated retroarch and retroarch32 launch scripts to allow dosbox-pure and gpsp cores for local netplay
+- Updated launching of scripts for the Options section to show stderr and not just stdout (Thanks to SirNate0 for the suggestion)
