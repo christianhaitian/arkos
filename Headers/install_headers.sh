@@ -3,23 +3,6 @@
 sudo chmod 666 /dev/tty1
 export TERM=linux
 
-if [[ -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick" ]]; then
-  if [[ -e "/boot/rk3326-rg351v-linux.dtb" ]]; then
-    sudo rg351p-js2xbox --silent -t oga_joypad &
-    sleep 0.5
-    sudo ln -s /dev/input/event4 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    sleep 0.5
-    sudo chmod 777 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    export LD_LIBRARY_PATH=/usr/local/bin
-  else
-    sudo rg351p-js2xbox --silent -t oga_joypad &
-    sleep 0.5
-    sudo ln -s /dev/input/event3 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    sleep 0.5
-    sudo chmod 777 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
-fi
-
 # Let's download the right header files depending on the supported unit
 # Minor differences between the same kernel files between units
 # will cause modules to not install. ¯\_(ツ)_/¯
@@ -36,7 +19,7 @@ fi
 # Let's check and make sure this is not run with sudo or as root
 isitroot=$(id -u)
 if [ "$isitroot" == "0" ]; then
-  msgbox "Don't run me with sudo or as root!"
+  echo "Don't run me with sudo or as root!"
   exit
 fi
 
@@ -59,13 +42,9 @@ fi
 
 GW=`ip route | awk '/default/ { print $3 }'`
 if [ -z "$GW" ]; then
-  msgbox "A stable internet connection is needed for this process. \
+  echo "A stable internet connection is needed for this process. \
   Your network connection doesn't seem to be working. \
   Did you make sure to configure your wifi connection?"
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -73,32 +52,25 @@ if [ -z "$GW" ]; then
 fi
 
 if [ -f "/home/ark/.config/.devenabled" ]; then
-  msgbox "Developer mode is already enabled on this installation."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "Developer mode is already enabled on this installation."
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
   exit
 fi
 
-sudo msgbox "IF YOU PROCEED WITH ENABLING DEVELOPER MODE, YOUR ROMS PARTITION AND \
+echo "IF YOU PROCEED WITH ENABLING DEVELOPER MODE, YOUR ROMS PARTITION AND \
 IT'S CONTENTS WILL BE DELETED FROM THE MAIN SYSTEM SD!  THE ROMS FOLDER STRUCTURE WILL BE RECREATED ON THE \
 EXT PARTITION BUT ALL GAME FILES WILL BE DELETED ON THE MAIN SYSTEM SD.  THE CURRENT ES THEME WILL BE CHANGED \
 AS WELL.  DO NOT STOP THIS SCRIPT UNTIL IT IS COMPLETED OR THIS DISTRIBUTION MAY BE LEFT \
 IN A STATE OF UNUSABILITY.  You've been warned!  Type GODEV in the next screen to proceed."
-my_var=`osk "Enter GODEV here to proceed." | tail -n 1`
+echo ""
+read -p "Enter GODEV here to proceed: " my_var
 
 echo "$my_var"
 
 if [ "$my_var" != "GODEV" ] && [ "$my_var" != "godev" ]; then
-  sudo msgbox "You didn't type GODEV.  This script will exit now and no changes have been made from this process."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "You didn't type GODEV.  This script will exit now and no changes have been made from this process."
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -109,11 +81,7 @@ cd ~
 
 sudo apt -y update && sudo apt -y --fix-broken install && sudo apt -t eoan install -y cloud-guest-utils
 if [ "$?" -ne "0" ]; then
-  msgbox "Couldn't install an important package from apt.  Are you connected to the internet?"
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "Couldn't install an important package from apt.  Are you connected to the internet?"
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -125,15 +93,11 @@ if [ ! -f "/roms.tar" ]; then
   -O defaultromsfolderstructure.tar || rm -f defaultromsfolderstructure.tar
 
   if [ ! -f "defaultromsfolderstructure.tar" ]; then
-	  msgbox "The defaultromsfolderstructure.tar did not download correctly or is missing."
-      if [ ! -z $(pidof rg351p-js2xbox) ]; then
-        sudo kill -9 $(pidof rg351p-js2xbox)
-        sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-      fi
-      exit
+	  echo "The defaultromsfolderstructure.tar did not download correctly or is missing."
       if [[ "$es_stopped" == "y" ]]; then
         sudo systemctl start emulationstation &
       fi
+      exit
   fi
 fi
 
@@ -144,28 +108,32 @@ if [ "$unit" != "rg503" ]; then
   dev="/dev/mmcblk0"
   ext="/dev/mmcblk0p2"
 else
-  dev="/dev/mmcblk1"
-  ext="/dev/mmcblk1p4"
+  testforemmc=`lsblk | grep mmcblk0`
+  if [ ! -z "$testforemmc" ]; then
+    dev="/dev/mmcblk0"
+    ext="/dev/mmcblk0p4"
+	digit="0"
+  else
+    dev="/dev/mmcblk1"
+    ext="/dev/mmcblk1p4"
+	digit="1"
+  fi
 fi
 # Let's delete the existing exfat partition if it exists
 
 if [ "$unit" != "rg503" ]; then
-  if test ! -z "$(sudo fdisk -l | grep mmcblk0p3 | tr -d '\0')"
+  if test ! -z "$(sudo fdisk -l | grep mmcblkp3 | tr -d '\0')"
   then
     printf "d\n3\nw\nq\n" | sudo fdisk $dev
   fi
 else
-  if test ! -z "$(sudo fdisk -l | grep mmcblk1p5 | tr -d '\0')"
+  if test ! -z "$(sudo fdisk -l | grep mmcblk${digit}p5 | tr -d '\0')"
   then
     printf "d\n5\nw\nq\n" | sudo fdisk $dev
   fi
 fi
 if [ "$?" -ne "0" ]; then
-  msgbox "Uh oh, something went wrong with trying to delete the exfat partition."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "Uh oh, something went wrong with trying to delete the exfat partition."
   if [[ "$es_stopped" == "y" ]]; then
    sudo systemctl start emulationstation &
   fi
@@ -184,7 +152,7 @@ sudo resize2fs $ext
 if [ "$unit" != "rg503" ]; then
   sudo sed -i "/\/dev\/mmcblk0p3/d" /etc/fstab
 else
-  sudo sed -i "/\/dev\/mmcblk1p5/d" /etc/fstab  
+  sudo sed -i "/\/dev\/mmcblk${digit}p5/d" /etc/fstab  
 fi
 # Let's recreate the default roms directory structure
 mkdir /roms
@@ -206,13 +174,9 @@ else
 fi
 
 if [ ! -f "${unit}-linux-headers-4.4.189_4.4.189-2_arm64.deb" ] && [ ! -f "${unit}-linux-headers-4.19.172_4.19.172-17_arm64.deb" ]; then
-	msgbox "The ${unit} linux header deb file did not download correctly or is missing. \
+	echo "The ${unit} linux header deb file did not download correctly or is missing. \
 	Either rerun this script or manually download it from the git and place \
 	it in this current folder then run this script again."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
     if [[ "$es_stopped" == "y" ]]; then
       sudo systemctl start emulationstation &
     fi
@@ -249,11 +213,7 @@ fi
 if [ "$unit" != "rg503" ]; then
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/module.patch -O - | sudo patch
   if [ $? != 0 ]; then
-    msgbox "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
+    echo "There was an error downloading and applying module.patch.  Please run Enable Developer Mode again."
     if [[ "$es_stopped" == "y" ]]; then
       sudo systemctl start emulationstation &
     fi
@@ -264,11 +224,7 @@ fi
 if [ "$unit" != "rg503" ]; then
   wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/compiler.patch -O - | sudo patch
   if [ $? != 0 ]; then
-    msgbox "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
-    if [ ! -z $(pidof rg351p-js2xbox) ]; then
-      sudo kill -9 $(pidof rg351p-js2xbox)
-      sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-    fi
+    echo "There was an error downloading and applying compiler.patch.  Please run Enable Developer Mode again."
     if [[ "$es_stopped" == "y" ]]; then
       sudo systemctl start emulationstation &
     fi
@@ -290,13 +246,9 @@ sudo apt -t eoan install -y build-essential bc bison curl libcurl4-openssl-dev l
 linux-libc-dev libc6-dev python3-pip python3-setuptools python3-wheel screen libasound2-dev libsdl2-ttf-2.0-0 \
 libsdl2-ttf-dev libsdl2-mixer-dev libfreeimage-dev
 if [ $? != 0 ]; then
-  msgbox "There was an error updating and installing some build tools.  \
+  echo "There was an error updating and installing some build tools.  \
   Please make sure your internet is active and stable then run \
   Enable Developer Mode again."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -334,11 +286,7 @@ fi
 # Credit to loverpi (https://forum.loverpi.com/discussion/555/how-to-fix-dkms-error-bin-sh-1-scripts-basic-fixdep-exec-format-error)
 wget -t 3 -T 60 --no-check-certificate https://github.com/christianhaitian/arkos/raw/main/Headers/headers-debian-byteshift.patch -O - | sudo patch -p1
 if [ $? != 0 ]; then
-  msgbox "There was an error downloading and applying headers-debian-byteshift.patch.  Please run Enable Developer Mode again."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "There was an error downloading and applying headers-debian-byteshift.patch.  Please run Enable Developer Mode again."
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -348,11 +296,7 @@ fi
 # Let's recompile the header scripts to account for the byteshift change to the header files
 sudo make scripts
 if [ $? != 0 ]; then
-  msgbox "There was an error making the header scripts."
-  if [ ! -z $(pidof rg351p-js2xbox) ]; then
-    sudo kill -9 $(pidof rg351p-js2xbox)
-    sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-  fi
+  echo "There was an error making the header scripts."
   if [[ "$es_stopped" == "y" ]]; then
     sudo systemctl start emulationstation &
   fi
@@ -366,7 +310,7 @@ sed -i "/<string name\=\"ThemeSet\"/c\<string name\=\"ThemeSet\" value\=\"es-the
 
 # Point libSDL2.so back to latest available sdl2 lib
 cd /lib/aarch64-linux-gnu/
-sudo ln -sf libSDL2-2.0.so.0.18.2 libSDL2.so
+sudo ln -sf libSDL2-2.0.so.0.2800.2 libSDL2.so
 cd ~
 
 if [ "$unit" != "rg503" ]; then
@@ -377,12 +321,8 @@ fi
 
 touch /home/ark/.config/.devenabled
 
-msgbox "All done!"
+echo "All done!"
 
-if [ ! -z $(pidof rg351p-js2xbox) ]; then
-  sudo kill -9 $(pidof rg351p-js2xbox)
-  sudo rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-fi
 if [[ "$es_stopped" == "y" ]]; then
   sudo systemctl start emulationstation &
 fi
