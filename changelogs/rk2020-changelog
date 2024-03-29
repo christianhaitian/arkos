@@ -823,3 +823,20 @@ v2.0 (02/23/2024)
 - Updated Retroarch and Retroarch32 to 1.17
 - Updated retroarch and retroarch32 launch scripts to allow dosbox-pure and gpsp cores for local netplay
 - Updated launching of scripts for the Options section to show stderr and not just stdout (Thanks to SirNate0 for the suggestion)
+
+v2.0 (03/29/2024)
+- Updated n64.sh launch script to more broadly account for various devices
+- Updated singe.sh launch script to use an alternate sdl2 for singe (ALG) games (Thanks to MBRetrocade6894 for reporting the issue)
+- Updated Retroarch and Retroarch32 to 1.18(f549875)
+- Updated retroarch and retroarch32 audio and video filters
+- Updated XRoar standalone emulator to 1.5.5
+- Updated older PortMaster installs to address a possible update bug (Thanks to kloptops for this fix)
+- Removed RGB30 related items accidentally added from the 02232024 update
+- Added geolith libretro emulator for Neo Geo (Thanks to Slaminger for the suggestion)
+ - This emulator is more accurate than fbneo and fbalpha and allows the ability to load .neo rom files instead
+   of cumbersome arcade roms of a particular version
+- Added .neo and .NEO extension support for Neo Geo
+- Added DoubleCherryGB libretro emulator for GameBoy and GameBoy Color (Thanks to Slaminger for the suggestion)
+ - This emulator allows for emulating up to 4 or more GameBoy units
+- Added stella libretro emulator for Atari 2600 (Thanks to xkenx70 for the suggestion)
+- Added Apple2 support (Thanks to slayer666 for script and recommendation)
