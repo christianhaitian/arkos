@@ -207,3 +207,11 @@ v2.0 (03/29/2024)
  - This emulator allows for emulating up to 4 or more GameBoy units
 - Added stella libretro emulator for Atari 2600 (Thanks to xkenx70 for the suggestion)
 - Added Apple2 support (Thanks to slayer666 for script and recommendation)
+
+v2.0 (03/30/2024)
+- Fixed missing saves and savestates issue from Retroarch and Retroarch32 1.18 update
+ - Related to this commit which has now reverted: https://github.com/libretro/RetroArch/commit/338c9a4fe441899e98c95ab082e18ddb5f931e49
+- Fixed rotated retroarch32
+- Fixed ppsspp 1.17.1 gui (Thanks to AmberElec for the patch)
+- Updated apple2.sh script to fix some minor issues (Thanks to Slayer366 for the fixes)
+- Added .rvz and .RVZ as supported extensions for Gamecube (Thanks to dani7959 for testing and confirming)
