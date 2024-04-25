@@ -716,3 +716,16 @@ v2.0 (03/30/2024)
  - Related to this commit which has now reverted: https://github.com/libretro/RetroArch/commit/338c9a4fe441899e98c95ab082e18ddb5f931e49
 - Fixed ppsspp 1.17.1 gui (Thanks to AmberElec for the patch)
 - Updated apple2.sh script to fix some minor issues (Thanks to Slayer366 for the fixes)
+
+v2.0 (04/24/2024)
+- Added Libretro MESS as an additional emulator for Apple 2 (Thanks to Zomugoff and BCosmo for the suggestion)
+- Added input tester tool (Thanks to CavemanJoe for the suggestion) (Thanks to Michele Righi for SDL2-Controller-Tester)
+- Added inactivity auto suspend capability 
+ - Enable and set the timeout (in minutes) for auto suspend via the Start Menu>Advanced section.
+- Updated apple2.sh script to fix filenames with parentheses and braces (Thanks to BCosmo for the fixes)
+- Updated linapple to stop joystick log messages
+- Updated ScummVM Standalone to 2.8.1
+- Updated Mednafen standalone to 1.32.1
+- Updated Emulationstation to add the ability to adjust and disable auto suspend
+- Updated Emulationstation to change folder icon from star to right arrow to differentiate from favorited games (Thanks to lauren7ino for the suggestion)
+- Fixed ppsspp-2021 gui (Thanks to AmberElec for guidance)
