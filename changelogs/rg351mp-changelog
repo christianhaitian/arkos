@@ -596,3 +596,17 @@ v2.0 (05/24/2024)
   - Make sure Game Loading Image Mode is set to PIC
 - Added ability to use an alternate SDL2 version for Portmaster games
   - Just use the Change Ports SDL tool located in the Options>Advanced section
+
+v2.0 (06/27/2024)
+- Updated Retroarch and Retroarch32 to 1.19.1 (e51a316)
+- Updated Emulationstation to fix not being able to show content in a subfolder named Sports (Thanks to evanation for reporting the issue)
+- Updated ondemand cpu governor up_threshold and sampling_down_factor to 85 and 150 respectively to smooth out game play when using this governor (Thanks to chronoreverse for the tip)
+- Updated N64 to add support for 7z and zip files
+- Fixed being able to set a performance governor for Atari ST emulation
+- Fixed Retroarch and Retroarch32 missing reboot and shutdown options (Thanks to Swift Outlaw for reporting the issue)
+- Fixed ALG no longer launching since last update
+- Fixed Update Games Lists option returns to corrupt game list for fade transition (Thanks to Zomgugoff for reporting the issue and confirming the fix)
+- Added Ardens libretro core as an addittional core for Arduboy
+- Added Japanese translation for Emulationstation (Thanks to alhumbra for the translation)
+- Added the ability to hide extensions per system (Thanks to Batocera for the solution)
+  - While in a system, press the start button then go to UI Settings then go to Theme Configuration then File Extensions
