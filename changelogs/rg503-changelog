@@ -663,3 +663,12 @@ v2.0 (06/27/2024)
 - Added Japanese translation for Emulationstation (Thanks to alhumbra for the translation)
 - Added the ability to hide extensions per system (Thanks to Batocera for the solution)
   - While in a system, press the start button then go to UI Settings then go to Theme Configuration then File Extensions
+
+v2.0 (07/04/2024)
+- Fixed Emulationstation slow loading when many ports are installed
+- Fixed game count when extensions are filtered
+- Added FBNeo xtreme amped libretro core for various arcade systems where libretro fbneo core is available (Thanks to KMFDManic for the modification and recommendation)
+  - May improve performance on rk3566 devices 
+    with certain CAVE games like Deathsmile and 
+    Mushihime-sama.  For Deathsmile, set
+    Blitter Delay to 128 in Core Options>Dip Switches.
