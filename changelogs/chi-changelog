@@ -633,3 +633,12 @@ v2.0 (07/04/2024)
     with certain CAVE games like Deathsmile and 
     Mushihime-sama.  For Deathsmile, set
     Blitter Delay to 128 in Core Options>Dip Switches.
+
+v2.0 (07/31/2024)
+- Updated French translation for Emulationstation (Thanks to chronoss09)
+- Updated Korean translation for Emulationstation (Thanks to ljhmd0825)
+- Updated Portuguese translation for Emulationstation (Thanks to lauren7ino)
+- Updated Spanish translation for Emulationstation (Thanks to AmadeusGraves)
+- Updated Emulationstation to fix Gamelist View Style option "video" not being translatable (Thanks to ljhmd0825 for the fix)
+- Added Sharp-Shimmerless-Shader for retroarch and retroarch32 (Thanks to Woohyun-Kang for creating this shader and providing permission to distribute it)(Thanks to Ganimoth for suggesting it for inclusion in ArkOS)
+- Added ChimeraSNES retroarch core for SNES (Thanks to cobaltgit for the suggestion)
