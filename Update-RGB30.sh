@@ -2293,7 +2293,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08232024/arkosupdate-kodi08232024.zip -O /dev/shm/arkosupdate-kodi08232024.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate-kodi08232024.zip | tee -a "$LOG_FILE"
 	  sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/08232024/arkosupdate-kodi08232024.z01 -O /dev/shm/arkosupdate-kodi08232024.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate-kodi08232024.z01 | tee -a "$LOG_FILE"
 	  if [ -f "/dev/shm/arkosupdate-kodi08232024.zip" ] && [ -f "/dev/shm/arkosupdate-kodi08232024.z01" ]; then
-	    zip -FF /dev/shm/arkosupdate-kodi08232024.zip --out /dev/shm/arkosupdate08232024.zip -fz | tee -a "$LOG_FILE"
+	    zip -FF /dev/shm/arkosupdate-kodi08232024.zip --out /dev/shm/arkosupdate08232024.zip -fz > /dev/null
 		sudo rm -fv /dev/shm/arkosupdate-kodi08232024.z* | tee -a "$LOG_FILE"
 	  else
 		printf "\nThe update couldn't complete because the packages did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
@@ -2308,7 +2308,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	if [ -f "/dev/shm/arkosupdate08232024.zip" ]; then
 	  if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
 	    rm -rf /opt/kodi/lib/kodi/addons/* /opt/kodi/share/kodi/addons/* /opt/kodi/lib/addons/* /opt/kodi/lib/pkgconfig/* /opt/kodi/lib/libdumb.a | tee -a "$LOG_FILE"
-	    sudo unzip -X -o /dev/shm/arkosupdate08232024.zip -d / | tee -a "$LOG_FILE"
+	    sudo unzip -qq -X -o /dev/shm/arkosupdate08232024.zip -d /
 		if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ] || [ "$(cat ~/.config/.DEVICE)" = "RGB30" ]; then
 		  sed -i '/<res width\="1920" height\="1440" aspect\="4:3"/s//<res width\="1623" height\="1180" aspect\="4:3"/g' /opt/kodi/share/kodi/addons/skin.estuary/addon.xml
 		fi
@@ -2500,36 +2500,6 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nAdd support for .hdv and .HDV to Apple II\n" | tee -a "$LOG_FILE"
 	sed -i '/<extension>.dsk .DSK .sh .SH .do .DO .po .PO .apple2 .APPLE2 .zip .ZIP/s//<extension>.apple2 .APPLE2 .do .DO .dsk .DSK .hdv .HDV .po .PO .sh .SH .zip .ZIP/' /etc/emulationstation/es_systems.cfg
-
-	#printf "\nInstall and link new SDL 2.0.3000.6 (aka SDL 2.0.30.6)\n" | tee -a "$LOG_FILE"
-#	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
-#	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.3000.6.rk3566 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.3000.6.rk3566 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
-#	elif [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-r33s-linux.dtb" ] || [ -f "/boot/rk3326-r35s-linux.dtb" ] || [ -f "/boot/rk3326-r36s-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
-#	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.3000.6.rk3326 /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.3000.6.rk3326 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
-#	else
-#	  sudo mv -f -v /home/ark/sdl2-64/libSDL2-2.0.so.0.3000.6.rotated /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo mv -f -v /home/ark/sdl2-32/libSDL2-2.0.so.0.3000.6.rotated /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-64 | tee -a "$LOG_FILE"
-#	  sudo rm -rfv /home/ark/sdl2-32 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2.so /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so.0.3000.6 /usr/lib/aarch64-linux-gnu/libSDL2.so | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2.so /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
-#	  sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.3000.6 /usr/lib/arm-linux-gnueabihf/libSDL2.so | tee -a "$LOG_FILE"
-#	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
