@@ -571,3 +571,27 @@ v2.0 (07/31/2024)
 - Updated Emulationstation to fix Gamelist View Style option "video" not being translatable (Thanks to ljhmd0825 for the fix)
 - Added Sharp-Shimmerless-Shader for retroarch and retroarch32 (Thanks to Woohyun-Kang for creating this shader and providing permission to distribute it)(Thanks to Ganimoth for suggesting it for inclusion in ArkOS)
 - Added ChimeraSNES retroarch core for SNES (Thanks to cobaltgit for the suggestion)
+
+v2.0 (08/23/2024)
+- Added CPU Undervolting support in Emulationstation Start Menu>Advanced Settings section (Thanks to sydarn and the ROCKNIX team)
+  - This can be useful to minimize heat generation during intense usage like high end emulation such as Dreamcast, N64, PSP, and Saturn.
+  - This can also lead to failed booting of devices, however, this can be reverted by removing the .undervolt.(light or medium or maximum) 
+    from the end of the FDT /rk3566-OC.dtb line in the extlinux.conf text file located in your fat32 boot partition in the extlinux
+    folder.
+- Added piemu emulator for Aquaplus P/ECE emulation (Thanks to sakamoto-neko for the suggestion and AmberElec for the execution script)
+- Added emuscv libretro core emulator for Epoch Super Cassette Vision (Thanks to sakamoto-neko for the suggestion)
+- Added smsplus-gx libretro core for Sega Master System and Sega Game Gear
+- Added hatariB libretro core as an additional emulator for Atari ST (Thanks to Slayer366 for the suggestion)
+- Added etos192us.img GPL licensed bios file for hatarib libretro core.  (Thanks to EmuTOS)
+ - https://emutos.sourceforge.io/
+- Added minivmac libretro core for Apple Macintosh emulation (Thanks to 6800legacy for the suggestion)
+- Added Aquaplus P/ECE system to NES-Box theme(Thanks to Jetup13)
+- Added Super Cassette Vision system to NES-Box theme(Thanks to Jetup13)
+- Added support for .hdv and .HDV for Apple II (Thanks to AP2K94 for the suggestion)(Thanks to Slayer366 for guidance on adding support for this)
+ - Requires using Applewin standalone emulator
+- Updated Kodi to 21.1 Omega
+- Updated singe.sh script to support game.commands file (Thanks to Rhikki for the suggestion) (Thanks to Dirtbagxon for the script modification)
+- Updated Fake-08 standalone emulator
+- Updated wifi script to add ability to set country for Wifi use
+ - May help improve wifi performance
+- Fixed Backup and Restore ArkOS settings function in BaRT
