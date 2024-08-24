@@ -5653,7 +5653,7 @@ if [ ! -f "/home/ark/.config/.update07042024" ]; then
 
 fi
 
-if [ ! -f "/home/ark/.config/.update08012024" ]; then
+if [ ! -f "/home/ark/.config/.update07312024" ]; then
 
 	printf "\nUpdate French translation for Emulationstation\nUpdate Korean translation for Emulationstation\nUpdate Spanish translation for Emulationstation\nUpdate Portuguese translation for Emulationstation\nUpdate emulationstation to fix translation for gamelist option video\nAdd Sharp-Shimmerless-Shader for retroarch and retroarch32\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -5764,7 +5764,7 @@ if [ ! -f "/home/ark/.config/.update08012024" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
 
-	touch "/home/ark/.config/.update08012024"
+	touch "/home/ark/.config/.update07312024"
 
 fi
 
