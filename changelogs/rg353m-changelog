@@ -595,3 +595,31 @@ v2.0 (08/23/2024)
 - Updated wifi script to add ability to set country for Wifi use
  - May help improve wifi performance
 - Fixed Backup and Restore ArkOS settings function in BaRT
+
+v2.0 (09/27/2024)
+- Fixed Kodi 21 crashing when playing large videos (Thanks to jgrass3 for reporting the issue, testing and confirming the fix)
+- Updated SDL to 2.0.30.7
+- Updated Change Ports SDL tool to support SDL 2.0.30.7
+- Updated singe.sh script to include -texturestream setting to improve performance with newer SDL
+- Updated daphne.sh script to include -texturestream setting to improve performance with newer SDL
+- Updated arkos_ap_mode.sh to fix failure state handling
+- Updated Restore ArkOS Settings tool to fix some missing settings like Tap to Power Off (Thanks to lauren7ino for reporting the issue)
+- Updated Backup ArkOS Settings tool to fix backing up timezone setting (Thanks to lauren7ino for reporting the issue)
+- Updated Emulationstation to add scraping support for Vircon32
+- Updated Emulationstation to add Loading Image delay feature when using Game Loading Image in Pic mode (Thanks to Zomugoff for the idea)
+- Updated perfmax and perfnorm scripts to support Loading image delay feature
+- Updated XRoar emulator to version 1.6.5
+- Optimized hostapd.conf to improve local netplay performance
+- Added ability to restore (reenable) joystick control for ECWolf standalone emulator.
+- Added support for PuzzleScript (Thanks to silliness is no laughing matter for the mention of this core)
+- Added support Vircon32 (Thanks to thenanox for the recommendation)
+- Added PuzzleScript system to NES-Box theme(Thanks to Jetup13)
+- Added Vircon32 system to NES-Box theme(Thanks to Jetup13)
+- Added .m3u and .M3U as supported extensions for Amiga and AmigaCD32 (Thanks to lauren7ino for the suggestion)
+- Added ability to add alternative control scheme for standalone Mupen64plus including on per game basis.
+ - In the n64 games folder, a controls subfolder will be created after the initial run of a game.  Within that controls folder should be a Sample.ini file.
+   This file contains the currently assigned default controls for mupen64plus.  To change that default control setup, 
+   just copy Sample.ini to Default.ini within the controls subfolder and make your control changes there.  
+   To do it on a per game basis, copy Sample.ini to yourgamename.ini within the controls subfolder and make your changes there.  
+   If your game's file name is called Paper Mario.z64, the custom control file name will need to be Paper Mario.ini for the custom control to be picked up. 
+ 
