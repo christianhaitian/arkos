@@ -622,4 +622,6 @@ v2.0 (09/27/2024)
    just copy Sample.ini to Default.ini within the controls subfolder and make your control changes there.  
    To do it on a per game basis, copy Sample.ini to yourgamename.ini within the controls subfolder and make your changes there.  
    If your game's file name is called Paper Mario.z64, the custom control file name will need to be Paper Mario.ini for the custom control to be picked up. 
- 
+
+v2.0 (09/29/2024)
+- Fixed builtin controller issue with SDL2 to 2.0.30.7
