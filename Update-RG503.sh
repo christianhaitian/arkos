@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="????2024"
+UPDATE_DATE="10252024"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -6252,13 +6252,13 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate emulationstation to exclude menu.scummvm from scraping\nUpdate DS4 Controller config for retroarches\nUpdate Hypseus-Singe to 2.11.3\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
-	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/????2024/arkosupdate????2024.zip -O /dev/shm/arkosupdate????2024.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate????2024.zip | tee -a "$LOG_FILE"
-	if [ -f "/dev/shm/arkosupdate????2024.zip" ]; then
-	  sudo unzip -X -o /dev/shm/arkosupdate????2024.zip -d / | tee -a "$LOG_FILE"
-	  sudo rm -fv /dev/shm/arkosupdate????2024.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/10252024/arkosupdate10252024.zip -O /dev/shm/arkosupdate10252024.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate10252024.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate10252024.zip" ]; then
+	  sudo unzip -X -o /dev/shm/arkosupdate10252024.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate10252024.zip | tee -a "$LOG_FILE"
 	else
 	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
-	  sudo rm -fv /dev/shm/arkosupdate????2024.z* | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate10252024.z* | tee -a "$LOG_FILE"
 	  sleep 3
 	  echo $c_brightness > /sys/class/backlight/backlight/brightness
 	  exit 1
