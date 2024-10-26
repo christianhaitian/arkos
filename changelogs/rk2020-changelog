@@ -954,3 +954,8 @@ v2.0 (09/27/2024)
 
 v2.0 (09/29/2024)
 - Fixed builtin controller issue with SDL2 to 2.0.30.7
+
+v2.0 (10/25/2024)
+- Updated Emulationstation to exculde menu.scummvm from being scraped (Thanks to lauren7ino for reporting the issue)
+- Updated Hypseus-singe to 2.11.3
+ - Some assigned buttons for this emulator have changed.  See the global assigned hotkey section in the FAQ for your respective device for more info.
