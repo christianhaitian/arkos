@@ -954,3 +954,12 @@ v2.0 (10/25/2024)
 - Updated Emulationstation to exculde menu.scummvm from being scraped (Thanks to lauren7ino for reporting the issue)
 - Updated Hypseus-singe to 2.11.3
  - Some assigned buttons for this emulator have changed.  See the global assigned hotkey section in the FAQ for your respective device for more info.
+
+v2.0 (11/27/2024)
+- Updated exfat kernel module
+- Updated GZDoom to 4.13.1
+- Updated XRoar to 1.7.2
+- Updated PPSSPP Standalone to 1.18.1 
+- Updated Mupen64Plus Standalone
+- Fixed ScummVM Standalone saving issue for single SD card setups
+- Disabled blinking cursor when entering and exiting Emulationstation (Thanks to Jason Grieves for the request)
