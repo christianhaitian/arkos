@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="11272024"
+UPDATE_DATE="????2024"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -6319,7 +6319,7 @@ if [ ! -f "/home/ark/.config/.update10252024" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update11272024" ]; then
 
 	printf "\nUpdate GZDoom to 4.13.1\nUpdate PPSSPP to 1.18.1\nUpdated Mupen64plus standalone\nUpdate XRoar to 1.7.1\nFix ScummVM single sd card setup\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -6411,6 +6411,63 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  then
 	    printf "\nDisabling blinking cursor when entering and exiting Emulationstation\n" | tee -a "$LOG_FILE"
 		sudo sed -i '/consoleblank\=0/s//consoleblank\=0 vt.global_cursor_default\=0/g' /boot/boot.ini
+	  fi
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update11272024"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nRevert exfat kernel module update to previous version\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/????2024/arkosupdate????2024.zip -O /dev/shm/arkosupdate????2024.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate????2024.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate????2024.zip" ]; then
+	  sudo unzip -X -o /dev/shm/arkosupdate????2024.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate????2024.zip | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate????2024.z* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+
+	if test ! -z $(tr -d '\0' < /proc/device-tree/compatible | grep rk3566)
+	then
+      kernel_ver="4.19.172"
+	else
+      kernel_ver="4.4.189"
+	fi
+	if [ ! -f "/lib/modules/${kernel_ver}/kernel/fs/exfat/exfat.ko.newer" ]; then
+	  printf "\nReverting to previous exfat kernel module\n" | tee -a "$LOG_FILE"
+	  sudo cp -fv /lib/modules/${kernel_ver}/kernel/fs/exfat/exfat.ko /lib/modules/${kernel_ver}/kernel/fs/exfat/exfat.ko.newer | tee -a "$LOG_FILE"
+	  sudo cp -fv /lib/modules/${kernel_ver}/kernel/fs/exfat/exfat.ko~ /lib/modules/${kernel_ver}/kernel/fs/exfat/exfat.ko | tee -a "$LOG_FILE"
+	  sudo depmod -a
+	  sudo modprobe -v exfat | tee -a "$LOG_FILE"
+	fi
+
+	if test ! -z $(tr -d '\0' < /proc/device-tree/compatible | grep rk3566)
+	then
+	  printf "\nDownloading Kodi 20.5 to revert Kodi 21.1 to older version to fix streaming issues\n" | tee -a "$LOG_FILE"
+	  while [ ! -f "/dev/shm/Kodi-20.5.tar.gz.partaa" ]; do
+	     sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/????2024/Kodi-20.5.tar.gz.partaa -O /dev/shm/Kodi-20.5.tar.gz.partaa -a "$LOG_FILE" || sudo rm -f /dev/shm/Kodi-20.5.tar.gz.partaa | tee -a "$LOG_FILE"
+	  done
+	  while [ ! -f "/dev/shm/Kodi-20.5.tar.gz.partab" ]; do
+	     sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/????2024/Kodi-20.5.tar.gz.partab -O /dev/shm/Kodi-20.5.tar.gz.partab -a "$LOG_FILE" || sudo rm -f /dev/shm/Kodi-20.5.tar.gz.partab | tee -a "$LOG_FILE"
+	  done
+	  if [ -f "/dev/shm/Kodi-20.5.tar.gz.partaa" ] && [ -f "/dev/shm/Kodi-20.5.tar.gz.partab" ]; then
+	    cat /dev/shm/Kodi-20.5.tar.gz.parta* > /dev/shm/Kodi-20.5.tar.gz
+		rm -fv /dev/shm/Kodi-20.5.tar.gz.parta* | tee -a "$LOG_FILE"
+	    tar -xvf /dev/shm/Kodi-20.5.tar.gz -C /
+	    if [ "$(cat ~/.config/.DEVICE)" = "RG353M" ] || [ "$(cat ~/.config/.DEVICE)" = "RG353V" ] || [ "$(cat ~/.config/.DEVICE)" = "RK2023" ] || [ "$(cat ~/.config/.DEVICE)" = "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" = "RGB20PRO" ]; then
+	      sed -i '/<res width\="1920" height\="1440" aspect\="4:3"/s//<res width\="1623" height\="1180" aspect\="4:3"/g' /opt/kodi/share/kodi/addons/skin.estuary/addon.xml
+	    fi
 	  fi
 	fi
 
