@@ -352,3 +352,18 @@ v2.0 (11/27/2024)
 - Updated PPSSPP Standalone to 1.18.1 
 - Updated Mupen64Plus Standalone
 - Fixed ScummVM Standalone saving issue for single SD card setups
+
+v2.0 (12/24/2024)
+- Reverted Kodi 21.1 to Kodi 20.5 to fix streaming addon playback issues
+- Reverted exfat kernel module from last update
+- Fixed fail booting when second sd card is not found or not in the expected format
+- Updated ScummVM Standalone to 2.9.0
+- Updated SDL to 2.0.30.10
+- Updated Change Ports SDL tool to support SDL 2.0.30.10 and 2.0.28.2
+- Updated FileBrowser to version 2.31.2
+- Updated enable_vibration script
+- Updated daphne.sh script to properly accomodate 720x720 screens
+- Updated singe.sh script to properly accomodate 720x720 screens
+- Updated coco.sh script to accomodate providing an alternate default control scheme for CoCo3 emulation using XRoar
+- Added j2me emulator using libretro freej2me and freej2me-plus cores
+- Added j2me system to SagaBox theme (Thanks to Jetup13)

@@ -968,3 +968,14 @@ v2.0 (11/27/2024)
 - Updated Mupen64Plus Standalone
 - Fixed ScummVM Standalone saving issue for single SD card setups
 - Disabled blinking cursor when entering and exiting Emulationstation (Thanks to Jason Grieves for the request)
+
+v2.0 (12/24/2024)
+- Reverted exfat kernel module from last update
+- Updated uboot to remove version info being shown over the boot logo
+- Updated ScummVM Standalone to 2.9.0
+- Updated SDL to 2.0.30.10
+- Updated Change Ports SDL tool to support SDL 2.0.30.10 and 2.0.28.2
+- Updated FileBrowser to version 2.31.2
+- Updated coco.sh script to accomodate providing an alternate default control scheme for CoCo3 emulation using XRoar
+- Added j2me emulator using libretro freej2me and freej2me-plus cores
+- Added j2me system to NES-Box theme(Thanks to Jetup13)
