@@ -7047,7 +7047,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  printf "  Done.\n" | tee -a "$LOG_FILE"
 	fi
 
-	if [ -f "/dev/input/by-path/platform-odroidgo2-joypad-joystick" ] && [ ! -f "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick" ]; then
+	if [ -e "/dev/input/by-path/platform-odroidgo2-joypad-joystick" ] && [ ! -e "/dev/input/by-path/platform-ff300000.usb-usb-0:1.2:1.0-event-joystick" ]; then
 	  printf "\nUpdating uboot to remove uboot version info drawing over boot logo\n" | tee -a "$LOG_FILE"
 	  cd /home/ark/sd_fuse
 	  sudo dd if=idbloader.img of=/dev/mmcblk0 conv=notrunc bs=512 seek=64 | tee -a "$LOG_FILE"
