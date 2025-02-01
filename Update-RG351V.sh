@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="01312025"
+UPDATE_DATE="02012025-2"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -7816,7 +7816,7 @@ if [ ! -f "/home/ark/.config/.update12242024" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update01312025" ]; then
 
 	printf "\nUpdate Retroarch and Retroarch32 to 1.20.0\nUpdate rk3566 kernel with battery reading fix and native rumble support\nUpdate Hypseus-singe to 2.11.4\nUpdate pico8.sh to fix offline carts play via splore\nFix bad freej2me-lr.jar and freej2me-plus-lr.jar files\nAdd vibration support for RK2023\nUpdate Emulationstation\nUpdate batt_life_verbal_warning.py\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -8001,6 +8001,59 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
 	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update01312025"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix potential battery reading issue from 01312025 update for rk3566 devices\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/02012025-2/arkosupdate02012025-2.zip -O /dev/shm/arkosupdate02012025-2.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate02012025-2.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate02012025-2.zip" ]; then
+	  sudo unzip -X -o /dev/shm/arkosupdate02012025-2.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate02012025-2.zip | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate02012025-2.z* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nAdd Onscripter_Onsyuri libretro core to Onscripter system\n" | tee -a "$LOG_FILE"
+	sed -i -e '/<command>sudo perfmax %GOVERNOR% %ROM%; nice -n -19 \/usr\/local\/bin\/retroarch -L \/home\/ark\/.config\/retroarch\/cores\/onscripter_libretro.so %ROM%; sudo perfnorm<\/command>/{r /home/ark/add_onsyuri_onscripter.txt' -e 'd}' /etc/emulationstation/es_systems.cfg
+	sudo rm -fv /home/ark/add_onsyuri_onscripter.txt | tee -a "$LOG_FILE"
+
+	if [ -f "/boot/rk3566.dtb" ]; then
+	    printf "\nCopy updated kernel based on device\n" | tee -a "$LOG_FILE"
+	    if test ! -z "$(grep "RG353V" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.353 /boot/Image | tee -a "$LOG_FILE"
+	    elif test ! -z "$(grep "RG353M" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.353 /boot/Image | tee -a "$LOG_FILE"
+	    elif test ! -z "$(grep "RGB30" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.rgb30 /boot/Image | tee -a "$LOG_FILE"
+	    elif test ! -z "$(grep "RGB20PRO" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.rgb20pro /boot/Image | tee -a "$LOG_FILE"
+	    elif test ! -z "$(grep "RK2023" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.rk2023 /boot/Image | tee -a "$LOG_FILE"
+	    elif test ! -z "$(grep "RG503" /home/ark/.config/.DEVICE | tr -d '\0')"
+	    then
+	      sudo mv -fv /home/ark/rk3566-kernel/Image.rg503 /boot/Image | tee -a "$LOG_FILE"
+		fi
+		sudo rm -rfv /home/ark/rk3566-kernel/ | tee -a "$LOG_FILE"
+	else
+	  sudo rm -rfv /home/ark/rk3566-kernel/ | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"

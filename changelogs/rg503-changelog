@@ -781,3 +781,9 @@ v2.0 (01/31/2025)
 
 v2.0 (02/01/2025)
 - Fixed controller issue for Kodi, Mednafen and possibly other programs and emulators from last update
+
+v2.0 (02/01/2025-2)
+- Reverted battery reading change from 01312025.
+  - If your battery is only charging to 50 percent, either let the unit completely drain to power off or open your unit and unplug 
+    your battery for 10 seconds to resolve the issue.
+- Add onscripter-onsyuri core for Onscripter system (Thanks to lcdyk0517 for the suggestion and testing.  Thanks to iyzsong for the libretro core and guidance.)
