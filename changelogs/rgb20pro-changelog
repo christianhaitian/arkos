@@ -41,3 +41,6 @@ v2.0 (01/31/2025)
 - Fixed text for Power LED Status during sleep setting in Emulationstation Advanced menu (Thanks to wakeboxer for reporting this and the PR to fix this)
 - Added Cave Story as a system using doukutsu-rs libretro core (Thanks to Tonhum for the suggestion and testing)
 - Added Cave Story system to NES-Box theme (Thanks to Jetup13)
+
+v2.0 (02/01/2025)
+- Fixed controller issue for Kodi, Mednafen and possibly other programs and emulators from last update

@@ -479,3 +479,7 @@ v2.0 (01/31/2025)
 - Added ability to enable rumble support for optional rumble motor
 - Added Cave Story as a system using doukutsu-rs libretro core (Thanks to Tonhum for the suggestion and testing)
 - Added Cave Story system to NES-Box theme (Thanks to Jetup13)
+
+v2.0 (02/01/2025)
+- Fixed controller issue for Kodi, Mednafen and possibly other programs and emulators from last update
+

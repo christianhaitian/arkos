@@ -778,3 +778,6 @@ v2.0 (01/31/2025)
 - Fixed bad freej2me-lr.jar and freej2me-plus-lr.jar files from 12/24/2024 update
 - Added Cave Story as a system using doukutsu-rs libretro core (Thanks to Tonhum for the suggestion and testing)
 - Added Cave Story system to NES-Box theme (Thanks to Jetup13)
+
+v2.0 (02/01/2025)
+- Fixed controller issue for Kodi, Mednafen and possibly other programs and emulators from last update
