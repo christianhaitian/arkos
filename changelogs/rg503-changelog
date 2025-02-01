@@ -763,3 +763,18 @@ v2.0 (12/24/2024)
 - Updated coco.sh script to accomodate providing an alternate default control scheme for CoCo3 emulation using XRoar
 - Added j2me emulator using libretro freej2me and freej2me-plus cores
 - Added j2me system to NES-Box theme(Thanks to Jetup13)
+
+v2.0 (01/31/2025)
+- Updated Retroarch and Retroarch32 to 1.20.0 (ed1810d)
+- Updated Hypseus-singe to 2.11.4
+- Updated kernel to add native rumble support (Thanks to trngaje. Thanks to wakeboxer for the mention of this being available.)
+- Updated kernel to fix incorrect battery reading when switching between bsp and mainline os like ROCKNIX (Thanks to spycat88 for the fix)
+- Updated Kodi to 21.2 with streaming addon playback issues fixed (Thanks to allanguild for the guidance on the necessary fix)
+- Updated pico8.sh script to fix Splore deleting downloaded carts when played offline (Thanks to elmimmo for reporting the issue)
+- Updated Emulationstation to add support for fontawesome font and add ability for additional translatable text (Thanks to wakeboxer)
+- Updated Emulationstation to add support for setting a custom verbal battery warning threshold (Thanks to mardem1976 for the suggestion)
+- Updated Emulationstation Korean translation (Thanks to wakeboxer for the PR)
+- Updated batt_life_verbal_warning.py to accomodate custom verbal battery warning threshold
+- Fixed bad freej2me-lr.jar and freej2me-plus-lr.jar files from 12/24/2024 update
+- Added Cave Story as a system using doukutsu-rs libretro core (Thanks to Tonhum for the suggestion and testing)
+- Added Cave Story system to NES-Box theme (Thanks to Jetup13)
