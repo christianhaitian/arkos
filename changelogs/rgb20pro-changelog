@@ -50,3 +50,7 @@ v2.0 (02/01/2025-2)
   - If your battery is only charging to 50 percent, either let the unit completely drain to power off or open your unit and unplug 
     your battery for 10 seconds to resolve the issue.
 - Add onscripter-onsyuri core for Onscripter system (Thanks to lcdyk0517 for the suggestion and testing.  Thanks to iyzsong for the libretro core and guidance.)
+
+v2.0 (02/01/2025)-3
+- Fixed Portmaster segfaulting
+- Added BUTTON_RIGHTSTICK as KEY_SERVICE for Hypsesus-Singe

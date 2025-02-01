@@ -731,3 +731,7 @@ v2.0 (01/31/2025)
 
 v2.0 (02/01/2025-2)
 - Add onscripter-onsyuri core for Onscripter system (Thanks to lcdyk0517 for the suggestion and testing.  Thanks to iyzsong for the libretro core and guidance.)
+
+v2.0 (02/01/2025)-3
+- Fixed Portmaster segfaulting
+- Added BUTTON_RIGHTSTICK as KEY_SERVICE for Hypsesus-Singe

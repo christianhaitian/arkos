@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="02012025-2"
+UPDATE_DATE="02012025-3"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -8517,7 +8517,7 @@ if [ ! -f "/home/ark/.config/.update01312025" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update02012025-2" ]; then
 
 	printf "\nFix potential battery reading issue from 01312025 update for rk3566 devices\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -8565,6 +8565,19 @@ if [ ! -f "$UPDATE_DONE" ]; then
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+
+	touch "/home/ark/.config/.update02012025-2"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nFix PortMaster\nAdd KEY_SERVICE to RIGHTSTICK button for Hypseus-Singe\n" | tee -a "$LOG_FILE"
+
+	sed -i '/KEY_SERVICE    \= SDLK_9          0         0                  0                 0/c\KEY_SERVICE    \= SDLK_9          0         BUTTON_RIGHTSTICK  0                 0' /opt/hypseus-singe/hypinput.ini
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 (02012025)-3" /usr/share/plymouth/themes/text.plymouth
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
