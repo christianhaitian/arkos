@@ -1003,3 +1003,12 @@ v2.0 (02/01/2025)-3
 v2.0 (02/02/2025)
 - Updated Retroarch and Retroarch32 to respect custom in-game save and savestate locations settings (05f75b8)
 - Added .VERSION file to /home/ark/.config folder location for PortMaster use
+
+v2.0 (02/08/2025)
+- Updated Retroarch and Retroarch32 to last 1.20.0 stable release due to override issues
+- Updated Emulationstation to resolve missing font issue for languages such as Korean (Thanks to wakeboxer for the fix)
+- Updated wifi tool to truncate long SSIDs during password input (Thanks to dani7959 for reporting the issue)
+- Updated USB Drive Mount to prevent incorrect mounting filesystem errors (Thanks to XNLFutureTechnologies for the fix)
+- Updated msgbox to add support for parsing a second argument as a dialog title (Thanks to XNLFutureTechnologies for the pull request)
+- Added BBC Micro emulation using the b2 libretro core (Thanks to SuperBadger77 for the recommendation)
+- Updated NES-Box theme to include BBC Micro (Thanks to Jetup13)
