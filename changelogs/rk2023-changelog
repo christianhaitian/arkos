@@ -505,3 +505,11 @@ v2.0 (02/08/2025)
 - Updated msgbox to add support for parsing a second argument as a dialog title (Thanks to XNLFutureTechnologies for the pull request)
 - Added BBC Micro emulation using the b2 libretro core (Thanks to SuperBadger77 for the recommendation)
 - Updated NES-Box theme to include BBC Micro (Thanks to Jetup13)
+
+v2.0 (02/09/2025)
+- Updated Emulationstation to fix missing popup keyboard fonts
+- Updated Emulationstation to add Date and Time display for video and slideshow screensavers (Thanks to bulzipke for the PR and Batocera)
+- Updated Emulationstation to add Korean(Hangui) input, unicode and other fixes for the popup keyboard (Thanks to bulzipke for the PR and Batocera)
+- Updated Retroarch and Retroarch32 to the correct last 1.20.0 stable release this time
+- Updated Retroarch and Retroarch32 common overlays
+- Updated BBC Micro emulation to no longer need a swapfile (Thanks to zoltanvb for updating the libretro core to resolve this)
