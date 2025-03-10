@@ -3,3 +3,9 @@ contact_links:
 - name: R36 units
   url: https://github.com/AeolusUX/ArkOS-R3XS
   about: R36 units are not supported by the main ArkOS distribution.
+- name: PortMaster Ports
+  url: https://github.com/PortsMaster/PortMaster-New
+  about: PortMaster Ports issues should be reported to the PortMaster git.
+- name: ThemeMaster
+  url: https://github.com/JohnIrvine1433/ThemeMaster
+  about: ThemeMaster issues should be reported to the ThemeMaster git.
