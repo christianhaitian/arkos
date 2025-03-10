@@ -1,5 +1,5 @@
 name: Bug report
-description: Before submitting your issue or feature request.  DO NOT REQUEST ASSISTANCE FOR PRELOADED IMAGES.  I do not support or condone the use of preloaded ArkOS images.  Preloaded meaning images that come with copyrighted roms preincluded.  Look for support from the creator or supplier of those preloaded images, not from here!  If a ticket is submitted for assistance for such images or if there's an indiciation that a preloaded image is what the support request is for, the issue ticket will be closed with no further response.
+description: DO NOT REQUEST ASSISTANCE FOR PRELOADED IMAGES.  Preloaded images meaning images or sd cards that come with copyrighted roms preincluded.  If a ticket is submitted for assistance for such images or if there's an indiciation that a preloaded image is what the support request is for, the issue ticket will be closed with no further response.
 body:
   - type: checkboxes
     attributes:
