@@ -19,12 +19,13 @@ body:
       - label: I couldn't find the answer for this in the Emulators and Ports section.
         required: true
       - label: I have reviewed the Emulators and Ports section.
+        required: true
 
   - type: dropdown
     id: device
     attributes:
       label: Which device are you having this issue with?
-      description: Only issues with ArkOS on supported devices should be reported here
+      description: Only issues with ArkOS on supported devices should be reported here.  If you're device is not listed here, it's not supported!
       options:
         - Not Listed
         - OGA 1.1/RGB10/V10
