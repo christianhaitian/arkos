@@ -25,18 +25,18 @@ body:
       label: Which device are you having this issue with?
       description: Only issues with ArkOS on supported devices should be reported here
       options:
-	    - Not Listed
+        - Not Listed
         - OGA 1.1/RGB10/V10
         - OGA 1.0/RK2020
         - RGB20Pro
-		- RGB30
-		- RG353M
-		- RG353V/VS
-		- RG503
-		- RG351MP
-		- R35S
-		- RG351V
-		- RK2023
+        - RGB30
+        - RG353M
+        - RG353V/VS
+        - RG503
+        - RG351MP
+        - R35S
+        - RG351V
+        - RK2023
       default: 0
     validations:
       required: true
