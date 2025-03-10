@@ -1,0 +1,78 @@
+name: Bug report
+description: Before submitting your issue or feature request.  DO NOT REQUEST ASSISTANCE FOR PRELOADED IMAGES.  I do not support or condone the use of preloaded ArkOS images.  Preloaded meaning images that come with copyrighted roms preincluded.  Look for support from the creator or supplier of those preloaded images, not from here!  If a ticket is submitted for assistance for such images or if there's an indiciation that a preloaded image is what the support request is for, the issue ticket will be closed with no further response.
+body:
+  - type: checkboxes
+    attributes:
+      label: Have you reviewed the Frequently Asked Questions section available for your supported device in the wiki?
+      description: Many basic answers can be found by reviewing the FAQ.
+      options:
+      - label: I couldn't find the answer for this in the Frequently Asked Quetions section for my supported device
+        required: true
+      - label: I have reviewed the FAQ for my supported device
+
+  - type: checkboxes
+    attributes:
+      label: If your issue is related to being able to run certain emulators, have you reviewed the Emulators and Ports section available at https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information for needed bios files and supported rom extensions?
+      description: Many basic answers related to emulators can be found by reviewing this section.
+      options:
+      - label: I couldn't find the answer for this in the Emulators and Ports section.
+        required: true
+      - label: I have reviewed the Emulators and Ports section.
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Which device are you having this issue with?
+      description: Only issues with ArkOS on supported devices should be reported here
+      options:
+	    - Not Listed
+        - OGA 1.1/RGB10/V10
+        - OGA 1.0/RK2020
+        - RGB20Pro
+		- RGB30
+		- RG353M
+		- RG353V/VS
+		- RG503
+		- RG351MP
+		- R35S
+		- RG351V
+		- RK2023
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Description of the actual issue
+      placeholder: What is actually happening
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen
+
+  - type: textarea
+    id: reproduce_steps
+    attributes:
+      label: Steps to reproduce the bug
+      description: List all steps to reproduce the problem
+      placeholder: |
+        1. [First step]
+        2. [Second step]
+        3. [and so on...]
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: What version of ArkOS are you on?
+      description: You can find this during the initial boot process right before the Emulationstation loading screen or from the start menu at the bottom of the screen while in Emulationstation
+      placeholder: 02092025
+    validations:
+      required: true
