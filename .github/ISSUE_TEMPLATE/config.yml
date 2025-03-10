@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+- name: R36 units
+  url: https://github.com/AeolusUX/ArkOS-R3XS
+  about: R36 units are not supported by the main ArkOS distribution.
