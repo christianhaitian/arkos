@@ -9,6 +9,7 @@ body:
       - label: I couldn't find the answer for this in the Frequently Asked Quetions section for my supported device
         required: true
       - label: I have reviewed the FAQ for my supported device
+        required: true
 
   - type: checkboxes
     attributes:
