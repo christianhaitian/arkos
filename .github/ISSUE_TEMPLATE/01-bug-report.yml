@@ -1,5 +1,5 @@
 name: Bug report
-description: DO NOT REQUEST ASSISTANCE FOR PRELOADED IMAGES.  Preloaded images meaning images or sd cards that come with copyrighted roms preincluded.  If a ticket is submitted for assistance for such images or if there's an indiciation that a preloaded image is what the support request is for, the issue ticket will be closed with no further response.
+description: DO NOT REQUEST ASSISTANCE FOR PRELOADED IMAGES OR SD CARDS.  The buf report will be closed with no further response for such requests.
 body:
   - type: checkboxes
     attributes:
