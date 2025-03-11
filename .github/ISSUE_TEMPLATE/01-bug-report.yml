@@ -13,7 +13,7 @@ body:
 
   - type: checkboxes
     attributes:
-      label: If your issue is related to being able to run certain emulators, have you reviewed the [Emulators and Ports](https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information) for needed bios files and supported rom extensions?
+      label: If your issue is related to being able to run certain emulators, have you reviewed the Emulators and Ports section available at https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information for needed bios files and supported rom extensions?
       description: Many basic answers related to emulators can be found by reviewing this section.
       options:
       - label: I couldn't find the answer for this in the Emulators and Ports section.
