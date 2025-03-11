@@ -6,9 +6,9 @@ body:
       label: Have you reviewed the Frequently Asked Questions section available for your supported device in the wiki?
       description: Many basic answers can be found by reviewing the FAQ.
       options:
-      - label: I couldn't find the answer for this in the Frequently Asked Quetions section for my supported device
-        required: true
       - label: I have reviewed the FAQ for my supported device
+        required: true
+      - label: I couldn't find the answer for this in the Frequently Asked Quetions section for my supported device
         required: true
 
   - type: checkboxes
@@ -16,9 +16,9 @@ body:
       label: If your issue is related to being able to run certain emulators, have you reviewed the Emulators and Ports section available at https://github.com/christianhaitian/arkos/wiki/ArkOS-Emulators-and-Ports-information for needed bios files and supported rom extensions?
       description: Many basic answers related to emulators can be found by reviewing this section.
       options:
-      - label: I couldn't find the answer for this in the Emulators and Ports section.
-        required: true
       - label: I have reviewed the Emulators and Ports section.
+        required: true
+      - label: I couldn't find the answer for this in the Emulators and Ports section.
         required: true
 
   - type: dropdown
