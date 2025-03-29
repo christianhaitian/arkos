@@ -30,6 +30,7 @@ echo "$my_var" | tee -a "$LOG_FILE"
 if [ "$my_var" != "OK" ] && [ "$my_var" != "ok" ]; then
   sudo msgbox "You didn't type OK.  This script will exit now and no changes have been made from this process."
   printf "You didn't type OK.  This script will exit now and no changes have been made from this process." | tee -a "$LOG_FILE"
+  rm -- "$0"
   exit 187
 fi
 

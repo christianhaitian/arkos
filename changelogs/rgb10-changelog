@@ -1015,3 +1015,20 @@ v2.0 (02/09/2025)
 - Updated Retroarch and Retroarch32 to the correct last 1.20.0 stable release this time
 - Updated Retroarch and Retroarch32 common overlays
 - Updated BBC Micro emulation to no longer need a swapfile (Thanks to zoltanvb for updating the libretro core to resolve this)
+
+v2.0 (03/29/2025)
+- Updated finish.sh and pause.sh to fix Favorites and Last Played not keeping updates between power on and power off events
+- Updated XRoar to 1.8.2
+- Updated GZDoom to 4.14.1
+- Updated Network Manager to 1.52.0
+- Updated Emulationstation to fix a popup keyboard cursor movement issue (Thanks to bulzipke for the PR)
+- Updated Emulationstation to fix korean keyboard (Thanks to ljhmd0825 for the PR)
+- Updated Emulationstation to fix screensaver update (Thanks to bulzipke for the PR)
+- Updated Emulationstation Russia translation (Thanks to SerjGeek)
+- Updated Update script to simplify future updates
+- Added Emulationstation Ukrainian Translation (Thanks to SerjGeek)
+- Added Emulationstation Swedish Translation (Thanks to yeager)
+- Added Dragon32 emulation (Thanks to alektronic)
+- Added Dragon64 emulation (Thanks to alektronic)
+- Added navy1978's modified retrorun and retrorun32 as additional emulators for Atomiswave, Dreamcast, Noami and Saturn (Thanks to navy1978 for the work and accommodations)
+- Added Flycast Standalone as additional emulator for Atomiswave, Dreamcast and Naomi (Thanks to KitFox618 for the inquiry)
