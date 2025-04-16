@@ -27,7 +27,6 @@ body:
       label: Which device are you having this issue with?
       description: Only issues with ArkOS on supported devices should be reported here.  If you're device is not listed here, it's not supported!
       options:
-        - Not Listed
         - OGA 1.1/RGB10/V10
         - OGA 1.0/RK2020
         - RGB20Pro
