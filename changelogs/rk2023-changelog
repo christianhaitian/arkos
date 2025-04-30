@@ -534,3 +534,18 @@ v2.0 (03/29/2025)
 
 v2.0 (03/30/2025)
 - Fixed analog stick for retrorun and retrorun32 (Thanks to KitFox618 for reporting the issue)
+
+v2.0 (04/30/2025)
+- Updated Retroarch and Retroarch32 to 1.21.0
+- Updated Sharp-Shimmerless shaders (Thanks to Woohyun) (Thanks to lauren7ino for the mention of the update)
+- Massive update to es_systems.cfg to allow for sorting of systems.  (Thanks to lauren7ino for the work)
+- Applied missing updated Emulationstation to fix a popup keyboard cursor movement issue (Thanks to bulzipke for the PR)
+- Applied missing updated Emulationstation to fix korean keyboard (Thanks to ljhmd0825 for the PR)
+- Applied missing updated Emulationstation to fix screensaver update (Thanks to bulzipke for the PR)
+- Updated Retrorun and Retrorun32 to version 2.7.5 (Thanks to navy1978)
+ - Adds savestate load (Select+L1 and save (Select+R1) hotkeys.
+ - Other cleanup and minor fixes
+- Updated Wifi tool to support connecting to WPA3 networks
+- Updated Wifi tool to not ask for a password when connecting to open networks
+- Updated importwifi tool to support connecting to WPA3 networks
+- Updated wifi_importer systemd service to load before plymouth

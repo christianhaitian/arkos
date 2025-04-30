@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="03302025"
+UPDATE_DATE="04302025"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -40,7 +40,7 @@ echo 255 > /sys/class/backlight/backlight/brightness
 touch $LOG_FILE
 tail -f $LOG_FILE >> /dev/tty1 &
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update03302025" ]; then
 
 	printf "\nUpdate retrorun.cfg to fix analog stick\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -61,6 +61,96 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sed -i "/retrorun_swap_l1r1_with_l2r2 \=/c\retrorun_swap_l1r1_with_l2r2 \= true" /home/ark/.config/retrorun.cfg
 	else
 	  sed -i "/retrorun_swap_l1r1_with_l2r2 \=/c\retrorun_swap_l1r1_with_l2r2 \= false" /home/ark/.config/retrorun.cfg
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	echo "$UPDATE_DATE" > /home/ark/.config/.VERSION
+
+	touch "/home/ark/.config/.update03302025"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdate Retroarch and Retroarch32 to 1.21.0\nUpdate Wifi.sh and importwifi.sh to support wpa3\nUpdate wifi_importer service\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/04302025/arkosupdate04302025.zip -O /dev/shm/arkosupdate04302025.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate04302025.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate04302025.zip" ]; then
+	  cp -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update04302025.bak
+	  sudo unzip -X -o /dev/shm/arkosupdate04302025.zip -d / | tee -a "$LOG_FILE"
+	  sudo systemctl daemon-reload
+	  sudo rm -fv /dev/shm/arkosupdate04302025.zip | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate04302025.z* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nMake sure the correct version of retrorun and retrorun32 are copied on the device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo rm -fv /usr/local/bin/retrorun-rk3326 | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/retrorun32-rk3326 | tee -a "$LOG_FILE"
+	else
+	  sudo cp -fv /usr/local/bin/retrorun-rk3326 /usr/local/bin/retrorun | tee -a "$LOG_FILE"
+	  sudo cp -fv /usr/local/bin/retrorun32-rk3326 /usr/local/bin/retrorun32 | tee -a "$LOG_FILE"
+	  sudo chmod 777 /usr/local/bin/retrorun*
+	  sudo rm -fv /usr/local/bin/retrorun-rk3326 | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/retrorun32-rk3326 | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nCopy correct es_systems.cfg depending on chipset\n" | tee -a "$LOG_FILE"
+	if [ ! -f "/boot/rk3566.dtb" ] && [ ! -f "/boot/rk3566-OC.dtb" ]; then
+	  cp -fv /etc/emulationstation/es_systems.cfg.rk3326 /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
+	else
+	  rm -fv /etc/emulationstation/es_systems.cfg.rk3326 | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nCopy correct Retroarches depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-r33s-linux.dtb" ] || [ -f "/boot/rk3326-r35s-linux.dtb" ] || [ -f "/boot/rk3326-r36s-linux.dtb" ] || [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
+	  cp -fv /opt/retroarch/bin/retroarch32.rk3326.unrot /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
+	  cp -fv /opt/retroarch/bin/retroarch.rk3326.unrot /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
+	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
+	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  cp -fv /opt/retroarch/bin/retroarch32.rk3326.rot /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
+	  cp -fv /opt/retroarch/bin/retroarch.rk3326.rot /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
+	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
+	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
+	else
+	  rm -fv /opt/retroarch/bin/retroarch.* | tee -a "$LOG_FILE"
+	  rm -fv /opt/retroarch/bin/retroarch32.* | tee -a "$LOG_FILE"
+	fi
+	chmod 777 /opt/retroarch/bin/*
+
+	printf "\nCopy correct emulationstation depending on device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3326-r33s-linux.dtb" ] || [ -f "/boot/rk3326-r35s-linux.dtb" ] || [ -f "/boot/rk3326-r36s-linux.dtb" ] || [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ] || [ -f "/boot/rk3326-batlexp-linux.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3326-odroidgo2-linux.dtb" ] || [ -f "/boot/rk3326-odroidgo2-linux-v11.dtb" ] || [ -f "/boot/rk3326-odroidgo3-linux.dtb" ]; then
+	  test=$(stat -c %s "/usr/bin/emulationstation/emulationstation")
+	  if [ "$test" = "3416928" ]; then
+	    sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  elif [ -f "/home/ark/.config/.DEVICE" ]; then
+		sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  fi
+	  if [ -f "/home/ark/.config/.DEVICE" ]; then
+	    sudo cp -fv /home/ark/emulationstation.rgb10max /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  else
+	    sudo cp -fv /home/ark/emulationstation.header /usr/bin/emulationstation/emulationstation.header | tee -a "$LOG_FILE"
+	  fi
+	  sudo cp -fv /home/ark/emulationstation.351v /usr/bin/emulationstation/emulationstation.fullscreen | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	elif [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
+	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
