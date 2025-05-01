@@ -108,6 +108,12 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  rm -fv /etc/emulationstation/es_systems.cfg.rk3326 | tee -a "$LOG_FILE"
 	fi
 
+	if test ! -z "$(cat /etc/fstab | grep roms2 | tr -d '\0')"
+	then
+ 	  printf "\nAccomodate for roms2 with new es_systems.cfg file...\n" | tee -a "$LOG_FILE"
+	  sed -i '/<path>\/roms\//s//<path>\/roms2\//g' /etc/emulationstation/es_systems.cfg
+	fi
+
 	printf "\nCopy correct Retroarches depending on device\n" | tee -a "$LOG_FILE"
 	if [ -f "/boot/rk3326-r33s-linux.dtb" ] || [ -f "/boot/rk3326-r35s-linux.dtb" ] || [ -f "/boot/rk3326-r36s-linux.dtb" ] || [ -f "/boot/rk3326-rg351v-linux.dtb" ] || [ -f "/boot/rk3326-rg351mp-linux.dtb" ] || [ -f "/boot/rk3326-gameforce-linux.dtb" ]; then
 	  cp -fv /opt/retroarch/bin/retroarch32.rk3326.unrot /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
