@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="04302025"
+UPDATE_DATE="05312025"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -71,7 +71,7 @@ if [ ! -f "/home/ark/.config/.update03302025" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update04302025" ]; then
 
 	printf "\nUpdate Retroarch and Retroarch32 to 1.21.0\nUpdate Wifi.sh and importwifi.sh to support wpa3\nUpdate wifi_importer service\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -157,6 +157,61 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	  sudo mv -fv /home/ark/emulationstation.503 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
 	  sudo rm -fv /home/ark/emulationstation.* | tee -a "$LOG_FILE"
 	  sudo chmod -v 777 /usr/bin/emulationstation/emulationstation* | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 ($UPDATE_DATE)" /usr/share/plymouth/themes/text.plymouth
+	echo "$UPDATE_DATE" > /home/ark/.config/.VERSION
+
+	touch "/home/ark/.config/.update04302025"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nUpdated ScummVM to version 2.9.1\nUpdated Hypseus-Singe 2.11.5\nUpdated Retrorun to version 2.7.7\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/05312025/arkosupdate05312025.zip -O /dev/shm/arkosupdate05312025.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate05312025.zip | tee -a "$LOG_FILE"
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/05312025/arkosupdate05312025.z01 -O /dev/shm/arkosupdate05312025.z01 -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate05312025.z01 | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate05312025.zip" ] && [ -f "/dev/shm/arkosupdate05312025.z01" ]; then
+	  zip -FF /dev/shm/arkosupdate05312025.zip --out /dev/shm/arkosupdate.zip -fz | tee -a "$LOG_FILE"
+	  sudo unzip -X -o /dev/shm/arkosupdate.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate05312025.z* | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate05312025.z* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nCopy correct scummvm for device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+      rm -fv /opt/scummvm/scummvm.rk3326 | tee -a "$LOG_FILE"
+    else
+      mv -fv /opt/scummvm/scummvm.rk3326 /opt/scummvm/scummvm | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nCopy correct Hypseus-Singe for device and mv hypinput.ini to hypinput_gamepad.ini\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+      rm -fv /opt/hypseus-singe/hypseus-singe.rk3326 | tee -a "$LOG_FILE"
+    else
+      mv -fv /opt/hypseus-singe/hypseus-singe.rk3326 /opt/hypseus-singe/hypseus-singe | tee -a "$LOG_FILE"
+	fi
+	if [ -f "/opt/hypseus-singe/hypinput.ini" ]; then
+	  mv -fv /opt/hypseus-singe/hypinput.ini /opt/hypseus-singe/hypinput_gamepad.ini | tee -a "$LOG_FILE"
+	fi
+
+	printf "\nMake sure the correct version of retrorun and retrorun32 are copied on the device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+	  sudo rm -fv /usr/local/bin/retrorun-rk3326 | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/retrorun32-rk3326 | tee -a "$LOG_FILE"
+	else
+	  sudo cp -fv /usr/local/bin/retrorun-rk3326 /usr/local/bin/retrorun | tee -a "$LOG_FILE"
+	  sudo cp -fv /usr/local/bin/retrorun32-rk3326 /usr/local/bin/retrorun32 | tee -a "$LOG_FILE"
+	  sudo chmod 777 /usr/local/bin/retrorun*
+	  sudo rm -fv /usr/local/bin/retrorun-rk3326 | tee -a "$LOG_FILE"
+	  sudo rm -fv /usr/local/bin/retrorun32-rk3326 | tee -a "$LOG_FILE"
 	fi
 
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
