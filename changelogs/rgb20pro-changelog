@@ -116,3 +116,9 @@ v2.0 (05/31/2025)
 - Updated ScummVM to version 2.9.1
 - Updated Hypseus-Singe 2.11.5
 - Updated Retrorun to version 2.7.7
+
+v2.0 (06/30/2025)
+- Updated PPSSPP to 1.19.2
+- Updated EasyRPG libretro to version 0.8.1.1 "Stun - Patch 1"
+- Updated liblcf to version 0.8.1 for EasyRPG 0.8.1.1
+- Added libretro vbam and libretro bsnes as selectable cores for Game Boy and Game Boy Color emulation via Retroarch
