@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-UPDATE_DATE="06302025-1"
+UPDATE_DATE="07312025"
 LOG_FILE="/home/ark/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/ark/.config/.update$UPDATE_DATE"
 
@@ -260,7 +260,7 @@ if [ ! -f "/home/ark/.config/.update06302025" ]; then
 
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/ark/.config/.update06302025-1" ]; then
 
 	printf "\nFix PPSSPP 1.19.2\nRevert EasyRPG back to 0.8\n" | tee -a "$LOG_FILE"
 	sudo rm -rf /dev/shm/*
@@ -279,6 +279,43 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
 	sudo sed -i "/title\=/c\title\=ArkOS 2.0 (06302025)-1" /usr/share/plymouth/themes/text.plymouth
 	echo "06302025" > /home/ark/.config/.VERSION
+
+	touch "/home/ark/.config/.update06302025-1"
+
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+
+	printf "\nAdd genesis_plus_gx_ex core for retroarch\nUpdate PPSSPP to 1.19.3\n" | tee -a "$LOG_FILE"
+	sudo rm -rf /dev/shm/*
+	sudo wget -t 3 -T 60 --no-check-certificate "$LOCATION"/07312025/arkosupdate07312025.zip -O /dev/shm/arkosupdate07312025.zip -a "$LOG_FILE" || sudo rm -f /dev/shm/arkosupdate07312025.zip | tee -a "$LOG_FILE"
+	if [ -f "/dev/shm/arkosupdate07312025.zip" ]; then
+	  sudo unzip -X -o /dev/shm/arkosupdate07312025.zip -d / | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate07312025.zip | tee -a "$LOG_FILE"
+	else
+	  printf "\nThe update couldn't complete because the package did not download correctly.\nPlease retry the update again." | tee -a "$LOG_FILE"
+	  sudo rm -fv /dev/shm/arkosupdate07312025.z* | tee -a "$LOG_FILE"
+	  sleep 3
+	  echo $c_brightness > /sys/class/backlight/backlight/brightness
+	  exit 1
+	fi
+
+	printf "\nCopy correct PPSSPPSDL for device\n" | tee -a "$LOG_FILE"
+	if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
+      rm -fv /opt/ppsspp/PPSSPPSDL.rk3326 | tee -a "$LOG_FILE"
+    else
+      mv -fv /opt/ppsspp/PPSSPPSDL.rk3326 /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
+	fi
+
+	if test -z "$(cat /etc/emulationstation/es_systems.cfg | grep 'genesis_plus_gx_EX' | tr -d '\0')"
+	then
+	  printf "\nAdd genesis_plus_gx_EX retroarch core for Sega Genesis, Megadrive, Master System, GameGear and Sega CD\n"
+	  sed -i '/<core>genesis_plus_gx<\/core>/c\\t\t\t\t\t<core>genesis_plus_gx<\/core>\n\t\t\t\t\t<core>genesis_plus_gx_EX<\/core>' /etc/emulationstation/es_systems.cfg
+	fi
+
+	printf "\nUpdate boot text to reflect current version of ArkOS\n" | tee -a "$LOG_FILE"
+	sudo sed -i "/title\=/c\title\=ArkOS 2.0 (07312025)" /usr/share/plymouth/themes/text.plymouth
+	echo "07312025" > /home/ark/.config/.VERSION
 
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"

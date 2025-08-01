@@ -793,3 +793,7 @@ v2.0 (06/30/2025)
 v2.0 (06/30/2025)-1
 - Fixed PPSSPP and PPSSPP-2021 not loading
 - Reverted last EasyRPG update back to 0.8 "Paralyze"
+
+v2.0 (07/31/2025)
+- Updated PPSSPP to 1.19.3
+- Added genesis_plus_gx_ex as additional retroarch core for Sega Genesis, Megadrive, Master System, GameGear and Sega CD
